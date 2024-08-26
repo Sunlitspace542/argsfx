@@ -3201,20 +3201,20 @@
  0000:CD16       loc_CD16
  0000:CD63       loc_CD63
  0000:CD6E       locret_CD6E
- 0000:CD6F       sub_CD6F
- 0000:CD73       loc_CD73
- 0000:CD81       loc_CD81
- 0000:CD84       sub_CD84
- 0000:CD86       loc_CD86
- 0000:CD8C       loc_CD8C
- 0000:CD9A       sub_CD9A
- 0000:CD9C       loc_CD9C
- 0000:CDA5       sub_CDA5
- 0000:CDAA       loc_CDAA
- 0000:CDBC       loc_CDBC
- 0000:CDC4       loc_CDC4
- 0000:CDCC       loc_CDCC
- 0000:CDDB       loc_CDDB
+ 0000:CD6F       STRRCHR
+ 0000:CD73       STRR0
+ 0000:CD81       STRR1
+ 0000:CD84       STRCAT
+ 0000:CD86       STRC0
+ 0000:CD8C       STRC1
+ 0000:CD9A       STRCPY
+ 0000:CD9C       STRY0
+ 0000:CDA5       COUNT_SYMBOLS
+ 0000:CDAA       CSY2
+ 0000:CDBC       CSY3
+ 0000:CDC4       CSY4
+ 0000:CDCC       CSY5
+ 0000:CDDB       CSY6
  0CDF:0018       loc_CE08
  0CDF:001D       loc_CE0D
  0CDF:0022       sub_CE12

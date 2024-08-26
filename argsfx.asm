@@ -28461,7 +28461,7 @@ call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
-call	sub_CDA5
+call	COUNT_SYMBOLS
 push	ax
 mov	cx, ss:word_9BEB
 mov	di, 9BEDh
@@ -28574,18 +28574,18 @@ loc_CC79:
 mov	di, 0A3EDh
 mov	ax, seg	seg003
 mov	es, ax
-call	sub_CD9A
+call	STRCPY
 mov	si, 0A3EDh
 mov	ax, seg	seg003
 mov	ds, ax
 mov	al, 2Eh	; '.'
-call	sub_CD6F
+call	STRRCHR
 mov	bp, si
 mov	si, 0A3EDh
 mov	ax, seg	seg003
 mov	ds, ax
 mov	al, 5Ch	; '\'
-call	sub_CD6F
+call	STRRCHR
 cmp	si, bp
 jnb	short loc_CCA9
 mov	byte ptr ds:[bp+0], 0
@@ -28597,7 +28597,7 @@ mov	ds, ax
 mov	di, 0A449h
 mov	ax, seg	seg003
 mov	es, ax
-call	sub_CD84
+call	STRCAT
 mov	dx, 0A3EDh
 mov	ax, seg	seg003
 mov	ds, ax
@@ -28704,109 +28704,109 @@ sub_CD10 endp
 
 
 
-sub_CD6F proc near
+STRRCHR proc near
 xor	cx, cx
 mov	ah, al
 
-loc_CD73:
+STRR0:
 lodsb
 or	al, al
-jz	short loc_CD81
+jz	short STRR1
 cmp	ah, al
-jnz	short loc_CD73
+jnz	short STRR0
 mov	cx, si
 dec	cx
-jmp	short loc_CD73
+jmp	short STRR0
 
-loc_CD81:
+STRR1:
 mov	si, cx
 retn
-sub_CD6F endp
+STRRCHR endp
 
 
 
 
-sub_CD84 proc near
+STRCAT proc near
 push	ds
 push	si
 
-loc_CD86:
+STRC0:
 lodsb
 or	al, al
-jnz	short loc_CD86
+jnz	short STRC0
 dec	si
 
-loc_CD8C:
+STRC1:
 mov	al, es:[di]
 mov	[si], al
 inc	si
 inc	di
 or	al, al
-jnz	short loc_CD8C
+jnz	short STRC1
 pop	si
 pop	ds
 retn
-sub_CD84 endp
+STRCAT endp
 
 
 
 
-sub_CD9A proc near
+STRCPY proc near
 push	es
 push	di
 
-loc_CD9C:
+STRY0:
 lodsb
 stosb
 or	al, al
-jnz	short loc_CD9C
+jnz	short STRY0
 pop	di
 pop	es
 retn
-sub_CD9A endp
+STRCPY endp
 
 
 
 
-sub_CDA5 proc near
+COUNT_SYMBOLS proc near
 xor	cx, cx
 mov	si, 1472h
 
-loc_CDAA:
+CSY2:
 cmp	word ptr ss:[si], 0
-jnz	short loc_CDBC
+jnz	short CSY3
 add	si, 4
 cmp	si, 2472h
-jl	short loc_CDAA
+jl	short CSY2
 mov	ax, cx
 retn
 
-loc_CDBC:
+CSY3:
 push	si
 mov	es, word ptr ss:[si]
 mov	si, ss:[si+2]
 
-loc_CDC4:
+CSY4:
 test	byte ptr es:[si+4], 5Eh
-jnz	short loc_CDCC
+jnz	short CSY5
 inc	cx
 
-loc_CDCC:
+CSY5:
 mov	ax, es:[si]
 or	ax, ax
-jz	short loc_CDDB
+jz	short CSY6
 mov	si, es:[si+2]
 mov	es, ax
-jmp	short loc_CDC4
+jmp	short CSY4
 
-loc_CDDB:
+CSY6:
 pop	si
 add	si, 4
 cmp	si, 2472h
-jl	short loc_CDAA
+jl	short CSY2
 mov	ax, cx
 retn
-sub_CDA5 endp
+COUNT_SYMBOLS endp
 
 align 10h
 seg000 ends
