@@ -50,7 +50,7 @@ call	WRITESYMBOLS
 call	GEN_MAP_SYMBOLS
 call	DO_END
 
-loc_3B:
+OVERRET:
 mov	ax, ss:word_12284
 or	ax, ax
 jnz	short loc_48
@@ -62,17 +62,18 @@ start endp
 
 ; START	OF FUNCTION CHUNK FOR sub_2170
 
-loc_4D:
+STOPASSEM:
 call	DO_END
-jmp	short loc_3B
+jmp	short OVERRET
 ; END OF FUNCTION CHUNK	FOR sub_2170
+CTRLCHAN:
 push	ds
 push	dx
 mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8A14h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -83,23 +84,23 @@ jmp	far ptr	loc_CE0D
 LINK proc near
 mov	al, ss:byte_12260
 or	al, al
-jnz	short loc_71
+jnz	short DOLINK
 retn
 
-loc_71:
+DOLINK:
 mov	ax, ss:word_12284
 or	ax, ax
-jz	short loc_7A
+jz	short DOLINK2
 retn
 
-loc_7A:
+DOLINK2:
 push	ds
 push	dx
 mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 89FCh
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -118,7 +119,7 @@ lodsb
 or	al, al
 jnz	short loc_99
 mov	byte ptr [si-1], 24h ; '$'
-call	sub_CE8E
+call	_OS2PRTSTRING
 mov	byte ptr [si-1], 0
 pop	ax
 pop	si
@@ -149,7 +150,7 @@ push	dx
 mov	dx, seg	seg003
 mov	ds, dx
 mov	dx, 891Ch
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -343,7 +344,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 88C4h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -361,7 +362,7 @@ lodsb
 or	al, al
 jnz	short loc_282
 mov	byte ptr [si-1], 24h ; '$'
-call	sub_CE8E
+call	_OS2PRTSTRING
 mov	byte ptr [si-1], 0
 pop	ax
 pop	si
@@ -458,7 +459,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8899h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -481,7 +482,7 @@ lodsb
 or	al, al
 jnz	short loc_35C
 mov	byte ptr [si-1], 24h ; '$'
-call	sub_CE8E
+call	_OS2PRTSTRING
 mov	byte ptr [si-1], 0
 pop	ax
 pop	si
@@ -550,7 +551,7 @@ test	al, 2
 jnz	short loc_43D
 mov	dx, 7E8Dh
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_3EF:
 inc	ss:word_12262
@@ -713,7 +714,7 @@ push	dx
 mov	dx, seg	seg003
 mov	ds, dx
 mov	dx, 891Ch
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -860,7 +861,7 @@ retn
 loc_66D:
 mov	dx, 80FFh
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 
 
@@ -974,7 +975,7 @@ cmp	ax, ss:word_122BD
 jb	short loc_778
 mov	dx, 7EB4h
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_778:
 jmp	short loc_724
@@ -1050,7 +1051,7 @@ or	al, al
 jz	short loc_801
 mov	dx, 7CF5h
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_801:
 call	sub_2270
@@ -4275,7 +4276,7 @@ retn
 loc_2025:
 mov	dx, 7C3Fh
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 GETMEM endp
 
 
@@ -4326,7 +4327,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8995h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -4353,7 +4354,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8997h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -4367,7 +4368,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 899Ah
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -4379,7 +4380,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8995h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -4408,7 +4409,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8995h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -4490,7 +4491,7 @@ or	al, al
 jz	short loc_21BB
 mov	dx, 7CF5h
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_21BB:
 call	sub_2270
@@ -4529,7 +4530,7 @@ cmp	ax, ss:word_122BD
 jb	short loc_2223
 mov	dx, 7EB4h
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_2223:
 pop	si
@@ -4579,7 +4580,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 2552h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -4609,7 +4610,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8A3Ch
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -4634,7 +4635,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 899Dh
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -4667,7 +4668,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8A6Eh
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -4677,7 +4678,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 899Fh
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -4687,13 +4688,13 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 89A3h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
 pop	dx
 inc	dx
-call	sub_CE8E
+call	_OS2PRTSTRING
 inc	ss:word_13C4
 mov	bx, 76A7h
 pop	di
@@ -5281,23 +5282,23 @@ retn
 loc_2908:
 mov	dx, 7C60h
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_2911:
 jg	short loc_291C
 mov	dx, 7CCAh
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_291C:
 mov	dx, 7C82h
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_2925:
 mov	dx, 7CABh
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 ; END OF FUNCTION CHUNK	FOR sub_2170
 ; START	OF FUNCTION CHUNK FOR sub_36FF
 
@@ -5369,7 +5370,7 @@ pop	di
 pop	es
 mov	dx, 7D45h
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_29E6:
 inc	ss:byte_F8A
@@ -5748,7 +5749,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8A62h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -5758,7 +5759,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8A6Eh
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -5768,7 +5769,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 89A9h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -5783,7 +5784,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 89B3h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -5801,7 +5802,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 899Dh
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -5822,7 +5823,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 899Fh
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -5846,7 +5847,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 899Fh
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -7452,7 +7453,7 @@ loc_3966:
 call	sub_202E
 mov	dx, 7D9Ch
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_3972:
 push	ax
@@ -9448,7 +9449,7 @@ cmp	ss:byte_F8A, 20h ; ' '
 jl	short loc_4804
 mov	dx, 7D45h
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_4804:
 inc	ss:byte_F8A
@@ -9494,16 +9495,16 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 89F8h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_489B:
 mov	dx, 7C3Fh
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 sub_4764 endp
 
 
@@ -10427,7 +10428,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 7FD5h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -10445,7 +10446,7 @@ lodsb
 or	al, al
 jnz	short loc_4F6A
 mov	byte ptr [si-1], 24h ; '$'
-call	sub_CE8E
+call	_OS2PRTSTRING
 mov	byte ptr [si-1], 0
 pop	ax
 pop	si
@@ -10457,7 +10458,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 2552h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -10781,7 +10782,7 @@ jmp	loc_507A
 loc_5188:
 mov	dx, 82B5h
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 ; END OF FUNCTION CHUNK	FOR sub_4EF9
 
 
@@ -10797,7 +10798,7 @@ jmp	loc_4FE7
 loc_51A0:
 mov	dx, 804Bh
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 sub_5191 endp
 
 
@@ -12387,7 +12388,7 @@ cmp	ss:byte_F8A, 20h ; ' '
 jl	short loc_5CF1
 mov	dx, 7D45h
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_5CF1:
 inc	ss:byte_F8A
@@ -17883,7 +17884,7 @@ cmp	di, 66E7h
 jb	short loc_85B0
 mov	dx, 7D69h
 call	sub_2290
-jmp	loc_4D
+jmp	STOPASSEM
 
 loc_85B0:
 mov	bp, ss:word_13F0
@@ -18546,7 +18547,7 @@ js	short locret_8B0D
 
 loc_8B01:
 mov	dx, 2555h
-call	sub_CE8E
+call	_OS2PRTSTRING
 dec	cl
 jnz	short loc_8B01
 
@@ -18579,7 +18580,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8A6Eh
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -18755,7 +18756,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8A6Eh
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -19056,7 +19057,7 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8A6Eh
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -19188,11 +19189,11 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 8D02h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
-jmp	loc_3B
+jmp	OVERRET
 
 loc_8F04:
 inc	si
@@ -19372,11 +19373,11 @@ mov	dx, seg	seg003
 mov	ds, dx
 assume ds:seg003
 mov	dx, 89C4h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
-jmp	loc_3B
+jmp	OVERRET
 PARSECLI endp
 
 
@@ -28456,7 +28457,7 @@ push	dx
 mov	dx, seg	seg003
 mov	ds, dx
 mov	dx, 0A44Eh
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -28613,7 +28614,7 @@ push	dx
 mov	dx, seg	seg003
 mov	ds, dx
 mov	dx, 0A464h
-call	sub_CE8E
+call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
@@ -29005,7 +29006,7 @@ sub_CE89 endp
 
 
 
-sub_CE8E proc far
+_OS2PRTSTRING proc far
 push	cx
 xor	cx, cx
 push	si
@@ -29023,8 +29024,9 @@ mov	bx, 1
 call	sub_CE3E
 pop	cx
 retf
-sub_CE8E endp
+_OS2PRTSTRING endp
 
+; stub function presumably from the OS/2 version
 _OS2INITTERM	proc far
 retf
 _OS2INITTERM	endp

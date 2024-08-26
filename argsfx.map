@@ -11,12 +11,12 @@
 
  0000:0000       start
  0000:0006       loc_6
- 0000:003B       loc_3B
+ 0000:003B       OVERRET
  0000:0048       loc_48
- 0000:004D       loc_4D
+ 0000:004D       STOPASSEM
  0000:0068       LINK
- 0000:0071       loc_71
- 0000:007A       loc_7A
+ 0000:0071       DOLINK
+ 0000:007A       DOLINK2
  0000:0099       loc_99
  0000:00C1       loc_C1
  0000:00EE       loc_EE
@@ -3232,7 +3232,7 @@
  0CDF:0085       sub_CE75
  0CDF:0094       sub_CE84
  0CDF:0099       sub_CE89
- 0CDF:009E       sub_CE8E
+ 0CDF:009E       _OS2PRTSTRING
  0CDF:00A4       loc_CE94
  0CDF:00B8       _OS2INITTERM
  0CDF:00B9       sub_CEA9
