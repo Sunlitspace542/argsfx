@@ -10,10 +10,10 @@ Currently, work is in progress to apply the symbol names to a disassembly genera
 - Originally assembled with version 3.0r1 of the Zortech C/C++ toolchain, according to 'stamps' left in the data of the DOS extender builds.  
 
 All known versions of the assembler:  
-- SASM (DOS extender) 2.02 (SASMX.EXE) (ARGSFX's codebase descended from this assembler)  
-- ARGSFX (DOS extender) versions 1.33, 1.40, 1.44, 1.48-1.50, 1.52 (ARGSFXX.EXE)  
-- ARGSFX OS/2 1.35 (ARGOS2.EXE)  
-- ARGSFX (no DOS extender) versions 1.33, 1.40, 1.44, 1.49, 1.50 (ARGSFX.EXE)  
+- SASM (DOS extender) 2.02 (``SASMX.EXE``) (ARGSFX's codebase descended from this assembler)  
+- ARGSFX (DOS extender) versions 1.33, 1.40, 1.44, 1.48-1.50, 1.52 (``ARGSFXX.EXE``)  
+- ARGSFX OS/2 1.35 (``ARGOS2.EXE``)  
+- ARGSFX (no DOS extender) versions 1.33, 1.40, 1.44, 1.49, 1.50 (``ARGSFX.EXE``)  
 
 ## Original source structure from leftover debug data:
 ```
