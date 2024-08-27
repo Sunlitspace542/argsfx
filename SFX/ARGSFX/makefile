@@ -17,7 +17,7 @@ ALLFILES= ARGSFX.OBJ
 # Everything that should be done when make is executed
 all: argsfx
 
-# The ROM Itself
+# Link EXE
 argsfx: $(ALLFILES)
 	@$(LINK) argsfx.obj
 
