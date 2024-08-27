@@ -1,3 +1,5 @@
+ deferror "%d:%f (%l), %e%u.%s%n"
+ defend "%n%[7]ie Error(s).%t%[7]iw Warning(s).%n%[7]is Symbols.%t%[7]ib Bytes.%t%t%[7]il Lines.%n"
  IFND __notitle
  printf "ArgSfx v1.50 (DBR=OFF)  Copyright (c) Argonaut Software Ltd. 1992%n"
  printf "%kK Free,  %$date_str%n"

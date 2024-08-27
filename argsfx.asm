@@ -77082,6 +77082,7 @@ db 0EFh	; �
 db  7Bh	; {
 db 0F5h	; �
 db  7Bh	; {
+_86TXT:
 db  38h	; 8
 db  30h	; 0
 db  38h	; 8
@@ -77090,24 +77091,28 @@ db  2Fh	; /
 db  38h	; 8
 db  36h	; 6
 db    0
+_186TXT:
 db  38h	; 8
 db  30h	; 0
 db  31h	; 1
 db  38h	; 8
 db  36h	; 6
 db    0
+_286TXT:
 db  38h	; 8
 db  30h	; 0
 db  32h	; 2
 db  38h	; 8
 db  36h	; 6
 db    0
+_386TXT:
 db  38h	; 8
 db  30h	; 0
 db  33h	; 3
 db  38h	; 8
 db  36h	; 6
 db    0
+_486TXT:
 db  38h	; 8
 db  30h	; 0
 db  34h	; 4
