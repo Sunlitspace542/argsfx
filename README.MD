@@ -10,7 +10,8 @@ Currently, work is in progress to reconstruct source code assemblable by MASM by
 - WARNING! -
 
 This codebase is in an early research/development phase and the binary this repository
-builds is currently not complete enough to be anywhere near usable, so it cannot yet be used as a codebase for general changes.
+builds is currently not complete enough to be anywhere near usable,
+so it cannot yet be used as a codebase for general changes.
 ```
 
 ## Progress:
