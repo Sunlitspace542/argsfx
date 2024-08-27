@@ -4880,6 +4880,7 @@ pop	si
 loc_247A:
 pop	ds
 assume ds:nothing
+
 db 36h
 byte_247C db 8Ch
 byte_247D db 16h
@@ -4901,10 +4902,13 @@ word_249C dw 12Bh
 word_249E dw 0E84Eh
 db 89h,	5Fh
 DO_65816 dw 0F636h
+;test	byte ptr ss:[0F8B],08
+VARSINFO:
 push	es
 mov	cx, [bx]
 or	[si+3],	dh
 jmp	E_CTRLC_HIT
+
 db 0ACh, 3Ch, 9, 75h, 0D5h, 36h, 89h, 3Eh
 db 90h,	0Fh, 0E8h, 5Bh,	7, 8Bh,	0CFh, 36h
 db 2Bh,	0Eh, 90h, 0Fh, 36h, 1, 0Eh, 94h
@@ -4927,6 +4931,7 @@ db 4, 74h, 5, 50h, 0E8h, 0EBh, 0FAh, 58h
 db 36h,	0A2h, 8Bh, 0Fh,	0EBh, 8Ah, 0E8h
 db 0B4h, 2Dh, 0BBh, 1, 8, 9Ah, 7Bh, 0
 dw seg seg001
+
 jnb	short loc_255A
 jmp	loc_2025
 

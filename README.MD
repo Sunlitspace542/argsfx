@@ -1,4 +1,4 @@
-# ARGSFX
+# ArgAsm-Super FX (ArgSfx) Disassembly
 A work-in-progress disassembly of the ArgAsm-Super FX (ArgSfx) 65816/SuperFX macro assembler by Argonaut Software Ltd.  
 The aim is to reconstruct the x86 assembly source code so it can be further modified and expanded by the Star Fox hacking community.  
 
