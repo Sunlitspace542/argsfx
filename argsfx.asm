@@ -4853,12 +4853,12 @@ stosw
 mov	ax, 223Dh
 stosw
 
-loc_245F:
+ASSLP:
 lodsb
 stosb
 xlat	byte ptr ss:[bx]
 or	al, al
-jns	short loc_245F
+jns	short ASSLP
 dec	di
 mov	al, 22h	; '"'
 stosb
@@ -4868,7 +4868,7 @@ mov	al, 0Ah
 stosb
 mov	si, 9778h
 
-loc_2474:
+HASHTABLEEND:
 call	sub_71FE
 pop	di
 
@@ -4902,7 +4902,6 @@ word_249C dw 12Bh
 word_249E dw 0E84Eh
 db 89h,	5Fh
 DO_65816 dw 0F636h
-;test	byte ptr ss:[0F8B],08
 VARSINFO:
 push	es
 mov	cx, [bx]
@@ -7593,7 +7592,7 @@ pop	es
 assume es:nothing
 pop	si
 pop	ds
-mov	word ptr ss:loc_2474, 1
+mov	word ptr ss:HASHTABLEEND, 1
 retn
 
 loc_3A24:
@@ -7609,7 +7608,7 @@ mov	dx, ss:word_9A7E
 mov	word ptr ss:loc_2478, ds
 mov	word ptr ss:loc_247A, dx
 call	ADDFLIST
-mov	bx, word ptr ss:loc_2474+2
+mov	bx, word ptr ss:HASHTABLEEND+2
 call	_OS2CLOSEFILE
 mov	ds, word ptr ss:loc_2478
 mov	dx, word ptr ss:loc_247A
@@ -7619,18 +7618,18 @@ jnb	short OK
 pop	si
 pop	ds
 mov	bx, 76A7h
-mov	word ptr ss:loc_2474, 0
+mov	word ptr ss:HASHTABLEEND, 0
 push	dx
 mov	dx, 80FFh
 call	ERROR_ROUT
 pop	dx
 
 OK:
-mov	word ptr ss:loc_2474, 1
-mov	word ptr ss:loc_2474+2,	ax
+mov	word ptr ss:HASHTABLEEND, 1
+mov	word ptr ss:HASHTABLEEND+2,	ax
 xor	cx, cx
 mov	dx, cx
-mov	bx, word ptr ss:loc_2474+2
+mov	bx, word ptr ss:HASHTABLEEND+2
 call	_OS2SEEKEND
 pop	si
 pop	ds
@@ -7638,7 +7637,7 @@ mov	bx, 76A7h
 retn
 
 F_OPENNEW:
-mov	bx, word ptr ss:loc_2474+2
+mov	bx, word ptr ss:HASHTABLEEND+2
 call	_OS2CLOSEFILE
 push	ds
 push	si
@@ -7654,8 +7653,8 @@ pop	cx
 pop	ax
 xor	bx, bx
 call	_OS2OPENNEWFILE
-mov	word ptr ss:loc_2474, 1
-mov	word ptr ss:loc_2474+2,	ax
+mov	word ptr ss:HASHTABLEEND, 1
+mov	word ptr ss:HASHTABLEEND+2,	ax
 pop	si
 pop	ds
 jb	short PFOPENF
@@ -7689,12 +7688,12 @@ cmp	al, 0Dh
 jz	short loc_3B15
 cmp	al, 21h	; '!'
 jnz	short loc_3B15
-mov	bx, word ptr ss:loc_2474+2
+mov	bx, word ptr ss:HASHTABLEEND+2
 call	_OS2CLOSEFILE
 mov	word ptr ss:loc_2478, 0
 
 loc_3B15:
-mov	word ptr ss:loc_2474, 0
+mov	word ptr ss:HASHTABLEEND, 0
 dec	si
 retn
 
@@ -11347,10 +11346,10 @@ mov	ds, ax
 assume ds:seg000
 mov	ax, 4002h
 mov	dx, word ptr ss:loc_2471+1
-mov	bx, word ptr ss:loc_2474
+mov	bx, word ptr ss:HASHTABLEEND
 or	bx, bx
 jz	short loc_557D
-mov	bx, word ptr ss:loc_2474+2
+mov	bx, word ptr ss:HASHTABLEEND+2
 call	_OS2WRITEBYTES
 pop	si
 pop	ds
@@ -29090,7 +29089,7 @@ seg001 ends
 
 
 ; Segment type:	Regular
-seg002 segment byte public 'UNK' use16
+seg002 segment byte public 'DATA' use16
 assume cs:seg002
 assume es:nothing, ss:nothing, ds:nothing, fs:nothing, gs:nothing
 db    0
@@ -45481,7 +45480,7 @@ seg002 ends
 
 
 ; Segment type:	Regular
-seg003 segment byte public 'UNK' use16
+seg003 segment byte public 'DATA' use16
 assume cs:seg003
 assume es:nothing, ss:nothing, ds:nothing, fs:nothing, gs:nothing
 unk_10EC0 db	0

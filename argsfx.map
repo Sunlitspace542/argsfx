@@ -440,9 +440,9 @@
  0000:23BD       sub_23BD
  0000:23D4       loc_23D4
  0000:23E7       ASSEMBLE
- 0000:245F       loc_245F
+ 0000:245F       ASSLP
  0000:2471       loc_2471
- 0000:2474       loc_2474
+ 0000:2474       HASHTABLEEND
  0000:2478       loc_2478
  0000:247A       loc_247A
  0000:247C       byte_247C
