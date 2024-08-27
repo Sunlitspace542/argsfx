@@ -9,10 +9,9 @@ assume es:nothing, ss:seg000, ds:nothing, fs:nothing, gs:nothing
 
 
 
-public start
-start proc near
+public _ARGSFX
 
-_ARGSFX:
+_ARGSFX proc near
 	cld
 	mov	cx,8AC9h
 	mov	ss,cx
@@ -33,6 +32,7 @@ _ARGSFX:
 	call	GEN_MAP_SYMBOLS
 	call	DO_END
 	endif
+
 OVERRET:
 	mov	ax,word	ptr	[13C4h]
 	or	ax,ax
@@ -42,6 +42,8 @@ OVERRET:
 loc_48:
 	jmp	far	ptr	_OS2EXITERR
 	endif
+_ARGSFX endp
+
 STOPASSEM:
 	if	0
 	call	DO_END
@@ -107,7 +109,6 @@ loc_99:
 	pop	dx
 LBUFOK:
 
-start endp
 seg000 ends
 
 ; Segment type:	Pure code
