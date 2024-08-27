@@ -417,17 +417,17 @@
  0000:214B       loc_214B
  0000:214E       loc_214E
  0000:2164       loc_2164
- 0000:2170       sub_2170
+ 0000:2170       ERROR_ROUT
  0000:21BB       loc_21BB
  0000:21D2       loc_21D2
  0000:21DA       loc_21DA
  0000:2208       loc_2208
  0000:2223       loc_2223
- 0000:2257       loc_2257
+ 0000:2257       NSLL1
  0000:226D       loc_226D
  0000:2270       sub_2270
  0000:228F       locret_228F
- 0000:2290       sub_2290
+ 0000:2290       FATALERR_ROUT
  0000:22BA       loc_22BA
  0000:2311       loc_2311
  0000:2358       sub_2358
@@ -471,10 +471,10 @@
  0000:26AA       loc_26AA
  0000:26C9       loc_26C9
  0000:26E0       loc_26E0
- 0000:26E4       loc_26E4
+ 0000:26E4       DO_MARIO
  0000:26EF       loc_26EF
  0000:26F4       loc_26F4
- 0000:270E       loc_270E
+ 0000:270E       GOTEOLDO_MARIO
  0000:2716       loc_2716
  0000:272B       loc_272B
  0000:2741       loc_2741
@@ -494,49 +494,49 @@
  0000:2887       loc_2887
  0000:28DE       loc_28DE
  0000:28E9       loc_28E9
- 0000:2908       loc_2908
- 0000:2911       loc_2911
- 0000:291C       loc_291C
- 0000:2925       loc_2925
- 0000:292E       loc_292E
- 0000:2936       loc_2936
- 0000:295F       loc_295F
- 0000:2978       loc_2978
- 0000:29E6       loc_29E6
- 0000:2A2E       loc_2A2E
- 0000:2A88       sub_2A88
- 0000:2A9B       loc_2A9B
- 0000:2AA1       loc_2AA1
- 0000:2AAA       loc_2AAA
- 0000:2ABD       loc_2ABD
- 0000:2AC4       loc_2AC4
- 0000:2AE0       loc_2AE0
- 0000:2AED       loc_2AED
- 0000:2AF5       loc_2AF5
- 0000:2AF9       loc_2AF9
- 0000:2B02       loc_2B02
- 0000:2B09       loc_2B09
- 0000:2B20       loc_2B20
- 0000:2B21       loc_2B21
- 0000:2B26       loc_2B26
- 0000:2B29       loc_2B29
- 0000:2B2E       loc_2B2E
- 0000:2B30       sub_2B30
- 0000:2B54       loc_2B54
- 0000:2B56       loc_2B56
- 0000:2B62       loc_2B62
- 0000:2B67       loc_2B67
- 0000:2B68       loc_2B68
- 0000:2B8F       loc_2B8F
- 0000:2B94       loc_2B94
- 0000:2B98       loc_2B98
- 0000:2B9B       loc_2B9B
- 0000:2BBE       loc_2BBE
- 0000:2BCF       loc_2BCF
+ 0000:2908       E_REPTUNBAL
+ 0000:2911       E_CONDUNBAL
+ 0000:291C       E_TOOMANYIFS
+ 0000:2925       E_CTRLC_HIT
+ 0000:292E       E_EXTRACHARS
+ 0000:2936       PM
+ 0000:295F       PMOK
+ 0000:2978       PMOKNOL
+ 0000:29E6       SRCLOK2
+ 0000:2A2E       _MACNUMOK
+ 0000:2A88       PARSE_MACRO_PARAMETERS
+ 0000:2A9B       NOBS
+ 0000:2AA1       BSPRESENT
+ 0000:2AAA       SCANPARS
+ 0000:2ABD       GOTPAR
+ 0000:2AC4       NEWARG
+ 0000:2AE0       ENDPARLP
+ 0000:2AED       MACOOPS
+ 0000:2AF5       MACMISS
+ 0000:2AF9       ANGLEERR
+ 0000:2B02       ANGLEBRAC
+ 0000:2B09       MACSRCH
+ 0000:2B20       SPEND1
+ 0000:2B21       CALCLEN
+ 0000:2B26       NOPARS
+ 0000:2B29       MACSKIPEOL
+ 0000:2B2E       MACCR
+ 0000:2B30       EXPAND_THE_MACRO
+ 0000:2B54       EXPANDMACRO
+ 0000:2B56       EXPANDMACRO2
+ 0000:2B62       EMEX
+ 0000:2B67       EMEX2
+ 0000:2B68       EMEX3
+ 0000:2B8F       COPYPAR
+ 0000:2B94       COPYPAR1
+ 0000:2B98       PARTOOMUCH
+ 0000:2B9B       EMSPECIAL
+ 0000:2BBE       EMATSA
+ 0000:2BCF       EMBSCHAR
  0000:2BD9       loc_2BD9
- 0000:2BE8       loc_2BE8
- 0000:2BF3       loc_2BF3
- 0000:2BFE       loc_2BFE
+ 0000:2BE8       EMBSCHAR
+ 0000:2BF3       GETNEXTMACEMS
+ 0000:2BFE       EMEND
  0000:2C0D       loc_2C0D
  0000:2C3C       sub_2C3C
  0000:2C4E       loc_2C4E
@@ -2017,7 +2017,7 @@
  0000:908D       loc_908D
  0000:908E       loc_908E
  0000:9097       loc_9097
- 0000:90A0       sub_90A0
+ 0000:90A0       PARSEMARIO
  0000:90CD       loc_90CD
  0000:90D5       loc_90D5
  0000:90DD       loc_90DD

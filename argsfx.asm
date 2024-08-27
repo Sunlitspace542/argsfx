@@ -60,12 +60,12 @@ loc_48:
 jmp	far ptr	loc_CE0D
 start endp
 
-; START	OF FUNCTION CHUNK FOR sub_2170
+; START	OF FUNCTION CHUNK FOR ERROR_ROUT
 
 STOPASSEM:
 call	DO_END
 jmp	short OVERRET
-; END OF FUNCTION CHUNK	FOR sub_2170
+; END OF FUNCTION CHUNK	FOR ERROR_ROUT
 CTRLCHAN:
 push	ds
 push	dx
@@ -131,7 +131,7 @@ call	sub_CE6B
 jnb	short loc_C1
 push	dx
 mov	dx, 8535h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_C1:
@@ -550,7 +550,7 @@ loc_3E2:
 test	al, 2
 jnz	short loc_43D
 mov	dx, 7E8Dh
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
 loc_3EF:
@@ -860,7 +860,7 @@ retn
 
 loc_66D:
 mov	dx, 80FFh
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
 
@@ -974,7 +974,7 @@ mov	ax, ss:word_12284
 cmp	ax, ss:word_122BD
 jb	short loc_778
 mov	dx, 7EB4h
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
 loc_778:
@@ -1050,7 +1050,7 @@ mov	al, ss:byte_11DA1
 or	al, al
 jz	short loc_801
 mov	dx, 7CF5h
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
 loc_801:
@@ -1472,7 +1472,7 @@ push	dx
 
 loc_AC1:
 mov	dx, 844Eh
-call	sub_2170
+call	ERROR_ROUT
 
 loc_AC7:
 pop	dx
@@ -1748,7 +1748,7 @@ adc	dx, 0
 lodsb
 push	dx
 mov	dx, 844Eh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_CAF:
@@ -1811,7 +1811,7 @@ mov	ch, cl
 mov	cl, al
 push	dx
 mov	dx, 844Eh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_D1B:
@@ -2133,7 +2133,7 @@ adc	dx, dx
 or	cl, al
 push	dx
 mov	dx, 844Eh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_F23:
@@ -2328,17 +2328,17 @@ jmp	loc_FD8
 loc_10CB:
 push	dx
 mov	dx, 8405h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 push	dx
 mov	dx, 83E9h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_10DB:
 push	dx
 mov	dx, 8425h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_10E3:
@@ -2781,7 +2781,7 @@ or	al, al
 jmp	loc_1053
 push	dx
 mov	dx, 87D2h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 push	bx
 mov	bx, 76A7h
@@ -3036,7 +3036,7 @@ test	ss:byte_11990, 0FFh
 jnz	short loc_160A
 push	dx
 mov	dx, 843Ah
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_160A:
@@ -3275,7 +3275,7 @@ jmp	loc_15BE
 loc_17E3:
 push	dx
 mov	dx, 847Ah
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 push	si
 mov	dx, es:[di+8]
@@ -3298,7 +3298,7 @@ or	cx, cx
 jnz	short loc_17FF
 push	dx
 mov	dx, 846Ah
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 
@@ -3489,7 +3489,7 @@ jmp	short loc_1987
 loc_19D6:
 push	dx
 mov	dx, 843Ah
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 cmp	word ptr ss:[di+2], 0
 jnz	short loc_19D6
@@ -4275,7 +4275,7 @@ retn
 
 loc_2025:
 mov	dx, 7C3Fh
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 GETMEM endp
 
@@ -4465,7 +4465,7 @@ retn
 
 
 
-sub_2170 proc near
+ERROR_ROUT proc near
 
 ; FUNCTION CHUNK AT 004D SIZE 00000005 BYTES
 ; FUNCTION CHUNK AT 26C9 SIZE 00000265 BYTES
@@ -4490,7 +4490,7 @@ mov	al, ss:byte_11DA1
 or	al, al
 jz	short loc_21BB
 mov	dx, 7CF5h
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
 loc_21BB:
@@ -4529,7 +4529,7 @@ mov	ax, ss:word_12284
 cmp	ax, ss:word_122BD
 jb	short loc_2223
 mov	dx, 7EB4h
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
 loc_2223:
@@ -4545,17 +4545,17 @@ mov	ss, ss:word_13360
 assume ss:seg000
 mov	sp, ss:word_24A2
 test	ss:byte_F8B, 2
-jz	short loc_2257
+jz	short NSLL1
 and	ss:byte_F8B, 0FDh
 mov	ds, ss:word_13E2
 assume ds:nothing
 mov	si, ss:word_13E4
 call	sub_202E
 
-loc_2257:
+NSLL1:
 lodsb
 cmp	al, 0Dh
-jnz	short loc_2257
+jnz	short NSLL1
 inc	si
 inc	ss:word_13F0
 mov	al, ss:byte_F8D
@@ -4564,8 +4564,8 @@ jnz	short loc_226D
 jmp	near ptr word_24A2
 
 loc_226D:
-jmp	loc_26E4
-sub_2170 endp
+jmp	DO_MARIO
+ERROR_ROUT endp
 
 
 
@@ -4593,7 +4593,7 @@ sub_2270 endp
 
 
 
-sub_2290 proc near
+FATALERR_ROUT proc near
 push	ds
 push	es
 push	ax
@@ -4703,7 +4703,7 @@ pop	es
 assume es:nothing
 pop	ds
 retn
-sub_2290 endp
+FATALERR_ROUT endp
 
 
 
@@ -4904,7 +4904,7 @@ word_24A2 dw 0F636h
 push	es
 mov	cx, [bx]
 or	[si+3],	dh
-jmp	loc_2925
+jmp	E_CTRLC_HIT
 db 0ACh, 3Ch, 9, 75h, 0D5h, 36h, 89h, 3Eh
 db 90h,	0Fh, 0E8h, 5Bh,	7, 8Bh,	0CFh, 36h
 db 2Bh,	0Eh, 90h, 0Fh, 36h, 1, 0Eh, 94h
@@ -4988,14 +4988,14 @@ mov	si, [bp+0Eh]
 mov	ax, [bp+4]
 cmp	ss:word_F96, ax
 jz	short loc_2645
-jmp	loc_2911
+jmp	E_CONDUNBAL
 
 loc_2645:
 mov	ss:word_F96, ax
 mov	ax, [bp+0]
 cmp	ss:word_1470, ax
 jz	short loc_2656
-jmp	loc_2908
+jmp	E_REPTUNBAL
 
 loc_2656:
 mov	ss:word_1470, ax
@@ -5037,7 +5037,7 @@ xor	ax, ax
 mov	es:[di], ax
 mov	es:[di+2], ax
 retn
-; START	OF FUNCTION CHUNK FOR sub_2170
+; START	OF FUNCTION CHUNK FOR ERROR_ROUT
 
 loc_26C9:
 mov	bx, 7827h
@@ -5047,7 +5047,7 @@ or	al, al
 jz	short loc_26E0
 inc	al
 jz	short loc_26F4
-jo	short loc_270E
+jo	short GOTEOLDO_MARIO
 js	short loc_272B
 jmp	loc_280B
 
@@ -5055,10 +5055,10 @@ loc_26E0:
 dec	si
 call	sub_842B
 
-loc_26E4:
+DO_MARIO:
 test	ss:byte_F8B, 8
 jz	short loc_26EF
-jmp	loc_2925
+jmp	E_CTRLC_HIT
 
 loc_26EF:
 lodsb
@@ -5067,13 +5067,13 @@ jnz	short loc_26C9
 
 loc_26F4:
 mov	ss:word_F90, di
-call	sub_90A0
+call	PARSEMARIO
 mov	cx, di
 sub	cx, ss:word_F90
 add	ss:word_F94, cx
 adc	byte ptr ss:word_F92, 0
 
-loc_270E:
+GOTEOLDO_MARIO:
 cmp	ss:byte_F8B, 0
 jnz	short loc_2765
 
@@ -5084,7 +5084,7 @@ inc	si
 inc	si
 inc	ss:word_13F0
 cmp	di, 7F00h
-jb	short loc_26E4
+jb	short DO_MARIO
 jmp	short loc_278C
 
 loc_272B:
@@ -5093,7 +5093,7 @@ jnz	short loc_2741
 inc	si
 inc	ss:word_13F0
 cmp	di, 7F00h
-jb	short loc_26E4
+jb	short DO_MARIO
 jmp	short loc_278C
 
 loc_2741:
@@ -5113,7 +5113,7 @@ xchg	si, di
 pop	es
 inc	ss:word_13F0
 cmp	di, 7F00h
-jb	short loc_26E4
+jb	short DO_MARIO
 jmp	short loc_278C
 
 loc_2765:
@@ -5124,7 +5124,7 @@ and	al, 0FEh
 push	ax
 push	dx
 mov	dx, 7FAAh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 pop	ax
 or	al, 2
@@ -5174,14 +5174,14 @@ mov	es:[di+0Eh], cx
 add	di, 13h
 mov	ss:word_13B4, di
 mov	bx, 76A7h
-jmp	loc_26E4
+jmp	DO_MARIO
 
 loc_280B:
 cmp	al, 3
 jnz	short loc_281A
 push	dx
 mov	dx, 837Eh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 jmp	loc_26F4
 
@@ -5197,11 +5197,11 @@ jnz	short loc_283E
 test	al, 4
 jz	short loc_2838
 call	sub_48A4
-jmp	loc_26E4
+jmp	DO_MARIO
 
 loc_2838:
 mov	dx, 7EDCh
-call	sub_2290
+call	FATALERR_ROUT
 
 loc_283E:
 mov	bx, [bp+2]
@@ -5232,13 +5232,13 @@ mov	si, [bp+0Eh]
 mov	ax, [bp+4]
 cmp	ss:word_F96, ax
 jz	short loc_2887
-jmp	loc_2911
+jmp	E_CONDUNBAL
 
 loc_2887:
 mov	ss:word_F96, ax
 mov	ax, [bp+0]
 cmp	ss:word_1470, ax
-jnz	short loc_2908
+jnz	short E_REPTUNBAL
 mov	ss:word_1470, ax
 mov	ax, [bp+15h]
 mov	ss:word_13F0, ax
@@ -5279,36 +5279,36 @@ mov	es:[di], ax
 mov	es:[di+2], ax
 retn
 
-loc_2908:
+E_REPTUNBAL:
 mov	dx, 7C60h
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
-loc_2911:
-jg	short loc_291C
+E_CONDUNBAL:
+jg	short E_TOOMANYIFS
 mov	dx, 7CCAh
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
-loc_291C:
+E_TOOMANYIFS:
 mov	dx, 7C82h
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
-loc_2925:
+E_CTRLC_HIT:
 mov	dx, 7CABh
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
-; END OF FUNCTION CHUNK	FOR sub_2170
+; END OF FUNCTION CHUNK	FOR ERROR_ROUT
 ; START	OF FUNCTION CHUNK FOR sub_36FF
 
-loc_292E:
+E_EXTRACHARS:
 push	dx
 mov	dx, 85FAh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
-loc_2936:
+PM:
 mov	si, dx
 mov	ss:word_13EC, ds
 mov	ss:word_13EE, si
@@ -5316,13 +5316,13 @@ mov	word ptr ss:loc_AAC, 0
 call	sub_88A9
 mov	ax, ss:word_13F0
 cmp	ax, word ptr ss:loc_AAC
-jnz	short loc_295F
+jnz	short PMOK
 push	dx
 mov	dx, 7F13h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
-loc_295F:
+PMOK:
 push	es
 push	di
 mov	es, dx
@@ -5331,11 +5331,11 @@ mov	cx, es:[bp+0Ch]
 push	dx
 push	cx
 test	ss:byte_F8B, 6
-jz	short loc_2978
+jz	short PMOKNOL
 call	sub_202E
 
-loc_2978:
-call	sub_2A88
+PMOKNOL:
+call	PARSE_MACRO_PARAMETERS
 mov	bp, ss:word_F9C
 dec	si
 dec	si
@@ -5363,33 +5363,33 @@ mov	ax, word ptr ss:loc_20B+1
 mov	[bp+1Fh], ax
 mov	ss:word_F9C, bp
 cmp	ss:byte_F8A, 20h ; ' '
-jl	short loc_29E6
+jl	short SRCLOK2
 pop	cx
 pop	dx
 pop	di
 pop	es
 mov	dx, 7D45h
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
-loc_29E6:
+SRCLOK2:
 inc	ss:byte_F8A
 inc	word ptr ss:loc_AA6
 inc	byte ptr ss:loc_207+2
 cmp	byte ptr ss:loc_207+2, 5Ah ; 'Z'
-jb	short loc_2A2E
+jb	short _MACNUMOK
 mov	byte ptr ss:loc_207+2, 41h ; 'A'
 inc	byte ptr ss:loc_207+1
 cmp	byte ptr ss:loc_207+1, 5Ah ; 'Z'
-jb	short loc_2A2E
+jb	short _MACNUMOK
 mov	byte ptr ss:loc_207+1, 41h ; 'A'
 inc	byte ptr ss:loc_207
 cmp	byte ptr ss:loc_207, 5Ah ; 'Z'
-jb	short loc_2A2E
+jb	short _MACNUMOK
 mov	byte ptr ss:loc_207, 41h ; 'A'
 inc	byte ptr ss:loc_204+2
 
-loc_2A2E:
+_MACNUMOK:
 mov	al, byte ptr ss:loc_202+1
 inc	al
 mov	es, word ptr ss:loc_A9D+1
@@ -5400,7 +5400,7 @@ mov	es:[di+0Ch], ax
 mov	word ptr ss:loc_204, ax
 pop	cx
 pop	dx
-call	sub_2B30
+call	EXPAND_THE_MACRO
 pop	di
 pop	es
 assume es:nothing
@@ -5425,41 +5425,41 @@ retn
 
 
 
-sub_2A88 proc near
+PARSE_MACRO_PARAMETERS proc near
 cmp	byte ptr [si], 2Eh ; '.'
-jnz	short loc_2A9B
+jnz	short NOBS
 mov	al, [si+1]
 and	al, 0DFh
 mov	byte ptr ss:loc_202, al
 add	si, 2
-jmp	short loc_2AA1
+jmp	short BSPRESENT
 
-loc_2A9B:
+NOBS:
 mov	byte ptr ss:loc_202, 4Eh ; 'N'
 
-loc_2AA1:
+BSPRESENT:
 mov	byte ptr ss:loc_202+1, 0FFh
 mov	bx, 7AA9h
 
-loc_2AAA:
+SCANPARS:
 lodsb
 cmp	al, 3Bh	; ';'
-jz	short loc_2B26
+jz	short NOPARS
 cmp	al, 0Dh
-jz	short loc_2B2E
+jz	short MACCR
 cmp	al, 2Ch	; ','
-jz	short loc_2ABD
+jz	short GOTPAR
 xlat	byte ptr ss:[bx]
 or	al, al
-js	short loc_2AAA
+js	short SCANPARS
 
-loc_2ABD:
+GOTPAR:
 mov	ax, ss
 mov	es, ax
 assume es:seg000
 mov	di, 0
 
-loc_2AC4:
+NEWARG:
 inc	byte ptr ss:loc_202+1
 mov	ax, si
 mov	cx, si
@@ -5467,87 +5467,87 @@ dec	ax
 stosw
 mov	al, [si-1]
 cmp	al, 3Ch	; '<'
-jz	short loc_2B02
+jz	short ANGLEBRAC
 cmp	al, 2Ch	; ','
-jz	short loc_2AED
+jz	short MACOOPS
 xlat	byte ptr ss:[bx]
 or	al, al
-js	short loc_2AF5
+js	short MACMISS
 
-loc_2AE0:
+ENDPARLP:
 lodsb
 xlat	byte ptr ss:[bx]
 or	al, al
-jns	short loc_2AE0
+jns	short ENDPARLP
 cmp	byte ptr [si-1], 2Ch ; ','
-jnz	short loc_2B21
+jnz	short CALCLEN
 
-loc_2AED:
+MACOOPS:
 mov	ax, si
 sub	ax, cx
 stosw
 lodsb
-jmp	short loc_2AC4
+jmp	short NEWARG
 
-loc_2AF5:
+MACMISS:
 dec	si
 dec	cx
-jmp	short loc_2B21
+jmp	short CALCLEN
 
-loc_2AF9:
+ANGLEERR:
 dec	si
 push	dx
 mov	dx, 8024h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
-loc_2B02:
+ANGLEBRAC:
 mov	es:[di-2], cx
 inc	cx
 mov	ah, 3Eh	; '>'
 
-loc_2B09:
+MACSRCH:
 lodsb
 cmp	al, 0Dh
-jz	short loc_2AF9
+jz	short ANGLEERR
 cmp	al, ah
-jnz	short loc_2B09
+jnz	short MACSRCH
 lodsb
 cmp	al, 2Ch	; ','
-jnz	short loc_2B20
+jnz	short SPEND1
 mov	ax, si
 sub	ax, cx
 dec	ax
 stosw
 lodsb
-jmp	short loc_2AC4
+jmp	short NEWARG
 
-loc_2B20:
+SPEND1:
 inc	cx
 
-loc_2B21:
+CALCLEN:
 mov	ax, si
 sub	ax, cx
 stosw
 
-loc_2B26:
+NOPARS:
 dec	si
 mov	ah, 0Dh
 
-loc_2B29:
+MACSKIPEOL:
 lodsb
 cmp	al, ah
-jnz	short loc_2B29
+jnz	short MACSKIPEOL
 
-loc_2B2E:
+MACCR:
 inc	si
 retn
-sub_2A88 endp
+PARSE_MACRO_PARAMETERS endp
 
 
 
 
-sub_2B30 proc near
+EXPAND_THE_MACRO proc near
 mov	ss:word_9A82, ds
 mov	ds, dx
 assume ds:nothing
@@ -5562,32 +5562,32 @@ mov	ax, 0A0Dh
 stosw
 mov	bx, 7B29h
 
-loc_2B54:
+EXPANDMACRO:
 mov	cl, 5Ch	; '\'
 
-loc_2B56:
+EXPANDMACRO2:
 lodsw
 stosw
 cmp	al, cl
-jz	short loc_2B62
+jz	short EMEX
 cmp	ah, cl
-jnz	short loc_2B56
-jmp	short loc_2B67
+jnz	short EXPANDMACRO2
+jmp	short EMEX2
 
-loc_2B62:
+EMEX:
 dec	di
 mov	al, ah
-jmp	short loc_2B68
+jmp	short EMEX3
 
-loc_2B67:
+EMEX2:
 lodsb
 
-loc_2B68:
+EMEX3:
 xlat	byte ptr ss:[bx]
 or	al, al
-js	short loc_2B9B
+js	short EMSPECIAL
 cmp	al, byte ptr ss:loc_202+1
-jg	short loc_2B98
+jg	short PARTOOMUCH
 dec	di
 push	ds
 push	si
@@ -5596,53 +5596,53 @@ mov	bp, ax
 mov	dl, al
 mov	cx, [bp+2]
 or	cx, cx
-jz	short loc_2B94
+jz	short COPYPAR1
 mov	si, [bp+0]
 mov	ds, ss:word_9A82
 
-loc_2B8F:
+COPYPAR:
 lodsb
 stosb
 dec	cx
-jnz	short loc_2B8F
+jnz	short COPYPAR
 
-loc_2B94:
+COPYPAR1:
 pop	si
 pop	ds
-jmp	short loc_2B54
+jmp	short EXPANDMACRO
 
-loc_2B98:
+PARTOOMUCH:
 dec	di
-jmp	short loc_2B54
+jmp	short EXPANDMACRO
 
-loc_2B9B:
+EMSPECIAL:
 mov	al, [si-1]
 cmp	al, 40h	; '@'
-jz	short loc_2BBE
+jz	short EMATSA
 cmp	al, 30h	; '0'
-jz	short loc_2BE8
+jz	short EMBSCHAR
 cmp	al, 24h	; '$'
-jz	short loc_2BCF
+jz	short EMBSCHAR
 cmp	al, 7Fh	; ''
-jz	short loc_2BF3
+jz	short GETNEXTMACEMS
 cmp	al, 5Ch	; '\'
-jz	short loc_2B54
+jz	short EXPANDMACRO
 or	al, al
-jz	short loc_2BFE
+jz	short EMEND
 push	dx
 mov	dx, 8078h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
-loc_2BBE:
+EMATSA:
 mov	byte ptr es:[di-1], 5Fh	; '_'
 mov	ax, word ptr ss:loc_204+2
 stosw
 mov	ax, word ptr ss:loc_207+1
 stosw
-jmp	short loc_2B54
+jmp	short EXPANDMACRO
 
-loc_2BCF:
+EMBSCHAR:
 dec	di
 call	sub_737B
 push	ds
@@ -5659,35 +5659,35 @@ dec	di
 pop	si
 pop	ds
 mov	bx, 7B29h
-jmp	loc_2B54
+jmp	EXPANDMACRO
 
-loc_2BE8:
+EMBSCHAR:
 mov	al, byte ptr ss:loc_202
 mov	es:[di-1], al
-jmp	loc_2B54
+jmp	EXPANDMACRO
 
-loc_2BF3:
+GETNEXTMACEMS:
 push	bx
 lodsw
 mov	ds, ax
 xor	si, si
 dec	di
 pop	bx
-jmp	loc_2B54
+jmp	EXPANDMACRO
 
-loc_2BFE:
+EMEND:
 mov	byte ptr es:[di-1], 1Ah
 mov	ax, word ptr ss:loc_200
 mov	word ptr ss:loc_200, di
 retn
-sub_2B30 endp
+EXPAND_THE_MACRO endp
 
 ; START	OF FUNCTION CHUNK FOR sub_75FC
 
 loc_2C0D:
 push	dx
 mov	dx, 800Ah
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 mov	dx, si
 lodsw
@@ -5868,7 +5868,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_2D6C
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_2D6C:
 mov	ax, [bp+6E2Dh]
@@ -5883,7 +5883,7 @@ retn
 loc_2D7C:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -5900,7 +5900,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_2DA3
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_2DA3:
 mov	ax, [bp+6E5Bh]
@@ -5915,7 +5915,7 @@ retn
 loc_2DB3:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -5925,7 +5925,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_2DCA
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_2DCA:
 mov	ax, [bp+6E89h]
@@ -5940,7 +5940,7 @@ retn
 loc_2DDA:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -5949,7 +5949,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_2DEE
-jmp	loc_2936
+jmp	PM
 
 loc_2DEE:
 lodsb
@@ -5990,7 +5990,7 @@ retn
 loc_2E47:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6013,7 +6013,7 @@ retn
 loc_2E73:
 push	dx
 mov	dx, 7F46h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6022,7 +6022,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_2E87
-jmp	loc_2936
+jmp	PM
 
 loc_2E87:
 lodsb
@@ -6063,7 +6063,7 @@ retn
 loc_2EE0:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6086,7 +6086,7 @@ retn
 loc_2F0C:
 push	dx
 mov	dx, 7F46h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6129,7 +6129,7 @@ retn
 loc_2F6E:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6152,7 +6152,7 @@ retn
 loc_2F9A:
 push	dx
 mov	dx, 7F46h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6169,7 +6169,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_2FC1
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_2FC1:
 mov	ax, [bp+6EB7h]
@@ -6184,7 +6184,7 @@ retn
 loc_2FD1:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6227,7 +6227,7 @@ retn
 loc_3033:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6250,7 +6250,7 @@ retn
 loc_305F:
 push	dx
 mov	dx, 7F46h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6293,7 +6293,7 @@ retn
 loc_30C1:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6316,7 +6316,7 @@ retn
 loc_30ED:
 push	dx
 mov	dx, 7F46h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6359,7 +6359,7 @@ retn
 loc_314F:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6382,7 +6382,7 @@ retn
 loc_317B:
 push	dx
 mov	dx, 7F46h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6391,7 +6391,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_318F
-jmp	loc_2936
+jmp	PM
 
 loc_318F:
 lodsb
@@ -6432,7 +6432,7 @@ retn
 loc_31E8:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6455,14 +6455,14 @@ retn
 loc_3214:
 push	dx
 mov	dx, 7F46h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
 loc_321D:
 push	dx
 mov	dx, 7F46h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3225:
@@ -6475,7 +6475,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3234
-jmp	loc_2936
+jmp	PM
 
 loc_3234:
 mov	byte ptr es:[di], 82h ;	'�'
@@ -6553,7 +6553,7 @@ jmp	short loc_32B6
 loc_32CE:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_32D6:
@@ -6561,7 +6561,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_32E1
-jmp	loc_2936
+jmp	PM
 
 loc_32E1:
 lodsb
@@ -6602,7 +6602,7 @@ retn
 loc_333A:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6625,7 +6625,7 @@ retn
 loc_3366:
 push	dx
 mov	dx, 7F46h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 retn
@@ -6635,7 +6635,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_337B
-jmp	loc_2936
+jmp	PM
 
 loc_337B:
 lodsb
@@ -6676,7 +6676,7 @@ retn
 loc_33D4:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6699,7 +6699,7 @@ retn
 loc_3400:
 push	dx
 mov	dx, 7F46h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 retn
@@ -6709,7 +6709,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3415
-jmp	loc_2936
+jmp	PM
 
 loc_3415:
 lodsb
@@ -6726,7 +6726,7 @@ jz	short loc_343B
 dec	si
 push	dx
 mov	dx, 8078h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3434:
@@ -6747,7 +6747,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3451
-jmp	loc_2936
+jmp	PM
 
 loc_3451:
 mov	al, 0D8h ; '�'
@@ -6759,7 +6759,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3460
-jmp	loc_2936
+jmp	PM
 
 loc_3460:
 mov	al, 58h	; 'X'
@@ -6771,7 +6771,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_346F
-jmp	loc_2936
+jmp	PM
 
 loc_346F:
 mov	al, 0B8h ; '�'
@@ -6791,7 +6791,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3491
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_3491:
 mov	ax, [bp+6EE5h]
@@ -6806,7 +6806,7 @@ retn
 loc_34A1:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6828,7 +6828,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_34CC
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_34CC:
 mov	ax, [bp+6F13h]
@@ -6843,7 +6843,7 @@ retn
 loc_34DC:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 byte_34E5 db 36h, 0A0h,	0BAh, 0Ah, 0A8h, 2, 74h, 8
@@ -6855,7 +6855,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3503
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_3503:
 mov	ax, [bp+6F41h]
@@ -6870,7 +6870,7 @@ retn
 loc_3513:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6880,7 +6880,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_352A
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_352A:
 mov	ax, [bp+6F6Fh]
@@ -6895,7 +6895,7 @@ retn
 loc_353A:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -6968,7 +6968,7 @@ retn
 loc_358F:
 push	dx
 mov	dx, 829Dh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3597:
@@ -6976,7 +6976,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_35A2
-jmp	loc_2936
+jmp	PM
 
 loc_35A2:
 lodsb
@@ -7067,7 +7067,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_365D
-jmp	loc_2936
+jmp	PM
 
 loc_365D:
 lodsb
@@ -7203,7 +7203,7 @@ retn
 loc_3783:
 push	dx
 mov	dx, 8078h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_378B:
@@ -7221,7 +7221,7 @@ cmp	al, cl
 jnz	short loc_378F
 push	dx
 mov	dx, 8136h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_37AD:
@@ -7265,13 +7265,13 @@ retn
 loc_380F:
 push	dx
 mov	dx, 81FAh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3817:
 push	dx
 mov	dx, 80D7h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_381F:
@@ -7311,7 +7311,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3884
-jmp	loc_2936
+jmp	PM
 
 loc_3884:
 lodsb
@@ -7379,7 +7379,7 @@ retn
 loc_38EF:
 push	dx
 mov	dx, 87D2h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_38F7:
@@ -7395,7 +7395,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3915
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_3915:
 mov	ax, [bp+6F9Dh]
@@ -7410,7 +7410,7 @@ retn
 loc_3925:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -7419,7 +7419,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3939
-jmp	loc_2936
+jmp	PM
 
 loc_3939:
 mov	bp, ss:word_F9C
@@ -7436,7 +7436,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3956
-jmp	loc_2936
+jmp	PM
 
 loc_3956:
 dec	ss:word_F96
@@ -7446,13 +7446,13 @@ retn
 loc_395E:
 push	dx
 mov	dx, 8179h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3966:
 call	sub_202E
 mov	dx, 7D9Ch
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
 loc_3972:
@@ -7498,7 +7498,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_39BB
-jmp	loc_2936
+jmp	PM
 
 loc_39BB:
 lodsb
@@ -7591,7 +7591,7 @@ mov	bx, 76A7h
 mov	word ptr ss:loc_2474, 0
 push	dx
 mov	dx, 80FFh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3A75:
@@ -7634,7 +7634,7 @@ retn
 loc_3AD8:
 push	dx
 mov	dx, 80FFh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3AE0:
@@ -7642,7 +7642,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3AEB
-jmp	loc_2936
+jmp	PM
 
 loc_3AEB:
 lodsb
@@ -7686,7 +7686,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3B45
-jmp	loc_2936
+jmp	PM
 
 loc_3B45:
 mov	al, 0
@@ -7697,7 +7697,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3B54
-jmp	loc_2936
+jmp	PM
 
 loc_3B54:
 mov	al, 1
@@ -7757,7 +7757,7 @@ retn
 loc_3BB2:
 push	dx
 mov	dx, 814Ch
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3BBA:
@@ -7766,7 +7766,7 @@ pop	si
 pop	di
 push	dx
 mov	dx, 8162h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3BC5:
@@ -7775,7 +7775,7 @@ pop	si
 pop	di
 push	dx
 mov	dx, 849Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3BD0:
@@ -7894,7 +7894,7 @@ retn
 loc_3C8A:
 push	dx
 mov	dx, 8702h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3C92:
@@ -7902,7 +7902,7 @@ pop	di
 pop	es
 push	dx
 mov	dx, 871Eh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3C9C:
@@ -7913,20 +7913,20 @@ pop	di
 pop	es
 push	dx
 mov	dx, 86E7h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 cmp	ah, 45h	; 'E'
 jz	short loc_3CBA
 cmp	ah, 4Eh	; 'N'
 jz	short loc_3CC9
-jmp	loc_2936
+jmp	PM
 
 loc_3CBA:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3CC5
-jmp	loc_2936
+jmp	PM
 
 loc_3CC5:
 mov	al, 0
@@ -7937,14 +7937,14 @@ lodsb
 and	al, 0DFh
 cmp	al, 45h	; 'E'
 jz	short loc_3CD3
-jmp	loc_2936
+jmp	PM
 
 loc_3CD3:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3CDE
-jmp	loc_2936
+jmp	PM
 
 loc_3CDE:
 mov	al, 1
@@ -8011,7 +8011,7 @@ retn
 loc_3D48:
 push	dx
 mov	dx, 814Ch
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3D50:
@@ -8020,7 +8020,7 @@ pop	si
 pop	di
 push	dx
 mov	dx, 8162h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3D5B:
@@ -8029,7 +8029,7 @@ pop	si
 pop	di
 push	dx
 mov	dx, 849Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3D66:
@@ -8038,7 +8038,7 @@ pop	si
 pop	di
 push	dx
 mov	dx, 873Eh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3D71:
@@ -8080,7 +8080,7 @@ jnz	short loc_3DA5
 jmp	loc_4068
 
 loc_3DA5:
-jmp	loc_2936
+jmp	PM
 cmp	ah, 45h	; 'E'
 jnz	short loc_3DB0
 jmp	loc_4042
@@ -8103,7 +8103,7 @@ jnz	short loc_3DCD
 jmp	loc_3B49
 
 loc_3DCD:
-jmp	loc_2936
+jmp	PM
 cmp	ah, 54h	; 'T'
 jnz	short loc_3DD8
 jmp	loc_3F9C
@@ -8114,7 +8114,7 @@ jnz	short loc_3DE0
 jmp	loc_3FC9
 
 loc_3DE0:
-jmp	loc_2936
+jmp	PM
 cmp	ah, 45h	; 'E'
 jnz	short loc_3DEB
 jmp	loc_400F
@@ -8132,7 +8132,7 @@ jns	short loc_3DFF
 jmp	loc_3EAA
 
 loc_3DFF:
-jmp	loc_2936
+jmp	PM
 mov	al, [si-1]
 xlat	byte ptr ss:[bx]
 or	al, al
@@ -8140,7 +8140,7 @@ jns	short loc_3E0E
 jmp	loc_3EE1
 
 loc_3E0E:
-jmp	loc_2936
+jmp	PM
 call	loc_3E23
 jz	short locret_3E19
 jmp	loc_425F
@@ -8205,7 +8205,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3E82
-jmp	loc_2936
+jmp	PM
 
 loc_3E82:
 lodsb
@@ -8246,7 +8246,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3EDD
-jmp	loc_2936
+jmp	PM
 
 loc_3EDD:
 mov	dh, 0FFh
@@ -8258,7 +8258,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_3EED
-jmp	loc_2936
+jmp	PM
 
 loc_3EED:
 xor	dh, dh
@@ -8349,7 +8349,7 @@ pop	di
 pop	es
 push	dx
 mov	dx, 8078h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3F79:
@@ -8360,13 +8360,13 @@ cmp	ah, 27h	; '''
 jnz	short loc_3F89
 push	dx
 mov	dx, 8136h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3F89:
 push	dx
 mov	dx, 814Ch
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3F91:
@@ -8375,7 +8375,7 @@ pop	di
 pop	es
 push	dx
 mov	dx, 8078h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_3F9C:
@@ -8562,7 +8562,7 @@ cmp	al, 47h	; 'G'
 jz	short loc_4128
 cmp	al, 4Ch	; 'L'
 jz	short loc_4135
-jmp	loc_2936
+jmp	PM
 
 loc_40DE:
 mov	ax, cx
@@ -8602,7 +8602,7 @@ jnz	short loc_411A
 jmp	loc_4205
 
 loc_411A:
-jmp	loc_2936
+jmp	PM
 
 loc_411D:
 cmp	ah, 45h	; 'E'
@@ -8610,14 +8610,14 @@ jnz	short loc_4125
 jmp	loc_4230
 
 loc_4125:
-jmp	loc_2936
+jmp	PM
 
 loc_4128:
 cmp	ah, 54h	; 'T'
 jz	short loc_414D
 cmp	ah, 45h	; 'E'
 jz	short loc_417D
-jmp	loc_2936
+jmp	PM
 
 loc_4135:
 cmp	ah, 54h	; 'T'
@@ -8627,12 +8627,12 @@ jnz	short loc_4142
 jmp	loc_41D8
 
 loc_4142:
-jmp	loc_2936
+jmp	PM
 
 loc_4145:
 push	dx
 mov	dx, 80D7h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_414D:
@@ -9104,7 +9104,7 @@ mov	di, ss:word_9A92
 mov	ss:byte_F8C, 0
 push	dx
 mov	dx, 8110h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_44D5:
@@ -9222,7 +9222,7 @@ jmp	loc_4678
 loc_45D2:
 push	dx
 mov	dx, 82E7h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_45DA:
@@ -9318,7 +9318,7 @@ pop	ds
 pop	di
 push	dx
 mov	dx, 80FFh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_46E2:
@@ -9393,7 +9393,7 @@ jnz	short loc_4761
 jmp	near ptr word_24A2
 
 loc_4761:
-jmp	loc_26E4
+jmp	DO_MARIO
 
 
 
@@ -9448,7 +9448,7 @@ mov	ss:word_F9C, bp
 cmp	ss:byte_F8A, 20h ; ' '
 jl	short loc_4804
 mov	dx, 7D45h
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
 loc_4804:
@@ -9485,7 +9485,7 @@ mov	ss:word_F98, ax
 mov	ax, [bp+19h]
 mov	ss:word_F9A, ax
 mov	dx, 7BFBh
-call	sub_2290
+call	FATALERR_ROUT
 pop	ss:word_F9A
 pop	ss:word_F98
 call	sub_23BD
@@ -9503,7 +9503,7 @@ jmp	STOPASSEM
 
 loc_489B:
 mov	dx, 7C3Fh
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 sub_4764 endp
 
@@ -9579,7 +9579,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_4937
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_4937:
 mov	ax, [bp+6FCBh]
@@ -9594,7 +9594,7 @@ retn
 loc_4947:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -9603,7 +9603,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_495B
-jmp	loc_2936
+jmp	PM
 
 loc_495B:
 mov	al, 1Ah
@@ -9615,7 +9615,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_496A
-jmp	loc_2936
+jmp	PM
 
 loc_496A:
 mov	al, 0E8h ; '�'
@@ -9627,7 +9627,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_4979
-jmp	loc_2936
+jmp	PM
 
 loc_4979:
 mov	al, 0C8h ; '�'
@@ -9639,7 +9639,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_4988
-jmp	loc_2936
+jmp	PM
 
 loc_4988:
 lodsb
@@ -9785,7 +9785,7 @@ retn
 loc_4AB9:
 push	dx
 mov	dx, 8291h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_4AC1:
@@ -9798,7 +9798,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_4ADC
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_4ADC:
 mov	ax, [bp+7027h]
@@ -9813,7 +9813,7 @@ retn
 loc_4AEC:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -9828,7 +9828,7 @@ jmp	loc_497D
 loc_4B00:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_4B08:
@@ -9836,7 +9836,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_4B13
-jmp	loc_2936
+jmp	PM
 
 loc_4B13:
 lodsb
@@ -9913,7 +9913,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_4BC0
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_4BC0:
 mov	ax, [bp+7055h]
@@ -9928,7 +9928,7 @@ retn
 loc_4BD0:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -9985,7 +9985,7 @@ jz	short loc_4C48
 dec	si
 push	dx
 mov	dx, 8078h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_4C36:
@@ -10022,7 +10022,7 @@ jmp	short loc_4C01
 loc_4C73:
 push	dx
 mov	dx, 83C5h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_4C7B:
@@ -10095,7 +10095,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_4D06
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_4D06:
 mov	ax, [bp+7083h]
@@ -10110,7 +10110,7 @@ retn
 loc_4D16:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -10127,7 +10127,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_4D3D
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_4D3D:
 mov	ax, [bp+70B1h]
@@ -10142,7 +10142,7 @@ retn
 loc_4D4D:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -10159,7 +10159,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_4D74
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_4D74:
 mov	ax, [bp+70DFh]
@@ -10174,7 +10174,7 @@ retn
 loc_4D84:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -10183,7 +10183,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_4D98
-jmp	loc_2936
+jmp	PM
 
 loc_4D98:
 call	sub_CD10
@@ -10203,7 +10203,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_4DC5
-jmp	loc_2936
+jmp	PM
 
 loc_4DC5:
 call	loc_CD14
@@ -10224,7 +10224,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_4DF5
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_4DF5:
 mov	ax, [bp+710Dh]
@@ -10239,7 +10239,7 @@ retn
 loc_4E05:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -10258,13 +10258,13 @@ jz	short loc_4E37
 dec	si
 push	dx
 mov	dx, 8078h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_4E2D:
 mov	ss:byte_F8D, 1
 pop	ax
-jmp	loc_270E
+jmp	GOTEOLDO_MARIO
 
 loc_4E37:
 mov	ss:byte_F8D, 0
@@ -10274,7 +10274,7 @@ jmp	near ptr byte_24AD+1Fh
 loc_4E41:
 push	dx
 mov	dx, 82D8h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_4E49:
@@ -10295,7 +10295,7 @@ retn
 loc_4E6F:
 push	dx
 mov	dx, 8241h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_4E77:
@@ -10347,7 +10347,7 @@ pop	es
 assume es:nothing
 push	dx
 mov	dx, 8291h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_4EC8:
@@ -10362,7 +10362,7 @@ pop	di
 pop	es
 push	dx
 mov	dx, 8059h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_4EE4:
@@ -10468,7 +10468,7 @@ pop	di
 pop	es
 push	dx
 mov	dx, 7FC0h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_4F9D:
@@ -10723,7 +10723,7 @@ assume es:nothing
 pop	ax
 push	dx
 mov	dx, 8091h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5134:
@@ -10781,7 +10781,7 @@ jmp	loc_507A
 
 loc_5188:
 mov	dx, 82B5h
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 ; END OF FUNCTION CHUNK	FOR sub_4EF9
 
@@ -10797,7 +10797,7 @@ jmp	loc_4FE7
 
 loc_51A0:
 mov	dx, 804Bh
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 sub_5191 endp
 
@@ -10807,7 +10807,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_51B4
-jmp	loc_2936
+jmp	PM
 
 loc_51B4:
 mov	byte ptr es:[di], 54h ;	'T'
@@ -10818,7 +10818,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_51C5
-jmp	loc_2936
+jmp	PM
 
 loc_51C5:
 mov	byte ptr es:[di], 44h ;	'D'
@@ -10847,7 +10847,7 @@ retn
 loc_51F6:
 push	dx
 mov	dx, 8276h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_51FE:
@@ -10868,7 +10868,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5220
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_5220:
 mov	ax, [bp+713Bh]
@@ -10883,7 +10883,7 @@ retn
 loc_5230:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -10892,7 +10892,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5244
-jmp	loc_2936
+jmp	PM
 
 loc_5244:
 lodsb
@@ -11132,7 +11132,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5429
-jmp	loc_2936
+jmp	PM
 
 loc_5429:
 lodsb
@@ -11194,7 +11194,7 @@ pop	es
 assume es:nothing
 push	dx
 mov	dx, 80D7h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5490:
@@ -11346,7 +11346,7 @@ pop	di
 pop	es
 push	dx
 mov	dx, 8162h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_559A:
@@ -11364,7 +11364,7 @@ pop	di
 pop	es
 push	dx
 mov	dx, 87E2h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 lodsb
 and	al, 0DFh
@@ -11412,7 +11412,7 @@ pop	di
 pop	es
 push	dx
 mov	dx, 80D7h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5604:
@@ -11490,7 +11490,7 @@ jmp	loc_54F4
 loc_567E:
 push	dx
 mov	dx, 87B1h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 mov	al, ss:byte_13E6+2
 or	al, al
@@ -11804,7 +11804,7 @@ pop	di
 pop	es
 push	dx
 mov	dx, 8827h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_58D9:
@@ -11812,13 +11812,13 @@ pop	di
 pop	es
 push	dx
 mov	dx, 8809h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_58E3:
 push	dx
 mov	dx, 8787h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 sub_5881 endp
 
@@ -11892,7 +11892,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_594A
-jmp	loc_2936
+jmp	PM
 
 loc_594A:
 lodsb
@@ -11930,13 +11930,13 @@ test	al, 80h
 jnz	short $+2
 push	dx
 mov	dx, 864Dh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_59A2:
 push	dx
 mov	dx, 8574h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_59AA:
@@ -11944,7 +11944,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_59B5
-jmp	loc_2936
+jmp	PM
 
 loc_59B5:
 lodsb
@@ -11987,13 +11987,13 @@ loc_5A05:
 pop	es
 push	dx
 mov	dx, 8630h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5A0E:
 push	dx
 mov	dx, 8553h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5A16:
@@ -12001,7 +12001,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5A21
-jmp	loc_2936
+jmp	PM
 
 loc_5A21:
 lodsb
@@ -12074,7 +12074,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5ABC
-jmp	loc_2936
+jmp	PM
 
 loc_5ABC:
 lodsb
@@ -12159,13 +12159,13 @@ retn
 loc_5B61:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5B69:
 push	dx
 mov	dx, 7F28h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5B71:
@@ -12173,7 +12173,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5B7C
-jmp	loc_2936
+jmp	PM
 
 loc_5B7C:
 mov	byte ptr es:[di], 62h ;	'b'
@@ -12184,7 +12184,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5B8E
-jmp	loc_2936
+jmp	PM
 
 loc_5B8E:
 mov	al, 48h	; 'H'
@@ -12196,7 +12196,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5B9D
-jmp	loc_2936
+jmp	PM
 
 loc_5B9D:
 mov	al, 8Bh	; '�'
@@ -12208,7 +12208,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5BAC
-jmp	loc_2936
+jmp	PM
 
 loc_5BAC:
 mov	al, 0Bh
@@ -12220,7 +12220,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5BBB
-jmp	loc_2936
+jmp	PM
 
 loc_5BBB:
 mov	al, 4Bh	; 'K'
@@ -12232,7 +12232,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5BCA
-jmp	loc_2936
+jmp	PM
 
 loc_5BCA:
 mov	al, 8
@@ -12244,7 +12244,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5BD9
-jmp	loc_2936
+jmp	PM
 
 loc_5BD9:
 mov	al, 0DAh ; '�'
@@ -12256,7 +12256,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5BE8
-jmp	loc_2936
+jmp	PM
 
 loc_5BE8:
 mov	al, 5Ah	; 'Z'
@@ -12268,7 +12268,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5BF7
-jmp	loc_2936
+jmp	PM
 
 loc_5BF7:
 mov	al, 68h	; 'h'
@@ -12280,7 +12280,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5C06
-jmp	loc_2936
+jmp	PM
 
 loc_5C06:
 mov	al, 0ABh ; '�'
@@ -12292,7 +12292,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5C15
-jmp	loc_2936
+jmp	PM
 
 loc_5C15:
 mov	al, 2Bh	; '+'
@@ -12304,7 +12304,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5C24
-jmp	loc_2936
+jmp	PM
 
 loc_5C24:
 mov	al, 28h	; '('
@@ -12316,7 +12316,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5C33
-jmp	loc_2936
+jmp	PM
 
 loc_5C33:
 mov	al, 0FAh ; '�'
@@ -12328,7 +12328,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5C42
-jmp	loc_2936
+jmp	PM
 
 loc_5C42:
 mov	al, 7Ah	; 'z'
@@ -12340,7 +12340,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5C51
-jmp	loc_2936
+jmp	PM
 
 loc_5C51:
 lodsb
@@ -12387,7 +12387,7 @@ mov	ss:word_F9C, bp
 cmp	ss:byte_F8A, 20h ; ' '
 jl	short loc_5CF1
 mov	dx, 7D45h
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
 loc_5CF1:
@@ -12403,7 +12403,7 @@ jnz	short loc_5D0A
 jmp	near ptr word_24A2
 
 loc_5D0A:
-jmp	loc_26E4
+jmp	DO_MARIO
 
 loc_5D0D:
 lodsb
@@ -12489,7 +12489,7 @@ retn
 loc_5DB2:
 push	dx
 mov	dx, 80AEh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5DBA:
@@ -12497,7 +12497,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5DC5
-jmp	loc_2936
+jmp	PM
 
 loc_5DC5:
 cmp	ss:word_1470, 0
@@ -12545,7 +12545,7 @@ pop	bp
 pop	es
 push	dx
 mov	dx, 84D4h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5E3E:
@@ -12569,7 +12569,7 @@ pop	es
 loc_5E59:
 push	dx
 mov	dx, 80D7h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 locret_5E61:
@@ -12578,7 +12578,7 @@ retn
 loc_5E62:
 push	dx
 mov	dx, 84C2h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5E6A:
@@ -12586,7 +12586,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5E75
-jmp	loc_2936
+jmp	PM
 
 loc_5E75:
 cmp	ss:word_1470, 0
@@ -12619,7 +12619,7 @@ jz	short loc_5EB6
 pop	di
 push	dx
 mov	dx, 85A9h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5EB6:
@@ -12653,7 +12653,7 @@ jz	short loc_5EE7
 pop	di
 push	dx
 mov	dx, 85A9h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5EE7:
@@ -12679,7 +12679,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_5F0A
-jmp	loc_2936
+jmp	PM
 
 loc_5F0A:
 lodsb
@@ -12745,13 +12745,13 @@ retn
 loc_5F92:
 push	dx
 mov	dx, 819Ah
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5F9A:
 push	dx
 mov	dx, 818Ah
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_5FA2:
@@ -12828,19 +12828,19 @@ pop	di
 pop	es
 push	dx
 mov	dx, 81D7h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_6056:
 push	dx
 mov	dx, 81BAh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_605E:
 push	dx
 mov	dx, 81AAh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_6066:
@@ -12848,7 +12848,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_6071
-jmp	loc_2936
+jmp	PM
 
 loc_6071:
 call	sub_75FC
@@ -12856,7 +12856,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_607F
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_607F:
 mov	ax, [bp+7169h]
@@ -12871,7 +12871,7 @@ retn
 loc_608F:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -12881,7 +12881,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_60A6
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_60A6:
 mov	ax, [bp+7197h]
@@ -12896,7 +12896,7 @@ retn
 loc_60B6:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -12905,7 +12905,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_60CA
-jmp	loc_2936
+jmp	PM
 
 loc_60CA:
 mov	al, 40h	; '@'
@@ -12917,7 +12917,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_60D9
-jmp	loc_2936
+jmp	PM
 
 loc_60D9:
 mov	al, 6Bh	; 'k'
@@ -12929,7 +12929,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_60E8
-jmp	loc_2936
+jmp	PM
 
 loc_60E8:
 mov	al, 60h	; '`'
@@ -12949,7 +12949,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_610A
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_610A:
 mov	ax, [bp+71C5h]
@@ -12964,7 +12964,7 @@ retn
 loc_611A:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -12973,7 +12973,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_612E
-jmp	loc_2936
+jmp	PM
 
 loc_612E:
 mov	al, 38h	; '8'
@@ -12985,7 +12985,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_613D
-jmp	loc_2936
+jmp	PM
 
 loc_613D:
 mov	al, 0F8h ; '�'
@@ -12997,7 +12997,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_614C
-jmp	loc_2936
+jmp	PM
 
 loc_614C:
 mov	al, 78h	; 'x'
@@ -13009,7 +13009,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_615B
-jmp	loc_2936
+jmp	PM
 
 loc_615B:
 lodsb
@@ -13134,7 +13134,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_626A
-jmp	loc_2936
+jmp	PM
 
 loc_626A:
 call	sub_CD08
@@ -13154,7 +13154,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_6297
-jmp	loc_2936
+jmp	PM
 
 loc_6297:
 call	sub_CD0C
@@ -13175,7 +13175,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_62C7
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_62C7:
 mov	ax, [bp+71F3h]
@@ -13190,7 +13190,7 @@ retn
 loc_62D7:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -13199,7 +13199,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_62EB
-jmp	loc_2936
+jmp	PM
 
 loc_62EB:
 mov	al, 0DBh ; '�'
@@ -13212,7 +13212,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_62FD
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_62FD:
 mov	ax, [bp+7221h]
@@ -13227,7 +13227,7 @@ retn
 loc_630D:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -13236,7 +13236,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_6321
-jmp	loc_2936
+jmp	PM
 
 loc_6321:
 lodsb
@@ -13260,7 +13260,7 @@ jz	short loc_634E
 loc_6346:
 push	dx
 mov	dx, 8078h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_634E:
@@ -13320,7 +13320,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_63C4
-jmp	loc_2936
+jmp	PM
 
 loc_63C4:
 lodsb
@@ -13424,7 +13424,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_647D
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_647D:
 mov	ax, [bp+724Fh]
@@ -13439,7 +13439,7 @@ retn
 loc_648D:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -13449,7 +13449,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_64A4
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_64A4:
 mov	ax, [bp+727Dh]
@@ -13464,7 +13464,7 @@ retn
 loc_64B4:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 retn
@@ -13472,7 +13472,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_64C9
-jmp	loc_2936
+jmp	PM
 
 loc_64C9:
 mov	al, 0AAh ; '�'
@@ -13482,7 +13482,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_64D8
-jmp	loc_2936
+jmp	PM
 
 loc_64D8:
 mov	al, 0A8h ; '�'
@@ -13492,7 +13492,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_64E7
-jmp	loc_2936
+jmp	PM
 
 loc_64E7:
 mov	al, 5Bh	; '['
@@ -13502,7 +13502,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_64F6
-jmp	loc_2936
+jmp	PM
 
 loc_64F6:
 mov	al, 1Bh
@@ -13516,7 +13516,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_650C
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_650C:
 mov	ax, [bp+72D9h]
@@ -13531,7 +13531,7 @@ retn
 loc_651C:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 call	sub_75FC
@@ -13539,7 +13539,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_6533
-jmp	loc_292E
+jmp	E_EXTRACHARS
 
 loc_6533:
 mov	ax, [bp+72ABh]
@@ -13554,7 +13554,7 @@ retn
 loc_6543:
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 retn
@@ -13565,7 +13565,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_655C
-jmp	loc_2936
+jmp	PM
 
 loc_655C:
 mov	al, 0BAh ; '�'
@@ -13575,7 +13575,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_656B
-jmp	loc_2936
+jmp	PM
 
 loc_656B:
 mov	al, 8Ah	; '�'
@@ -13585,7 +13585,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_657A
-jmp	loc_2936
+jmp	PM
 
 loc_657A:
 mov	al, 9Ah	; '�'
@@ -13595,7 +13595,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_6589
-jmp	loc_2936
+jmp	PM
 
 loc_6589:
 mov	al, 9Bh	; '�'
@@ -13605,7 +13605,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_6598
-jmp	loc_2936
+jmp	PM
 
 loc_6598:
 mov	al, 98h	; '�'
@@ -13615,7 +13615,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_65A7
-jmp	loc_2936
+jmp	PM
 
 loc_65A7:
 mov	al, 0BBh ; '�'
@@ -13680,7 +13680,7 @@ pop	es
 pop	di
 push	dx
 mov	dx, 80FFh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_661B:
@@ -13749,7 +13749,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_66A5
-jmp	loc_2936
+jmp	PM
 
 loc_66A5:
 mov	al, 0CBh ; '�'
@@ -13771,7 +13771,7 @@ jz	short loc_66CF
 dec	si
 push	dx
 mov	dx, 8078h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_66C8:
@@ -13796,7 +13796,7 @@ cmp	ah, 53h	; 'S'
 jz	short loc_670D
 cmp	ah, 4Eh	; 'N'
 jz	short loc_66F3
-jmp	loc_2936
+jmp	PM
 
 loc_66F3:
 lodsb
@@ -13806,7 +13806,7 @@ jnz	short loc_66FD
 jmp	loc_2D85
 
 loc_66FD:
-jmp	loc_2936
+jmp	PM
 
 loc_6700:
 lodsb
@@ -13816,7 +13816,7 @@ jnz	short loc_670A
 jmp	loc_2D4E
 
 loc_670A:
-jmp	loc_2936
+jmp	PM
 
 loc_670D:
 lodsb
@@ -13826,13 +13826,13 @@ jnz	short loc_6717
 jmp	loc_2DBC
 
 loc_6717:
-jmp	loc_2936
+jmp	PM
 mov	al, ah
 xor	ah, ah
 xlat	byte ptr ss:[bx]
 sub	al, 41h	; 'A'
 jge	short loc_6727
-jmp	loc_2936
+jmp	PM
 
 loc_6727:
 shl	al, 1
@@ -13850,12 +13850,12 @@ jnz	short loc_6740
 jmp	loc_2DE3
 
 loc_6740:
-jmp	loc_2936
+jmp	PM
 lodsb
 and	al, 0DFh
 cmp	al, 51h	; 'Q'
 jz	short loc_674D
-jmp	loc_2936
+jmp	PM
 
 loc_674D:
 mov	al, [si]
@@ -13872,12 +13872,12 @@ jnz	short loc_6762
 jmp	loc_2FA3
 
 loc_6762:
-jmp	loc_2936
+jmp	PM
 lodsb
 and	al, 0DFh
 cmp	al, 49h	; 'I'
 jz	short loc_676F
-jmp	loc_2936
+jmp	PM
 
 loc_676F:
 mov	al, [si]
@@ -13891,7 +13891,7 @@ lodsb
 and	al, 0DFh
 cmp	al, 45h	; 'E'
 jz	short loc_6784
-jmp	loc_2936
+jmp	PM
 
 loc_6784:
 mov	al, [si]
@@ -13905,7 +13905,7 @@ lodsb
 and	al, 0DFh
 cmp	al, 4Ch	; 'L'
 jz	short loc_6799
-jmp	loc_2936
+jmp	PM
 
 loc_6799:
 mov	al, [si]
@@ -13932,7 +13932,7 @@ jnz	short loc_67BC
 jmp	loc_3229
 
 loc_67BC:
-jmp	loc_2936
+jmp	PM
 lodsb
 and	al, 0DFh
 cmp	al, 53h	; 'S'
@@ -13945,7 +13945,7 @@ jnz	short loc_67D0
 jmp	loc_32D6
 
 loc_67D0:
-jmp	loc_2936
+jmp	PM
 and	ah, 0DFh
 cmp	ah, 4Ch	; 'L'
 jz	short loc_6819
@@ -13957,21 +13957,21 @@ cmp	ah, 50h	; 'P'
 jz	short loc_685D
 cmp	ah, 48h	; 'H'
 jz	short loc_67F2
-jmp	loc_2936
+jmp	PM
 
 loc_67F2:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4345h
 jz	short loc_67FE
-jmp	loc_2936
+jmp	PM
 
 loc_67FE:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4D4Bh
 jz	short loc_680A
-jmp	loc_2936
+jmp	PM
 
 loc_680A:
 lodsw
@@ -13981,7 +13981,7 @@ jnz	short loc_6816
 jmp	loc_340A
 
 loc_6816:
-jmp	loc_2936
+jmp	PM
 
 loc_6819:
 lodsb
@@ -14006,7 +14006,7 @@ jnz	short loc_6838
 jmp	loc_3464
 
 loc_6838:
-jmp	loc_2936
+jmp	PM
 
 loc_683B:
 lodsb
@@ -14016,14 +14016,14 @@ jnz	short loc_6845
 jmp	loc_3473
 
 loc_6845:
-jmp	loc_2936
+jmp	PM
 
 loc_6848:
 lodsb
 and	al, 0DFh
 cmp	al, 50h	; 'P'
 jz	short loc_6852
-jmp	loc_2936
+jmp	PM
 
 loc_6852:
 mov	al, [si]
@@ -14045,7 +14045,7 @@ jnz	short loc_686E
 jmp	near ptr byte_34E5
 
 loc_686E:
-jmp	loc_2936
+jmp	PM
 and	ah, 0DFh
 cmp	ah, 45h	; 'E'
 jnz	short loc_68E6
@@ -14070,7 +14070,7 @@ jmp	loc_3547
 loc_6891:
 cmp	al, 46h	; 'F'
 jz	short loc_6898
-jmp	loc_2936
+jmp	PM
 
 loc_6898:
 lodsw
@@ -14084,14 +14084,14 @@ cmp	ax, 5245h
 jz	short loc_68C5
 cmp	ax, 4E45h
 jz	short loc_68B0
-jmp	loc_2936
+jmp	PM
 
 loc_68B0:
 lodsb
 and	al, 0DFh
 cmp	al, 44h	; 'D'
 jz	short loc_68BA
-jmp	loc_2936
+jmp	PM
 
 loc_68BA:
 mov	al, [si]
@@ -14105,14 +14105,14 @@ lodsw
 and	ax, 0DFDFh
 cmp	ax, 4F52h
 jz	short loc_68D1
-jmp	loc_2936
+jmp	PM
 
 loc_68D1:
 lodsb
 and	al, 0DFh
 cmp	al, 52h	; 'R'
 jz	short loc_68DB
-jmp	loc_2936
+jmp	PM
 
 loc_68DB:
 mov	al, [si]
@@ -14139,21 +14139,21 @@ jmp	loc_3652
 loc_68FE:
 cmp	ah, 41h	; 'A'
 jz	short loc_6906
-jmp	loc_2936
+jmp	PM
 
 loc_6906:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4554h
 jz	short loc_6912
-jmp	loc_2936
+jmp	PM
 
 loc_6912:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_691D
-jmp	loc_2936
+jmp	PM
 
 loc_691D:
 lodsb
@@ -14209,35 +14209,35 @@ jnz	short loc_6999
 jmp	loc_6A47
 
 loc_6999:
-jmp	loc_2936
+jmp	PM
 
 loc_699C:
 lodsb
 and	al, 0DFh
 cmp	al, 53h	; 'S'
 jz	short loc_69A6
-jmp	loc_2936
+jmp	PM
 
 loc_69A6:
 lodsb
 and	al, 0DFh
 cmp	al, 45h	; 'E'
 jz	short loc_69B0
-jmp	loc_2936
+jmp	PM
 
 loc_69B0:
 lodsb
 and	al, 0DFh
 cmp	al, 49h	; 'I'
 jz	short loc_69BA
-jmp	loc_2936
+jmp	PM
 
 loc_69BA:
 lodsb
 and	al, 0DFh
 cmp	al, 46h	; 'F'
 jz	short loc_69C4
-jmp	loc_2936
+jmp	PM
 
 loc_69C4:
 mov	al, [si]
@@ -14251,7 +14251,7 @@ lodsb
 and	al, 0DFh
 cmp	al, 55h	; 'U'
 jz	short loc_69D9
-jmp	loc_2936
+jmp	PM
 
 loc_69D9:
 mov	al, [si]
@@ -14270,7 +14270,7 @@ db 3Ch
 sub_69E8 proc near
 push	dx
 jz	short loc_69EE
-jmp	loc_2936
+jmp	PM
 
 loc_69EE:
 mov	al, [si]
@@ -14287,7 +14287,7 @@ jnz	short loc_6A03
 jmp	loc_38F7
 
 loc_6A03:
-jmp	loc_2936
+jmp	PM
 sub_69E8 endp
 
 
@@ -14296,7 +14296,7 @@ lodsb
 and	al, 0DFh
 cmp	al, 44h	; 'D'
 jz	short loc_6A10
-jmp	loc_2936
+jmp	PM
 
 loc_6A10:
 mov	al, [si]
@@ -14323,7 +14323,7 @@ lodsw
 and	ax, 0DFDFh
 cmp	ax, 4554h
 jz	short loc_6A38
-jmp	loc_2936
+jmp	PM
 
 loc_6A38:
 lodsw
@@ -14333,34 +14333,34 @@ jnz	short loc_6A44
 jmp	loc_593F
 
 loc_6A44:
-jmp	loc_2936
+jmp	PM
 
 loc_6A47:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4F52h
 jz	short loc_6A53
-jmp	loc_2936
+jmp	PM
 
 loc_6A53:
 lodsb
 and	al, 0DFh
 cmp	al, 52h	; 'R'
 jz	short loc_6A5D
-jmp	loc_2936
+jmp	PM
 
 loc_6A5D:
 lodsb
 cmp	al, 2Bh	; '+'
 jz	short loc_6A65
-jmp	loc_2936
+jmp	PM
 
 loc_6A65:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_6A70
-jmp	loc_2936
+jmp	PM
 
 loc_6A70:
 inc	ss:word_13C4
@@ -14374,14 +14374,14 @@ cmp	ax, 504Fh
 jz	short loc_6AA2
 cmp	ax, 4C43h
 jz	short loc_6AB1
-jmp	loc_2936
+jmp	PM
 
 loc_6A8D:
 lodsb
 and	al, 0DFh
 cmp	al, 4Ch	; 'L'
 jz	short loc_6A97
-jmp	loc_2936
+jmp	PM
 
 loc_6A97:
 mov	al, [si]
@@ -14398,21 +14398,21 @@ jnz	short loc_6AAE
 jmp	loc_39B0
 
 loc_6AAE:
-jmp	loc_2936
+jmp	PM
 
 loc_6AB1:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 534Fh
 jz	short loc_6ABD
-jmp	loc_2936
+jmp	PM
 
 loc_6ABD:
 lodsb
 and	al, 0DFh
 cmp	al, 45h	; 'E'
 jz	short loc_6AC7
-jmp	loc_2936
+jmp	PM
 
 loc_6AC7:
 mov	al, [si]
@@ -14425,28 +14425,28 @@ loc_6AD2:
 and	ah, 0DFh
 cmp	ah, 45h	; 'E'
 jz	short loc_6ADD
-jmp	loc_2936
+jmp	PM
 
 loc_6ADD:
 lodsb
 and	al, 0DFh
 cmp	al, 54h	; 'T'
 jz	short loc_6AE7
-jmp	loc_2936
+jmp	PM
 
 loc_6AE7:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4E45h
 jz	short loc_6AF3
-jmp	loc_2936
+jmp	PM
 
 loc_6AF3:
 lodsb
 and	al, 0DFh
 cmp	al, 56h	; 'V'
 jz	short loc_6AFD
-jmp	loc_2936
+jmp	PM
 
 loc_6AFD:
 jmp	loc_3C38
@@ -14463,7 +14463,7 @@ jnz	short loc_6B18
 jmp	loc_6BE1
 
 loc_6B18:
-jmp	loc_2936
+jmp	PM
 
 loc_6B1B:
 lodsb
@@ -14485,7 +14485,7 @@ jnz	short loc_6B37
 jmp	loc_4950
 
 loc_6B37:
-jmp	loc_2936
+jmp	PM
 
 loc_6B3A:
 lodsb
@@ -14505,14 +14505,14 @@ lodsb
 and	al, 0DFh
 cmp	al, 49h	; 'I'
 jz	short loc_6B5A
-jmp	loc_2936
+jmp	PM
 
 loc_6B5A:
 lodsb
 and	al, 0DFh
 cmp	al, 52h	; 'R'
 jz	short loc_6B64
-jmp	loc_2936
+jmp	PM
 
 loc_6B64:
 mov	al, [si]
@@ -14522,21 +14522,21 @@ jns	short loc_6B6F
 jmp	loc_44D5
 
 loc_6B6F:
-jmp	loc_2936
+jmp	PM
 
 loc_6B72:
 lodsb
 and	al, 0DFh
 cmp	al, 49h	; 'I'
 jz	short loc_6B7C
-jmp	loc_2936
+jmp	PM
 
 loc_6B7C:
 lodsb
 and	al, 0DFh
 cmp	al, 4Eh	; 'N'
 jz	short loc_6B86
-jmp	loc_2936
+jmp	PM
 
 loc_6B86:
 mov	al, [si]
@@ -14546,28 +14546,28 @@ jns	short loc_6B91
 jmp	loc_45DA
 
 loc_6B91:
-jmp	loc_2936
+jmp	PM
 
 loc_6B94:
 lodsb
 and	al, 0DFh
 cmp	al, 55h	; 'U'
 jz	short loc_6B9E
-jmp	loc_2936
+jmp	PM
 
 loc_6B9E:
 lodsb
 and	al, 0DFh
 cmp	al, 44h	; 'D'
 jz	short loc_6BA8
-jmp	loc_2936
+jmp	PM
 
 loc_6BA8:
 lodsb
 and	al, 0DFh
 cmp	al, 45h	; 'E'
 jz	short loc_6BB2
-jmp	loc_2936
+jmp	PM
 
 loc_6BB2:
 mov	al, [si]
@@ -14577,21 +14577,21 @@ jns	short loc_6BBD
 jmp	loc_46E2
 
 loc_6BBD:
-jmp	loc_2936
+jmp	PM
 
 loc_6BC0:
 lodsb
 and	al, 0DFh
 cmp	al, 4Fh	; 'O'
 jz	short loc_6BCA
-jmp	loc_2936
+jmp	PM
 
 loc_6BCA:
 lodsb
 and	al, 0DFh
 cmp	al, 4Ch	; 'L'
 jz	short loc_6BD4
-jmp	loc_2936
+jmp	PM
 
 loc_6BD4:
 lodsb
@@ -14601,7 +14601,7 @@ jns	short loc_6BDE
 jmp	loc_450D
 
 loc_6BDE:
-jmp	loc_2936
+jmp	PM
 
 loc_6BE1:
 lodsb
@@ -14616,13 +14616,13 @@ jnz	short loc_6BF2
 jmp	loc_5E6A
 
 loc_6BF2:
-jmp	loc_2936
+jmp	PM
 and	ah, 0DFh
 cmp	ah, 4Dh	; 'M'
 jz	short loc_6C05
 cmp	ah, 53h	; 'S'
 jz	short loc_6C19
-jmp	loc_2936
+jmp	PM
 
 loc_6C05:
 lodsb
@@ -14637,7 +14637,7 @@ jnz	short loc_6C16
 jmp	loc_4AC1
 
 loc_6C16:
-jmp	loc_2936
+jmp	PM
 
 loc_6C19:
 lodsb
@@ -14652,7 +14652,7 @@ jnz	short loc_6C2A
 jmp	loc_4BAA
 
 loc_6C2A:
-jmp	loc_2936
+jmp	PM
 and	ah, 0DFh
 cmp	ah, 44h	; 'D'
 jnz	short loc_6C50
@@ -14673,7 +14673,7 @@ jnz	short loc_6C4D
 jmp	loc_4D56
 
 loc_6C4D:
-jmp	loc_2936
+jmp	PM
 
 loc_6C50:
 cmp	ah, 4Fh	; 'O'
@@ -14682,7 +14682,7 @@ cmp	ah, 49h	; 'I'
 jz	short loc_6CC3
 cmp	ah, 53h	; 'S'
 jz	short loc_6C62
-jmp	loc_2936
+jmp	PM
 
 loc_6C62:
 lodsb
@@ -14692,7 +14692,7 @@ jnz	short loc_6C6C
 jmp	loc_4DE7
 
 loc_6C6C:
-jmp	loc_2936
+jmp	PM
 
 loc_6C6F:
 lodsw
@@ -14711,7 +14711,7 @@ jnz	short loc_6C89
 jmp	loc_4DBA
 
 loc_6C89:
-jmp	loc_2936
+jmp	PM
 
 loc_6C8C:
 cmp	ax, 4143h
@@ -14720,7 +14720,7 @@ lodsb
 and	al, 0DFh
 cmp	al, 4Ch	; 'L'
 jz	short loc_6C9B
-jmp	loc_2936
+jmp	PM
 
 loc_6C9B:
 mov	al, [si]
@@ -14732,14 +14732,14 @@ jmp	loc_4C7B
 loc_6CA6:
 cmp	ax, 4557h
 jz	short loc_6CAE
-jmp	loc_2936
+jmp	PM
 
 loc_6CAE:
 lodsb
 and	al, 0DFh
 cmp	al, 52h	; 'R'
 jz	short loc_6CB8
-jmp	loc_2936
+jmp	PM
 
 loc_6CB8:
 mov	al, [si]
@@ -14753,14 +14753,14 @@ lodsb
 and	al, 0DFh
 cmp	al, 53h	; 'S'
 jz	short loc_6CCD
-jmp	loc_2936
+jmp	PM
 
 loc_6CCD:
 lodsb
 and	al, 0DFh
 cmp	al, 54h	; 'T'
 jz	short loc_6CD7
-jmp	loc_2936
+jmp	PM
 
 loc_6CD7:
 mov	al, [si]
@@ -14777,28 +14777,28 @@ cmp	ah, 45h	; 'E'
 jz	short loc_6CF7
 cmp	ah, 56h	; 'V'
 jz	short loc_6D6C
-jmp	loc_2936
+jmp	PM
 
 loc_6CF7:
 lodsb
 and	al, 0DFh
 cmp	al, 58h	; 'X'
 jz	short loc_6D01
-jmp	loc_2936
+jmp	PM
 
 loc_6D01:
 lodsb
 and	al, 0DFh
 cmp	al, 49h	; 'I'
 jz	short loc_6D0B
-jmp	loc_2936
+jmp	PM
 
 loc_6D0B:
 lodsb
 and	al, 0DFh
 cmp	al, 54h	; 'T'
 jz	short loc_6D15
-jmp	loc_2936
+jmp	PM
 
 loc_6D15:
 mov	al, [si]
@@ -14818,14 +14818,14 @@ lodsb
 and	al, 0DFh
 cmp	al, 52h	; 'R'
 jz	short loc_6D31
-jmp	loc_2936
+jmp	PM
 
 loc_6D31:
 lodsb
 and	al, 0DFh
 cmp	al, 4Fh	; 'O'
 jz	short loc_6D3B
-jmp	loc_2936
+jmp	PM
 
 loc_6D3B:
 mov	al, [si]
@@ -14837,21 +14837,21 @@ jmp	loc_4E77
 loc_6D46:
 cmp	al, 52h	; 'R'
 jz	short loc_6D4D
-jmp	loc_2936
+jmp	PM
 
 loc_6D4D:
 lodsb
 and	al, 0DFh
 cmp	al, 49h	; 'I'
 jz	short loc_6D57
-jmp	loc_2936
+jmp	PM
 
 loc_6D57:
 lodsb
 and	al, 0DFh
 cmp	al, 4Fh	; 'O'
 jz	short loc_6D61
-jmp	loc_2936
+jmp	PM
 
 loc_6D61:
 mov	al, [si]
@@ -14873,18 +14873,18 @@ jnz	short loc_6D7D
 jmp	loc_51BA
 
 loc_6D7D:
-jmp	loc_2936
+jmp	PM
 and	ah, 0DFh
 cmp	ah, 4Fh	; 'O'
 jz	short loc_6D8B
-jmp	loc_2936
+jmp	PM
 
 loc_6D8B:
 lodsb
 and	al, 0DFh
 cmp	al, 50h	; 'P'
 jz	short loc_6D95
-jmp	loc_2936
+jmp	PM
 
 loc_6D95:
 mov	al, [si]
@@ -14899,7 +14899,7 @@ cmp	ah, 52h	; 'R'
 jz	short loc_6DB0
 cmp	ah, 55h	; 'U'
 jz	short loc_6DC4
-jmp	loc_2936
+jmp	PM
 
 loc_6DB0:
 lodsb
@@ -14914,35 +14914,35 @@ jnz	short loc_6DC1
 jmp	loc_5244
 
 loc_6DC1:
-jmp	loc_2936
+jmp	PM
 
 loc_6DC4:
 lodsb
 and	al, 0DFh
 cmp	al, 54h	; 'T'
 jz	short loc_6DCE
-jmp	loc_2936
+jmp	PM
 
 loc_6DCE:
 lodsb
 and	al, 0DFh
 cmp	al, 50h	; 'P'
 jz	short loc_6DD8
-jmp	loc_2936
+jmp	PM
 
 loc_6DD8:
 lodsb
 and	al, 0DFh
 cmp	al, 55h	; 'U'
 jz	short loc_6DE2
-jmp	loc_2936
+jmp	PM
 
 loc_6DE2:
 lodsb
 and	al, 0DFh
 cmp	al, 54h	; 'T'
 jz	short loc_6DEC
-jmp	loc_2936
+jmp	PM
 
 loc_6DEC:
 mov	al, [si]
@@ -14969,7 +14969,7 @@ jnz	short loc_6E19
 jmp	loc_6EB9
 
 loc_6E19:
-jmp	loc_2936
+jmp	PM
 
 loc_6E1C:
 lodsb
@@ -14989,7 +14989,7 @@ jnz	short loc_6E34
 jmp	loc_5B71
 
 loc_6E34:
-jmp	loc_2936
+jmp	PM
 
 loc_6E37:
 lodsb
@@ -15029,7 +15029,7 @@ jnz	short loc_6E6B
 jmp	loc_5BB0
 
 loc_6E6B:
-jmp	loc_2936
+jmp	PM
 
 loc_6E6E:
 lodsb
@@ -15064,14 +15064,14 @@ jnz	short loc_6E9B
 jmp	loc_5C0A
 
 loc_6E9B:
-jmp	loc_2936
+jmp	PM
 
 loc_6E9E:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4E49h
 jz	short loc_6EAA
-jmp	loc_2936
+jmp	PM
 
 loc_6EAA:
 lodsw
@@ -15081,14 +15081,14 @@ jnz	short loc_6EB6
 jmp	loc_541E
 
 loc_6EB6:
-jmp	loc_2936
+jmp	PM
 
 loc_6EB9:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4C42h
 jz	short loc_6EC5
-jmp	loc_2936
+jmp	PM
 
 loc_6EC5:
 lodsw
@@ -15098,7 +15098,7 @@ jnz	short loc_6ED1
 jmp	loc_59AA
 
 loc_6ED1:
-jmp	loc_2936
+jmp	PM
 and	ah, 0DFh
 cmp	ah, 45h	; 'E'
 jz	short loc_6EEE
@@ -15108,7 +15108,7 @@ cmp	ah, 4Fh	; 'O'
 jz	short loc_6F2D
 cmp	ah, 55h	; 'U'
 jz	short loc_6F5C
-jmp	loc_2936
+jmp	PM
 
 loc_6EEE:
 lodsb
@@ -15121,7 +15121,7 @@ lodsw
 and	ax, 0DFDFh
 cmp	ax, 4145h
 jz	short loc_6F05
-jmp	loc_2936
+jmp	PM
 
 loc_6F05:
 lodsw
@@ -15131,7 +15131,7 @@ jnz	short loc_6F11
 jmp	loc_63B9
 
 loc_6F11:
-jmp	loc_2936
+jmp	PM
 
 loc_6F14:
 lodsb
@@ -15149,7 +15149,7 @@ jns	short loc_6F2A
 jmp	loc_5D0D
 
 loc_6F2A:
-jmp	loc_2936
+jmp	PM
 
 loc_6F2D:
 lodsb
@@ -15164,7 +15164,7 @@ jnz	short loc_6F3E
 jmp	loc_6098
 
 loc_6F3E:
-jmp	loc_2936
+jmp	PM
 
 loc_6F41:
 lodsb
@@ -15184,14 +15184,14 @@ jnz	short loc_6F59
 jmp	loc_60BF
 
 loc_6F59:
-jmp	loc_2936
+jmp	PM
 
 loc_6F5C:
 lodsb
 and	al, 0DFh
 cmp	al, 4Eh	; 'N'
 jz	short loc_6F66
-jmp	loc_2936
+jmp	PM
 
 loc_6F66:
 mov	al, [si]
@@ -15234,7 +15234,7 @@ jmp	loc_70A9
 loc_6FA4:
 cmp	ah, 55h	; 'U'
 jz	short loc_6FAC
-jmp	loc_2936
+jmp	PM
 
 loc_6FAC:
 lodsw
@@ -15243,14 +15243,14 @@ cmp	ax, 5342h
 jz	short loc_6FD8
 cmp	ax, 5050h
 jz	short loc_6FBD
-jmp	loc_2936
+jmp	PM
 
 loc_6FBD:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4552h
 jz	short loc_6FC9
-jmp	loc_2936
+jmp	PM
 
 loc_6FC9:
 lodsw
@@ -15260,21 +15260,21 @@ jnz	short loc_6FD5
 jmp	loc_6316
 
 loc_6FD5:
-jmp	loc_2936
+jmp	PM
 
 loc_6FD8:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 5254h
 jz	short loc_6FE4
-jmp	loc_2936
+jmp	PM
 
 loc_6FE4:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_6FEF
-jmp	loc_2936
+jmp	PM
 
 loc_6FEF:
 lodsb
@@ -15388,14 +15388,14 @@ lodsb
 and	al, 0DFh
 cmp	al, 43h	; 'C'
 jz	short loc_70B3
-jmp	loc_2936
+jmp	PM
 
 loc_70B3:
 lodsb
 and	al, 0DFh
 cmp	al, 45h	; 'E'
 jz	short loc_70BD
-jmp	loc_2936
+jmp	PM
 
 loc_70BD:
 mov	al, [si]
@@ -15409,7 +15409,7 @@ lodsb
 and	al, 0DFh
 cmp	al, 41h	; 'A'
 jz	short loc_70D2
-jmp	loc_2936
+jmp	PM
 
 loc_70D2:
 mov	al, [si]
@@ -15426,28 +15426,28 @@ jnz	short loc_70E7
 jmp	loc_60EC
 
 loc_70E7:
-jmp	loc_2936
+jmp	PM
 
 loc_70EA:
 lodsb
 and	al, 0DFh
 cmp	al, 4Fh	; 'O'
 jz	short loc_70F4
-jmp	loc_2936
+jmp	PM
 
 loc_70F4:
 lodsb
 and	al, 0DFh
 cmp	al, 52h	; 'R'
 jz	short loc_70FE
-jmp	loc_2936
+jmp	PM
 
 loc_70FE:
 lodsb
 and	al, 0DFh
 cmp	al, 54h	; 'T'
 jz	short loc_7108
-jmp	loc_2936
+jmp	PM
 
 loc_7108:
 lodsb
@@ -15462,7 +15462,7 @@ jnz	short loc_7119
 jmp	loc_628C
 
 loc_7119:
-jmp	loc_2936
+jmp	PM
 
 loc_711C:
 lodsb
@@ -15489,21 +15489,21 @@ jmp	loc_6150
 loc_713B:
 cmp	al, 54h	; 'T'
 jz	short loc_7142
-jmp	loc_2936
+jmp	PM
 
 loc_7142:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4244h
 jz	short loc_714E
-jmp	loc_2936
+jmp	PM
 
 loc_714E:
 lodsb
 and	al, 0DFh
 cmp	al, 52h	; 'R'
 jz	short loc_7158
-jmp	loc_2936
+jmp	PM
 
 loc_7158:
 mov	al, [si]
@@ -15514,7 +15514,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_716B
-jmp	loc_2936
+jmp	PM
 
 loc_716B:
 lodsb
@@ -15538,7 +15538,7 @@ retn
 loc_7191:
 push	dx
 mov	dx, 861Bh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_7199:
@@ -15571,7 +15571,7 @@ jmp	loc_62E0
 loc_71BF:
 cmp	al, 52h	; 'R'
 jz	short loc_71C6
-jmp	loc_2936
+jmp	PM
 
 loc_71C6:
 lodsw
@@ -15580,14 +15580,14 @@ cmp	ax, 4E49h
 jz	short loc_71EC
 cmp	ax, 5043h
 jz	short loc_71D7
-jmp	loc_2936
+jmp	PM
 
 loc_71D7:
 lodsb
 and	al, 0DFh
 cmp	al, 59h	; 'Y'
 jz	short loc_71E1
-jmp	loc_2936
+jmp	PM
 
 loc_71E1:
 mov	al, [si]
@@ -15601,7 +15601,7 @@ lodsb
 and	al, 0DFh
 cmp	al, 47h	; 'G'
 jz	short loc_71F6
-jmp	loc_2936
+jmp	PM
 
 loc_71F6:
 mov	al, [si]
@@ -15672,7 +15672,7 @@ retn
 loc_7260:
 push	dx
 mov	dx, 86E7h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_7268:
@@ -15812,7 +15812,7 @@ pop	di
 pop	es
 push	dx
 mov	dx, 86D8h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_7371:
@@ -15820,7 +15820,7 @@ pop	di
 pop	es
 push	dx
 mov	dx, 80D7h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 sub_71FE endp
 
@@ -15995,7 +15995,7 @@ db 0D7h, 0Ah, 0C0h, 79h, 3, 0E9h, 0E6h,	0F0h
 loc_75F4:
 push	dx
 mov	dx, 7EFEh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 
@@ -16012,7 +16012,7 @@ js	short loc_764C
 cmp	al, 2Eh	; '.'
 jz	short loc_760E
 pop	ax
-jmp	loc_2936
+jmp	PM
 
 loc_760E:
 lodsw
@@ -17637,7 +17637,7 @@ retn
 loc_83C6:
 push	dx
 mov	dx, 85DDh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 xor	bp, bp
 retn
@@ -17646,7 +17646,7 @@ loc_83D1:
 xor	bp, bp
 push	dx
 mov	dx, 7F28h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 ; START	OF FUNCTION CHUNK FOR sub_71FE
 
@@ -17654,54 +17654,54 @@ loc_83DB:
 xor	bp, bp
 push	dx
 mov	dx, 7F7Fh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 xor	bp, bp
 push	dx
 mov	dx, 83D5h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_83EF:
 xor	bp, bp
 push	dx
 mov	dx, 7F37h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_83F9:
 xor	bp, bp
 push	dx
 mov	dx, 7F66h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_8403:
 xor	bp, bp
 push	dx
 mov	dx, 7F37h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_840D:
 xor	bp, bp
 push	dx
 mov	dx, 7F28h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_8417:
 xor	bp, bp
 push	dx
 mov	dx, 7F54h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_8421:
 xor	bp, bp
 push	dx
 mov	dx, 839Bh
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 ; END OF FUNCTION CHUNK	FOR sub_71FE
 
@@ -17883,7 +17883,7 @@ mov	di, ss:word_F6E
 cmp	di, 66E7h
 jb	short loc_85B0
 mov	dx, 7D69h
-call	sub_2290
+call	FATALERR_ROUT
 jmp	STOPASSEM
 
 loc_85B0:
@@ -18493,7 +18493,7 @@ pop	es
 pop	bx
 push	dx
 mov	dx, 7FC0h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_8A8F:
@@ -19408,7 +19408,7 @@ pop	ax
 loc_908E:
 push	dx
 mov	dx, 8251h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 ; END OF FUNCTION CHUNK	FOR sub_9936
@@ -19417,21 +19417,21 @@ retn
 loc_9097:
 push	dx
 mov	dx, 8262h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 ; END OF FUNCTION CHUNK	FOR sub_B7E9
 
 
 
-sub_90A0 proc near
+PARSEMARIO proc near
 mov	dx, si
 lodsb
 mov	bp, ax
 and	bp, 0FFh
 add	bp, bp
 jmp	word ptr [bp+6821h]
-sub_90A0 endp
+PARSEMARIO endp
 
 mov	dx, si
 lodsb
@@ -19464,7 +19464,7 @@ jnz	short loc_90E5
 jmp	loc_9B1F
 
 loc_90E5:
-jmp	loc_2936
+jmp	PM
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4152h
@@ -19527,7 +19527,7 @@ jnz	short loc_914C
 jmp	loc_9B39
 
 loc_914C:
-jmp	loc_2936
+jmp	PM
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4341h
@@ -19558,21 +19558,21 @@ jnz	short loc_9180
 jmp	loc_67F2
 
 loc_9180:
-jmp	loc_2936
+jmp	PM
 
 loc_9183:
 lodsb
 and	al, 0DFh
 cmp	al, 53h	; 'S'
 jz	short loc_918D
-jmp	loc_2936
+jmp	PM
 
 loc_918D:
 lodsb
 and	al, 0DFh
 cmp	al, 45h	; 'E'
 jz	short loc_9197
-jmp	loc_2936
+jmp	PM
 
 loc_9197:
 mov	al, [si]
@@ -19617,14 +19617,14 @@ jnz	short loc_91D8
 jmp	loc_6879
 
 loc_91D8:
-jmp	loc_2936
+jmp	PM
 
 loc_91DB:
 lodsb
 and	al, 0DFh
 cmp	al, 53h	; 'S'
 jz	short loc_91E5
-jmp	loc_2936
+jmp	PM
 
 loc_91E5:
 mov	al, [si]
@@ -19653,21 +19653,21 @@ jmp	loc_69A6
 loc_920C:
 cmp	ax, 5458h
 jz	short loc_9214
-jmp	loc_2936
+jmp	PM
 
 loc_9214:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 5245h
 jz	short loc_9220
-jmp	loc_2936
+jmp	PM
 
 loc_9220:
 lodsb
 and	al, 0DFh
 cmp	al, 4Eh	; 'N'
 jz	short loc_922A
-jmp	loc_2936
+jmp	PM
 
 loc_922A:
 mov	al, [si]
@@ -19693,7 +19693,7 @@ cmp	ax, 504Fh
 jz	short loc_9256
 cmp	ax, 4C43h
 jz	short loc_9265
-jmp	loc_2936
+jmp	PM
 
 loc_9256:
 lodsw
@@ -19704,21 +19704,21 @@ jnz	short loc_9262
 jmp	loc_39B0
 
 loc_9262:
-jmp	loc_2936
+jmp	PM
 
 loc_9265:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 534Fh
 jz	short loc_9271
-jmp	loc_2936
+jmp	PM
 
 loc_9271:
 lodsb
 and	al, 0DFh
 cmp	al, 45h	; 'E'
 jz	short loc_927B
-jmp	loc_2936
+jmp	PM
 
 loc_927B:
 mov	al, [si]
@@ -19735,7 +19735,7 @@ jnz	short loc_9292
 jmp	loc_A4B9
 
 loc_9292:
-jmp	loc_2936
+jmp	PM
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4249h
@@ -19743,7 +19743,7 @@ jnz	short loc_92A1
 jmp	loc_A55B
 
 loc_92A1:
-jmp	loc_2936
+jmp	PM
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 5442h
@@ -19770,7 +19770,7 @@ jmp	loc_5DBA
 loc_92CD:
 cmp	al, 46h	; 'F'
 jz	short loc_92D4
-jmp	loc_2936
+jmp	PM
 
 loc_92D4:
 dec	si
@@ -19808,7 +19808,7 @@ jnz	short loc_9307
 jmp	loc_A82E
 
 loc_9307:
-jmp	loc_2936
+jmp	PM
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 5253h
@@ -19873,21 +19873,21 @@ jnz	short loc_9372
 jmp	loc_AB4D
 
 loc_9372:
-jmp	loc_2936
+jmp	PM
 
 loc_9375:
 lodsb
 and	al, 0DFh
 cmp	al, 41h	; 'A'
 jz	short loc_937F
-jmp	loc_2936
+jmp	PM
 
 loc_937F:
 lodsb
 and	al, 0DFh
 cmp	al, 4Ch	; 'L'
 jz	short loc_9389
-jmp	loc_2936
+jmp	PM
 
 loc_9389:
 mov	al, [si]
@@ -19924,7 +19924,7 @@ jnz	short loc_93C0
 jmp	loc_6D27
 
 loc_93C0:
-jmp	loc_2936
+jmp	PM
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 504Fh
@@ -19937,7 +19937,7 @@ jnz	short loc_93D7
 jmp	loc_BA97
 
 loc_93D7:
-jmp	loc_2936
+jmp	PM
 lodsb
 and	al, 0DFh
 cmp	al, 52h	; 'R'
@@ -19945,7 +19945,7 @@ jnz	short loc_93E4
 jmp	loc_BAB1
 
 loc_93E4:
-jmp	loc_2936
+jmp	PM
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4F4Ch
@@ -19955,14 +19955,14 @@ jmp	loc_BCF5
 loc_93F3:
 cmp	ax, 4952h
 jz	short loc_93FB
-jmp	loc_2936
+jmp	PM
 
 loc_93FB:
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 544Eh
 jz	short loc_9407
-jmp	loc_2936
+jmp	PM
 
 loc_9407:
 lodsb
@@ -19972,7 +19972,7 @@ jnz	short loc_9411
 jmp	loc_541E
 
 loc_9411:
-jmp	loc_2936
+jmp	PM
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4C4Fh
@@ -20010,7 +20010,7 @@ jnz	short loc_9450
 jmp	loc_5C46
 
 loc_9450:
-jmp	loc_2936
+jmp	PM
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 4F54h
@@ -20068,7 +20068,7 @@ jnz	short loc_94AE
 jmp	loc_C262
 
 loc_94AE:
-jmp	loc_2936
+jmp	PM
 lodsb
 and	al, 0DFh
 cmp	al, 4Fh	; 'O'
@@ -20081,7 +20081,7 @@ jnz	short loc_94C2
 jmp	near ptr byte_7423+58h
 
 loc_94C2:
-jmp	loc_2936
+jmp	PM
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 554Dh
@@ -20089,7 +20089,7 @@ jnz	short loc_94D1
 jmp	loc_C57A
 
 loc_94D1:
-jmp	loc_2936
+jmp	PM
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 5449h
@@ -20097,7 +20097,7 @@ jnz	short loc_94E0
 jmp	loc_C6A9
 
 loc_94E0:
-jmp	loc_2936
+jmp	PM
 lodsw
 and	ax, 0DFDFh
 cmp	ax, 524Fh
@@ -20105,14 +20105,14 @@ jnz	short loc_94EF
 jmp	loc_C728
 
 loc_94EF:
-jmp	loc_2936
+jmp	PM
 
 loc_94F2:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_94FD
-jmp	loc_2936
+jmp	PM
 
 loc_94FD:
 lodsb
@@ -20209,7 +20209,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_958E
-jmp	loc_2936
+jmp	PM
 
 loc_958E:
 mov	al, 3Dh	; '='
@@ -20288,7 +20288,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_9634
-jmp	loc_2936
+jmp	PM
 
 loc_9634:
 mov	al, 3Fh	; '?'
@@ -20428,7 +20428,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_9708
-jmp	loc_2936
+jmp	PM
 
 loc_9708:
 lodsb
@@ -20525,7 +20525,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_9799
-jmp	loc_2936
+jmp	PM
 
 loc_9799:
 mov	al, cl
@@ -20603,7 +20603,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_983D
-jmp	loc_2936
+jmp	PM
 
 loc_983D:
 mov	al, 3Eh	; '>'
@@ -20743,7 +20743,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_9911
-jmp	loc_2936
+jmp	PM
 
 loc_9911:
 lodsb
@@ -20848,7 +20848,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_99AA
-jmp	loc_2936
+jmp	PM
 
 loc_99AA:
 mov	al, cl
@@ -20931,7 +20931,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_9A56
-jmp	loc_2936
+jmp	PM
 
 loc_9A56:
 mov	al, 3Eh	; '>'
@@ -21060,14 +21060,14 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_9B2A
-jmp	loc_2936
+jmp	PM
 
 loc_9B2A:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_9B35
-jmp	loc_2936
+jmp	PM
 
 loc_9B35:
 mov	al, 96h	; '�'
@@ -21079,7 +21079,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_9B44
-jmp	loc_2936
+jmp	PM
 
 loc_9B44:
 lodsb
@@ -21154,7 +21154,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_9BB8
-jmp	loc_2936
+jmp	PM
 
 loc_9BB8:
 mov	al, 3Dh	; '='
@@ -21240,7 +21240,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_9C66
-jmp	loc_2936
+jmp	PM
 
 loc_9C66:
 mov	al, 3Fh	; '?'
@@ -21313,7 +21313,7 @@ retn
 loc_9CF2:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -21382,7 +21382,7 @@ retn
 loc_9D81:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -21451,7 +21451,7 @@ retn
 loc_9E10:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -21520,7 +21520,7 @@ retn
 loc_9E9F:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -21589,7 +21589,7 @@ retn
 loc_9F2E:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -21658,7 +21658,7 @@ retn
 loc_9FBD:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -21727,7 +21727,7 @@ retn
 loc_A04C:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -21796,7 +21796,7 @@ retn
 loc_A0DB:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -21865,7 +21865,7 @@ retn
 loc_A16A:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -21934,7 +21934,7 @@ retn
 loc_A1F9:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -22003,7 +22003,7 @@ retn
 loc_A288:
 push	dx
 mov	dx, 8595h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -22012,21 +22012,21 @@ lodsw
 and	ax, 0DFDFh
 cmp	ax, 4548h
 jz	short loc_A29D
-jmp	loc_2936
+jmp	PM
 
 loc_A29D:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A2A8
-jmp	loc_2936
+jmp	PM
 
 loc_A2A8:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A2B3
-jmp	loc_2936
+jmp	PM
 
 loc_A2B3:
 mov	al, 2
@@ -22038,28 +22038,28 @@ lodsw
 and	ax, 0DFDFh
 cmp	ax, 554Fh
 jz	short loc_A2C3
-jmp	loc_2936
+jmp	PM
 
 loc_A2C3:
 lodsb
 and	al, 0DFh
 cmp	al, 52h	; 'R'
 jz	short loc_A2CD
-jmp	loc_2936
+jmp	PM
 
 loc_A2CD:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A2D8
-jmp	loc_2936
+jmp	PM
 
 loc_A2D8:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A2E3
-jmp	loc_2936
+jmp	PM
 
 loc_A2E3:
 mov	al, 4Eh	; 'N'
@@ -22071,21 +22071,21 @@ lodsw
 and	ax, 0DFDFh
 cmp	ax, 4544h
 jz	short loc_A2F3
-jmp	loc_2936
+jmp	PM
 
 loc_A2F3:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A2FE
-jmp	loc_2936
+jmp	PM
 
 loc_A2FE:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A309
-jmp	loc_2936
+jmp	PM
 
 loc_A309:
 mov	al, 3Dh	; '='
@@ -22098,7 +22098,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A31A
-jmp	loc_2936
+jmp	PM
 
 loc_A31A:
 lodsb
@@ -22167,7 +22167,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A380
-jmp	loc_2936
+jmp	PM
 
 loc_A380:
 mov	al, 3Fh	; '?'
@@ -22240,7 +22240,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A3EC
-jmp	loc_2936
+jmp	PM
 
 loc_A3EC:
 mov	al, cl
@@ -22251,21 +22251,21 @@ loc_A3F0:
 lodsb
 cmp	al, 32h	; '2'
 jz	short loc_A3F8
-jmp	loc_2936
+jmp	PM
 
 loc_A3F8:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A403
-jmp	loc_2936
+jmp	PM
 
 loc_A403:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A40E
-jmp	loc_2936
+jmp	PM
 
 loc_A40E:
 mov	al, 3Dh	; '='
@@ -22278,21 +22278,21 @@ lodsw
 and	ax, 0DFDFh
 cmp	ax, 544Ch
 jz	short loc_A420
-jmp	loc_2936
+jmp	PM
 
 loc_A420:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A42B
-jmp	loc_2936
+jmp	PM
 
 loc_A42B:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A436
-jmp	loc_2936
+jmp	PM
 
 loc_A436:
 mov	al, 9Fh	; '�'
@@ -22304,14 +22304,14 @@ lodsb
 and	al, 0DFh
 cmp	al, 4Dh	; 'M'
 jz	short loc_A444
-jmp	loc_2936
+jmp	PM
 
 loc_A444:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A44F
-jmp	loc_2936
+jmp	PM
 
 loc_A44F:
 lodsb
@@ -22379,7 +22379,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A4B5
-jmp	loc_2936
+jmp	PM
 
 loc_A4B5:
 mov	al, cl
@@ -22393,21 +22393,21 @@ cmp	al, 43h	; 'C'
 jz	short loc_A4C7
 cmp	al, 42h	; 'B'
 jz	short loc_A4E1
-jmp	loc_2936
+jmp	PM
 
 loc_A4C7:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A4D2
-jmp	loc_2936
+jmp	PM
 
 loc_A4D2:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A4DD
-jmp	loc_2936
+jmp	PM
 
 loc_A4DD:
 mov	al, 0DFh ; '�'
@@ -22425,7 +22425,7 @@ cmp	al, 4Ch	; 'L'
 jz	short loc_A523
 cmp	al, 53h	; 'S'
 jz	short loc_A53F
-jmp	loc_2936
+jmp	PM
 
 loc_A4F7:
 dec	si
@@ -22433,7 +22433,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A503
-jmp	loc_2936
+jmp	PM
 
 loc_A503:
 mov	al, 0EFh ; '�'
@@ -22445,14 +22445,14 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A512
-jmp	loc_2936
+jmp	PM
 
 loc_A512:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A51D
-jmp	loc_2936
+jmp	PM
 
 loc_A51D:
 mov	al, 3Dh	; '='
@@ -22465,14 +22465,14 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A52E
-jmp	loc_2936
+jmp	PM
 
 loc_A52E:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A539
-jmp	loc_2936
+jmp	PM
 
 loc_A539:
 mov	al, 3Eh	; '>'
@@ -22485,14 +22485,14 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A54A
-jmp	loc_2936
+jmp	PM
 
 loc_A54A:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A555
-jmp	loc_2936
+jmp	PM
 
 loc_A555:
 mov	al, 3Fh	; '?'
@@ -22505,14 +22505,14 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A566
-jmp	loc_2936
+jmp	PM
 
 loc_A566:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A571
-jmp	loc_2936
+jmp	PM
 
 loc_A571:
 mov	al, 0C0h ; '�'
@@ -22524,7 +22524,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A580
-jmp	loc_2936
+jmp	PM
 
 loc_A580:
 lodsb
@@ -22669,7 +22669,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A689
-jmp	loc_2936
+jmp	PM
 
 loc_A689:
 mov	al, dl
@@ -22682,7 +22682,7 @@ dec	si
 pop	cx
 push	dx
 mov	dx, 8276h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -22822,7 +22822,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A797
-jmp	loc_2936
+jmp	PM
 
 loc_A797:
 mov	al, dl
@@ -22842,7 +22842,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A7B2
-jmp	loc_2936
+jmp	PM
 
 loc_A7B2:
 mov	al, dl
@@ -22856,7 +22856,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A7C4
-jmp	loc_2936
+jmp	PM
 
 loc_A7C4:
 lodsb
@@ -22923,7 +22923,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A82A
-jmp	loc_2936
+jmp	PM
 
 loc_A82A:
 mov	al, cl
@@ -22935,7 +22935,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A839
-jmp	loc_2936
+jmp	PM
 
 loc_A839:
 lodsb
@@ -23007,7 +23007,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A8A7
-jmp	loc_2936
+jmp	PM
 
 loc_A8A7:
 mov	al, cl
@@ -23019,7 +23019,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A8B6
-jmp	loc_2936
+jmp	PM
 
 loc_A8B6:
 lodsb
@@ -23098,7 +23098,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A92C
-jmp	loc_2936
+jmp	PM
 
 loc_A92C:
 mov	al, 3Dh	; '='
@@ -23111,7 +23111,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A93D
-jmp	loc_2936
+jmp	PM
 
 loc_A93D:
 lodsb
@@ -23190,7 +23190,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A9B3
-jmp	loc_2936
+jmp	PM
 
 loc_A9B3:
 mov	al, cl
@@ -23202,7 +23202,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_A9C2
-jmp	loc_2936
+jmp	PM
 
 loc_A9C2:
 lodsb
@@ -23339,7 +23339,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AABD
-jmp	loc_2936
+jmp	PM
 
 loc_AABD:
 mov	al, dl
@@ -23353,14 +23353,14 @@ lodsb
 and	al, 0DFh
 cmp	al, 50h	; 'P'
 jz	short loc_AACE
-jmp	loc_2936
+jmp	PM
 
 loc_AACE:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AAD9
-jmp	loc_2936
+jmp	PM
 
 loc_AAD9:
 lodsb
@@ -23432,7 +23432,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AB47
-jmp	loc_2936
+jmp	PM
 
 loc_AB47:
 mov	al, 3Dh	; '='
@@ -23446,7 +23446,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AB59
-jmp	loc_2936
+jmp	PM
 
 loc_AB59:
 lodsb
@@ -23599,7 +23599,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AC6F
-jmp	loc_2936
+jmp	PM
 
 loc_AC6F:
 mov	ax, dx
@@ -23612,7 +23612,7 @@ loc_AC76:
 pop	cx
 push	dx
 mov	dx, 8285h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 ; START	OF FUNCTION CHUNK FOR sub_C943
@@ -23622,7 +23622,7 @@ pop	cx
 dec	si
 push	dx
 mov	dx, 8291h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 ; END OF FUNCTION CHUNK	FOR sub_C943
@@ -23632,7 +23632,7 @@ lodsw
 and	al, 0DFh
 cmp	al, 4Bh	; 'K'
 jz	short loc_AC95
-jmp	loc_2936
+jmp	PM
 
 loc_AC95:
 mov	al, ah
@@ -23662,14 +23662,14 @@ cmp	al, 33h	; '3'
 jz	short loc_ACF1
 cmp	al, 34h	; '4'
 jz	short loc_ACC4
-jmp	loc_2936
+jmp	PM
 
 loc_ACC4:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_ACCF
-jmp	loc_2936
+jmp	PM
 
 loc_ACCF:
 mov	al, 94h	; '�'
@@ -23681,7 +23681,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_ACDE
-jmp	loc_2936
+jmp	PM
 
 loc_ACDE:
 mov	al, 91h	; '�'
@@ -23693,7 +23693,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_ACED
-jmp	loc_2936
+jmp	PM
 
 loc_ACED:
 mov	al, 92h	; '�'
@@ -23705,7 +23705,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_ACFC
-jmp	loc_2936
+jmp	PM
 
 loc_ACFC:
 mov	al, 93h	; '�'
@@ -23717,21 +23717,21 @@ lodsw
 and	ax, 0DFDFh
 cmp	ax, 544Ch
 jz	short loc_AD0C
-jmp	loc_2936
+jmp	PM
 
 loc_AD0C:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AD17
-jmp	loc_2936
+jmp	PM
 
 loc_AD17:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AD22
-jmp	loc_2936
+jmp	PM
 
 loc_AD22:
 mov	al, 3Dh	; '='
@@ -23744,7 +23744,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AD33
-jmp	loc_2936
+jmp	PM
 
 loc_AD33:
 lodsb
@@ -23911,7 +23911,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AE66
-jmp	loc_2936
+jmp	PM
 
 loc_AE66:
 mov	al, cl
@@ -23922,7 +23922,7 @@ retn
 loc_AE6A:
 push	dx
 mov	dx, 85C4h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 ; END OF FUNCTION CHUNK	FOR sub_C943
@@ -23932,14 +23932,14 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AE7E
-jmp	loc_2936
+jmp	PM
 
 loc_AE7E:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AE89
-jmp	loc_2936
+jmp	PM
 
 loc_AE89:
 mov	al, 9Eh	; '�'
@@ -23951,21 +23951,21 @@ lodsb
 and	al, 0DFh
 cmp	al, 50h	; 'P'
 jz	short loc_AE97
-jmp	loc_2936
+jmp	PM
 
 loc_AE97:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AEA2
-jmp	loc_2936
+jmp	PM
 
 loc_AEA2:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AEAD
-jmp	loc_2936
+jmp	PM
 
 loc_AEAD:
 mov	al, 3Ch	; '<'
@@ -23977,14 +23977,14 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AEBC
-jmp	loc_2936
+jmp	PM
 
 loc_AEBC:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AEC7
-jmp	loc_2936
+jmp	PM
 
 loc_AEC7:
 mov	al, 3
@@ -23996,21 +23996,21 @@ lodsw
 and	ax, 0DFDFh
 cmp	ax, 4547h
 jz	short loc_AED7
-jmp	loc_2936
+jmp	PM
 
 loc_AED7:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AEE2
-jmp	loc_2936
+jmp	PM
 
 loc_AEE2:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AEED
-jmp	loc_2936
+jmp	PM
 
 loc_AEED:
 mov	al, 70h	; 'p'
@@ -24022,7 +24022,7 @@ lodsb
 and	al, 0DFh
 cmp	al, 45h	; 'E'
 jz	short loc_AEFB
-jmp	loc_2936
+jmp	PM
 
 loc_AEFB:
 mov	al, [si]
@@ -24190,7 +24190,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_AFF1
-jmp	loc_2936
+jmp	PM
 
 loc_AFF1:
 mov	al, cl
@@ -24276,7 +24276,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B0A3
-jmp	loc_2936
+jmp	PM
 
 loc_B0A3:
 mov	al, dl
@@ -24343,7 +24343,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B135
-jmp	loc_2936
+jmp	PM
 
 loc_B135:
 mov	al, dl
@@ -24435,7 +24435,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B1FC
-jmp	loc_2936
+jmp	PM
 
 loc_B1FC:
 mov	ax, cx
@@ -24448,7 +24448,7 @@ loc_B203:
 pop	cx
 push	dx
 mov	dx, 8291h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -24521,7 +24521,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B2B2
-jmp	loc_2936
+jmp	PM
 
 loc_B2B2:
 mov	al, cl
@@ -24674,7 +24674,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B3D1
-jmp	loc_2936
+jmp	PM
 
 loc_B3D1:
 mov	al, cl
@@ -24750,7 +24750,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B479
-jmp	loc_2936
+jmp	PM
 
 loc_B479:
 mov	ax, cx
@@ -24763,7 +24763,7 @@ loc_B480:
 pop	cx
 push	dx
 mov	dx, 8251h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -24774,7 +24774,7 @@ pop	cx
 loc_B48B:
 push	dx
 mov	dx, 8276h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 ; END OF FUNCTION CHUNK	FOR sub_B7E9
@@ -24785,7 +24785,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B4A0
-jmp	loc_2936
+jmp	PM
 
 loc_B4A0:
 lodsb
@@ -24915,7 +24915,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B560
-jmp	loc_2936
+jmp	PM
 
 loc_B560:
 mov	al, dl
@@ -24929,7 +24929,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B572
-jmp	loc_2936
+jmp	PM
 
 loc_B572:
 lodsb
@@ -25080,7 +25080,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B652
-jmp	loc_2936
+jmp	PM
 
 loc_B652:
 mov	al, dl
@@ -25094,7 +25094,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B666
-jmp	loc_2936
+jmp	PM
 
 loc_B666:
 mov	al, cl
@@ -25237,7 +25237,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B734
-jmp	loc_2936
+jmp	PM
 
 loc_B734:
 mov	al, dl
@@ -25251,7 +25251,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B748
-jmp	loc_2936
+jmp	PM
 
 loc_B748:
 mov	al, cl
@@ -25264,7 +25264,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B758
-jmp	loc_2936
+jmp	PM
 
 loc_B758:
 lodsb
@@ -25428,7 +25428,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B83B
-jmp	loc_2936
+jmp	PM
 
 loc_B83B:
 mov	al, dl
@@ -25443,7 +25443,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B850
-jmp	loc_2936
+jmp	PM
 
 loc_B850:
 mov	al, 3Dh	; '='
@@ -25589,7 +25589,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B924
-jmp	loc_2936
+jmp	PM
 
 loc_B924:
 mov	al, dl
@@ -25604,7 +25604,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B939
-jmp	loc_2936
+jmp	PM
 
 loc_B939:
 mov	al, 3Dh	; '='
@@ -25615,7 +25615,7 @@ retn
 loc_B93F:
 push	dx
 mov	dx, 8285h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -25623,7 +25623,7 @@ loc_B948:
 dec	si
 push	dx
 mov	dx, 8291h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 sub_B7E9 endp
@@ -25634,14 +25634,14 @@ lodsb
 and	al, 0DFh
 cmp	al, 54h	; 'T'
 jz	short loc_B95C
-jmp	loc_2936
+jmp	PM
 
 loc_B95C:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B967
-jmp	loc_2936
+jmp	PM
 
 loc_B967:
 lodsb
@@ -25711,7 +25711,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_B9D3
-jmp	loc_2936
+jmp	PM
 
 loc_B9D3:
 mov	al, cl
@@ -25789,7 +25789,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BA77
-jmp	loc_2936
+jmp	PM
 
 loc_BA77:
 mov	al, 3Eh	; '>'
@@ -25802,14 +25802,14 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BA88
-jmp	loc_2936
+jmp	PM
 
 loc_BA88:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BA93
-jmp	loc_2936
+jmp	PM
 
 loc_BA93:
 mov	al, 1
@@ -25821,14 +25821,14 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BAA2
-jmp	loc_2936
+jmp	PM
 
 loc_BAA2:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BAAD
-jmp	loc_2936
+jmp	PM
 
 loc_BAAD:
 mov	al, 4Fh	; 'O'
@@ -25845,7 +25845,7 @@ jnz	short loc_BABF
 jmp	loc_5239
 
 loc_BABF:
-jmp	loc_2936
+jmp	PM
 
 loc_BAC2:
 lodsb
@@ -25951,7 +25951,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BB5B
-jmp	loc_2936
+jmp	PM
 
 loc_BB5B:
 mov	al, cl
@@ -26034,7 +26034,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BC06
-jmp	loc_2936
+jmp	PM
 
 loc_BC06:
 mov	al, 3Eh	; '>'
@@ -26174,21 +26174,21 @@ lodsb
 and	al, 0DFh
 cmp	al, 58h	; 'X'
 jz	short loc_BCD9
-jmp	loc_2936
+jmp	PM
 
 loc_BCD9:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BCE4
-jmp	loc_2936
+jmp	PM
 
 loc_BCE4:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BCEF
-jmp	loc_2936
+jmp	PM
 
 loc_BCEF:
 mov	al, 3Dh	; '='
@@ -26201,21 +26201,21 @@ lodsb
 and	al, 0DFh
 cmp	al, 54h	; 'T'
 jz	short loc_BCFF
-jmp	loc_2936
+jmp	PM
 
 loc_BCFF:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BD0A
-jmp	loc_2936
+jmp	PM
 
 loc_BD0A:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BD15
-jmp	loc_2936
+jmp	PM
 
 loc_BD15:
 mov	al, 4Ch	; 'L'
@@ -26227,21 +26227,21 @@ lodsb
 and	al, 0DFh
 cmp	al, 42h	; 'B'
 jz	short loc_BD23
-jmp	loc_2936
+jmp	PM
 
 loc_BD23:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BD2E
-jmp	loc_2936
+jmp	PM
 
 loc_BD2E:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BD39
-jmp	loc_2936
+jmp	PM
 
 loc_BD39:
 mov	al, 3Eh	; '>'
@@ -26254,14 +26254,14 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BD4A
-jmp	loc_2936
+jmp	PM
 
 loc_BD4A:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BD55
-jmp	loc_2936
+jmp	PM
 
 loc_BD55:
 mov	al, 4
@@ -26273,21 +26273,21 @@ lodsb
 and	al, 0DFh
 cmp	al, 42h	; 'B'
 jz	short loc_BD63
-jmp	loc_2936
+jmp	PM
 
 loc_BD63:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BD6E
-jmp	loc_2936
+jmp	PM
 
 loc_BD6E:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BD79
-jmp	loc_2936
+jmp	PM
 
 loc_BD79:
 mov	al, 3Fh	; '?'
@@ -26300,14 +26300,14 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BD8A
-jmp	loc_2936
+jmp	PM
 
 loc_BD8A:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BD95
-jmp	loc_2936
+jmp	PM
 
 loc_BD95:
 mov	al, 97h	; '�'
@@ -26319,14 +26319,14 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BDA4
-jmp	loc_2936
+jmp	PM
 
 loc_BDA4:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BDAF
-jmp	loc_2936
+jmp	PM
 
 loc_BDAF:
 mov	al, 95h	; '�'
@@ -26338,14 +26338,14 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BDBE
-jmp	loc_2936
+jmp	PM
 
 loc_BDBE:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BDC9
-jmp	loc_2936
+jmp	PM
 
 loc_BDC9:
 mov	al, 90h	; '�'
@@ -26357,21 +26357,21 @@ lodsb
 and	al, 0DFh
 cmp	al, 50h	; 'P'
 jz	short loc_BDD7
-jmp	loc_2936
+jmp	PM
 
 loc_BDD7:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BDE2
-jmp	loc_2936
+jmp	PM
 
 loc_BDE2:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BDED
-jmp	loc_2936
+jmp	PM
 
 loc_BDED:
 mov	al, 0
@@ -26383,7 +26383,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BDFC
-jmp	loc_2936
+jmp	PM
 
 loc_BDFC:
 lodsb
@@ -26462,7 +26462,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BE72
-jmp	loc_2936
+jmp	PM
 
 loc_BE72:
 mov	al, 3Dh	; '='
@@ -26475,7 +26475,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BE83
-jmp	loc_2936
+jmp	PM
 
 loc_BE83:
 lodsb
@@ -26554,7 +26554,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BEF9
-jmp	loc_2936
+jmp	PM
 
 loc_BEF9:
 mov	al, cl
@@ -26566,7 +26566,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BF08
-jmp	loc_2936
+jmp	PM
 
 loc_BF08:
 lodsb
@@ -26663,7 +26663,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_BF99
-jmp	loc_2936
+jmp	PM
 
 loc_BF99:
 mov	al, cl
@@ -26741,7 +26741,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C03D
-jmp	loc_2936
+jmp	PM
 
 loc_C03D:
 mov	al, 3Eh	; '>'
@@ -26881,7 +26881,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C111
-jmp	loc_2936
+jmp	PM
 
 loc_C111:
 lodsb
@@ -26974,7 +26974,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C199
-jmp	loc_2936
+jmp	PM
 
 loc_C199:
 mov	al, 3Dh	; '='
@@ -27115,7 +27115,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C26E
-jmp	loc_2936
+jmp	PM
 
 loc_C26E:
 lodsb
@@ -27265,7 +27265,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C384
-jmp	loc_2936
+jmp	PM
 
 loc_C384:
 mov	ax, cx
@@ -27277,21 +27277,21 @@ retn
 loc_C38B:
 push	dx
 mov	dx, 8285h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
 loc_C394:
 push	dx
 mov	dx, 8291h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
 loc_C39D:
 push	dx
 mov	dx, 8276h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 retn
 
@@ -27300,7 +27300,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C3B1
-jmp	loc_2936
+jmp	PM
 
 loc_C3B1:
 lodsb
@@ -27459,7 +27459,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C4DD
-jmp	loc_2936
+jmp	PM
 
 loc_C4DD:
 mov	al, dl
@@ -27471,21 +27471,21 @@ lodsb
 and	al, 0DFh
 cmp	al, 50h	; 'P'
 jz	short loc_C4EB
-jmp	loc_2936
+jmp	PM
 
 loc_C4EB:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C4F6
-jmp	loc_2936
+jmp	PM
 
 loc_C4F6:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C501
-jmp	loc_2936
+jmp	PM
 
 loc_C501:
 mov	al, 4Dh	; 'M'
@@ -27497,7 +27497,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C510
-jmp	loc_2936
+jmp	PM
 
 loc_C510:
 lodsb
@@ -27564,7 +27564,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C576
-jmp	loc_2936
+jmp	PM
 
 loc_C576:
 mov	al, cl
@@ -27576,14 +27576,14 @@ lodsw
 and	ax, 0DFDFh
 cmp	ax, 544Ch
 jz	short loc_C586
-jmp	loc_2936
+jmp	PM
 
 loc_C586:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C591
-jmp	loc_2936
+jmp	PM
 
 loc_C591:
 lodsb
@@ -27653,7 +27653,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C5FD
-jmp	loc_2936
+jmp	PM
 
 loc_C5FD:
 mov	al, 3Dh	; '='
@@ -27732,7 +27732,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C6A3
-jmp	loc_2936
+jmp	PM
 
 loc_C6A3:
 mov	al, 3Fh	; '?'
@@ -27745,14 +27745,14 @@ lodsb
 and	al, 0DFh
 cmp	al, 48h	; 'H'
 jz	short loc_C6B3
-jmp	loc_2936
+jmp	PM
 
 loc_C6B3:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C6BE
-jmp	loc_2936
+jmp	PM
 
 loc_C6BE:
 lodsb
@@ -27819,7 +27819,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C724
-jmp	loc_2936
+jmp	PM
 
 loc_C724:
 mov	al, cl
@@ -27831,7 +27831,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C733
-jmp	loc_2936
+jmp	PM
 
 loc_C733:
 lodsb
@@ -27933,7 +27933,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C7CC
-jmp	loc_2936
+jmp	PM
 
 loc_C7CC:
 mov	al, 3Dh	; '='
@@ -28017,7 +28017,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_C87A
-jmp	loc_2936
+jmp	PM
 
 loc_C87A:
 mov	al, 3Fh	; '?'
@@ -28421,7 +28421,7 @@ jnb	short loc_CB55
 mov	ss:byte_9BE8, 0
 push	dx
 mov	dx, 7EC6h
-call	sub_2170
+call	ERROR_ROUT
 pop	dx
 
 loc_CB55:
