@@ -54,10 +54,10 @@ OVERRET:
 mov	ax, ss:word_12284
 or	ax, ax
 jnz	short loc_48
-jmp	far ptr	loc_CE08
+jmp	far ptr	_OS2EXIT
 
 loc_48:
-jmp	far ptr	loc_CE0D
+jmp	far ptr	_OS2EXITERR
 start endp
 
 ; START	OF FUNCTION CHUNK FOR ERROR_ROUT
@@ -77,7 +77,7 @@ call	_OS2PRTSTRING
 pop	dx
 pop	ds
 assume ds:nothing
-jmp	far ptr	loc_CE0D
+jmp	far ptr	_OS2EXITERR
 
 
 
@@ -127,21 +127,21 @@ pop	dx
 pop	ds
 assume ds:nothing
 mov	bx, 800h
-call	sub_CE6B
-jnb	short loc_C1
+call	_OS2ALLOCSEG
+jnb	short LBUFOK
 push	dx
 mov	dx, 8535h
 call	ERROR_ROUT
 pop	dx
 
-loc_C1:
+LBUFOK:
 mov	ss:word_1A942, ax
 mov	ax, ss
 mov	ds, ax
 assume ds:seg003
 mov	dx, 9B1Ch
 xor	cx, cx
-call	sub_CE18
+call	_OS2OPENNEWFILE
 mov	ss:word_11D9D, ax
 jnb	short loc_EE
 call	sub_2270
@@ -173,23 +173,23 @@ mov	ds, ss:word_1A942
 xor	dx, dx
 mov	cx, 8
 mov	bx, ss:word_11D9D
-call	sub_CE3E
-call	sub_374
-call	sub_2A0
-call	sub_172
+call	_OS2WRITEBYTES
+call	WRITEBLOCKS
+call	WRITEPUBLICS
+call	WRITEEXTERNS
 xor	cx, cx
 mov	dx, 6
 mov	bx, ss:word_11D9D
-call	sub_CE5F
+call	_OS2SEEKFILE
 mov	ax, ss
 mov	ds, ax
 assume ds:seg003
 mov	dx, 13A2h
 mov	cx, 2
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 mov	bx, ss:word_11D9D
-call	sub_CE34
+call	_OS2CLOSEFILE
 retn
 LINK endp
 
@@ -198,18 +198,18 @@ assume ds:nothing
 xor	dx, dx
 mov	cx, ss:word_11D9B
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 retn
 
 
 
-sub_172	proc near
+WRITEEXTERNS	proc near
 mov	ax, ss:word_1226A
 or	ax, ax
-jnz	short loc_17B
+jnz	short WEDO
 retn
 
-loc_17B:
+WEDO:
 mov	ds, ss:word_12264
 mov	si, 2
 xor	di, di
@@ -277,7 +277,7 @@ mov	ds, ss:word_1A942
 xor	dx, dx
 mov	cx, di
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	cx
 
 loc_200:
@@ -311,7 +311,7 @@ mov	ds, ss:word_1A942
 xor	dx, dx
 mov	cx, di
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 retn
 
 loc_23C:
@@ -370,12 +370,12 @@ pop	dx
 pop	ds
 inc	ss:word_12284
 jmp	loc_1C5
-sub_172	endp
+WRITEEXTERNS	endp
 
 
 
 
-sub_2A0	proc near
+WRITEPUBLICS	proc near
 mov	es, ss:word_1A942
 xor	di, di
 mov	bx, 1472h
@@ -421,7 +421,7 @@ mov	ds, ss:word_1A942
 xor	dx, dx
 mov	cx, di
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	bx
 pop	si
 pop	ds
@@ -445,7 +445,7 @@ mov	ds, ss:word_1A942
 xor	dx, dx
 mov	cx, di
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 retn
 
 loc_330:
@@ -489,12 +489,12 @@ pop	si
 pop	dx
 pop	ds
 jmp	short loc_304
-sub_2A0	endp
+WRITEPUBLICS	endp
 
 
 
 
-sub_374	proc near
+WRITEBLOCKS	proc near
 mov	ds, ss:word_12270
 mov	si, ss:word_12272
 
@@ -513,7 +513,7 @@ assume ds:seg003
 mov	dx, 13BCh
 mov	cx, 4
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	cx
 pop	dx
 pop	si
@@ -533,7 +533,7 @@ assume ds:seg003
 mov	dx, 13BCh
 mov	cx, 4
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	cx
 pop	dx
 pop	si
@@ -578,7 +578,7 @@ assume ds:seg003
 mov	dx, 13BCh
 mov	cx, 1
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	cx
 pop	dx
 pop	si
@@ -589,7 +589,7 @@ mov	cx, [si+6]
 mov	bx, ss:word_11D9D
 mov	dx, si
 add	dx, 13h
-call	sub_4D8
+call	INT21R
 pop	si
 jmp	short loc_3EF
 
@@ -605,7 +605,7 @@ assume ds:seg003
 mov	dx, 13BCh
 mov	cx, 1
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	cx
 pop	dx
 pop	si
@@ -623,7 +623,7 @@ assume ds:seg003
 mov	dx, 13BCh
 mov	cx, 2
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	cx
 pop	dx
 pop	si
@@ -643,7 +643,7 @@ inc	cx
 or	al, al
 jnz	short loc_493
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	si
 pop	ds
 jmp	loc_3EF
@@ -660,7 +660,7 @@ assume ds:seg003
 mov	dx, 13BCh
 mov	cx, 1
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	cx
 pop	dx
 pop	si
@@ -670,25 +670,25 @@ mov	bx, [si+4]
 mov	cx, [si+6]
 call	sub_676
 jmp	loc_3EF
-sub_374	endp
+WRITEBLOCKS	endp
 
 
 
 
-sub_4D8	proc near
+INT21R	proc near
 cmp	ss:byte_13358, 0
 jz	short locret_4EB
 push	dx
 push	ds
 push	bx
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	bx
 pop	ds
 pop	dx
 
 locret_4EB:
 retn
-sub_4D8	endp
+INT21R	endp
 
 
 
@@ -705,7 +705,7 @@ mov	ds, ax
 assume ds:seg003
 mov	dx, 9B5Ch
 xor	cx, cx
-call	sub_CE18
+call	_OS2OPENNEWFILE
 mov	ss:word_11D9D, ax
 jnb	short loc_51E
 call	sub_2270
@@ -742,7 +742,7 @@ mov	cl, es:[di+5]
 dec	cl
 xor	ch, ch
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 mov	dx, es:[di+0Ah]
 mov	cx, es:[di+0Ch]
 mov	ax, ss
@@ -764,7 +764,7 @@ assume ds:seg003
 mov	dx, 8A6Eh
 mov	cx, 0Ch
 mov	bx, ss:word_11D9D
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	cx
 pop	dx
 pop	si
@@ -790,7 +790,7 @@ jmp	loc_521
 
 loc_5A5:
 mov	bx, ss:word_11D9D
-call	sub_CE34
+call	_OS2CLOSEFILE
 retn
 WRITESYMBOLS	endp
 
@@ -805,60 +805,60 @@ mov	word ptr ss:off_11E56+2, ax
 mov	dx, [si+0Ah]
 mov	ss:word_11E5A, dx
 mov	ds, ax
-call	sub_CE12
+call	_OS2OPENFILE
 mov	ss:word_1A944, ax
 pop	dx
 jnb	short loc_5E0
-jmp	loc_66D
+jmp	SINCERROR
 
 loc_5E0:
 xor	cx, cx
 or	dx, dx
-jz	short loc_5F0
+jz	short SINC
 mov	bx, ss:word_1A944
-call	sub_CE5F
+call	_OS2SEEKFILE
 
-loc_5F0:
+SINC:
 cmp	ss:word_1A950, 0
-jz	short loc_62D
+jz	short NOBX
 
-loc_5F8:
+LOTSCX:
 mov	bx, ss:word_1A944
 mov	ds, ss:word_1A942
 xor	dx, dx
 mov	cx, 8000h
 sub	ss:word_1A952, cx
 sbb	ss:word_1A950, 0
-call	sub_CE39
+call	_OS2READBYTES
 push	ax
 mov	cx, 8000h
 mov	ds, ss:word_1A942
 xor	dx, dx
 mov	bx, ss:word_11D9D
-call	sub_4D8
+call	INT21R
 pop	ax
-jmp	short loc_5F0
+jmp	short SINC
 
-loc_62D:
+NOBX:
 cmp	ss:word_1A952, 8000h
-jnb	short loc_5F8
+jnb	short LOTSCX
 mov	bx, ss:word_1A944
 mov	ds, ss:word_1A942
 xor	dx, dx
 mov	cx, ss:word_1A952
-call	sub_CE39
+call	_OS2READBYTES
 mov	cx, ss:word_1A952
 mov	ds, ss:word_1A942
 xor	dx, dx
 mov	bx, ss:word_11D9D
-call	sub_4D8
+call	INT21R
 mov	bx, ss:word_1A944
-call	sub_CE34
+call	_OS2CLOSEFILE
 pop	si
 pop	ds
 retn
 
-loc_66D:
+SINCERROR:
 mov	dx, 80FFh
 call	FATALERR_ROUT
 jmp	STOPASSEM
@@ -881,7 +881,7 @@ push	cx
 mov	dx, 0
 mov	bx, ss:word_11D9D
 mov	cx, 4000h
-call	sub_4D8
+call	INT21R
 pop	cx
 pop	bx
 jmp	short loc_67D
@@ -890,7 +890,7 @@ loc_69A:
 add	cx, 4000h
 mov	dx, 0
 mov	bx, ss:word_11D9D
-call	sub_4D8
+call	INT21R
 pop	si
 pop	ds
 assume ds:nothing
@@ -902,9 +902,9 @@ sub_676	endp
 
 DO_END	proc near
 mov	bx, ss:word_122B6
-call	sub_CE34
+call	_OS2CLOSEFILE
 mov	bx, ss:word_13336
-call	sub_CE34
+call	_OS2CLOSEFILE
 mov	ax, ss
 mov	ds, ax
 assume ds:seg003
@@ -3251,7 +3251,7 @@ neg	bx
 sbb	cx, 0
 call	sub_1759
 
-loc_17B2:
+WEDO2:
 neg	dx
 neg	ax
 sbb	dx, 0
@@ -3328,7 +3328,7 @@ call	sub_1759
 neg	cx
 neg	bx
 sbb	cx, 0
-jmp	loc_17B2
+jmp	WEDO2
 sub_181D endp
 
 mov	ax, es:[di+8]
@@ -4003,7 +4003,7 @@ push	es
 push	si
 push	di
 mov	bx, 801h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jnb	short loc_1E12
 jmp	loc_2025
 
@@ -4040,7 +4040,7 @@ push	es
 push	si
 push	di
 mov	bx, 401h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jnb	short loc_1E4C
 jmp	loc_2025
 
@@ -4074,7 +4074,7 @@ push	es
 push	si
 push	di
 mov	bx, 6D7h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jnb	short loc_1E7F
 jmp	loc_2025
 
@@ -4105,7 +4105,7 @@ push	es
 push	si
 push	di
 mov	bx, 201h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jnb	short loc_1EA8
 jmp	loc_2025
 
@@ -4139,7 +4139,7 @@ push	es
 push	si
 push	di
 mov	bx, 201h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jnb	short loc_1EDB
 jmp	loc_2025
 
@@ -4173,7 +4173,7 @@ push	es
 push	si
 push	di
 mov	bx, 401h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jnb	short loc_1F0E
 jmp	loc_2025
 
@@ -4196,7 +4196,7 @@ sub_1EF9 endp
 
 GETMEM proc near
 mov	bx, 401h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jnb	short loc_1F2F
 jmp	loc_2025
 
@@ -4204,7 +4204,7 @@ loc_1F2F:
 mov	ss:word_11E32, ax
 mov	ss:word_11E34, 0
 mov	bx, 201h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jnb	short loc_1F47
 jmp	loc_2025
 
@@ -4212,7 +4212,7 @@ loc_1F47:
 mov	ss:word_11D99, ax
 mov	ss:word_11D9B, 2
 mov	bx, 201h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jnb	short loc_1F5F
 jmp	loc_2025
 
@@ -4224,7 +4224,7 @@ mov	es, ax
 mov	word ptr es:0, 0
 mov	word ptr es:2, 0FFFFh
 mov	bx, 6D7h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jnb	short loc_1F8B
 jmp	loc_2025
 
@@ -4232,7 +4232,7 @@ loc_1F8B:
 mov	ss:word_11E36, ax
 mov	ss:word_11E38, 0
 mov	bx, 801h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jnb	short loc_1FA3
 jmp	loc_2025
 
@@ -4240,7 +4240,7 @@ loc_1FA3:
 mov	ss:word_11962, ax
 mov	ss:word_11964, 0
 mov	bx, 801h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jb	short loc_2025
 mov	ss:word_1226C, ax
 mov	ss:word_12276, ax
@@ -4259,14 +4259,14 @@ dec	cx
 jnz	short loc_1FE2
 mov	ss:word_12274, di
 mov	bx, 801h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jb	short loc_2025
 mov	ss:word_1198B, ax
 mov	ss:word_11985, ax
 mov	ss:word_11987, 2
 mov	ss:word_11989, 2
 mov	bx, 401h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jb	short loc_2025
 mov	ss:word_12264, ax
 mov	ss:word_12266, ax
@@ -4443,7 +4443,7 @@ assume ds:seg003
 mov	ax, 4002h
 mov	bx, 1
 mov	dx, 8A6Eh
-call	sub_CE3E
+call	_OS2WRITEBYTES
 
 loc_2164:
 pop	di
@@ -4543,7 +4543,7 @@ pop	ss:word_13334
 pop	ss:word_1333D
 mov	ss, ss:word_13360
 assume ss:seg000
-mov	sp, ss:word_24A2
+mov	sp, ss:DO_65816
 test	ss:byte_F8B, 2
 jz	short NSLL1
 and	ss:byte_F8B, 0FDh
@@ -4561,7 +4561,7 @@ inc	ss:word_13F0
 mov	al, ss:byte_F8D
 or	al, al
 jnz	short loc_226D
-jmp	near ptr word_24A2
+jmp	near ptr DO_65816
 
 loc_226D:
 jmp	DO_MARIO
@@ -4625,7 +4625,7 @@ lodsb
 or	al, al
 jnz	short loc_22BA
 mov	bx, 1
-call	sub_CE3E
+call	_OS2WRITEBYTES
 mov	ax, es
 mov	ds, ax
 assume ds:seg000
@@ -4794,7 +4794,7 @@ or	al, al
 jnz	short loc_23D4
 dec	cx
 mov	bx, 1
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	ds
 pop	si
 pop	es
@@ -4900,7 +4900,7 @@ byte_2499 db 78h, 4Eh, 0E9h
 word_249C dw 12Bh
 word_249E dw 0E84Eh
 db 89h,	5Fh
-word_24A2 dw 0F636h
+DO_65816 dw 0F636h
 push	es
 mov	cx, [bx]
 or	[si+3],	dh
@@ -4956,7 +4956,32 @@ mov	es:[di+0Eh], cx
 add	di, 13h
 mov	ss:word_13B4, di
 mov	bx, 76A7h
-jmp	near ptr word_24A2
+jmp	near ptr DO_65816
+;jmp       DO_65816
+;cmp       al,03
+;jne       25D8
+;push      dx
+;mov       dx,837E
+;call      ERROR_ROUT
+;pop       dx
+;jmp       24B2
+;mov       bp,word ptr ss:[0F9C]
+;mov       al,byte ptr [bp+14]
+;test      al,02
+;jne       2619
+;test      al,08
+;jne       2610
+;test      al,01
+;jne       25FC
+;test      al,04
+;je        25F6
+;call      READMORESOURCE
+;jmp       DO_65816
+;mov       dx,7EDC
+;call      FATALERR_ROUT
+;mov       bx,word ptr [bp+02]
+;call      far ptr _OS2CLOSEFILE
+
 db 3Ch,	3, 75h,	0Bh, 52h, 0BAh,	7Eh, 83h
 db 0E8h, 9Ch, 0FBh, 5Ah, 0E9h, 0DAh, 0FEh
 db 36h,	8Bh, 2Eh, 9Ch, 0Fh, 8Ah, 46h, 14h
@@ -4966,9 +4991,10 @@ db 0B1h, 22h, 0E9h, 0ACh, 0FEh,	0BAh, 0DCh
 db 7Eh,	0E8h, 94h, 0FCh, 8Bh, 5Eh, 2, 9Ah
 db 44h,	0
 dw seg seg001
+
 push	es
 mov	es, word ptr [bp+10h]
-call	sub_CE70
+call	_OS2FREESEG
 pop	es
 jmp	short loc_261E
 mov	ax, ss:word_F96
@@ -5144,7 +5170,7 @@ jmp	short loc_2716
 loc_278C:
 call	sub_5301
 mov	bx, 801h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jnb	short loc_279C
 jmp	loc_2025
 
@@ -5205,10 +5231,10 @@ call	FATALERR_ROUT
 
 loc_283E:
 mov	bx, [bp+2]
-call	sub_CE34
+call	_OS2CLOSEFILE
 push	es
 mov	es, word ptr [bp+10h]
-call	sub_CE70
+call	_OS2FREESEG
 pop	es
 jmp	short loc_2860
 
@@ -7455,7 +7481,7 @@ mov	dx, 7D9Ch
 call	FATALERR_ROUT
 jmp	STOPASSEM
 
-loc_3972:
+ADDFLIST:
 push	ax
 mov	al, ss:byte_13F5
 or	al, al
@@ -7475,13 +7501,13 @@ or	al, al
 jnz	short loc_3984
 dec	cx
 mov	bx, ss:word_13F6
-call	sub_CE3E
+call	_OS2WRITEBYTES
 mov	ax, ss
 mov	ds, ax
 mov	dx, 2552h
 mov	cx, 2
 mov	bx, ss:word_13F6
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	cx
 pop	si
 pop	dx
@@ -7508,7 +7534,7 @@ js	short loc_39BB
 dec	si
 cmp	byte ptr [si], 2Bh ; '+'
 jz	short loc_39CB
-jmp	loc_3A94
+jmp	F_OPENNEW
 
 loc_39CB:
 inc	si
@@ -7572,19 +7598,19 @@ pop	si
 pop	ds
 push	ds
 push	si
-call	sub_53B7
+call	COPYFNAME
 mov	ds, ss:word_9A7C
 mov	dx, ss:word_9A7E
 mov	word ptr ss:loc_2478, ds
 mov	word ptr ss:loc_247A, dx
-call	loc_3972
+call	ADDFLIST
 mov	bx, word ptr ss:loc_2474+2
-call	sub_CE34
+call	_OS2CLOSEFILE
 mov	ds, word ptr ss:loc_2478
 mov	dx, word ptr ss:loc_247A
 xor	bx, bx
-call	sub_CE1E
-jnb	short loc_3A75
+call	_OS2OPENAPPENDFILE
+jnb	short OK
 pop	si
 pop	ds
 mov	bx, 76A7h
@@ -7594,44 +7620,44 @@ mov	dx, 80FFh
 call	ERROR_ROUT
 pop	dx
 
-loc_3A75:
+OK:
 mov	word ptr ss:loc_2474, 1
 mov	word ptr ss:loc_2474+2,	ax
 xor	cx, cx
 mov	dx, cx
 mov	bx, word ptr ss:loc_2474+2
-call	sub_CE65
+call	_OS2SEEKEND
 pop	si
 pop	ds
 mov	bx, 76A7h
 retn
 
-loc_3A94:
+F_OPENNEW:
 mov	bx, word ptr ss:loc_2474+2
-call	sub_CE34
+call	_OS2CLOSEFILE
 push	ds
 push	si
 push	ax
 push	cx
-call	sub_53B7
+call	COPYFNAME
 mov	ds, ss:word_9A7C
 mov	dx, ss:word_9A7E
 mov	word ptr ss:loc_2478, ds
 mov	word ptr ss:loc_247A, dx
-call	loc_3972
+call	ADDFLIST
 pop	cx
 pop	ax
 xor	bx, bx
-call	sub_CE18
+call	_OS2OPENNEWFILE
 mov	word ptr ss:loc_2474, 1
 mov	word ptr ss:loc_2474+2,	ax
 pop	si
 pop	ds
-jb	short loc_3AD8
+jb	short PFOPENF
 mov	bx, 76A7h
 retn
 
-loc_3AD8:
+PFOPENF:
 push	dx
 mov	dx, 80FFh
 call	ERROR_ROUT
@@ -7659,7 +7685,7 @@ jz	short loc_3B15
 cmp	al, 21h	; '!'
 jnz	short loc_3B15
 mov	bx, word ptr ss:loc_2474+2
-call	sub_CE34
+call	_OS2CLOSEFILE
 mov	word ptr ss:loc_2478, 0
 
 loc_3B15:
@@ -9152,11 +9178,11 @@ xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_450D
 dec	si
-call	sub_53B7
+call	COPYFNAME
 push	ds
 mov	ds, ss:word_9A7C
 mov	dx, ss:word_9A7E
-call	loc_3972
+call	ADDFLIST
 pop	ds
 lodsb
 cmp	al, 2Ch	; ','
@@ -9231,15 +9257,15 @@ xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_45DA
 dec	si
-call	sub_53B7
+call	COPYFNAME
 push	di
 push	ds
 push	bx
 mov	ax, ss
 mov	ds, ss:word_9A7C
 mov	dx, ss:word_9A7E
-call	loc_3972
-call	sub_CE12
+call	ADDFLIST
+call	_OS2OPENFILE
 jnb	short loc_4601
 jmp	loc_46D7
 
@@ -9247,14 +9273,14 @@ loc_4601:
 xor	cx, cx
 mov	dx, cx
 mov	bx, ax
-call	sub_CE65
+call	_OS2SEEKEND
 jnb	short loc_4611
 jmp	loc_46D7
 
 loc_4611:
 mov	ss:word_9A80, dx
 mov	ss:word_9A82, ax
-call	sub_CE34
+call	_OS2CLOSEFILE
 pop	bx
 pop	ds
 pop	di
@@ -9327,7 +9353,7 @@ xlat	byte ptr ss:[bx]
 or	al, al
 js	short loc_46E2
 dec	si
-call	sub_53B7
+call	COPYFNAME
 push	ds
 push	si
 push	es
@@ -9390,7 +9416,7 @@ pop	ax
 mov	ss:byte_9BDD, 0
 cmp	ss:byte_F8D, 0
 jnz	short loc_4761
-jmp	near ptr word_24A2
+jmp	near ptr DO_65816
 
 loc_4761:
 jmp	DO_MARIO
@@ -9417,14 +9443,14 @@ mov	[bp+0Ah], ax
 add	bp, 1Fh
 mov	ds, ss:word_9A7C
 mov	dx, ss:word_9A7E
-call	loc_3972
+call	ADDFLIST
 mov	word ptr [bp+17h], ds
 mov	word ptr [bp+1Dh], ds
 mov	ss:word_F98, ds
 mov	[bp+19h], dx
 mov	[bp+1Fh], dx
 mov	ss:word_F9A, dx
-call	sub_CE12
+call	_OS2OPENFILE
 jnb	short loc_47C9
 jmp	loc_4852
 
@@ -9435,7 +9461,7 @@ mov	[bp+6],	ax
 mov	[bp+8],	ax
 push	bp
 mov	bx, 801h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jnb	short loc_47E2
 jmp	loc_489B
 
@@ -9515,14 +9541,14 @@ push	bp
 mov	bx, [bp+2]
 mov	cx, [bp+6]
 mov	dx, [bp+8]
-call	sub_CE5F
+call	_OS2SEEKFILE
 pop	bp
 push	bp
 mov	bx, [bp+2]
 mov	cx, 8000h
 mov	ds, word ptr [bp+10h]
 mov	dx, [bp+12h]
-call	sub_CE39
+call	_OS2READBYTES
 pop	bp
 mov	word ptr ss:loc_EE3+1, ax
 or	ax, ax
@@ -10770,7 +10796,7 @@ loc_5169:
 mov	ax, 7F5Ch
 stosw
 mov	bx, 801h
-call	sub_CE6B
+call	_OS2ALLOCSEG
 jb	short loc_5188
 mov	es:[di], ax
 mov	word ptr ss:loc_AA2, ax
@@ -11060,7 +11086,7 @@ sub_537C endp
 
 
 
-sub_53B7 proc near
+COPYFNAME proc near
 push	di
 push	es
 mov	es, word ptr ss:loc_ED8+1
@@ -11124,7 +11150,7 @@ pop	es
 assume es:nothing
 pop	di
 retn
-sub_53B7 endp
+COPYFNAME endp
 
 
 loc_541E:
@@ -11198,7 +11224,7 @@ call	ERROR_ROUT
 pop	dx
 
 loc_5490:
-call	sub_58EB
+call	PFPRTNUM
 pop	dx
 jmp	loc_551B
 
@@ -11320,7 +11346,7 @@ mov	bx, word ptr ss:loc_2474
 or	bx, bx
 jz	short loc_557D
 mov	bx, word ptr ss:loc_2474+2
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	si
 pop	ds
 assume ds:nothing
@@ -11328,7 +11354,7 @@ jmp	short loc_5587
 
 loc_557D:
 mov	bx, 1
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	si
 pop	ds
 
@@ -11375,17 +11401,17 @@ jmp	loc_56FD
 loc_55BE:
 cmp	al, 57h	; 'W'
 jnz	short loc_55C5
-jmp	loc_570F
+jmp	PFNUMWARNINGS
 
 loc_55C5:
 cmp	al, 45h	; 'E'
 jnz	short loc_55CC
-jmp	loc_572D
+jmp	PFNUMERRORS
 
 loc_55CC:
 cmp	al, 4Ch	; 'L'
 jnz	short loc_55D3
-jmp	loc_573C
+jmp	PFNUMLINES
 
 loc_55D3:
 cmp	al, 46h	; 'F'
@@ -11416,7 +11442,7 @@ call	ERROR_ROUT
 pop	dx
 
 loc_5604:
-call	sub_58EB
+call	PFPRTNUM
 inc	si
 pop	dx
 jmp	loc_54F4
@@ -11553,7 +11579,7 @@ loc_56EB:
 push	dx
 mov	cx, ss:word_13CA
 mov	dx, ss:word_13C8
-call	sub_58EB
+call	PFPRTNUM
 pop	dx
 jmp	loc_54F4
 
@@ -11561,37 +11587,38 @@ loc_56FD:
 push	dx
 mov	cx, word ptr ss:byte_13CC+2
 mov	dx, word ptr ss:byte_13CC
-call	sub_58EB
+call	PFPRTNUM
 pop	dx
 jmp	loc_54F4
 
-loc_570F:
+PFNUMWARNINGS:
 push	dx
 mov	cx, word ptr ss:byte_13C6
 xor	dx, dx
-call	sub_58EB
+call	PFPRTNUM
 pop	dx
 jmp	loc_54F4
+PFMEM:
 push	dx
-call	sub_CE75
+call	_OS2AVAILMEM
 mov	cx, ax
-call	sub_58EB
+call	PFPRTNUM
 pop	dx
 jmp	loc_54F4
 
-loc_572D:
+PFNUMERRORS:
 push	dx
 mov	cx, ss:word_13C4
 xor	dx, dx
-call	sub_58EB
+call	PFPRTNUM
 pop	dx
 jmp	loc_54F4
 
-loc_573C:
+PFNUMLINES:
 push	dx
 mov	cx, ss:word_13D2
 mov	dx, ss:word_13D0
-call	sub_58EB
+call	PFPRTNUM
 pop	dx
 jmp	loc_54F4
 
@@ -11599,7 +11626,7 @@ loc_574E:
 push	dx
 mov	cx, word ptr ss:byte_13D4+8
 xor	dx, dx
-call	sub_58EB
+call	PFPRTNUM
 pop	dx
 jmp	loc_54F4
 push	si
@@ -11726,7 +11753,7 @@ push	dx
 call	sub_239D
 mov	cx, ax
 xor	dx, dx
-call	sub_58EB
+call	PFPRTNUM
 pop	dx
 add	dl, ss:byte_2485
 mov	al, 2Fh	; '/'
@@ -11742,7 +11769,7 @@ inc	dl
 push	dx
 mov	cx, ax
 xor	dx, dx
-call	sub_58EB
+call	PFPRTNUM
 pop	dx
 add	dl, ss:byte_2485
 
@@ -11753,7 +11780,7 @@ loc_586D:
 push	dx
 mov	cx, ss:word_13F0
 xor	dx, dx
-call	sub_58EB
+call	PFPRTNUM
 pop	dx
 add	dl, ss:byte_2485
 jmp	loc_54F4
@@ -11825,7 +11852,7 @@ sub_5881 endp
 
 
 
-sub_58EB proc near
+PFPRTNUM proc near
 push	di
 mov	al, ss:byte_2484
 or	al, al
@@ -11842,7 +11869,7 @@ loc_5905:
 pop	di
 call	sub_8BC5
 retn
-sub_58EB endp ;	sp =  2
+PFPRTNUM endp ;	sp =  2
 
 
 
@@ -12400,7 +12427,7 @@ pop	bx
 pop	ax
 cmp	ss:byte_F8D, 0
 jnz	short loc_5D0A
-jmp	near ptr word_24A2
+jmp	near ptr DO_65816
 
 loc_5D0A:
 jmp	DO_MARIO
@@ -12678,14 +12705,14 @@ loc_5EFF:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
-js	short loc_5F0A
+js	short SINCA
 jmp	PM
 
-loc_5F0A:
+SINCA:
 lodsb
 xlat	byte ptr ss:[bx]
 or	al, al
-js	short loc_5F0A
+js	short SINCA
 dec	si
 call	sub_95F
 test	byte ptr ss:loc_ACD+1, 0C0h
@@ -13180,14 +13207,14 @@ jmp	E_EXTRACHARS
 loc_62C7:
 mov	ax, [bp+71F3h]
 or	al, al
-jz	short loc_62D7
+jz	short NOBX7
 stosb
 mov	al, ah
 xor	ah, ah
 add	di, ax
 retn
 
-loc_62D7:
+NOBX7:
 push	dx
 mov	dx, 7F7Fh
 call	ERROR_ROUT
@@ -13635,7 +13662,7 @@ push	si
 push	ds
 mov	ds, ss:word_9A7C
 mov	dx, ss:word_9A7E
-call	sub_CE12
+call	_OS2OPENFILE
 jb	short loc_660F
 mov	bx, ax
 
@@ -13648,20 +13675,20 @@ sub	dx, cx
 xchg	dx, cx
 push	bx
 push	cx
-call	sub_CE39
+call	_OS2READBYTES
 jb	short loc_660D
 push	ax
 mov	cx, ax
 mov	ds, word ptr ss:loc_ED8+1
 mov	dx, word ptr ss:loc_EDB
 mov	bx, 1
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	ax
 pop	cx
 pop	bx
 cmp	ax, cx
 jz	short loc_65CD
-call	sub_CE34
+call	_OS2CLOSEFILE
 pop	ds
 assume ds:nothing
 pop	si
@@ -13782,7 +13809,7 @@ loc_66CF:
 and	ss:byte_13BA, 0FBh
 retn
 
-loc_66D6:
+SINCERROR6:
 mov	al, 0EBh ; '�'
 stosb
 retn
@@ -15417,7 +15444,7 @@ mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
 jns	short loc_70DD
-jmp	loc_66D6
+jmp	SINCERROR6
 
 loc_70DD:
 lodsb
@@ -15930,7 +15957,7 @@ dw offset sub_8936
 dw offset sub_7E0E
 dw offset loc_AC9A
 dw offset sub_2C3C
-dw offset sub_374
+dw offset WRITEBLOCKS
 dw offset sub_B7E9
 db 0Fh,	0E8h, 54h, 0FFh, 6, 57h, 1Eh, 56h
 db 8Eh,	0DAh, 8Bh, 0F1h, 36h, 8Eh, 6, 7Ch
@@ -19245,7 +19272,7 @@ mov	ds, ax
 assume ds:seg000
 mov	dx, 9A9Ch
 xor	cx, cx
-call	sub_CE18
+call	_OS2OPENNEWFILE
 pop	ds
 assume ds:nothing
 jnb	short loc_8F7A
@@ -19316,7 +19343,7 @@ mov	ds, ax
 assume ds:seg000
 mov	dx, 9B9Ch
 xor	cx, cx
-call	sub_CE18
+call	_OS2OPENNEWFILE
 pop	ds
 assume ds:nothing
 jb	short loc_9066
@@ -20051,7 +20078,7 @@ jmp	loc_BEFD
 loc_948F:
 cmp	ax, 4342h
 jnz	short loc_9497
-jmp	loc_C106
+jmp	LBUFOK06
 
 loc_9497:
 cmp	ax, 534Dh
@@ -26877,36 +26904,36 @@ mov	ds, word ptr ss:byte_248C+8
 mov	si, word ptr ss:byte_248C+0Ah
 retn
 
-loc_C106:
+LBUFOK06:
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
-js	short loc_C111
+js	short LBUFOK11
 jmp	PM
 
-loc_C111:
+LBUFOK11:
 lodsb
 xlat	byte ptr ss:[bx]
 or	al, al
-js	short loc_C111
+js	short LBUFOK11
 dec	si
 mov	bp, si
 xor	cl, cl
 
-loc_C11D:
+LBUFOK1D:
 lodsb
 cmp	al, 2Ch	; ','
-jnz	short loc_C126
+jnz	short LBUFOK26
 inc	cl
-jmp	short loc_C11D
+jmp	short LBUFOK1D
 
-loc_C126:
+LBUFOK26:
 xlat	byte ptr ss:[bx]
 or	al, al
-jns	short loc_C11D
+jns	short LBUFOK1D
 mov	si, bp
 cmp	cl, 2
-jz	short loc_C19F
+jz	short LBUFOK9F
 
 
 
@@ -26919,65 +26946,65 @@ dec	si
 lodsb
 and	al, 0DFh
 cmp	al, 52h	; 'R'
-jnz	short loc_C155
+jnz	short LBUFOK55
 lodsb
 sub	al, 30h	; '0'
-js	short loc_C154
+js	short LBUFOK54
 cmp	al, 9
-jg	short loc_C154
+jg	short LBUFOK54
 cmp	al, 1
-jz	short loc_C172
+jz	short LBUFOK72
 mov	cl, al
-jmp	short loc_C18B
+jmp	short LBUFOK8B
 
-loc_C153:
+LBUFOK53:
 dec	si
 
-loc_C154:
+LBUFOK54:
 dec	si
 
-loc_C155:
+LBUFOK55:
 dec	si
 push	dx
 call	sub_95F
 pop	dx
 test	byte ptr ss:loc_ACD+1, 4
-jnz	short loc_C18B
+jnz	short LBUFOK8B
 jmp	loc_9097
 
-loc_C166:
+LBUFOK66:
 cmp	ah, 5
-jg	short loc_C153
+jg	short LBUFOK53
 add	ah, 0Ah
 mov	cl, ah
-jmp	short loc_C18B
+jmp	short LBUFOK8B
 
-loc_C172:
+LBUFOK72:
 lodsb
 cmp	al, 5Dh	; ']'
-jz	short loc_C188
+jz	short LBUFOK88
 cmp	al, 2Ch	; ','
-jz	short loc_C188
+jz	short LBUFOK88
 mov	ah, al
 sub	ah, 30h	; '0'
-jns	short loc_C166
+jns	short LBUFOK66
 xlat	byte ptr ss:[bx]
 or	al, al
-jns	short loc_C153
+jns	short LBUFOK53
 
-loc_C188:
+LBUFOK88:
 mov	cl, 1
 dec	si
 
-loc_C18B:
+LBUFOK8B:
 add	cl, 60h	; '`'
 mov	al, [si]
 xlat	byte ptr ss:[bx]
 or	al, al
-js	short loc_C199
+js	short LBUFOK99
 jmp	PM
 
-loc_C199:
+LBUFOK99:
 mov	al, 3Dh	; '='
 mov	ah, cl
 stosw
@@ -26985,66 +27012,66 @@ retn
 sub_C133 endp
 
 
-loc_C19F:
+LBUFOK9F:
 lodsb
 and	al, 0DFh
 cmp	al, 52h	; 'R'
-jnz	short loc_C1B9
+jnz	short LBUFOKB9
 lodsb
 sub	al, 30h	; '0'
-js	short loc_C1B8
+js	short LBUFOKB8
 cmp	al, 9
-jg	short loc_C1B8
+jg	short LBUFOKB8
 cmp	al, 1
-jz	short loc_C1D6
+jz	short LBUFOKD6
 mov	cl, al
-jmp	short loc_C1EB
+jmp	short LBUFOKEB
 
-loc_C1B7:
+LBUFOKB7:
 dec	si
 
-loc_C1B8:
+LBUFOKB8:
 dec	si
 
-loc_C1B9:
+LBUFOKB9:
 dec	si
 push	dx
 call	sub_95F
 pop	dx
 test	byte ptr ss:loc_ACD+1, 4
-jnz	short loc_C1EB
+jnz	short LBUFOKEB
 jmp	loc_9097
 
-loc_C1CA:
+LBUFOKCA:
 cmp	ah, 5
-jg	short loc_C1B7
+jg	short LBUFOKB7
 add	ah, 0Ah
 mov	cl, ah
-jmp	short loc_C1EB
+jmp	short LBUFOKEB
 
-loc_C1D6:
+LBUFOKD6:
 lodsb
 cmp	al, 2Ch	; ','
-jz	short loc_C1E8
+jz	short LBUFOKE8
 mov	ah, al
 sub	ah, 30h	; '0'
-jns	short loc_C1CA
+jns	short LBUFOKCA
 xlat	byte ptr ss:[bx]
 or	al, al
-jns	short loc_C1B7
+jns	short LBUFOKB7
 
-loc_C1E8:
+LBUFOKE8:
 mov	cl, 1
 dec	si
 
-loc_C1EB:
+LBUFOKEB:
 mov	ss:byte_248C+1,	cl
 lodsb
 cmp	al, 2Ch	; ','
-jz	short loc_C1F8
+jz	short LBUFOKF8
 jmp	loc_83DB
 
-loc_C1F8:
+LBUFOKF8:
 lodsb
 and	al, 0DFh
 cmp	al, 52h	; 'R'
@@ -28417,7 +28444,7 @@ mov	ax, seg	seg003
 mov	ds, ax
 assume ds:seg003
 mov	cx, 0
-call	sub_CE18
+call	_OS2OPENNEWFILE
 jnb	short loc_CB55
 mov	ss:byte_9BE8, 0
 push	dx
@@ -28522,7 +28549,7 @@ mov	ax, seg	seg003
 mov	ds, ax
 assume ds:seg003
 mov	bx, ss:word_9BE9
-call	sub_CE3E
+call	_OS2WRITEBYTES
 mov	di, 9BEDh
 mov	ax, seg	seg003
 mov	es, ax
@@ -28557,11 +28584,11 @@ mov	ax, seg	seg003
 mov	ds, ax
 assume ds:seg003
 mov	bx, ss:word_9BE9
-call	sub_CE3E
+call	_OS2WRITEBYTES
 
 loc_CC57:
 mov	bx, ss:word_9BE9
-call	sub_CE34
+call	_OS2CLOSEFILE
 mov	si, 9ADCh
 mov	ax, seg	seg003
 mov	ds, ax
@@ -28588,10 +28615,10 @@ mov	ds, ax
 mov	al, 5Ch	; '\'
 call	STRRCHR
 cmp	si, bp
-jnb	short loc_CCA9
+jnb	short GMF0
 mov	byte ptr ds:[bp+0], 0
 
-loc_CCA9:
+GMF0:
 mov	si, 0A3EDh
 mov	ax, seg	seg003
 mov	ds, ax
@@ -28602,14 +28629,14 @@ call	STRCAT
 mov	dx, 0A3EDh
 mov	ax, seg	seg003
 mov	ds, ax
-call	sub_CEAE
+call	_OS2DELETEFILE
 mov	dx, 0A43Dh
 mov	ax, seg	seg003
 mov	ds, ax
 mov	di, 0A3EDh
 mov	ax, seg	seg003
 mov	es, ax
-call	sub_CEA9
+call	_OS2RENAMEFILE
 push	ds
 push	dx
 mov	dx, seg	seg003
@@ -28623,12 +28650,12 @@ retn
 
 loc_CCF0:
 mov	bx, ss:word_9BE9
-call	sub_CE34
+call	_OS2CLOSEFILE
 mov	dx, 0A43Dh
 mov	ax, seg	seg003
 mov	ds, ax
 assume ds:seg003
-call	sub_CEAE
+call	_OS2DELETEFILE
 retn
 GEN_MAP_SYMBOLS endp
 
@@ -28684,7 +28711,7 @@ mov	dx, 9BEDh
 mov	ax, seg	seg003
 mov	ds, ax
 mov	bx, ss:word_9BE9
-call	sub_CE3E
+call	_OS2WRITEBYTES
 xor	cx, cx
 
 loc_CD63:
@@ -28820,43 +28847,44 @@ assume es:nothing, ss:nothing, ds:nothing, fs:nothing, gs:nothing
 db 10h dup(0), 0Bh, 0C0h, 75h, 2, 0F8h,	0C3h
 db 0F9h, 0C3h
 ; START	OF FUNCTION CHUNK FOR start
+; _OS2x routines that deal with system operations
 
-loc_CE08:
+_OS2EXIT:
 mov	ax, 4C00h
 int	21h		; DOS -	2+ - QUIT WITH EXIT CODE (EXIT)
 			; AL = exit code
 
-loc_CE0D:
+_OS2EXITERR:
 mov	ax, 4C01h
 int	21h		; DOS -	2+ - QUIT WITH EXIT CODE (EXIT)
 ; END OF FUNCTION CHUNK	FOR start ; AL = exit code
 
 
 
-sub_CE12 proc far
+_OS2OPENFILE proc far
 mov	ax, 3D00h
 int	21h		; DOS -	2+ - OPEN DISK FILE WITH HANDLE
 			; DS:DX	-> ASCIZ filename
 			; AL = access mode
 			; 0 - read
 retf
-sub_CE12 endp
+_OS2OPENFILE endp
 
 
 
 
-sub_CE18 proc far
+_OS2OPENNEWFILE proc far
 mov	ax, 3C00h
 int	21h		; DOS -	2+ - CREATE A FILE WITH	HANDLE (CREAT)
 			; CX = attributes for file
 			; DS:DX	-> ASCIZ filename (may include drive and path)
 retf
-sub_CE18 endp
+_OS2OPENNEWFILE endp
 
 
 
 
-sub_CE1E proc far
+_OS2OPENAPPENDFILE proc far
 push	ds
 push	dx
 mov	ax, 3D01h
@@ -28876,33 +28904,33 @@ int	21h		; DOS -	2+ - CREATE A FILE WITH	HANDLE (CREAT)
 
 locret_CE33:
 retf
-sub_CE1E endp
+_OS2OPENAPPENDFILE endp
 
 
 
 
-sub_CE34 proc far
+_OS2CLOSEFILE proc far
 mov	ah, 3Eh
 int	21h		; DOS -	2+ - CLOSE A FILE WITH HANDLE
 			; BX = file handle
 retf
-sub_CE34 endp
+_OS2CLOSEFILE endp
 
 
 
 
-sub_CE39 proc far
+_OS2READBYTES proc far
 mov	ah, 3Fh
 int	21h		; DOS -	2+ - READ FROM FILE WITH HANDLE
 			; BX = file handle, CX = number	of bytes to read
 			; DS:DX	-> buffer
 retf
-sub_CE39 endp
+_OS2READBYTES endp
 
 
 
 
-sub_CE3E proc far
+_OS2WRITEBYTES proc far
 mov	al, ds:13F2h
 or	al, al
 jz	short loc_CE5A
@@ -28926,52 +28954,52 @@ mov	ah, 40h
 int	21h		; DOS -	2+ - WRITE TO FILE WITH	HANDLE
 			; BX = file handle, CX = number	of bytes to write, DS:DX -> buffer
 retf
-sub_CE3E endp
+_OS2WRITEBYTES endp
 
 
 
 
-sub_CE5F proc far
+_OS2SEEKFILE proc far
 mov	ax, 4200h
 int	21h		; DOS -	2+ - MOVE FILE READ/WRITE POINTER (LSEEK)
 			; AL = method: offset from beginning of	file
 retf
-sub_CE5F endp
+_OS2SEEKFILE endp
 
 
 
 
-sub_CE65 proc far
+_OS2SEEKEND proc far
 mov	ax, 4202h
 int	21h		; DOS -	2+ - MOVE FILE READ/WRITE POINTER (LSEEK)
 			; AL = method: offset from end of file
 retf
-sub_CE65 endp
+_OS2SEEKEND endp
 
 
 
 
-sub_CE6B proc far
+_OS2ALLOCSEG proc far
 mov	ah, 48h
 int	21h		; DOS -	2+ - ALLOCATE MEMORY
 			; BX = number of 16-byte paragraphs desired
 retf
-sub_CE6B endp
+_OS2ALLOCSEG endp
 
 
 
 
-sub_CE70 proc far
+_OS2FREESEG proc far
 mov	ah, 49h
 int	21h		; DOS -	2+ - FREE MEMORY
 			; ES = segment address of area to be freed
 retf
-sub_CE70 endp
+_OS2FREESEG endp
 
 
 
 
-sub_CE75 proc far
+_OS2AVAILMEM proc far
 mov	bx, 0FFFFh
 mov	ah, 48h
 int	21h		; DOS -	2+ - ALLOCATE MEMORY
@@ -28980,7 +29008,7 @@ shr	bx, 6
 mov	ax, bx
 xor	dx, dx
 retf
-sub_CE75 endp
+_OS2AVAILMEM endp
 
 
 
@@ -29022,7 +29050,7 @@ dec	cx
 pop	si
 mov	ah, 40h	; '@'
 mov	bx, 1
-call	sub_CE3E
+call	_OS2WRITEBYTES
 pop	cx
 retf
 _OS2PRTSTRING endp
@@ -29034,23 +29062,23 @@ _OS2INITTERM	endp
 
 
 
-sub_CEA9 proc far
+_OS2RENAMEFILE proc far
 mov	ah, 56h
 int	21h		; DOS -	2+ - RENAME A FILE
 			; DS:DX	-> ASCIZ old name (drive and path allowed, no wildcards)
 			; ES:DI	-> ASCIZ new name
 retf
-sub_CEA9 endp
+_OS2RENAMEFILE endp
 
 
 
 
-sub_CEAE proc far
+_OS2DELETEFILE proc far
 mov	ah, 41h
 int	21h		; DOS -	2+ - DELETE A FILE (UNLINK)
 			; DS:DX	-> ASCIZ pathname of file to delete (no	wildcards allowed)
 retf
-sub_CEAE endp
+_OS2DELETEFILE endp
 
 align 10h
 seg001 ends

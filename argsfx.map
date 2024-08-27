@@ -18,10 +18,10 @@
  0000:0071       DOLINK
  0000:007A       DOLINK2
  0000:0099       loc_99
- 0000:00C1       loc_C1
+ 0000:00C1       LBUFOK
  0000:00EE       loc_EE
- 0000:0172       sub_172
- 0000:017B       loc_17B
+ 0000:0172       WRITEEXTERNS
+ 0000:017B       WEDO
  0000:0185       loc_185
  0000:018E       loc_18E
  0000:0193       loc_193
@@ -41,7 +41,7 @@
  0000:0251       loc_251
  0000:0261       loc_261
  0000:0282       loc_282
- 0000:02A0       sub_2A0
+ 0000:02A0       WRITEPUBLICS
  0000:02AA       loc_2AA
  0000:02B8       loc_2B8
  0000:02D3       loc_2D3
@@ -49,7 +49,7 @@
  0000:0310       loc_310
  0000:0330       loc_330
  0000:035C       loc_35C
- 0000:0374       sub_374
+ 0000:0374       WRITEBLOCKS
  0000:037E       loc_37E
  0000:03E2       loc_3E2
  0000:03EF       loc_3EF
@@ -58,7 +58,7 @@
  0000:043D       loc_43D
  0000:0493       loc_493
  0000:04A8       loc_4A8
- 0000:04D8       sub_4D8
+ 0000:04D8       INT21R
  0000:04EB       locret_4EB
  0000:04EC       WRITESYMBOLS
  0000:04F5       loc_4F5
@@ -69,10 +69,10 @@
  0000:0599       loc_599
  0000:05A5       loc_5A5
  0000:05E0       loc_5E0
- 0000:05F0       loc_5F0
- 0000:05F8       loc_5F8
- 0000:062D       loc_62D
- 0000:066D       loc_66D
+ 0000:05F0       SINC
+ 0000:05F8       LOTSCX
+ 0000:062D       NOBX
+ 0000:066D       SINCERROR
  0000:0676       sub_676
  0000:067D       loc_67D
  0000:069A       loc_69A
@@ -334,7 +334,7 @@
  0000:1791       loc_1791
  0000:1796       loc_1796
  0000:17A4       loc_17A4
- 0000:17B2       loc_17B2
+ 0000:17B2       WEDO2
  0000:17E3       loc_17E3
  0000:17FF       loc_17FF
  0000:1811       loc_1811
@@ -461,7 +461,7 @@
  0000:2499       byte_2499
  0000:249C       word_249C
  0000:249E       word_249E
- 0000:24A2       word_24A2
+ 0000:24A2       DO_65816
  0000:24AD       byte_24AD
  0000:255A       loc_255A
  0000:261E       loc_261E
@@ -709,7 +709,7 @@
  0000:3956       loc_3956
  0000:395E       loc_395E
  0000:3966       loc_3966
- 0000:3972       loc_3972
+ 0000:3972       ADDFLIST
  0000:3984       loc_3984
  0000:39AE       loc_39AE
  0000:39B0       loc_39B0
@@ -720,9 +720,9 @@
  0000:39F5       loc_39F5
  0000:39F9       loc_39F9
  0000:3A24       loc_3A24
- 0000:3A75       loc_3A75
- 0000:3A94       loc_3A94
- 0000:3AD8       loc_3AD8
+ 0000:3A75       OK
+ 0000:3A94       F_OPENNEW
+ 0000:3AD8       PFOPENF
  0000:3AE0       loc_3AE0
  0000:3AEB       loc_3AEB
  0000:3B15       loc_3B15
@@ -1076,7 +1076,7 @@
  0000:537C       sub_537C
  0000:5395       loc_5395
  0000:53B4       loc_53B4
- 0000:53B7       sub_53B7
+ 0000:53B7       COPYFNAME
  0000:53D2       loc_53D2
  0000:53E3       loc_53E3
  0000:53EE       loc_53EE
@@ -1129,9 +1129,9 @@
  0000:56CB       loc_56CB
  0000:56EB       loc_56EB
  0000:56FD       loc_56FD
- 0000:570F       loc_570F
- 0000:572D       loc_572D
- 0000:573C       loc_573C
+ 0000:570F       PFNUMWARNINGS
+ 0000:572D       PFNUMERRORS
+ 0000:573C       PFNUMLINES
  0000:574E       loc_574E
  0000:5763       loc_5763
  0000:576E       loc_576E
@@ -1154,7 +1154,7 @@
  0000:58CF       loc_58CF
  0000:58D9       loc_58D9
  0000:58E3       loc_58E3
- 0000:58EB       sub_58EB
+ 0000:58EB       PFPRTNUM
  0000:5905       loc_5905
  0000:590A       sub_590A
  0000:5920       loc_5920
@@ -1254,7 +1254,7 @@
  0000:5EED       loc_5EED
  0000:5EF7       loc_5EF7
  0000:5EFF       loc_5EFF
- 0000:5F0A       loc_5F0A
+ 0000:5F0A       SINCA
  0000:5F20       loc_5F20
  0000:5F2A       loc_5F2A
  0000:5F31       loc_5F31
@@ -1313,7 +1313,7 @@
  0000:6297       loc_6297
  0000:62B9       loc_62B9
  0000:62C7       loc_62C7
- 0000:62D7       loc_62D7
+ 0000:62D7       NOBX7
  0000:62E0       loc_62E0
  0000:62EB       loc_62EB
  0000:62EF       loc_62EF
@@ -1375,7 +1375,7 @@
  0000:66A9       loc_66A9
  0000:66C8       loc_66C8
  0000:66CF       loc_66CF
- 0000:66D6       loc_66D6
+ 0000:66D6       SINCERROR6
  0000:66F3       loc_66F3
  0000:66FD       loc_66FD
  0000:6700       loc_6700
@@ -2995,28 +2995,28 @@
  0000:C0E5       loc_C0E5
  0000:C0E8       loc_C0E8
  0000:C0F5       loc_C0F5
- 0000:C106       loc_C106
- 0000:C111       loc_C111
- 0000:C11D       loc_C11D
- 0000:C126       loc_C126
+ 0000:C106       LBUFOK06
+ 0000:C111       LBUFOK11
+ 0000:C11D       LBUFOK1D
+ 0000:C126       LBUFOK26
  0000:C133       sub_C133
- 0000:C153       loc_C153
- 0000:C154       loc_C154
- 0000:C155       loc_C155
- 0000:C166       loc_C166
- 0000:C172       loc_C172
- 0000:C188       loc_C188
- 0000:C18B       loc_C18B
- 0000:C199       loc_C199
- 0000:C19F       loc_C19F
- 0000:C1B7       loc_C1B7
- 0000:C1B8       loc_C1B8
- 0000:C1B9       loc_C1B9
- 0000:C1CA       loc_C1CA
- 0000:C1D6       loc_C1D6
- 0000:C1E8       loc_C1E8
- 0000:C1EB       loc_C1EB
- 0000:C1F8       loc_C1F8
+ 0000:C153       LBUFOK53
+ 0000:C154       LBUFOK54
+ 0000:C155       LBUFOK55
+ 0000:C166       LBUFOK66
+ 0000:C172       LBUFOK72
+ 0000:C188       LBUFOK88
+ 0000:C18B       LBUFOK8B
+ 0000:C199       LBUFOK99
+ 0000:C19F       LBUFOK9F
+ 0000:C1B7       LBUFOKB7
+ 0000:C1B8       LBUFOKB8
+ 0000:C1B9       LBUFOKB9
+ 0000:C1CA       LBUFOKCA
+ 0000:C1D6       LBUFOKD6
+ 0000:C1E8       LBUFOKE8
+ 0000:C1EB       LBUFOKEB
+ 0000:C1F8       LBUFOKF8
  0000:C210       loc_C210
  0000:C211       loc_C211
  0000:C212       loc_C212
@@ -3192,7 +3192,7 @@
  0000:CC41       loc_CC41
  0000:CC57       loc_CC57
  0000:CC79       loc_CC79
- 0000:CCA9       loc_CCA9
+ 0000:CCA9       GMF0
  0000:CCF0       loc_CCF0
  0000:CD08       sub_CD08
  0000:CD0C       sub_CD0C
@@ -3215,28 +3215,28 @@
  0000:CDC4       CSY4
  0000:CDCC       CSY5
  0000:CDDB       CSY6
- 0CDF:0018       loc_CE08
- 0CDF:001D       loc_CE0D
- 0CDF:0022       sub_CE12
- 0CDF:0028       sub_CE18
- 0CDF:002E       sub_CE1E
+ 0CDF:0018       _OS2EXIT
+ 0CDF:001D       _OS2EXITERR
+ 0CDF:0022       _OS2OPENFILE
+ 0CDF:0028       _OS2OPENNEWFILE
+ 0CDF:002E       _OS2OPENAPPENDFILE
  0CDF:0043       locret_CE33
- 0CDF:0044       sub_CE34
- 0CDF:0049       sub_CE39
- 0CDF:004E       sub_CE3E
+ 0CDF:0044       _OS2CLOSEFILE
+ 0CDF:0049       _OS2READBYTES
+ 0CDF:004E       _OS2WRITEBYTES
  0CDF:006A       loc_CE5A
- 0CDF:006F       sub_CE5F
- 0CDF:0075       sub_CE65
- 0CDF:007B       sub_CE6B
- 0CDF:0080       sub_CE70
- 0CDF:0085       sub_CE75
+ 0CDF:006F       _OS2SEEKFILE
+ 0CDF:0075       _OS2SEEKEND
+ 0CDF:007B       _OS2ALLOCSEG
+ 0CDF:0080       _OS2FREESEG
+ 0CDF:0085       _OS2AVAILMEM
  0CDF:0094       _OS2GETDATE
  0CDF:0099       _OS2GETTIME
  0CDF:009E       _OS2PRTSTRING
  0CDF:00A4       loc_CE94
  0CDF:00B8       _OS2INITTERM
- 0CDF:00B9       sub_CEA9
- 0CDF:00BE       sub_CEAE
+ 0CDF:00B9       _OS2RENAMEFILE
+ 0CDF:00BE       _OS2DELETEFILE
  10EC:0000       unk_10EC0
  10EC:0AA2       word_11962
  10EC:0AA4       word_11964
