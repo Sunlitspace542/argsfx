@@ -29060,7 +29060,7 @@ pop	cx
 retf
 _OS2PRTSTRING endp
 
-; stub function presumably from the OS/2 version
+; Used in the OS/2 version, but stubbed in the DOS versions
 _OS2INITTERM	proc far
 retf
 _OS2INITTERM	endp
