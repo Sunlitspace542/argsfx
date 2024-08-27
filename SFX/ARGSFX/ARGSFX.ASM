@@ -132,7 +132,7 @@ unkfunc1_sub:
 _OS2EXIT proc far
 mov	ax,4C00h
 int	21h
-_OS2EXITERR endp
+_OS2EXIT endp
 
 _OS2EXITERR proc far
 mov	ax,4C01h
