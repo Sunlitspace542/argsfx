@@ -1,2 +1,8 @@
 #MASM objects
 *.obj
+
+#Build logs
+*.log
+
+#Linked EXEs
+SFX/ARGSFX/*.EXE

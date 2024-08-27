@@ -1,7 +1,7 @@
 cls
 set path=%path%;c:\bin
 cd SFX\ARGSFX
-masm argsfx.asm > ..\..\build.log
+make > ..\..\build.log
 cd ..\..
 pause
 exit
