@@ -220,4 +220,18 @@ retf
 
 seg001 ends
 
+; Segment type:	Regular
+seg002 segment byte public 'DATA' use16
+assume cs:seg002
+assume es:nothing, ss:nothing, ds:nothing, fs:nothing, gs:nothing
+
+seg002 ends
+
+; Segment type:	Regular
+seg003 segment byte public 'DATA' use16
+assume cs:seg003
+assume es:nothing, ss:nothing, ds:nothing, fs:nothing, gs:nothing
+
+seg003 ends
+
 end
