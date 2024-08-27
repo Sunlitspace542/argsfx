@@ -10,3 +10,5 @@ all:
 log: 
 	@$(DOSBOX) BLDTOLOG.BAT
 
+clean:
+	@$(DOSBOX) CLEAN.BAT
