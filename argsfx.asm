@@ -3843,7 +3843,7 @@ inc	si
 jmp	short loc_1CC8
 
 loc_1CED:
-call	sub_CE84
+call	_OS2GETDATE
 push	cx
 mov	bx, dx
 and	bx, 0FFh
@@ -13683,13 +13683,13 @@ mov	dx, 80FFh
 call	ERROR_ROUT
 pop	dx
 
-loc_661B:
+P_TIME:
 lodsb
 xlat	byte ptr ss:[bx]
 or	al, al
-js	short loc_661B
+js	short P_TIME
 dec	si
-call	sub_CE89
+call	_OS2GETTIME
 push	dx
 push	cx
 call	sub_842B
@@ -14164,10 +14164,10 @@ dec	si
 call	sub_842B
 mov	bx, 76A7h
 test	ss:byte_F8B, 1
-jnz	short locret_696B
+jnz	short NODATE
 push	es
 push	di
-call	sub_CE84
+call	_OS2GETDATE
 mov	es, ss:word_F7C
 mov	bp, ss:word_F7E
 mov	byte ptr es:[bp+4], 5
@@ -14182,8 +14182,9 @@ mov	ss:word_F6E, ax
 pop	di
 pop	es
 
-locret_696B:
+NODATE:
 retn
+P_E:
 and	ah, 0DFh
 cmp	ah, 4Fh	; 'O'
 jnz	short loc_6977
@@ -28984,24 +28985,24 @@ sub_CE75 endp
 
 
 
-sub_CE84 proc far
+_OS2GETDATE proc far
 mov	ah, 2Ah
 int	21h		; DOS -	GET CURRENT DATE
 			; Return: DL = day, DH = month,	CX = year
 			; AL = day of the week (0=Sunday, 1=Monday, etc.)
 retf
-sub_CE84 endp
+_OS2GETDATE endp
 
 
 
 
-sub_CE89 proc far
+_OS2GETTIME proc far
 mov	ah, 2Ch
 int	21h		; DOS -	GET CURRENT TIME
 			; Return: CH = hours, CL = minutes, DH = seconds
 			; DL = hundredths of seconds
 retf
-sub_CE89 endp
+_OS2GETTIME endp
 
 
 

@@ -1366,7 +1366,7 @@
  0000:65CD       loc_65CD
  0000:660D       loc_660D
  0000:660F       loc_660F
- 0000:661B       loc_661B
+ 0000:661B       P_TIME
  0000:6670       locret_6670
  0000:6671       loc_6671
  0000:6682       loc_6682
@@ -1433,7 +1433,7 @@
  0000:6906       loc_6906
  0000:6912       loc_6912
  0000:691D       loc_691D
- 0000:696B       locret_696B
+ 0000:696B       NODATE
  0000:6977       loc_6977
  0000:697F       loc_697F
  0000:6991       loc_6991
@@ -3230,8 +3230,8 @@
  0CDF:007B       sub_CE6B
  0CDF:0080       sub_CE70
  0CDF:0085       sub_CE75
- 0CDF:0094       sub_CE84
- 0CDF:0099       sub_CE89
+ 0CDF:0094       _OS2GETDATE
+ 0CDF:0099       _OS2GETTIME
  0CDF:009E       _OS2PRTSTRING
  0CDF:00A4       loc_CE94
  0CDF:00B8       _OS2INITTERM
