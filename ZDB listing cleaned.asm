@@ -23450,6 +23450,7 @@ cmp	si,2472
 jl	CSY2
 mov	ax,cx
 ret
+
 add	byte	ptr	[bx+si],al
 add	byte	ptr	[bx+si],al
 add	byte	ptr	[bx+si],al
@@ -23468,6 +23469,7 @@ clc
 ret
 stc
 ret
+
 _OS2EXIT:
 mov	ax,4C00
 int	21
@@ -23551,6 +23553,7 @@ _OS2GETDATE:
 mov	ah,2A
 int	21
 retf
+_OS2GETTIME:
 mov	ah,2C
 int	21
 retf
