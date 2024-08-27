@@ -57,10 +57,55 @@ CTRLCHAN:
 	pop	dx
 	pop	ds
 	jmp	far	ptr	_OS2EXITERR
+LINK:
+	mov	al,byte	ptr	[13A0h]
+	or	al,al
+	jne	DOLINK
+	ret
+DOLINK:
+mov	ax,word	ptr	[13C4h]
+or	ax,ax
+je	DOLINK2
+ret
+DOLINK2:
+	push	ds
+	push	dx
+	mov	dx,8AC9h
+	mov	ds,dx
+	mov	dx,89FCh
+	call	far	ptr	_OS2PRTSTRING
+	pop	dx
+	pop	ds
+	push	ds
+	push	dx
+	push	si
+	push	ax
+	mov	bx,8AC9h
+	mov	dx,9B1Ch
+	mov	ds,bx
+	mov	si,dx
 
-
-
-
+loc_99:
+	lodsb
+	or	al,al
+	jne	loc_99
+	mov	byte	ptr	[si-1],24h
+	call	far	ptr	_OS2PRTSTRING
+	mov	byte	ptr	[si-1],00h
+	pop	ax
+	pop	si
+	pop	dx
+	pop	ds
+	mov	bx,0800h
+	call	far	ptr	_OS2ALLOCSEG
+	jae	LBUFOK
+	push	dx
+	mov	dx,8535h
+	if	0
+	call	ERROR_ROUT
+	endif
+	pop	dx
+LBUFOK:
 
 start endp
 seg000 ends
