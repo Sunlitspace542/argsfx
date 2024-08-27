@@ -15,6 +15,9 @@ All known versions of the assembler:
 - ARGSFX (DOS extender) versions 1.33, 1.40, 1.44, 1.48-1.50, 1.52 (``ARGSFXX.EXE``)  
 - ARGSFX OS/2 1.35 (``ARGOS2.EXE``)  
 - ARGSFX (no DOS extender) versions 1.33, 1.40, 1.44, 1.49, 1.50 (``ARGSFX.EXE``)  
+All known versions of the companion linker:
+- SL 1.01 (``SL.EXE``) (ARGLINK's codebase descended from here)  
+- ARGLINK SFX versions 1.06, 1.08, 1.11 (``ARGLINK.EXE``)
 
 ## Original source structure from leftover debug data:
 ```
