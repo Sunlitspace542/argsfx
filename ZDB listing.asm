@@ -23554,7 +23554,7 @@
     79dd:ce89    mov       ah,2C
     79dd:ce8b    int       21
     79dd:ce8d    retf
-             _OS2PRINTSTRING:
+             _OS2PRTSTRING:
     79dd:ce8e    push      cx
     79dd:ce8f    xor       cx,cx
     79dd:ce91    push      si
