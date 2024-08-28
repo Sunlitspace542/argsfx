@@ -217,6 +217,13 @@ WELP2:
 	endif
 WELP3:
 
+GREGERR:
+
+; This is where the MARIO parser will eventually go
+include mariop.asm
+
+OPEN_MAP_FILE:
+
 seg000 ends
 
 ; Segment type:	Pure code
