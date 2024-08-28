@@ -6,3 +6,6 @@
 
 #Linked EXEs
 SFX/ARGSFX/*.EXE
+
+#Address Maps
+SFX/ARGSFX/*.MAP

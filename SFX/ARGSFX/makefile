@@ -8,6 +8,8 @@ ASM=MASM
 # Linker
 LINK=ML
 
+LOPTS= /FmARGSFX.MAP
+
 ALLFILES= ARGSFX.OBJ
 
 # Recipe to assemble a .ASM file and create a linkable .OBJ file
@@ -19,13 +21,14 @@ all: argsfx
 
 # Clean
 clean:
-	@echo cleaning...
+	@echo Cleaning...
 	@del *.obj
 	@del *.exe
+	@del *.map
 
 # Link EXE
 argsfx: $(ALLFILES)
-	@$(LINK) argsfx.obj
+	@$(LINK) $(LOPTS) argsfx.obj
 
 ## Files to assemble
 

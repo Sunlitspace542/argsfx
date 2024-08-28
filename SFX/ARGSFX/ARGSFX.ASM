@@ -6,6 +6,7 @@
 
 .386
 .model large
+.stack ; fixes no stack segment error, probably not accurate
 
 
 ; Segment type:	Pure code
@@ -343,4 +344,4 @@ assume es:nothing, ss:nothing, ds:nothing, fs:nothing, gs:nothing
 
 seg003 ends
 
-end
+end _ARGSFX
