@@ -1,3 +1,9 @@
+; ArgAsm-Super FX (ArgSfx)
+; Filename: ARGSFX.ASM
+; Purpose: Main assembler module.
+; Source code reconstructed by Sunlitspace542 and contributors.
+; Original program copyright (C) 1992-1994 Argonaut Software Ltd.
+
 .386
 .model large
 
@@ -11,7 +17,6 @@ assume es:nothing, ss:seg000, ds:nothing, fs:nothing, gs:nothing
 
 
 public _ARGSFX
-
 _ARGSFX proc near
 	cld
 	mov	cx,8AC9h
