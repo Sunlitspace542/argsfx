@@ -16,9 +16,10 @@ _ARGSFX proc near
 	cld
 	mov	cx,8AC9h
 	mov	ss,cx
+	assume ss:seg003
 	mov	word	ptr	ss:[9BDEh],ds
 	mov	word	ptr	ss:[9BE0h],0080h
-	mov	dx,79DDh
+	mov	dx,seg000
 	mov	bx,0052h
 	call	far	ptr	_OS2INITTERM ; ArgSfx OS/2 leftover
 	if	0
@@ -53,14 +54,17 @@ STOPASSEM:
 CTRLCHAN:
 	push	ds
 	push	dx
-	mov	dx,8AC9h
+	mov	dx, seg	seg003
 	mov	ds,dx
+	assume ds:seg003
 	mov	dx,8A14h
 	call	far	ptr	_OS2PRTSTRING
 	pop	dx
 	pop	ds
+	assume ds:nothing
 	jmp	far	ptr	_OS2EXITERR
-LINK:
+
+LINK proc near
 	mov	al,byte	ptr	[13A0h]
 	or	al,al
 	jne	DOLINK
@@ -73,19 +77,22 @@ DOLINK:
 DOLINK2:
 	push	ds
 	push	dx
-	mov	dx,8AC9h
+	mov	dx, seg	seg003
 	mov	ds,dx
+	assume ds:seg003
 	mov	dx,89FCh
 	call	far	ptr	_OS2PRTSTRING
 	pop	dx
 	pop	ds
+	assume ds:nothing
 	push	ds
 	push	dx
 	push	si
 	push	ax
-	mov	bx,8AC9h
+	mov	bx, seg	seg003
 	mov	dx,9B1Ch
 	mov	ds,bx
+	assume ds:seg003
 	mov	si,dx
 
 loc_99:
@@ -99,6 +106,7 @@ loc_99:
 	pop	si
 	pop	dx
 	pop	ds
+	assume ds:nothing
 	mov	bx,0800h
 	call	far	ptr	_OS2ALLOCSEG
 	jae	LBUFOK
@@ -109,6 +117,8 @@ loc_99:
 	endif
 	pop	dx
 LBUFOK:
+
+LINK endp
 
 seg000 ends
 
