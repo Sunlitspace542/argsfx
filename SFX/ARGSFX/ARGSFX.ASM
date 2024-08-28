@@ -23,8 +23,8 @@ _ARGSFX proc near
 mov	cx, seg	seg003
 	mov	ss,cx
 	assume ss:seg003
-	mov	word	ptr	ss:[9BDEh],ds
-	mov	word	ptr	ss:[9BE0h],0080h
+	mov	ss:word_1AA9E, ds
+	mov	ss:word_1AAA0, 80h ; '�'
 	mov	dx, seg	seg000
 	mov	bx,0052h
 	call	far	ptr	_OS2INITTERM ; ArgSfx OS/2 leftover
@@ -35,14 +35,16 @@ mov	cx, seg	seg003
 	call	OPEN_MAP_FILE
 	call	ASSEMBLE
 	call	EVAL_FRS
+	endif
 	call	LINK
+	if	0
 	call	WRITESYMBOLS
 	call	GEN_MAP_SYMBOLS
 	call	DO_END
 	endif
 
 OVERRET:
-	mov	ax,word	ptr	[13C4h]
+	mov	ax, ss:word_12284
 	or	ax,ax
 	if	0
 	jne	loc_48
@@ -71,12 +73,12 @@ CTRLCHAN:
 	jmp	far	ptr	_OS2EXITERR
 
 LINK proc near
-	mov	al,byte	ptr	[13A0h]
+	mov	al, ss:byte_12260
 	or	al,al
 	jne	DOLINK
 	ret
 DOLINK:
-	mov	ax,word	ptr	[13C4h]
+	mov	ax, ss:word_12284
 	or	ax,ax
 	je	DOLINK2
 	ret
@@ -123,8 +125,97 @@ loc_99:
 	endif
 	pop	dx
 LBUFOK:
-
+	mov	ss:word_1A942, ax
+	mov	ax,ss
+	mov	ds,ax
+	assume ds:seg003
+	mov	dx,9B1Ch
+	xor	cx,cx
+	call	far	ptr	_OS2OPENNEWFILE
+	mov	ss:word_11D9D, ax
+	jae	LDISKOK
+	if	0
+	call	NEEDCR
+	endif
+	push	ds
+	push	dx
+	mov	dx, seg	seg003
+	mov	ds,dx
+	mov	dx,891Ch
+	call	far	ptr	_OS2PRTSTRING
+	pop	dx
+	pop	ds
+	assume ds:nothing
+	ret
+LDISKOK:
+	mov	ss:byte_13358, 1
+	mov	ss:byte_1227A, 4
+	mov	es, ss:word_1A942
+	xor	di,di
+	mov	ax,4F53h
+	stosw
+	mov	ax,4A42h
+	stosw
+	mov	ax,0101h
+	stosw
+	xor	ax,ax
+	stosw
+	mov	ds, ss:word_1A942
+	xor	dx,dx
+	mov	cx,0008h
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	if	0
+	call	WRITEBLOCKS
+	call	WRITEPUBLICS
+	endif
+	call	WRITEEXTERNS
+	xor	cx,cx
+	mov	dx,0006h
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2SEEKFILE
+	mov	ax,ss
+	mov	ds,ax
+	assume ds:seg003
+	mov	dx,13A2h
+	mov	cx,0002h
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2CLOSEFILE
+	ret
 LINK endp
+
+	mov	ds, ss:word_11D99
+	assume ds:nothing
+	xor	dx, dx
+	mov	cx, ss:word_11D9B
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	ret
+
+WRITEEXTERNS:
+	mov	ax, ss:word_1226A
+	or	ax, ax
+	jne	WEDO
+	ret
+WEDO:
+	mov	ds, ss:word_12264
+	mov	si,0002
+	xor	di,di
+WELP:
+	xor	cx,cx
+	push	si
+	add	si,02
+	lodsw
+	jmp	WELP3
+WELP2:
+	lodsw
+	or	ax,ax
+	if	0
+	je	WEENDEXP
+	endif
+WELP3:
 
 seg000 ends
 
@@ -328,20 +419,8 @@ _OS2DELETEFILE endp
 
 seg001 ends
 
-; Segment type:	Regular
-seg002 segment byte public 'DATA' use16
-assume cs:seg002
-assume es:nothing, ss:nothing, ds:nothing, fs:nothing, gs:nothing
-
-
-seg002 ends
-
-; Segment type:	Regular
-seg003 segment byte public 'DATA' use16
-assume cs:seg003
-assume es:nothing, ss:nothing, ds:nothing, fs:nothing, gs:nothing
-
-
-seg003 ends
+; temporary home for the data segments until I
+; get around to properly disassembling them
+include datasegs.asm
 
 end _ARGSFX

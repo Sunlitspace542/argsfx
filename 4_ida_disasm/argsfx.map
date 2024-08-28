@@ -19,7 +19,7 @@
  0000:007A       DOLINK2
  0000:0099       loc_99
  0000:00C1       LBUFOK
- 0000:00EE       loc_EE
+ 0000:00EE       LDISKOK
  0000:0172       WRITEEXTERNS
  0000:017B       WEDO
  0000:0185       loc_185
@@ -425,7 +425,7 @@
  0000:2223       loc_2223
  0000:2257       NSLL1
  0000:226D       loc_226D
- 0000:2270       sub_2270
+ 0000:2270       NEEDCR
  0000:228F       locret_228F
  0000:2290       FATALERR_ROUT
  0000:22BA       loc_22BA
