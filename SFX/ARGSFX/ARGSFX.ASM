@@ -20,12 +20,12 @@ assume es:nothing, ss:seg000, ds:nothing, fs:nothing, gs:nothing
 public _ARGSFX
 _ARGSFX proc near
 	cld
-	mov	cx,8AC9h
+mov	cx, seg	seg003
 	mov	ss,cx
 	assume ss:seg003
 	mov	word	ptr	ss:[9BDEh],ds
 	mov	word	ptr	ss:[9BE0h],0080h
-	mov	dx,seg000
+	mov	dx, seg	seg000
 	mov	bx,0052h
 	call	far	ptr	_OS2INITTERM ; ArgSfx OS/2 leftover
 	if	0
