@@ -219,14 +219,14 @@ xor	cx, cx
 push	si
 add	si, 2
 lodsw
-jmp	short loc_193
+jmp	short WELP3
 
 loc_18E:
 lodsw
 or	ax, ax
 jz	short loc_1CA
 
-loc_193:
+WELP3:
 test	al, 80h
 jz	short loc_1C5
 mov	es, word ptr [si]
