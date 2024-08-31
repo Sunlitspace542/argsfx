@@ -29,6 +29,7 @@ clean:
 # Link EXE
 argsfx: $(ALLFILES)
 	@$(LINK) $(LOPTS) argsfx.obj
+	@del *.obj
 
 ## Files to assemble
 

@@ -4,8 +4,6 @@
 ; Source code reconstructed by Sunlitspace542 and contributors.
 ; Original program copyright (C) 1992-1994 Argonaut Software Ltd.
 
-.DATA
-
 ; Segment type:	Regular
 seg002 segment byte public 'DATA' use16
 assume cs:seg002
