@@ -226,7 +226,7 @@ WELP3:
 	mov	al,byte	ptr	es:[bp+0]
 	test	byte	ptr	es:[bp+4],40h
 	je	loc_1AA
-;	jmp	WRITESTR
+	jmp	WRITESTR
 loc_1AA:
 	test	byte ptr es:[bp+4], 10h
 	jz	short loc_1B4
@@ -240,6 +240,72 @@ loc_1B4:
 WENOTLAB:
 	add	si,4
 	jmp	WELP2
+WEENDEXP:
+	mov	es, ss:word_1A942
+	xor	al,al
+	stosb
+	mov	dx,si
+	mov	bx,si
+	pop	si
+	sub	bx,si
+	add	bx,5
+WEWEPLP:
+	lodsb
+	stosb
+	dec	bx
+	jne	WEWEPLP
+	mov	si,dx
+	cmp	di,7E00h
+	jb	WENOTENDBUF
+	push	ds
+	push	si
+	push	cx
+	mov	ds, ss:word_1A942
+	xor	dx,dx
+	mov	cx,di
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	pop	cx
+loc_200:
+	pop	si
+	pop	ds
+loc_202:
+	xor	di,di
+WENOTENDBUF:
+	add	si, 5
+loc_207:
+	cmp	si, 3F00h
+	jb	short WEOK
+	xor	si, si
+	mov	ax, [si]
+	mov	ds, ax
+	mov	si, 2
+WEOK:
+	dec	ss:word_1226A
+	jz	short loc_220
+	jmp	WELP
+loc_220:
+	mov	es, ss:word_1A942
+	xor	al, al
+	stosb
+	mov	ds, ss:word_1A942
+	xor	dx, dx
+	mov	cx, di
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	ret
+WRITESTR:
+	push	ds
+	push	si
+	push	cx
+	push	es
+	mov	ds, word ptr es:[bp+6]
+	mov	si, es:[bp+8]
+	mov	cl, es:[bp+5]
+	mov	es, ss:word_1A942
+
+
+
 
 GREGERR:
 

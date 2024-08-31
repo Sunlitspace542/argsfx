@@ -47991,6 +47991,8 @@ db  4Eh	; N
 db  46h	; F
 db    0
 db    0
+
+; pointer table for cpu strings?
 db 0DBh	; �
 db  7Bh	; {
 db 0E3h	; �
@@ -48011,7 +48013,7 @@ _486TXT	DB	"80486", 0
 ; TODO is there some sort of byte fill going on here?
 db	0
 
-; Error strings
+; Messages
 
 DB	"Can't find source file ""$", 0
 DB	"Writing object file to disk.$", 0
@@ -48131,7 +48133,7 @@ DB	"Bad field$", 1
 DB	"Rept re-load. Moving large REPT loops will help assembly time$", 1
 DB	"No MVN/MVP command!$", 0
 
-; This chunk is really weird, idk how best to do it
+; This chunk is formatted strangely
 
 DB	"Can't find symbol$", 0dh, 0ah
 DB	"Public not defined at end of assembly : $", 0dh, 0ah
@@ -53853,5 +53855,6 @@ db    0
 db    0
 db    0
 db    0
+
 DB 	0Dh,0Ah, "**** Error creating stack for thread/allocating memory.", 0Dh, 0Ah, "$"
 seg003 ends

@@ -234,7 +234,7 @@ mov	bp, [si+2]
 mov	al, es:[bp+0]
 test	byte ptr es:[bp+4], 40h
 jz	short loc_1AA
-jmp	loc_23C
+jmp	WRITESTR
 
 loc_1AA:
 test	byte ptr es:[bp+4], 10h
@@ -314,7 +314,7 @@ mov	bx, ss:word_11D9D
 call	_OS2WRITEBYTES
 retn
 
-loc_23C:
+WRITESTR:
 push	ds
 push	si
 push	cx
