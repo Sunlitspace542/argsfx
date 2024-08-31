@@ -48002,7 +48002,6 @@ db  7Bh	; {
 db 0F5h	; �
 db  7Bh	; {
 
-; TODO Possibly leftovers from CPUTYPE in the Zortech 3.0r1 sample code? Investigate this
 _86TXT	DB	"8088/86", 0
 _186TXT	DB	"80186", 0
 _286TXT	DB	"80286", 0
@@ -48014,7 +48013,6 @@ db	0
 
 ; Error strings
 
-; Label(s) may be incorrect
 DB	"Can't find source file ""$", 0
 DB	"Writing object file to disk.$", 0
 DB	"Disk full.$", 0

@@ -5,3 +5,5 @@
 ; Original program copyright (C) 1992-1994 Argonaut Software Ltd.
 
 ; Once ARGSFX.ASM is completed enough, this file will begin being populated.
+
+PARSEMARIO:

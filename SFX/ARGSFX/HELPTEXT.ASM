@@ -23,5 +23,3 @@ DB	"   -x<name>          - Writes symbol listing to file.", 0Dh,0Ah
 DB	"   -z                - Generate a .MAP debug file.", 0Dh,0Ah
 DB	0Dh,0Ah
 DB	"$"
-DB	0Dh,0Ah
-DB	0Dh,0Ah
