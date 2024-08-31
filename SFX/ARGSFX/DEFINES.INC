@@ -5,6 +5,8 @@
 ; Original program copyright (C) 1992-1994 Argonaut Software Ltd.
 
 ; Useful labels
+
+; Marks calls to unimplemented code
 UNIMPLEMENTED_ROUTINES	equ	0
 
 ; Platform Defines

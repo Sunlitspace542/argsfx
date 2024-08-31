@@ -458,8 +458,192 @@ loc_35C:
 WRITEPUBLICS	endp
 
 WRITEBLOCKS	proc near
-
+	mov	ds, ss:word_12270
+	mov	si, ss:word_12272
+LINKLOOP:
+	mov	ax,word	ptr	[si+0Ch]
+	mov	ss:word_1227E, ax
+	mov	ax,word	ptr	[si+0Eh]
+	mov	ss:word_1227C, ax
+	push	ds
+	push	si
+	push	dx
+	push	cx
+	mov	ax, seg	seg003
+	mov	ds,ax
+	assume ds:seg003
+	mov	dx,13BCh
+	mov	cx,0004h
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	pop	cx
+	pop	dx
+	pop	si
+	pop	ds
+	assume ds:nothing
+	mov	ax,word	ptr	[si+04h]
+	mov	ss:word_1227E, ax
+	mov	ax,word	ptr	[si+06h]
+	mov	ss:word_1227C, ax
+	push	ds
+	push	si
+	push	dx
+	push	cx
+	mov	ax, seg	seg003
+	mov	ds,ax
+	assume ds:seg003
+	mov	dx,13BCh
+	mov	cx,0004h
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	pop	cx
+	pop	dx
+	pop	si
+	pop	ds
+	assume ds:nothing
+	mov	al,byte	ptr	[si+10h]
+	test	al,01h
+	jne	LINKNORM
+	test	al,08h
+	je	loc_3E2
+	jmp	LINKGAP
+loc_3E2:
+	test	al,02h
+	jne	LINKINCBIN
+	mov	dx,7E8Dh
+	IF	UNIMPLEMENTED_ROUTINES
+	call	FATALERR_ROUT
+	ENDIF
+	jmp	STOPASSEM
+LINKWRITERET:
+	inc	ss:word_12262
+	mov	ax,word	ptr	[si]
+	mov	bx,word	ptr	[si+02h]
+	mov	ds,ax
+	mov	si,bx
+	or	ax,ax
+	je	locret_404
+	jmp	LINKLOOP
+locret_404:
+	ret
+LINKNORM:
+	mov	ss:word_1227C, 0
+	push	ds
+	push	si
+	push	dx
+	push	cx
+	mov	ax, seg	seg003
+	mov	ds,ax
+	assume ds:seg003
+	mov	dx,13BCh
+	mov	cx,0001h
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	pop	cx
+	pop	dx
+	pop	si
+	pop	ds
+	assume ds:nothing
+	push	si
+	mov	cx,word	ptr	[si+06h]
+	mov	bx, ss:word_11D9D
+	mov	dx,si
+	add	dx,13h
+	call	INT21R
+	pop	si
+	jmp	LINKWRITERET
+LINKINCBIN:
+	mov	ss:word_1227C, 1
+	push	ds
+	push	si
+	push	dx
+	push	cx
+	mov	ax, seg	seg003
+	mov	ds,ax
+	assume ds:seg003
+	mov	dx,13BCh
+	mov	cx,0001h
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	pop	cx
+	pop	dx
+	pop	si
+	pop	ds
+	assume ds:nothing
+	mov	ax,word	ptr	[si+11h]
+	mov	ss:word_1227C, ax
+	push	ds
+	push	si
+	push	dx
+	push	cx
+	mov	ax, seg	seg003
+	mov	ds,ax
+	assume ds:seg003
+	mov	dx,13BCh
+	mov	cx,0002h
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	pop	cx
+	pop	dx
+	pop	si
+	pop	ds
+	assume ds:nothing
+	push	ds
+	push	si
+	mov	ax,word	ptr	[si+08h]
+	mov	dx,word	ptr	[si+0Ah]
+	mov	ds,ax
+	mov	si,dx
+	xor	cx,cx
+LILP:
+	lodsb
+	inc	cx
+	or	al,al
+	jne	LILP
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	pop	si
+	pop	ds
+	jmp	LINKWRITERET
+LINKGAP:
+	mov	ss:word_1227C, 0
+	push	ds
+	push	si
+	push	dx
+	push	cx
+	mov	ax, seg	seg003
+	mov	ds,ax
+	assume ds:seg003
+	mov	dx,13BCh
+	mov	cx,0001h
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	pop	cx
+	pop	dx
+	pop	si
+	pop	ds
+	mov	bx,word	ptr	[si+04h]
+	mov	cx,word	ptr	[si+06h]
+	if	UNIMPLEMENTED_ROUTINES
+	call	SENDGAP
+	ENDIF
+	jmp	LINKWRITERET
 WRITEBLOCKS	endp
+
+INT21R	proc near
+cmp	ss:byte_13358, 0
+jz	short locret_4EB
+push	dx
+push	ds
+push	bx
+call	_OS2WRITEBYTES
+pop	bx
+pop	ds
+pop	dx
+
+locret_4EB:
+retn
+INT21R	endp
 
 GREGERR:
 
