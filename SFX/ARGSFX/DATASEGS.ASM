@@ -48028,7 +48028,7 @@ DB	"Out of macro space while defining macro definition.$", 0
 DB	"Out of source levels. (Max is 32.)$", 0
 DB	"Out of local label memory(Put a parent label in).$", 0
 DB	"User assembly fail.$", 0
-DB	"Internal error: Strange conditional at symbol char table.(report)$", 0
+DB	"Internal error: Strange condition at symbol char table.(report)$", 0
 DB	"Internal error: Couldn't evaluate heap expression(maybe -e__heap=xxxx CLI option.$", 0 ; SASM leftover
 DB	"File read failure, maybe corrupt end of file.$", 0
 DB	"Need DOS 3.0 or higher.$", 0
@@ -48072,14 +48072,14 @@ DB	"EQU/SET must have a label$", 0
 DB	"SET attempted to overwrite permanant label$", 0
 DB	"Not in a macro$", 0
 DB	"Bad Mario value$", 0
-DB	"Bad Mario Register$", 0
+DB	"Bad Mario register$", 0
 DB	"Bad seperator$", 0
 DB	"[ expected$", 0
 DB	"] expected$", 0
-DB	"Missing openin quotes$", 0
+DB	"Missing opening quotes$", 0
 DB	"Need memory for macro definitions$", 0
 DB	"Spurious ENDM$", 0
-DB	"Expected INCCOL <NAME>,start pal, end pal$", 0
+DB	"Expected INCCOL <NAME>,start pal,end pal$", 0
 DB	"Need more EMS for FR references$", 0
 DB	"Heap gone, Get some more.$", 0 ; SASM leftover
 DB	"Parameter used in definition is more than given$", 0
@@ -48113,7 +48113,7 @@ DB	"EXTERN is already a PUBLIC$", 0
 DB	"Expecting parameters$", 0
 DB	"Unexpected end of line$", 0
 DB	"Expecting a { start of macro definition$", 0
-DB	"Unexpecyed end of file$", 0
+DB	"Unexpected end of file$", 0
 DB	"Invalid array$", 0
 DB	"String too long for array$", 0
 DB	"Undefined string specified$", 0
