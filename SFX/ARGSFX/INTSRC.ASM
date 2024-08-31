@@ -7,22 +7,62 @@
 DB	" deferror ""%d:%f (%l), %e%u.%s%n""", 0Dh,0Ah
 DB	" defend ""%n%[7]ie Error(s).%t%[7]iw Warning(s).%n%[7]is Symbols.%t%[7]ib Bytes.%t%t%[7]il Lines.%n""", 0Dh,0Ah
 DB	" IFND __notitle", 0Dh,0Ah
+
+	IF VERSION_SASM NE 0
+DB	" printf ""SASMX v2.02  Copyright (c) Argonaut Software Ltd 1992%n""", 0Dh,0Ah
+	ELSEIF
 DB	" printf ""ArgSfx v1.50 (DBR=OFF)  Copyright (c) Argonaut Software Ltd. 1992%n""", 0Dh,0Ah
+	ENDIF
+
+	IF	VERSION_SASM NE	0
+DB	" printf ""%kK Free,  %$7%n"""
+	ELSEIF
 DB	" printf ""%kK Free,  %$date_str%n""", 0Dh,0Ah
+	ENDIF
+
 DB	" ENDC", 0Dh,0Ah
+
+	IF	VERSION_SASM NE	0
+DB	"_SASM", 0Dh,0Ah
+	ELSEIF
 DB	"_SASM", 0Dh,0Ah
 DB	"_ARGSFX", 0Dh,0Ah
+	ENDIF
+
 DB	" DATE _DATE", 0Dh,0Ah
 DB	"_DAY = _DATE&$ff", 0Dh,0Ah
 DB	"_MONTH = _DATE>>8&$ff", 0Dh,0Ah
 DB	"_YEAR = _DATE>>16", 0Dh,0Ah
+
+	IF	VERSION_SASM NE	0
+DB	" IFEQ _MONTH-8"
+DB	" IFEQ _DAY-6"
+DB	" PRINTF ""Happy birthday Krister!%n"""
+DB	" ENDC"
+DB	" ENDC"
+DB	" IFEQ _MONTH-3"
+DB	" IFEQ _DAY-30"
+DB	" PRINTF ""Happy birthday Giles!%n"""
+DB	" ENDC"
+DB	" ENDC"
+DB	" IFEQ _MONTH-2"
+DB	" IFEQ _DAY-18"
+DB	" PRINTF ""Happy birthday Dylan!%n"""
+DB	" ENDC"
+DB	" ENDC"
+	ENDIF
+
 DB	" IFD __mario", 0Dh,0Ah
 DB	" MARIO ON", 0Dh,0Ah
 DB	" ENDC", 0Dh,0Ah
+
+	IF	VERSION_SASM
 DB	" STRING 1[150]", 0Dh,0Ah
 DB	" STRING 2[150]", 0Dh,0Ah
 DB	" STRING 3[150]", 0Dh,0Ah
 DB	" STRING 4[150]", 0Dh,0Ah
 DB	" STRING 5[150]", 0Dh,0Ah
 DB	" STRING 6[150]", 0Dh,0Ah
+	ENDIF
+
 DB	" include ", 0Dh,0Ah
