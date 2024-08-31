@@ -440,7 +440,7 @@ _OS2PRTSTRING endp
 _OS2INITTERM	proc far
 
 ; The OS/2 version does this:
-	IF	VERSION_OS2	NE	0
+	IF	TARGET_OS2	NE	0
 	PUSH	DX
 	BX
 	SS

@@ -4,10 +4,11 @@
 ; Source code reconstructed by Sunlitspace542 and contributors.
 ; Original program copyright (C) 1992-1994 Argonaut Software Ltd.
 
+	IF	VERSION_SASM
 DB	"ArgSfx v1.50 (DBR=OFF) Copyright (c) Argonaut Software Ltd. 1992", 0Dh,0Ah
 DB	"Usage: ARGSFX [options] sourcefile", 0Dh,0Ah
 DB	" Options are:", 0Dh,0Ah
-DB	"   -d<value>,"<str>" - Defines a string.", 0Dh,0Ah
+DB	"   -d<value>,""<str>"" - Defines a string.", 0Dh,0Ah
 DB	"   -e<label>(=value) - Equate label with the optional value.", 0Dh,0Ah
 DB	"   -f<name>          - Write file listing to file name.", 0Dh,0Ah
 DB	"   -h                - This text.", 0Dh,0Ah
@@ -25,3 +26,29 @@ DB	0Dh,0Ah
 DB	"$"
 DB	0Dh,0Ah
 DB	0Dh,0Ah
+	ELSEIF
+DB	"SASMX v2.02  Copyright (c) Argonaut Software Ltd 1992", 0Dh,0Ah
+DB	"Usage: SASMX [options] sourcefile", 0Dh,0Ah
+DB	" Options are:", 0Dh,0Ah
+DB	"   -d<value>,""<str>"" - Defines a string.", 0Dh,0Ah
+DB	"   -e<label>(=value) - Equate label with the optional value.", 0Dh,0Ah
+DB	"   -f<Name>          - Show file listing on screen or write to file.", 0Dh,0Ah
+DB	"   -h                - This text.", 0Dh,0Ah
+DB	"   -i<name>          - Specifies an incdir name.", 0Dh,0Ah
+DB	"   -l                - Turns on listing.", 0Dh,0Ah
+DB	"   -m<value>         - Specifies maximum errors before stopping.", 0Dh,0Ah
+DB	"   -o<name>          - Write object code to file <name>.", 0Dh,0Ah
+DB	"   -r                - Display rom listing on screen.", 0Dh,0Ah
+DB	"   -s<label>(=value) - Set the label with the optional value.", 0Dh,0Ah
+DB	"   -v<filename.SOB>  - Write linkable file <filename.SOB>.", 0Dh,0Ah
+DB	"   -x<Name>          - Turns on symbol listing to optional file.", 0Dh,0Ah
+DB	0Dh,0Ah
+DB	" Valid enironment variables : ", 0Dh,0Ah
+DB	"   sasmdir           - Default directory for the source code.", 0Dh,0Ah
+DB	"   sasmsrc           - Default source code file.", 0Dh,0Ah
+DB	"   sasmheap          - Default heap size.", 0Dh,0Ah
+DB	0Dh,0Ah
+DB	"$"
+DB	0Dh,0Ah
+DB	0Dh,0Ah
+	ENDIF

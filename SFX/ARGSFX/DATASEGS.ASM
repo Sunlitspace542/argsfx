@@ -25696,9 +25696,9 @@ word_13360 dw 0
 aUNargLongaLong:
 db	9Eh,0Ah
 db	'NARG',9
-db	C1h,0Ah
+db	0C1h,0Ah
 db	'LONGA',9
-db	BDh,0Ah
+db	0BDh,0Ah
 db	'LONGI',9
 db	0
 
@@ -48558,7 +48558,7 @@ db    0
 db    0
 DB	"Run statement"
 DB	0,9
-DB	"onerror", 0dh,0ah,
+DB	"onerror", 0dh,0ah
 db  1Ah
 db    0
 db    0
@@ -48614,7 +48614,6 @@ db  1Fh
 db    0
 
 ; This looks to be the days table
-DAYSPTRS:
 db  59h	; Y
 db  8Ch	; �
 db  63h	; c
@@ -48642,7 +48641,6 @@ db    0
 db    0
 
 ; This looks to be the months table
-MONPTRS:
 db 0ACh	; �
 db  8Ch	; �
 db 0B4h	; �
