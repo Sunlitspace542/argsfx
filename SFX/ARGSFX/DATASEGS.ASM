@@ -25693,14 +25693,10 @@ byte_13358 db 0
 word_13360 dw 0
 ;align 4
 
-aUNargLongaLong:
-db	9Eh,0Ah
-db	'NARG',9
-db	0C1h,0Ah
-db	'LONGA',9
-db	0BDh,0Ah
-db	'LONGI',9
-db	0
+aUNargLongaLong	db '�',0Ah
+db 'NARG',9,'�',0Ah
+db 'LONGA',9,'�',0Ah
+db 'LONGI',9,0
 
 db    0
 db    0
@@ -48019,10 +48015,10 @@ db	0
 ; Error strings
 
 ; Label(s) may be incorrect
-DB	"Can''t find source file ""$", 0
+DB	"Can't find source file ""$", 0
 DB	"Writing object file to disk.$", 0
 DB	"Disk full.$", 0
-DB	"Can''t allocate any more memory.$", 0
+DB	"Can't allocate any more memory.$", 0
 DB	"Repts unbalanced at end of file.$", 0
 DB	"Conditionals unbalanced - Too many IFs.$", 0
 DB	"CTRL-C or CTRL-BREAK pressed.$", 0
@@ -48033,12 +48029,12 @@ DB	"Out of source levels. (Max is 32.)$", 0
 DB	"Out of local label memory(Put a parent label in).$", 0
 DB	"User assembly fail.$", 0
 DB	"Internal error: Strange conditional at symbol char table.(report)$", 0
-DB	"Internal error: Couldn''t evaluate heap expression(maybe -e__heap=xxxx CLI option.$", 0 ; SASM leftover
+DB	"Internal error: Couldn't evaluate heap expression(maybe -e__heap=xxxx CLI option.$", 0 ; SASM leftover
 DB	"File read failure, maybe corrupt end of file.$", 0
 DB	"Need DOS 3.0 or higher.$", 0
 DB	"Unknown object block.. (REPORT THIS).$", 0
 DB	"Too many errors.$", 0
-DB	"Can''t open MAP file!$", 0
+DB	"Can't open MAP file!$", 0
 DB	"Invalid source type(report this)$", 0
 DB	"Bad value specified$", 0
 DB	"Unknown instruction$", 0
@@ -48051,7 +48047,7 @@ DB	"No such effective address or syntax error$", 0
 DB	"Symbol defined twice$", 0
 DB	"Macro defined twice$", 9 ;!! fat finger: may have meant 0 (NUL), but pressed 9
 DB	"       Macro defined twice is : $", 0
-DB	"Can''t find symbol$", 0
+DB	"Can't find symbol$", 0
 DB	"Bad size Must be L,W,D,N$", 0
 DB	"Angled bracket missing from paramater$", 0
 DB	"Missing ENDM$", 0
@@ -48061,12 +48057,12 @@ DB	"Cannot find macro parameter$", 0
 DB	"REP and SEP can only use immediate data$", 0
 DB	"Expression must evaluate$", 0
 DB	"Bad ROM type$", 0
-DB	"Can''t open file$", 0
+DB	"Can't open file$", 0
 DB	"Premature end of file,  missing ENDC$", 0
 DB	"Missing single quote$", 0
 DB	"Missing double quote$", 0
 DB	"Missing ending quotes$", 0
-DB	"Too many ENDC''s$", 0
+DB	"Too many ENDC's$", 0
 DB	"Bad REPT count$", 0
 DB	"Too many repts$", 0
 DB	"Too many endrs$", 0
@@ -48100,10 +48096,10 @@ DB	"Divide by zero$", 0
 DB	"First mod parameter must be 1-65535$", 0
 DB	"Attempted to define a null string$", 0
 DB	"Not in REPT loop$", 0
-DB	"Not enough IRP''s for the REPT loop$", 0
-DB	"Not enough IRC''s for the REPT loop$", 0
+DB	"Not enough IRP's for the REPT loop$", 0
+DB	"Not enough IRC's for the REPT loop$", 0
 DB	"Multiplication overflow$", 0
-DB	"Can''t allocate incbin buffer$", 0
+DB	"Can't allocate incbin buffer$", 0
 DB	"No PUBLIC local symbols allowed$", 0
 DB	"No EXTERN local symbols allowed$", 0
 DB	"Illegal EXTERN use$", 0
@@ -48139,13 +48135,13 @@ DB	"No MVN/MVP command!$", 0
 
 ; This chunk is really weird, idk how best to do it
 
-DB	"Can''t find symbol$", 0dh, 0ah
+DB	"Can't find symbol$", 0dh, 0ah
 DB	"Public not defined at end of assembly : $", 0dh, 0ah
 DB	"Symbol not defined : $"
 DB	"Error : Cannot allocate incbin block", 0dh, 0ah, "$"
 DB	"Ramboy not present....", 0dh, 0ah, "$"
-DB	"Can''t open output file....$", 0dh, 0ah, "$"
-DB	"Can''t open symbols file....$", 0dh, 0ah, "$"
+DB	"Can't open output file....$", 0dh, 0ah, "$"
+DB	"Can't open symbols file....$", 0dh, 0ah, "$"
 DB	"Rompos:$ Blk length:$Total gap length = $ Gap length:$     $	$ +$ x$($)", 0dh, 0ah
 DB	"$  -  $ at line $ has a value of $ "
 DB	"File open error in command line.", 0dh, 0ah, "$"
