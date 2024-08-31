@@ -31,7 +31,7 @@ _ARGSFX proc near
 	mov	dx, seg	seg000
 	mov	bx,0052h
 	call	far	ptr	_OS2INITTERM ; ArgSfx OS/2 leftover
-	if	0
+	if	UNIMPLEMENTED_ROUTINES
 	call	GETMEM
 	call	ADD_ASSEMVARS
 	call	PARSECLI
@@ -40,7 +40,7 @@ _ARGSFX proc near
 	call	EVAL_FRS
 	endif
 	call	LINK
-	if	0
+	if	UNIMPLEMENTED_ROUTINES
 	call	WRITESYMBOLS
 	call	GEN_MAP_SYMBOLS
 	call	DO_END
@@ -49,7 +49,7 @@ _ARGSFX proc near
 OVERRET:
 	mov	ax, ss:word_12284
 	or	ax,ax
-	if	0
+	if	UNIMPLEMENTED_ROUTINES
 	jne	loc_48
 	jmp	far	ptr	_OS2EXIT
 loc_48:
@@ -58,7 +58,7 @@ loc_48:
 _ARGSFX endp
 
 STOPASSEM:
-	if	0
+	if	UNIMPLEMENTED_ROUTINES
 	call	DO_END
 	endif
 	jmp	OVERRET
@@ -110,7 +110,7 @@ loc_99:
 	lodsb
 	or	al,al
 	jne	loc_99
-	mov	byte	ptr	[si-1],24h
+	mov	byte	ptr	[si-1],24h ; '$'
 	call	far	ptr	_OS2PRTSTRING
 	mov	byte	ptr	[si-1],00h
 	pop	ax
@@ -123,7 +123,7 @@ loc_99:
 	jae	LBUFOK
 	push	dx
 	mov	dx,8535h
-	if	0
+	if	UNIMPLEMENTED_ROUTINES
 	call	ERROR_ROUT
 	endif
 	pop	dx
@@ -137,7 +137,7 @@ LBUFOK:
 	call	far	ptr	_OS2OPENNEWFILE
 	mov	ss:word_11D9D, ax
 	jae	LDISKOK
-	if	0
+	if	UNIMPLEMENTED_ROUTINES
 	call	NEEDCR
 	endif
 	push	ds
@@ -168,10 +168,8 @@ LDISKOK:
 	mov	cx,0008h
 	mov	bx, ss:word_11D9D
 	call	far	ptr	_OS2WRITEBYTES
-	if	0
 	call	WRITEBLOCKS
 	call	WRITEPUBLICS
-	endif
 	call	WRITEEXTERNS
 	xor	cx,cx
 	mov	dx,0006h
@@ -215,7 +213,7 @@ WELP:
 WELP2:
 	lodsw
 	or	ax,ax
-	if	0
+	if	UNIMPLEMENTED_ROUTINES
 	je	WEENDEXP
 	endif
 WELP3:
@@ -350,6 +348,118 @@ loc_282:
 	jmp	WENOTLAB
 WRITEEXTERNS	endp
 
+WRITEPUBLICS	proc near
+	mov	es, ss:word_1A942
+	xor	di,di
+	mov	bx,1472h
+	WPUBLP:
+	mov	ax,word	ptr	ss:[bx]
+	or	ax,ax
+	je	WPUBNEXT
+	mov	ds,ax
+	mov	si,word	ptr	ss:[bx+02]
+	push	bx
+WPUBLP2:
+	test	byte	ptr	[si+04h],80h
+	je	WPUBNEXT2
+	test	byte	ptr	[si+04h],10h
+	jne	WPUBUNDEF
+	push	ds
+	push	si
+	mov	ax,word	ptr	[si+06h]
+	mov	bp,word	ptr	[si+08h]
+	mov	cl,byte	ptr	[si+05h]
+	mov	si,bp
+	mov	ds,ax
+WPWSLP:
+	lodsb
+	stosb
+	dec	cl
+	jne	WPWSLP
+	pop	si
+	pop	ds
+	mov	ax,word	ptr	[si+0Ch]
+	stosw
+	mov	ax,word	ptr	[si+0Ah]
+	stosw
+	cmp	di,7F00h
+	jb	WPUBNEXT2
+	push	ds
+	push	si
+	push	bx
+	mov	ds, ss:word_1A942
+	xor	dx,dx
+	mov	cx,di
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	pop	bx
+	pop	si
+	pop	ds
+	xor	di,di
+WPUBNEXT2:
+	mov	ax,word	ptr	[si]
+	mov	si,word	ptr	[si+02]
+	mov	ds,ax
+	or	ax,ax
+	jne	WPUBLP2
+	pop	bx
+WPUBNEXT:
+	add	bx,04h
+	cmp	bx,2472h
+	jb	WPUBLP
+	xor	al,al
+	stosb
+	mov	ds, ss:word_1A942
+	xor	dx,dx
+	mov	cx,di
+	mov	bx, ss:word_11D9D
+	call	far	ptr	_OS2WRITEBYTES
+	ret
+WPUBUNDEF:
+	push	es
+	push	di
+	push	ds
+	push	si
+	push	ds
+	push	dx
+	mov	dx, seg	seg003
+	mov	ds, dx
+	assume ds:seg003
+	mov	dx,8899h
+	call	far	ptr	_OS2PRTSTRING
+	pop	dx
+	pop	ds
+	assume ds:nothing
+	inc	ss:word_12284
+	pop	si
+	pop	ds
+	pop	di
+	pop	es
+	push	ds
+	push	dx
+	push	si
+	push	ax
+	mov	bx,word	ptr	[si+06h]
+	mov	dx,word	ptr	[si+08h]
+	mov	ds,bx
+	mov	si,dx
+loc_35C:
+	lodsb
+	or	al,al
+	jne	loc_35C
+	mov	byte	ptr	[si-1],24h
+	call	far	ptr	_OS2PRTSTRING
+	mov	byte	ptr	[si-1],00h
+	pop	ax
+	pop	si
+	pop	dx
+	pop	ds
+	jmp	WPUBNEXT2
+WRITEPUBLICS	endp
+
+WRITEBLOCKS	proc near
+
+WRITEBLOCKS	endp
 
 GREGERR:
 

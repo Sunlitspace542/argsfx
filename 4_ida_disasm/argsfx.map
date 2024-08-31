@@ -29,7 +29,7 @@
  0000:01B4       loc_1B4
  0000:01C5       loc_1C5
  0000:01CA       loc_1CA
- 0000:01DC       loc_1DC
+ 0000:01DC       WEWEPLP
  0000:0200       loc_200
  0000:0202       loc_202
  0000:0204       loc_204
@@ -384,7 +384,7 @@
  0000:1DAE       loc_1DAE
  0000:1DB6       loc_1DB6
  0000:1DBE       loc_1DBE
- 0000:1DCD       loc_1DCD
+ 0000:1DCD       WEWEPLPD
  0000:1DFD       sub_1DFD
  0000:1E12       loc_1E12
  0000:1E37       sub_1E37

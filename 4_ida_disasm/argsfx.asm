@@ -262,11 +262,11 @@ pop	si
 sub	bx, si
 add	bx, 5
 
-loc_1DC:
+WEWEPLP:
 lodsb
 stosb
 dec	bx
-jnz	short loc_1DC
+jnz	short WEWEPLP
 mov	si, dx
 cmp	di, 7E00h
 jb	short loc_204
