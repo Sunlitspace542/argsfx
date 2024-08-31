@@ -4,6 +4,9 @@
 ; Source code reconstructed by Sunlitspace542 and contributors.
 ; Original program copyright (C) 1992-1994 Argonaut Software Ltd.
 
+include	defines.inc
+include	macros.inc
+
 .386
 .model large
 .stack ; fixes no stack segment error, probably not accurate
@@ -20,7 +23,7 @@ assume es:nothing, ss:seg000, ds:nothing, fs:nothing, gs:nothing
 public _ARGSFX
 _ARGSFX proc near
 	cld
-mov	cx, seg	seg003
+	mov	cx, seg	seg003
 	mov	ss,cx
 	assume ss:seg003
 	mov	ss:word_1AA9E, ds
@@ -435,6 +438,29 @@ _OS2PRTSTRING endp
 
 ; Stub function used in the OS/2 version
 _OS2INITTERM	proc far
+
+; The OS/2 version does this:
+	IF	VERSION_OS2	NE	0
+	PUSH	DX
+	BX
+	SS
+	PUSH	73e6h
+	PUSH	SS
+	PUSH	73eah
+	PUSH	2h
+	PUSH	1h
+	CALLF	DOSCALLS::Ordinal_14
+
+	PUSH	DX
+	PUSH	BX
+	PUSH	SS
+	PUSH	73e6h
+	PUSH	SS
+	PUSH	73eah
+	PUSH	2h
+	PUSH	4h
+	CALLF	DOSCALLS::Ordinal_14
+	ENDIF
 	retf
 _OS2INITTERM	endp
 

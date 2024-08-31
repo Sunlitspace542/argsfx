@@ -14,7 +14,7 @@ builds is currently not complete enough to be anywhere near usable,
 so it cannot yet be used as a codebase for general changes.
 ```
 
-## Progress:
+## Disassembly Progress:
 
 | Segment | Type | Purpose                   | Status      |
 |---------|------|---------------------------|-------------|
@@ -31,7 +31,7 @@ so it cannot yet be used as a codebase for general changes.
 - Run ``build.cmd`` to assemble.  
 - Run ``build to log.cmd`` to assemble, writing console output to a log file.  
 
-## Known info
+## Known Info
 - Originally assembled with MASM (unknown version)  
 - Built with version 3.0r1 of the Zortech C/C++ toolchain, according to 'stamps' left in the data of the DOS extender builds.  
 

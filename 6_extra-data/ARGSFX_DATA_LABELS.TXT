@@ -1,3 +1,5 @@
+;TODO see if there's a way to get proper addresses for these labels...
+
 ADCTAB                                                                0
 ADDEDSYMBOL                                                           0
 ANDTAB                                                                0
