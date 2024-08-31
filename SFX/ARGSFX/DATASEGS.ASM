@@ -48612,6 +48612,9 @@ db  1Eh
 db    0
 db  1Fh
 db    0
+
+; This looks to be the days table
+DAYSPTRS:
 db  59h	; Y
 db  8Ch	; �
 db  63h	; c
@@ -48637,6 +48640,9 @@ TUES	DB	"Tuesday", 0
 
 db    0
 db    0
+
+; This looks to be the months table
+MONPTRS:
 db 0ACh	; �
 db  8Ch	; �
 db 0B4h	; �
@@ -48675,28 +48681,8 @@ OCT	DB	"October", 0
 NOV	DB	"November", 0
 DECE	DB	"December", 0
 
-
-DB	"ArgSfx v1.50 (DBR=OFF) Copyright (c) Argonaut Software Ltd. 1992", 0Dh,0Ah
-DB	"Usage: ARGSFX [options] sourcefile", 0Dh,0Ah
-DB	" Options are:", 0Dh,0Ah
-DB	"   -d<value>,"<str>" - Defines a string.", 0Dh,0Ah
-DB	"   -e<label>(=value) - Equate label with the optional value.", 0Dh,0Ah
-DB	"   -f<name>          - Write file listing to file name.", 0Dh,0Ah
-DB	"   -h                - This text.", 0Dh,0Ah
-DB	"   -i<name>          - Specifies an incdir name.", 0Dh,0Ah
-DB	"   -l                - Turns on listing.", 0Dh,0Ah
-DB	"   -m<value>         - Specifies maximum errors before stopping.", 0Dh,0Ah
-DB	"   -o<name>          - Write object code to file <name>.", 0Dh,0Ah
-DB	"   -p<name>          - Write stdout to file <name>.", 0Dh,0Ah
-DB	"   -r                - Display rom listing on screen.", 0Dh,0Ah
-DB	"   -s<label>(=value) - Set the label with the optional value.", 0Dh,0Ah
-DB	"   -v<filename.SOB>  - Write linkable file <filename.SOB>.", 0Dh,0Ah
-DB	"   -x<name>          - Writes symbol listing to file.", 0Dh,0Ah
-DB	"   -z                - Generate a .MAP debug file.", 0Dh,0Ah
-DB	0Dh,0Ah
-DB	"$"
-DB	0Dh,0Ah
-DB	0Dh,0Ah
+; Help Text
+include	helptext.asm
 
 ; Internal Source File
 include	intsrc.asm
@@ -48767,48 +48753,10 @@ db    0
 db    0
 db    0
 db    0
-db  0Dh
-db  0Ah
-db  49h	; I
-db  6Eh	; n
-db  63h	; c
-db  62h	; b
-db  69h	; i
-db  6Eh	; n
-db  20h
-db  66h	; f
-db  69h	; i
-db  6Ch	; l
-db  65h	; e
-db  20h
-db  20h
-db  20h
-db  20h
-db  20h
-db  3Ah	; :
-db  20h
-db  24h	; $
-db  0Dh
-db  0Ah
-db  4Fh	; O
-db  76h	; v
-db  65h	; e
-db  72h	; r
-db  20h
-db  6Ch	; l
-db  61h	; a
-db  70h	; p
-db  70h	; p
-db  65h	; e
-db  64h	; d
-db  20h
-db  62h	; b
-db  79h	; y
-db  20h
-db  20h
-db  3Ah	; :
-db  20h
-db  24h	; $
+
+DB	0Dh, 0Ah, "Incbin file     : $"
+DB	0Dh, 0Ah, "Over lapped by  : $"
+
 db    0
 db    0
 db    0
@@ -53913,64 +53861,5 @@ db    0
 db    0
 db    0
 db    0
-db  0Dh
-db  0Ah
-db  2Ah	; *
-db  2Ah	; *
-db  2Ah	; *
-db  2Ah	; *
-db  20h
-db  45h	; E
-db  72h	; r
-db  72h	; r
-db  6Fh	; o
-db  72h	; r
-db  20h
-db  63h	; c
-db  72h	; r
-db  65h	; e
-db  61h	; a
-db  74h	; t
-db  69h	; i
-db  6Eh	; n
-db  67h	; g
-db  20h
-db  73h	; s
-db  74h	; t
-db  61h	; a
-db  63h	; c
-db  6Bh	; k
-db  20h
-db  66h	; f
-db  6Fh	; o
-db  72h	; r
-db  20h
-db  74h	; t
-db  68h	; h
-db  72h	; r
-db  65h	; e
-db  61h	; a
-db  64h	; d
-db  2Fh	; /
-db  61h	; a
-db  6Ch	; l
-db  6Ch	; l
-db  6Fh	; o
-db  63h	; c
-db  61h	; a
-db  74h	; t
-db  69h	; i
-db  6Eh	; n
-db  67h	; g
-db  20h
-db  6Dh	; m
-db  65h	; e
-db  6Dh	; m
-db  6Fh	; o
-db  72h	; r
-db  79h	; y
-db  2Eh	; .
-db  0Dh
-db  0Ah
-db  24h	; $
+DB 	0Dh,0Ah, "**** Error creating stack for thread/allocating memory.", 0Dh, 0Ah, "$"
 seg003 ends
