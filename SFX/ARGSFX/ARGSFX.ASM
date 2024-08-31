@@ -197,7 +197,7 @@ LINK endp
 	call	far	ptr	_OS2WRITEBYTES
 	ret
 
-WRITEEXTERNS:
+WRITEEXTERNS	proc near
 	mov	ax, ss:word_1226A
 	or	ax, ax
 	jne	WEDO
@@ -303,8 +303,52 @@ WRITESTR:
 	mov	si, es:[bp+8]
 	mov	cl, es:[bp+5]
 	mov	es, ss:word_1A942
+WEWSLP:
+	lodsb
+	stosb
+	dec	cl
+	jne	WEWSLP
+	pop	es
+	pop	cx
+	pop	si
+	pop	ds
+	mov	word	ptr	[si],cx
+	inc	cx
+	jmp	WENOTLAB
+E_EXTNOTDEF:
+	push	ds
+	push	dx
+	mov	dx, seg	seg003
+	mov	ds, dx
+	assume ds:seg003
+	mov	dx, 88C4h
+	call	far	ptr	_OS2PRTSTRING
+	pop	dx
+	pop	ds
+	assume ds:nothing
+	push	ds
+	push	dx
+	push	si
+	push	ax
+	mov	bx, es:[bp+6]
+	mov	dx, es:[bp+8]
+	mov	ds, bx
+	mov	si, dx
 
-
+loc_282:
+	lodsb
+	or	al,al
+	jnz	short loc_282
+	mov	byte ptr [si-1], 24h ; '$'
+	call	far	ptr	_OS2PRTSTRING
+	mov	byte ptr [si-1], 0
+	pop	ax
+	pop	si
+	pop	dx
+	pop	ds
+	inc	ss:word_12284
+	jmp	WENOTLAB
+WRITEEXTERNS	endp
 
 
 GREGERR:

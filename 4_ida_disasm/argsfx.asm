@@ -239,7 +239,7 @@ jmp	WRITESTR
 loc_1AA:
 test	byte ptr es:[bp+4], 10h
 jz	short loc_1B4
-jmp	loc_261
+jmp	E_EXTNOTDEF
 
 loc_1B4:
 mov	dx, es:[bp+0Ch]
@@ -324,11 +324,11 @@ mov	si, es:[bp+8]
 mov	cl, es:[bp+5]
 mov	es, ss:word_1A942
 
-loc_251:
+WEWSLP:
 lodsb
 stosb
 dec	cl
-jnz	short loc_251
+jnz	short WEWSLP
 pop	es
 pop	cx
 pop	si
@@ -337,7 +337,7 @@ mov	[si], cx
 inc	cx
 jmp	loc_1C5
 
-loc_261:
+E_EXTNOTDEF:
 push	ds
 push	dx
 mov	dx, seg	seg003
@@ -5000,13 +5000,13 @@ push	es
 mov	es, word ptr [bp+10h]
 call	_OS2FREESEG
 pop	es
-jmp	short loc_261E
+jmp	short E_EXTNOTDEFE
 mov	ax, ss:word_F96
 mov	[bp-1Bh], ax
-jmp	short loc_261E
+jmp	short E_EXTNOTDEFE
 dec	word ptr ss:loc_AA6
 
-loc_261E:
+E_EXTNOTDEFE:
 mov	ax, ss:word_13F0
 add	ss:word_13D2, ax
 adc	ss:word_13D0, 0
