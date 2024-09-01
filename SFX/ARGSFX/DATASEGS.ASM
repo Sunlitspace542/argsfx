@@ -47992,18 +47992,37 @@ db  46h	; F
 db    0
 db    0
 
-; pointer table for cpu strings?
+; Pointer table for CPU strings
+; label is purely speculative
+CPUPTRS:
+dw offset _86TXT
+dw offset _186TXT
+dw offset _286TXT
+dw offset _386TXT
+dw offset _486TXT
+;original bytes
+IF	0
 db 0DBh	; �
 db  7Bh	; {
+
 db 0E3h	; �
 db  7Bh	; {
+
 db 0E9h	; �
 db  7Bh	; {
+
 db 0EFh	; �
 db  7Bh	; {
+
 db 0F5h	; �
 db  7Bh	; {
+ENDIF
 
+; Leftovers from CPUTYPE.asm, which is included with the Zortech SDK.
+; SASM.DOC mentions code from CPUTYPE being used in SASM at some point,
+; though these strings are nowhere to be found anywhere in it.
+; However, the numbers that CPUTYPE can return line up with the order of these strings.
+; It appears that one point SASM detected the CPU it was running on and presumably did something with that information?
 _86TXT	DB	"8088/86", 0
 _186TXT	DB	"80186", 0
 _286TXT	DB	"80286", 0
@@ -48552,6 +48571,10 @@ db    0
 db    0
 db    0
 db    0
+IF VERSION_SASM NE 0
+DB	"Sending (4 Mbit Ramboy 4, $printer port)   $fabcard)   $"
+DB	"     Writing object code.$"
+ENDIF
 DB	"Run statement"
 DB	0,9
 DB	"onerror", 0dh,0ah
@@ -48609,21 +48632,39 @@ db    0
 db  1Fh
 db    0
 
-; This looks to be the days table
+; This looks to be the days ptr table
+DAYSPTRS:
+dw offset WED
+dw offset THURS
+dw offset FRI
+dw offset SAT
+dw offset SUN
+dw offset MON
+dw offset TUES
+
+; original bytes
+IF	0
 db  59h	; Y
 db  8Ch	; �
+
 db  63h	; c
 db  8Ch	; �
+
 db  6Ch	; l
 db  8Ch	; �
+
 db  73h	; s
 db  8Ch	; �
+
 db  7Ch	; |
 db  8Ch	; �
+
 db  83h	; �
 db  8Ch	; �
+
 db  8Ah	; �
 db  8Ch	; �
+ENDIF
 
 WED	DB	"Wednesday", 0
 THURS	DB	"Thursday", 0
@@ -48636,31 +48677,59 @@ TUES	DB	"Tuesday", 0
 db    0
 db    0
 
-; This looks to be the months table
+; This looks to be the months ptr table
+MONPTRS:
+dw offset JAN
+dw offset FEB
+dw offset MAR
+dw offset APR
+dw offset MAY
+dw offset JUN
+dw offset JUL
+dw offset AUG
+dw offset SEP
+dw offset OCT
+dw offset NOV
+dw offset DECE
+
+; original bytes
+IF	0
 db 0ACh	; �
 db  8Ch	; �
+
 db 0B4h	; �
 db  8Ch	; �
+
 db 0BDh	; �
 db  8Ch	; �
+
 db 0C3h	; �
 db  8Ch	; �
+
 db 0C9h	; �
 db  8Ch	; �
+
 db 0CDh	; �
 db  8Ch	; �
+
 db 0D2h	; �
 db  8Ch	; �
+
 db 0D7h	; �
 db  8Ch	; �
+
 db 0DEh	; �
 db  8Ch	; �
+
 db 0E8h	; �
 db  8Ch	; �
+
 db 0F0h	; �
 db  8Ch	; �
+
 db 0F9h	; �
 db  8Ch	; �
+ENDIF
 
 JAN	DB	"January", 0
 FEB	DB	"February", 0

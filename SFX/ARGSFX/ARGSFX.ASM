@@ -19,7 +19,6 @@ assume cs:seg000
 assume es:nothing, ss:seg000, ds:nothing, fs:nothing, gs:nothing
 
 
-
 public _ARGSFX
 _ARGSFX proc near
 	cld
@@ -27,7 +26,7 @@ _ARGSFX proc near
 	mov	ss,cx
 	assume ss:seg003
 	mov	ss:word_1AA9E, ds
-	mov	ss:word_1AAA0, 80h ; '�'
+	mov	ss:word_1AAA0, 80h
 	mov	dx, seg	seg000
 	mov	bx,0052h
 	call	far	ptr	_OS2INITTERM ; ArgSfx OS/2 leftover

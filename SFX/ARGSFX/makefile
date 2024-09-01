@@ -29,6 +29,8 @@ clean:
 # Link EXE
 argsfx: $(ALLFILES)
 	@$(LINK) $(LOPTS) argsfx.obj
+# This has to be done because apparently if an OBJ already exists,
+# MASM won't overwrite it?
 	@del *.obj
 
 ## Files to assemble

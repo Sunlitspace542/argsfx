@@ -11,14 +11,14 @@ UNIMPLEMENTED_ROUTINES	equ	0
 
 ; Platform Defines
 
-; Target MS-DOS
+; Target MS-DOS (Real mode)
 TARGET_DOS		equ	1
 
-; Target DOS with DOS/16M (ZPM) extender
+; Target MS-DOS, DOS/16M (ZPM) extended version (Protected Mode)
 TARGET_DOS16M	equ	0
 
-; TODO figure out if we can actually target OS/2 with MASM
-; Target IBM OS/2
+; TODO Find MASM 5.13, we need it to be able to target OS/2
+; Target IBM OS/2 (Protected Mode)
 TARGET_OS2		equ	0
 
 ; Assembler Version defines

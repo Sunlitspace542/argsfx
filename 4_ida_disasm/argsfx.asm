@@ -16099,7 +16099,7 @@ mov	bp, 2
 retn
 align 4
 jz	short loc_7675
-jmp	loc_8421
+jmp	A_LA_GILES
 
 loc_7675:
 call	sub_95F
@@ -17729,7 +17729,7 @@ mov	dx, 7F54h
 call	ERROR_ROUT
 pop	dx
 
-loc_8421:
+A_LA_GILES:
 xor	bp, bp
 push	dx
 mov	dx, 839Bh
