@@ -651,6 +651,96 @@ include mariop.asm
 
 OPEN_MAP_FILE:
 
+STRRCHR proc near
+xor	cx, cx
+mov	ah, al
+
+STRR0:
+lodsb
+or	al, al
+jz	short STRR1
+cmp	ah, al
+jnz	short STRR0
+mov	cx, si
+dec	cx
+jmp	short STRR0
+
+STRR1:
+mov	si, cx
+retn
+STRRCHR endp
+
+STRCAT proc near
+push	ds
+push	si
+
+STRC0:
+lodsb
+or	al, al
+jnz	short STRC0
+dec	si
+
+STRC1:
+mov	al, es:[di]
+mov	[si], al
+inc	si
+inc	di
+or	al, al
+jnz	short STRC1
+pop	si
+pop	ds
+retn
+STRCAT endp
+
+STRCPY proc near
+push	es
+push	di
+
+STRY0:
+lodsb
+stosb
+or	al, al
+jnz	short STRY0
+pop	di
+pop	es
+retn
+STRCPY endp
+
+COUNT_SYMBOLS proc near
+	xor	cx,cx
+	mov	si,1472h
+CSY2:
+	cmp	word	ptr	ss:[si],0
+	jne	CSY3
+	add	si,04h
+	cmp	si,2472h
+	jl	CSY2
+	mov	ax,cx
+	ret
+CSY3:
+	push	si
+	mov	es,word	ptr	ss:[si]
+	mov	si,word	ptr	ss:[si+02h]
+CSY4:
+	test	byte	ptr	es:[si+04h],5Eh
+	jne	CSY5
+	inc	cx
+CSY5:
+	mov	ax,word	ptr	es:[si]
+	or	ax,ax
+	je	CSY6
+	mov	si,word	ptr	es:[si+02h]
+	mov	es,ax
+	jmp	CSY4
+CSY6:
+	pop	si
+	add	si,04h
+	cmp	si,2472h
+	jl	CSY2
+	mov	ax,cx
+	ret
+COUNT_SYMBOLS endp
+
 seg000 ends
 
 ; Segment type:	Pure code

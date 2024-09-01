@@ -214,14 +214,14 @@ mov	ds, ss:word_12264
 mov	si, 2
 xor	di, di
 
-loc_185:
+WELP:
 xor	cx, cx
 push	si
 add	si, 2
 lodsw
 jmp	short WELP3
 
-loc_18E:
+WELP2:
 lodsw
 or	ax, ax
 jz	short loc_1CA
@@ -250,7 +250,7 @@ and	byte ptr [si-2], 7Fh
 
 loc_1C5:
 add	si, 4
-jmp	short loc_18E
+jmp	short WELP2
 
 loc_1CA:
 mov	es, ss:word_1A942
@@ -301,7 +301,7 @@ mov	si, 2
 loc_216:
 dec	ss:word_1226A
 jz	short loc_220
-jmp	loc_185
+jmp	WELP
 
 loc_220:
 mov	es, ss:word_1A942

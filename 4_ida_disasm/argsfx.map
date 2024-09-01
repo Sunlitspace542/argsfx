@@ -22,8 +22,8 @@
  0000:00EE       LDISKOK
  0000:0172       WRITEEXTERNS
  0000:017B       WEDO
- 0000:0185       loc_185
- 0000:018E       loc_18E
+ 0000:0185       WELP
+ 0000:018E       WELP2
  0000:0193       WELP3
  0000:01AA       loc_1AA
  0000:01B4       loc_1B4
