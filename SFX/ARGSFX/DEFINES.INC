@@ -4,7 +4,11 @@
 ; Source code reconstructed by Sunlitspace542 and contributors.
 ; Original program copyright (C) 1992-1994 Argonaut Software Ltd.
 
-; Useful labels
+; Useful Labels
+
+; Carriage Return / Line Feed
+__CR	equ	0Dh
+__LF	equ	0Ah
 
 ; Marks calls to unimplemented code
 UNIMPLEMENTED_ROUTINES	equ	0

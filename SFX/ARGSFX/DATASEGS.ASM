@@ -48139,22 +48139,22 @@ DB	"No MVN/MVP command!$", 0
 
 ; This chunk is formatted strangely
 
-DB	"Can't find symbol$", 0dh, 0ah
-DB	"Public not defined at end of assembly : $", 0dh, 0ah
+DB	"Can't find symbol$",__CR,__LF
+DB	"Public not defined at end of assembly : $",__CR,__LF
 DB	"Symbol not defined : $"
-DB	"Error : Cannot allocate incbin block", 0dh, 0ah, "$"
-DB	"Ramboy not present....", 0dh, 0ah, "$"
-DB	"Can't open output file....$", 0dh, 0ah, "$"
-DB	"Can't open symbols file....$", 0dh, 0ah, "$"
-DB	"Rompos:$ Blk length:$Total gap length = $ Gap length:$     $	$ +$ x$($)", 0dh, 0ah
+DB	"Error : Cannot allocate incbin block",__CR,__LF,"$"
+DB	"Ramboy not present....",__CR,__LF, "$"
+DB	"Can't open output file....$",__CR,__LF,"$"
+DB	"Can't open symbols file....$",__CR,__LF,"$"
+DB	"Rompos:$ Blk length:$Total gap length = $ Gap length:$     $	$ +$ x$($)",__CR,__LF
 DB	"$  -  $ at line $ has a value of $ "
-DB	"File open error in command line.", 0dh, 0ah, "$"
-DB	" EMM failure.", 0dh, 0ah, "$"
-DB	"""", 0dh, 0ah; (" 0D 0A)
+DB	"File open error in command line.",__CR,__LF,"$"
+DB	" EMM failure.",__CR,__LF,"$"
+DB	22h,__CR,__LF
 DB	"$Writing SOB file : $ $"
-db	0,0, 0Dh,0Ah,1Bh
-DB	"[0mCtrl-C pressed!  -  Exiting... ", 0Dh,0Ah,"$"
-db	0Dh,0Ah,"  -  Drastic Error : $Error$Warning$Expression:$"
+db	0,0,__CR,__LF
+DB	1Bh,"[0mCtrl-C pressed!  -  Exiting... ",__CR,__LF,"$"
+db	__CR,__LF,"  -  Drastic Error : $Error$Warning$Expression:$"
 
 db    0
 db    0
@@ -48562,7 +48562,7 @@ DB	"     Writing object code.$"
 ENDIF
 DB	"Run statement"
 DB	0,9
-DB	"onerror", 0dh,0ah
+DB	"onerror", __CR,__LF
 db  1Ah
 db    0
 db    0
@@ -48802,8 +48802,8 @@ db    0
 db    0
 db    0
 
-DB	0Dh, 0Ah, "Incbin file     : $"
-DB	0Dh, 0Ah, "Over lapped by  : $"
+DB	__CR,__LF, "Incbin file     : $"
+DB	__CR,__LF, "Over lapped by  : $"
 
 db    0
 db    0
@@ -53265,10 +53265,10 @@ db    0
 db    0
 TEMPMAPFNAME	DB	"SFXTEMP.MAP", 0
 MAPEXTNAME	DB	".MAP", 0
-MAPFILEMES	DB	0Dh,0Ah,"Writing MAP file...$"
-MAPDONEMES DB " Done.",0Dh,0Ah
-DB	"$string not defined",0,0Dh,0Ah
-DB	"Debug point encountered",0Dh,0Ah,"$",0
+MAPFILEMES	DB	__CR,__LF,"Writing MAP file...$"
+MAPDONEMES DB " Done.",__CR,__LF
+DB	"$string not defined",0,__CR,__LF
+DB	"Debug point encountered",__CR,__LF,"$",0
 word_1B35D dw 0
 word_1B35F dw 0
 db    0
@@ -53820,5 +53820,5 @@ db    0
 db    0
 db    0
 
-DB 	0Dh,0Ah, "**** Error creating stack for thread/allocating memory.", 0Dh, 0Ah, "$"
+DB 	__CR,__LF, "**** Error creating stack for thread/allocating memory.",__CR,__LF, "$"
 seg003 ends
