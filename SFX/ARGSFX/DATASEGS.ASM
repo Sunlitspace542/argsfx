@@ -42637,22 +42637,7 @@ db    0
 db    0
 db    0
 db    0
-db  49h	; I
-db  6Eh	; n
-db  74h	; t
-db  65h	; e
-db  72h	; r
-db  6Eh	; n
-db  61h	; a
-db  6Ch	; l
-db  20h
-db  53h	; S
-db  6Fh	; o
-db  75h	; u
-db  72h	; r
-db  63h	; c
-db  65h	; e
-db    0
+DB	"Internal Source",0
 db  36h	; 6
 db  29h	; )
 db  36h	; 6
@@ -53278,102 +53263,12 @@ db    0
 db    0
 db    0
 db    0
-db  53h	; S
-db  46h	; F
-db  58h	; X
-db  54h	; T
-db  45h	; E
-db  4Dh	; M
-db  50h	; P
-db  2Eh	; .
-db  4Dh	; M
-db  41h	; A
-db  50h	; P
-db    0
-db  2Eh	; .
-db  4Dh	; M
-db  41h	; A
-db  50h	; P
-db    0
-db  0Dh
-db  0Ah
-db  57h	; W
-db  72h	; r
-db  69h	; i
-db  74h	; t
-db  69h	; i
-db  6Eh	; n
-db  67h	; g
-db  20h
-db  4Dh	; M
-db  41h	; A
-db  50h	; P
-db  20h
-db  66h	; f
-db  69h	; i
-db  6Ch	; l
-db  65h	; e
-db  2Eh	; .
-db  2Eh	; .
-db  2Eh	; .
-db  24h	; $
-db  20h
-db  44h	; D
-db  6Fh	; o
-db  6Eh	; n
-db  65h	; e
-db  2Eh	; .
-db  0Dh
-db  0Ah
-db  24h	; $
-db  73h	; s
-db  74h	; t
-db  72h	; r
-db  69h	; i
-db  6Eh	; n
-db  67h	; g
-db  20h
-db  6Eh	; n
-db  6Fh	; o
-db  74h	; t
-db  20h
-db  64h	; d
-db  65h	; e
-db  66h	; f
-db  69h	; i
-db  6Eh	; n
-db  65h	; e
-db  64h	; d
-db    0
-db  0Dh
-db  0Ah
-db  44h	; D
-db  65h	; e
-db  62h	; b
-db  75h	; u
-db  67h	; g
-db  20h
-db  70h	; p
-db  6Fh	; o
-db  69h	; i
-db  6Eh	; n
-db  74h	; t
-db  20h
-db  65h	; e
-db  6Eh	; n
-db  63h	; c
-db  6Fh	; o
-db  75h	; u
-db  6Eh	; n
-db  74h	; t
-db  65h	; e
-db  72h	; r
-db  65h	; e
-db  64h	; d
-db  0Dh
-db  0Ah
-db  24h	; $
-db    0
+TEMPMAPFNAME	DB	"SFXTEMP.MAP", 0
+MAPEXTNAME	DB	".MAP", 0
+MAPFILEMES	DB	0Dh,0Ah,"Writing MAP file...$"
+MAPDONEMES DB " Done.",0Dh,0Ah
+DB	"$string not defined",0,0Dh,0Ah
+DB	"Debug point encountered",0Dh,0Ah,"$",0
 word_1B35D dw 0
 word_1B35F dw 0
 db    0
