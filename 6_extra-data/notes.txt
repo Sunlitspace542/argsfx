@@ -1,0 +1,44 @@
+ArgBug MAP file format
+
+"SIZE" magic (4 bytes): 53 49 5A 45 (ASCII "SIZE")
+Then: zero or more 4-byte entries
+  [0]: 2 bytes: Value High (from [0F94] (PCADDR?))
+  [2]: 1 byte: Value Low  (from [0F92] (PCADDR-2?))
+  [3]: 1 byte: Type ID (from AL)
+Type IDs:
+MAP_SHORTA: 01 - Accumulator 8-bit
+MAP_SHORTI: 02 - Index registers X/Y 8-bit
+MAP_LONGA: 03 - Accumulator 16-bit
+MAP_LONGI: 04 - Index registers X/Y 16-bit
+
+"SM32" magic number (4 bytes: 53 4D 33 32)
+ 2 bytes, number of symbols (little-endian)
+Then: repeating symbols:
+  - 4 bytes: address (little-endian)
+  - 1 byte: length of label
+  - label (ASCII)
+
+
+NB02 magic number - Microsoft LINK v5.10 (or equivalent linker) signature
+this first data chunk looks to be source filesystem information?
+? bytes: lfoDir
+? bytes: sstmodule(n)
+? bytes: ????
+in my file the above chunk of data is 0x27 bytes
+begin symbol entries
+SYMBOL ENTRY FORMAT
+2 bytes: address into segment (little-endian)
+2 bytes: segment address (little-endian)
+2 bytes: length?
+1 byte: symbol name length in bytes
+symbol name (ASCII)
+in my file the symbol entry chunk is 0x605F bytes long
+
+after this is a full source file path ("D:\SFX\ARGSFX\ARGSFX.ASM"),
+a whole bunch of bytes,
+MARIO assembly parser source file path ("D:\SFX\ARGSFX\MARIOP.ASM"),
+another big set of bytes,
+the main source file path again ("D:\SFX\ARGSFX\ARGSFX.ASM"),
+some more bytes,
+another NB02 signature, (signature, if OMF executable?)
+and 4 bytes (offset of base, if OMF executable?)
