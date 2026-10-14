@@ -21225,7 +21225,7 @@ retn
 ; END OF FUNCTION CHUNK	FOR sub_B7E9
 
 
-
+; START OF MARIOP.ASM
 public PARSEMARIO
 PARSEMARIO proc	near
 mov	dx, si
@@ -30415,7 +30415,7 @@ mov	word ptr ss:byte_248C+8, ds
 mov	word ptr ss:byte_248C+0Ah, si
 retn
 CODEDREGSREG_ROU endp ;	sp =  2
-
+; END OF MARIOP.ASM
 
 
 
@@ -80103,7 +80103,20 @@ db    0
 db  1Fh
 db    0
 public DAYSPTRS
-DAYSPTRS db 'Y�c�l�s�|�����'
+DAYSPTRS	db  59h	; Y
+		db  8Ch	; �
+		db  63h	; c
+		db  8Ch	; �
+		db  6Ch	; l
+		db  8Ch	; �
+		db  73h	; s
+		db  8Ch	; �
+		db  7Ch	; |
+		db  8Ch	; �
+		db  83h	; �
+		db  8Ch	; �
+		db  8Ah	; �
+		db  8Ch	; �
 public WED
 WED 'Wednesday',0
 public THURS
@@ -80169,7 +80182,8 @@ public NOV
 NOV db 'November',0
 public DECE
 DECE db	'December',0
-aArgsfxV1_50Dbr	db 'ArgSfx v1.50 (DBR=OFF) Copyright (c'
+public HELPTXT
+HELPTXT	db 'ArgSfx v1.50 (DBR=OFF) Copyright (c'
 db ') Argonaut Software Ltd. 1992',0Dh,0Ah
 db 'Usage: ARGSFX [options] sourcefile',0Dh
 db 0Ah
@@ -80203,7 +80217,9 @@ db 'l listing to file.',0Dh,0Ah
 db '   -z                - Generate a .'
 db 'MAP debug file.',0Dh,0Ah
 db 0Dh,0Ah
-db '$ deferror "%d:%f (%l), %e%u.%s%n"',0Dh
+db '$'
+; begin internal source
+db 'deferror "%d:%f (%l), %e%u.%s%n"',0Dh
 db 0Ah
 db ' defend "%n%[7]ie Error(s).%t%[7]iw'
 db ' Warning(s).%n%[7]is Symbols.%t%[7]'
