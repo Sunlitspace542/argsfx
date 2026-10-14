@@ -25,6 +25,13 @@ so it cannot yet be used as a codebase for general changes.
 
 ## Building
 
+## Importing symbols into IDA
+- From the tools directory, run ``python extract_zortech_symbols.py original\ARGSFX.EXE reverse\publics.csv`` to extract the typed publics and local labels from the NB02 overlay.
+- Run ``python generate_ida_idc.py`` to generate ``reverse\import_publics.idc`` from the CSV.
+- Load the original DOS executable in IDA with image base ``0``, then run the generated script using IDA's IDC file command.
+- The script imports each symbol at ``segment * 16 + offset``. Multiple symbols at the same address are represented by one primary name; the remaining aliases are listed in comments in the IDC file.
+- The extractor records the compact local-label format separately and maps its segment index ``0x0b`` to load segment ``0``; this mapping was checked against the ZDB listing.
+
 ## Windows
 - Download or clone the repo.  
 - Extract it somewhere if you downloaded as ZIP, or go to the repo directory if you cloned it.  
