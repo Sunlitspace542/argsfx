@@ -20,8 +20,8 @@ so it cannot yet be used as a codebase for general changes.
 |---------|------|---------------------------|-------------|
 | 0       | Code | Main assembler logic      | In Progress |
 | 1       | Code | I/O routines (``_OS2*``)  | Implemented |
-| 2       | Data | Strings                   | X           |
-| 3       | Data | Strings                   | X           |
+| 2       | Data | Data                      | X           |
+| 3       | Data | Data, Stack               | X           |
 
 ## Building
 
