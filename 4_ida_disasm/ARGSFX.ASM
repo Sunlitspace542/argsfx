@@ -31087,9 +31087,29 @@ _OS2PRTSTRING endp
 
 
 
-
+; Stub function used in the OS/2 version
 public _OS2INITTERM
 _OS2INITTERM proc far
+; The OS/2 version does this:
+	; PUSH	DX
+	; BX
+	; SS
+	; PUSH	73e6h
+	; PUSH	SS
+	; PUSH	73eah
+	; PUSH	2h
+	; PUSH	1h
+	; CALLF	DOSCALLS::Ordinal_14
+
+	; PUSH	DX
+	; PUSH	BX
+	; PUSH	SS
+	; PUSH	73e6h
+	; PUSH	SS
+	; PUSH	73eah
+	; PUSH	2h
+	; PUSH	4h
+	; CALLF	DOSCALLS::Ordinal_14
 retf
 _OS2INITTERM endp
 
