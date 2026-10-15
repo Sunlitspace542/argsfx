@@ -9,6 +9,7 @@
 ; Carriage Return / Line Feed
 __CR	equ	0Dh
 __LF	equ	0Ah
+_CRLF	equ	00A0Dh
 
 ; Marks calls to unimplemented code
 UNIMPLEMENTED_ROUTINES	equ	0
