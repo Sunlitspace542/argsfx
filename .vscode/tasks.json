@@ -1,0 +1,42 @@
+{
+	// ArgSfx VSCode Build Tasks
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Assemble EXE",
+			"type": "shell",
+			"command": "make",
+			"windows": {
+				"command": "build.cmd"
+			},
+			"group": {
+				"kind":"build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Assemble EXE and log output",
+			"type": "shell",
+			"command": "make log",
+			"windows": {
+				"command": "build to log.cmd"
+			},
+			"group": {
+				"kind":"build",
+				"isDefault": false
+			}
+		},
+		{
+			"label": "Clean Everything",
+			"type": "shell",
+			"command": "make clean",
+			"windows": {
+				"command": "clean.cmd"
+			},
+			"group": {
+				"kind":"build",
+				"isDefault": false
+			}
+		}
+	]
+}

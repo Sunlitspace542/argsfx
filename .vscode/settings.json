@@ -1,3 +1,9 @@
 {
-	"python-envs.defaultEnvManager": "ms-python.python:system"
+	"python-envs.defaultEnvManager": "ms-python.python:system",
+	"terminal.integrated.automationProfile.windows": {
+		"path": "cmd.exe"
+	},
+	"editor.insertSpaces": false,
+	"editor.tabSize": 4,
+	"files.eol": "\r\n"
 }

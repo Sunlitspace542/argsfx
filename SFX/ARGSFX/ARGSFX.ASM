@@ -9,7 +9,6 @@ include	macros.inc
 
 .386
 .model large
-.stack ; fixes no stack segment error, probably not accurate
 
 
 ; Segment type:	Pure code

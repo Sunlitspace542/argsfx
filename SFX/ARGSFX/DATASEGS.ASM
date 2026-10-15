@@ -16396,6 +16396,7 @@ db    0
 db    0
 seg002 ends
 
+.stack ; according to the init routine, below is the stack segment
 
 ; Segment type:	Regular
 seg003 segment byte public 'DATA' use16

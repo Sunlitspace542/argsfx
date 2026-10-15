@@ -14,7 +14,7 @@ builds is currently not complete enough to be anywhere near usable,
 so it cannot yet be used as a codebase for general changes.
 ```
 
-## Disassembly Progress:
+# Disassembly Progress:
 
 | Segment | Type | Purpose                   | Status      |
 |---------|------|---------------------------|-------------|
@@ -23,7 +23,18 @@ so it cannot yet be used as a codebase for general changes.
 | 2       | Data | Data                      | X           |
 | 3       | Data | Data, Stack               | X           |
 
-## Building
+## Plan:
+- [ ] 1. Disassemble ArgSfx v1.50
+- [ ] 2. Using the ArgSfx v1.50 disassembly as a basis, disassemble the ArgSfx-Extender v1.50
+- [ ] 3. Find and implement ArgSfx-Extender v1.52 changes
+- [ ] 4. Use ArgSfx-OS/2 1.35 to reconstruct OS/2 target?
+
+## Plans after completion
+- [ ] Try to reconstruct SASMX source using the reconstructed ArgSfx source as a basis?
+- [ ] Create buildable disassembly of the linker? (I don't think I'm going to be able to decompile it but there is some HASM in there)
+- [ ] Investigate porting - 32-bit conversion, static recomp, reimplementation? (the OS/2 version may be the key here)
+
+# Building
 
 ## Importing symbols into IDA
 - From the tools directory, run ``python extract_zortech_symbols.py original\ARGSFX.EXE reverse\publics.csv`` to extract the typed publics and local labels from the NB02 overlay.
@@ -38,18 +49,19 @@ so it cannot yet be used as a codebase for general changes.
 - Run ``build.cmd`` to assemble.  
 - Run ``build to log.cmd`` to assemble, writing console output to a log file.  
 
-## Known Info
+# Known Info
 - Originally assembled with MASM 5.13 (According to the header of ArgSfx OS/2 1.35)
 - Built with version 3.0r1 of the Zortech C/C++ toolchain, according to 'stamps' left in the data of the DOS extender builds.  
 
 All known versions of the assembler:  
-- SASM (DOS extender) 2.02 (``SASMX.EXE``) (ARGSFX's codebase descended from this assembler)  
-- ARGSFX (DOS extender) versions 1.33, 1.40, 1.44, 1.48-1.50, 1.52 (``ARGSFXX.EXE``)  
-- ARGSFX OS/2 1.35 (``ARGOS2.EXE``)  
-- ARGSFX (no DOS extender) versions 1.33, 1.40, 1.44, 1.49, 1.50 (``ARGSFX.EXE``)  
+- SASMX 2.02 (``SASMX.EXE``) (ArgSfx's codebase descended from this assembler)  
+- ArgSfx versions 1.33, 1.40, 1.44, 1.49, 1.50 (``ARGSFX.EXE``)  
+- ArgSfx-Extender versions 1.33, 1.40, 1.44, 1.48-1.50, 1.52 (``ARGSFXX.EXE``)  
+- ArgSfx-OS/2 1.35 (``ARGOS2.EXE``)  
+
 All known versions of the companion linker:
-- SL 1.01 (``SL.EXE``) (ARGLINK's codebase descended from here)  
-- ARGLINK SFX versions 1.06, 1.08, 1.11 (``ARGLINK.EXE``)
+- SL (SLink?) 1.01 (``SL.EXE``) (ArgLink's codebase descended from here)  
+- ArgLink SFX versions 1.06, 1.08, 1.11 (``ARGLINK.EXE``)
 
 ## Original source structure from leftover debug data:
 ```
