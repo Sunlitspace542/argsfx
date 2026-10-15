@@ -3,10 +3,12 @@
 ###################
 
 # Assembler
-ASM=MASM
+#ASM=MASM
+#ASM=ztc -mZ -L # for ZPM extender
+ASM=ztc -mS -L
 
 # Linker
-LINK=ML
+#LINK=ML #commented out because we use ZTC now
 
 LOPTS= /FmARGSFX.MAP
 
@@ -28,7 +30,7 @@ clean:
 
 # Link EXE
 argsfx: $(ALLFILES)
-	@$(LINK) $(LOPTS) argsfx.obj
+#	@$(LINK) $(LOPTS) argsfx.obj #commented out because we use ZTC now
 # This has to be done because apparently if an OBJ already exists,
 # MASM won't overwrite it?
 	@del *.obj

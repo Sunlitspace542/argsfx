@@ -1,0 +1,41 @@
+ZTC Copyright 1985-1991 by Zortech
+All Rights Reserved, written by Walter Bright
+ZTC is a one-step program to compile and link C++, C and ASM files.
+Usage ([] means optional):
+	ZTC file... [flags...] [@file] 
+file...	  .CPP, .C or .ASM source, .OBJ object or .LIB library file name[s]
+@file...  pick up arguments from file or environment
+flags...  zero or more of the following:
+
+-a[1|2|4] alignment of struct members	-A  strict ANSI c
+-b  use ZTC1B and ZTC2B			-b[r|x] use 286/386 DOS extender executables
+-c  skip the link, do compile only
+-cpp  assume source files are C++	-co link for CodeView
+-C  no inline expansion			-cod  Generate .cod (.asm) file
+-D[macro[=text]]  define macro		-e  show results of preprocessor
+-f  in-line 8087 code			-g  put full debug info in .OBJ file
+-gb put browse records into object file -gd dynamic C++ type info only
+-gl line numbers only			-gs symbol info only
+-Ipath	#include file search path	-j[0|1|2]  Asian language characters
+    0: Japanese (default) 1: Taiwanese and Chinese 2: Korean
+-Jm relaxed type checking		-Ju char==unsigned char
+-J  chars are unsigned			-l[listfile]  generate list file
+-L  use LINK instead of BLINK		-Lswitch  pass parameter to linker
+-m[tsmclvrpx][i][w][u] memory model
+    s: small code and data (default)	m: large code, small data
+    c: small code, large data		l: large code and data
+    v: VCM				r: Rational 286 DOS Extender
+    p: Pharlap 386 DOS Extender		x: DOSX 386 DOS Extender
+    z: ZPM 286 DOS Extender
+    t: .COM file    i: integer only	w: SS != DS	u: reload DS
+-NS new code seg for each function	-NTname  set code segment name
+-NV vtables in far data			-O  generate Pharlap OBJ format
+-o[-+flag]  run optimizer with flag	-ooutput  output filename (.ext opt)
+-p  turn off autoprototyping		-P  default to pascal linkage
+-r  strict prototyping			-R  put switch tables in code seg
+-s  stack overflow checking		-S  always gen stack frame
+-u  suppress predefined macros		-v[0|1|2] verbose compile
+-w[n]  suppress warnings		-W[1|2|3]  MS Windows prolog/epilog
+    n: message number			 1: Full 2: Reduced 3: Smart callback
+-x  turn off error maximum		=nnnn  set stack size for ZTxxx
+-[2|3|4]  286/386/486 code generation
