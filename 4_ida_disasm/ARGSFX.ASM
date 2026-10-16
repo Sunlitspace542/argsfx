@@ -6623,7 +6623,7 @@ EXPAND_THE_MACRO endp
 		public DOTERR
 DOTERR:					; CODE XREF: GETEA+2Fj
 		push	dx
-		mov	dx, 800Ah
+		mov	dx, offset BADSIZELWDN
 		call	ERROR_ROUT
 		pop	dx
 
