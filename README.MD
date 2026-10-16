@@ -50,6 +50,10 @@ so it cannot yet be used as a codebase for general changes.
 - The script imports each symbol at ``segment * 16 + offset``. Multiple symbols at the same address are represented by one primary name; the remaining aliases are listed in comments in the IDC file.
 - The extractor records the compact local-label format separately and maps its segment index ``0x0b`` to load segment ``0``; this mapping was checked against the ZDB listing.
 
+## Processing ZDB symbol dumps
+- To join the ``SYMBOLS`` and ``DATA`` names in a ZDB text dump, run ``python parse_zdb_dump.py ..\6_extra-data\ARGSFX_full.DBG``. This writes ``ARGSFX_full_symbols.csv`` alongside the dump and includes linked definition metadata for ``DATA`` entries. Duplicate ``SYMBOLS`` rows are omitted when the same name and address has a richer ``DATA`` row, and the ``#argsfx`` suffix is removed from names.
+- The CSV can be passed to ``generate_ida_idc.py``. Its ``source_section`` column preserves the source table; ZDB's dump does not identify publics versus locals, and ``LINES`` is intentionally omitted from the symbol CSV.
+
 ## Windows
 - Download or clone the repo.  
 - Extract it somewhere if you downloaded as ZIP, or go to the repo directory if you cloned it.  

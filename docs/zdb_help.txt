@@ -1,0 +1,24 @@
+ZDB V3.0r1, Copyright (c) 1991 Zortech Ltd, written by P Murray
+ZDB may be used with the following flags placed after 'ZDB' but before
+the program name, '-' switches a flag off. Most flags are stored in the
+'.cfg' file and hence need only be used once:
+
+    -2[-]               Use the secondary display device
+    -3[-]               Show 386 register set
+    -A[-]               Start up in assembler mode
+    -C[C|-]             Clear session data in zdb.cfg
+    -E[<n>|-]           Use EMS (set pages to use)
+    -F[-]               Save all function expansions
+    -G                  Allow debugging with no debug data
+    -H[-]               Strict Hercules graphics detection
+    -I[-]               Save all 256 interrupt vectors
+    -M[<n>|-]           Set ZDB memory size
+    -N[-]               Snow protection
+    -O[-]               Program output protection
+    -P[-]               Disable mouse usage
+    -R[prt:bd|-]        Set remote debugging port/baud
+    -S<path>            Set a source path (multiples allowed)
+    -T[<n>|-]           Set trace buffer size
+    -V[-|M|C|E|EM|V|VM] Force video adapter
+    -X[<n>|-]           Set page switching (and page)
+    -?[D]               Dump debug data to text file
