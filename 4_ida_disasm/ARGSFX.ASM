@@ -81819,9 +81819,9 @@ X:		db ' x$'
 		public OPBR
 OPBR	db '($'
 		public CLOSEBRAC
-CLOSEBRAC	db ')',0Dh,0Ah
+CLOSEBRAC	db ')',0Dh,0Ah,'$'
 		public STARS
-STARS	db '$  -  $'
+STARS	db '  -  $'
 		public ATLINE
 ATLINE	db ' at line $'
 		public HASAVALUE
