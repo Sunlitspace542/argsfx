@@ -21,6 +21,23 @@ assume es:nothing, ss:seg000, ds:nothing, fs:nothing, gs:nothing
 public _ARGSFX
 _ARGSFX proc near
 
+; The following is a test program, so this does something other than hang when I run it
+cld
+mov	cx, seg	seg003
+mov	ss, cx ; set stack segment to seg003
+assume ss:seg003
+
+push cs
+pop ds ; seg000 -> ds
+
+mov	dx, offset teststring
+call	_OS2PRTSTRING
+
+jmp far ptr	_OS2EXIT
+
+teststring:
+db "Hello, world!",0dh,0ah,"$",0
+
 _ARGSFX endp
 
 seg000 ends
