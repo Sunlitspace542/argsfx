@@ -1,8 +1,11 @@
 comment $
 cmacros - assembly macros for interfacing to hhls
-(C)Copyright Microsoft Corp. 1984-1988
+(C)Copyright Microsoft Corp. 1984-1991
 $
 .xcref
+??CM_Paste macro arg1:req, arg2:req
+exitm <arg1&arg2>
+endm
 .xcref ??_out
 ??_out macro t
 ifndef ?QUIET
@@ -30,12 +33,11 @@ endif
 endm
 .xcref ??error
 ??error macro msg
-e r r o r ----- msg
-.err
+%out e r r o r ----- msg
+.err e r r o r ----- msg
 endm
 .xcref ASMpass
 .xcref memS,memM,memL,memC,memH,memMOD,sizec,sized
-if1
 ASMpass=1
 ifdef ?SMALL
 memS=1
@@ -52,16 +54,17 @@ endif
 ifdef ?HUGE
 memH=1
 endif
-??_out <cMacros Version 5.20 - Copyright (c) Microsoft Corp. 1984-1988>
-outif memS,0,<Small model>
-outif memM,0,<Medium model>
-outif memL,0,<Large model>
-outif memC,0,<Compact model>
-outif memH,0,<Huge model>
+??_out <cMacros Version 5.30 - Copyright (c) Microsoft Corp. 1984-1991>
+outif memS,0,<Small Model>
+outif memM,0,<Medium Model>
+outif memL,0,<Large Model>
+outif memC,0,<Compact Model>
+outif memH,0,<Huge Model>
 memMOD= memS + memM + memL + memC + memH
 if memMOD ne 1
 if memMOD eq 0
 memS = 1
+outif memS,0,<Small Model>
 else
 ??error <more than 1 memory model selected>
 endif
@@ -100,9 +103,6 @@ else
 endif
 ifdef ?PROFILE
 ??_out <! Native profiling enabled>
-endif
-else
-ASMpass=2
 endif
 .xcref ?n,?ax,?ah,?al,?bx,?bh
 .xcref ?bl,?cx,?ch,?cl,?dx,?dh
@@ -143,7 +143,7 @@ endif
 ?ff = 0
 ?dd2 = 0
 ?cCall1 = 0
-?pcc = 0
+?pcc = ?PLM
 ?PLMPrevParm = 0
 .xcref ?casen
 if1
@@ -176,14 +176,14 @@ a&b c&d e&f&g
 endm
 mpush macro r
 irp x,<ax,bx,cx,dx,si,di,es,ds,bp,sp,ss,cs>
-if (r and ?&&x)
+if (r and ??CM_Paste(?,x))
 	push	x
 endif
 endm
 endm
 mpop macro r
 irp x,<cs,ss,sp,bp,ds,es,di,si,dx,cx,bx,ax>
-if (r and ?&&x)
+if (r and ??CM_Paste(?,x))
 	pop	x
 endif
 endm
@@ -194,13 +194,13 @@ save macro r
 endm
 ?ri macro n,r
 irp x,<r>
-ifdef ?&&x
-n=n or ?&&x
+ifdef ??CM_Paste(?,x)
+n=n or ??CM_Paste(?,x)
 endif
 endm
 endm
 .xcref
-.xcref parmB,parmW,parmD,parmQ,parmT,parmCP,parmDP
+.xcref parmB,parmW,parmD,parmQ,parmT,parmCP,parmDP,parmH
 .cref
 parmB macro n
 ?pp <n>,<byte>,2,1
@@ -209,7 +209,7 @@ parmW macro n
 ?pp <n>,<word>,2,2
 endm
 parmD macro n
-ife ?PLM
+ife ?pcc
 irp x,<n>
 ?pp <&&x>,<dword>,0,4
 ?pp <off_&&x>,<word>,2,2
@@ -222,6 +222,9 @@ irp x,<n>
 ?pp <&&x>,<dword>,0,4
 endm
 endif
+endm
+parmH macro n
+?pp <n>,<word>,4,2
 endm
 parmQ macro n
 ?pp <n>,<qword>,8,8
@@ -251,9 +254,9 @@ endif
 if ?cpd
 .xcref
 irp x,<n>
-.xcref ?t&&x
-?t&&x=s
-ife ?PLM
+.xcref ??CM_Paste(?t_,x)
+??CM_Paste(?t_,x)=s
+ife ?pcc
 ?pp1 x,<t>,,,%(?po+?adj)
 ?po=?po+l
 else
@@ -268,17 +271,17 @@ else
 endif
 endm
 ?pp1 macro n,t,o,a,b,cpc,ppc
-ife ?PLM
-n equ (t ptr [bp+b])
+ife ?pcc
+n equ (t ptr [bp][+b])
 else
 .xcref
 .xcref ?PLMParm&cpc
 .cref
-?PLMParm&cpc &macro po
-uconcat <n>,,<equ>,,<(t ptr [bp+>,%(a+po-o),<])>
+?PLMParm&cpc macro po
+uconcat <n>,,<equ>,,<(t ptr [bp][+>,%(a+po-o),<])>
 ?PLMParm&ppc po
 purge ?PLMParm&cpc
-&endm
+endm
 endif
 endm
 ifndef ?NOPARMR
@@ -293,9 +296,9 @@ endm
 ifnb <r2>
 parmR seg_&n,r
 parmR off_&n,r2
-n equ (dword ptr [bp-o-2])
-.xcref ?t&n
-?t&n=4
+n equ (dword ptr [bp][-o-2])
+.xcref ?t_&n
+?t_&n=4
 else
 .xcref ?rp&i
 ?rp&i=0
@@ -306,12 +309,13 @@ if ??? or (?cpd eq 0) or (?rp&i eq 0)
 ??error <invalid parmR encountered: &n,&r>
 exitm
 endif
-n equ (word ptr [bp-o])
-?t&n=2
+n equ (word ptr [bp][-o])
+.xcref ?t_&n
+?t_&n=2
 irp x,<bh,ch,dh,bl,cl,dl,ah,al>
-if ?&&x eq ?&r
-n equ (byte ptr [bp-o])
-?t&n=1
+if ??CM_Paste(?,x) eq ??CM_Paste(?,r)
+n equ (byte ptr [bp][-o])
+??CM_Paste(?t_,n)=1
 exitm
 endif
 endm
@@ -332,8 +336,8 @@ localW macro n
 endm
 localD macro n
 irp x,<n>
-?aloc <seg_&&x>,<word ptr>,2,2,1
-?aloc <off_&&x>,<word ptr>,2,2,1
+?aloc <%??CM_Paste(seg_,x)>,<word ptr>,2,2,1
+?aloc <%??CM_Paste(off_,x)>,<word ptr>,2,2,1
 ?aloc <&&x>,<dword ptr>,0,4,1
 endm
 endm
@@ -373,8 +377,8 @@ if a
 ???=((??? + 1) and 0fffeh)
 endif
 ?al1 x,<t>,%(???+?ia)
-.xcref ?t&&x
-?t&&x=s
+.xcref ??CM_Paste(?t_,x)
+??CM_Paste(?t_,x)=s
 endm
 .cref
 else
@@ -382,7 +386,7 @@ else
 endif
 endm
 ?al1 macro n,t,o
-n equ (t [bp-o])
+n equ (t [bp][-o])
 endm
 ?gcc macro s,i,cc
 s = i
@@ -413,8 +417,8 @@ endm
 globalD macro n,i,s,c
 ?ad <n>,4
 ?dd n,1,<dword>,<dd>,<i>,<s>,<c>
-off_&n equ n
-seg_&n equ n[2]
+off_&n equ word ptr n[0]
+seg_&n equ word ptr n[2]
 endm
 globalQ macro n,i,s,c
 ?ad <n>,8
@@ -570,20 +574,20 @@ endif
 ?gcc ?ex2,%?PLM,<c>
 irp x,<n>
 .xcref
-.xcref ?t&&x
+.xcref ??CM_Paste(?t_,x)
 .cref
-?t&&x=s
+??CM_Paste(?t_,x)=s
 ife ?ex2
-extrn _&&x:&d
-x equ _&&x
+extrn ??CM_Paste(_,x):&d
+x equ ??CM_Paste(_,x)
 else
 extrn x:&d
 endif
 ifidn <scv>,<cc>
 .xcref
-.xcref ?CC&&x
+.xcref ??CM_Paste(?CC,x)
 .cref
-?CC&&x=?ex2
+??CM_Paste(?CC,x)=?ex2
 endif
 endm
 endm
@@ -652,15 +656,15 @@ ifidn <x>,<PUBLIC>
 ?lblpu=1
 else
 .xcref
-.xcref ?t&&x
+.xcref ??CM_Paste(?t_,x)
 .cref
-?t&&x=s
+??CM_Paste(?t_,x)=s
 ife ?lb2
 if ?lblpu
-public _&&x
+public ??CM_Paste(_,x)
 endif
-_&&x label &d
-x equ _&&x
+??CM_Paste(_,x) label &d
+x equ ??CM_Paste(_,x)
 else
 if ?lblpu
 public x
@@ -712,9 +716,9 @@ endif
 ?ad macro n,s
 irp x,<n>
 .xcref
-.xcref ?t&&x
+.xcref ??CM_Paste(?t_,x)
 .cref
-?t&&x=s
+??CM_Paste(?t_,x)=s
 endm
 endm
 ifndef ?NOPTR
@@ -726,13 +730,13 @@ farPtr n,s,o
 endm
 farPtr macro n,s,o
 .xcref
-.xcref ?t&n
+.xcref ?t_&n
 .cref
-n &macro
+n macro
 	push	s
 	push	o
-&endm
-?t&n=80h
+endm
+?t_&n=80h
 endm
 endif
 arg macro a
@@ -745,28 +749,28 @@ endm
 .xcref
 .xcref ?ali&i
 .cref
-?ali&i &macro
-?ap n
-&endm
+?ali&i macro
+?ap <n>
+endm
 endm
 ?ap macro n
 ?argl=?argl+2
-ifdef ?t&n
-ife ?t&n-1
+ifdef ?t_&n
+ife ?t_&n-1
 	push	word ptr (n)
 exitm
 endif
-ife ?t&n-2
+ife ?t_&n-2
 	push	n
 exitm
 endif
-ife ?t&n-4
+ife ?t_&n-4
 	push	word ptr (n)[2]
 	push	word ptr (n)
 ?argl=?argl+2
 exitm
 endif
-ife ?t&n-8
+ife ?t_&n-8
 	push	word ptr (n)[6]
 	push	word ptr (n)[4]
 	push	word ptr (n)[2]
@@ -774,12 +778,12 @@ ife ?t&n-8
 ?argl=?argl+6
 exitm
 endif
-if ?t&n and 80h
+if ?t_&n and 80h
 n
 ?argl=?argl+2
 exitm
 endif
-ife ?t&n
+ife ?t_&n
 	push	word ptr (n)
 exitm
 endif
@@ -890,9 +894,9 @@ if ?pcc
 .xcref
 .xcref ?PLMParm0
 .cref
-?PLMParm0 &macro
+?PLMParm0 macro arg
 purge ?PLMParm0
-&endm
+endm
 endif
 .xcref
 .xcref ?CC&n
@@ -932,7 +936,7 @@ if ?nd
 endif
 endif
 .xcref cBegin
-cBegin &macro g
+cBegin macro g
 .xcref
 if cc
 uconcat <?PLMParm>,%?PLMPrevParm,%?po
@@ -1028,17 +1032,17 @@ endif
 endif
 .cref
 purge cBegin
-&endm
+endm
 .xcref ?utpe
-?utpe &macro
+?utpe macro
 ??error <unterminated procedure definition: "&n">
-&endm
+endm
 .cref
 endm
 ?pg1 macro n,c,a,o,w,f,d,r,cc
 .xcref
 .xcref cEnd
-cEnd &macro g
+cEnd macro g
 .xcref
 ?ba=0
 ifidn <g>,<nogen>
@@ -1091,10 +1095,25 @@ endif
 n endp
 .cref
 purge cEnd
-&endm
+endm
 .cref
 endm
 assumes macro s,ln
+ifdef MS_STARTUP
+ifidn <code>,<ln>
+assume s&:_TEXT
+exitm
+elseifidn <CODE>,<ln>
+assume s&:_TEXT
+exitm
+elseifidn <data>,<ln>
+assume s&:dgroup
+exitm
+elseifidn <DATA>,<ln>
+assume s&:dgroup
+exitm
+endif
+endif
 ifndef ln&_assumes
 assume s:ln
 else
@@ -1102,13 +1121,6 @@ ln&_assumes s
 endif
 endm
 createSeg macro n,ln,a,co,cl,grp
-ifnb <grp>
-addseg grp,n
-else
-ln&OFFSET equ offset n:
-ln&BASE equ n
-?cs3 <ln>,<n>
-endif
 ifnb <cl>
 n segment a co '&cl'
 else
@@ -1116,57 +1128,48 @@ n segment a co
 endif
 n ends
 ?cs1 <ln>,<n>
+ifnb <grp>
+grp group n
+?cs3 <ln>,<grp>
+ln&OFFSET equ <offset grp:>
+ln&BASE equ <grp>
+else
+?cs3 <ln>,<n>
+endif
 endm
 addseg macro grp,seg
 .xcref
-.xcref grp&_def
-.cref
-ifndef grp&_def
-grp&_def=0
-endif
-if grp&_def ne ASMpass
-.xcref
 .xcref grp&_add
 .cref
-grp&_add &macro s
+grp&_add macro s
 grp&_in <seg>,s
-&endm
+endm
 .xcref
 .xcref grp&_in
 .cref
-grp&_in &macro sl,s
+grp&_in macro sl,s
 ifb <s>
 grp group sl
 else
-grp&_add &macro ns
+grp&_add macro ns
 grp&_in <sl,s>,ns
-&endm
+endm
 endif
-&endm
-grp&_def=ASMpass
-else
-grp&_add seg
-endif
+endm
 endm
 defgrp macro grp,ln
-addseg grp
-ifnb <ln>
-irp x,<ln>
-?cs3 <&x>,<grp>
-x&&OFFSET equ offset grp:
-x&&BASE equ grp
-endm
-endif
 endm
 ?cs1 macro ln,n
 .xcref
 .xcref ln&_sbegin
 .cref
-ln&_sbegin &macro
+ln&_sbegin macro
+?cs2 <ln>,<n>
+n segment
 .xcref
 .xcref ?mf
 .cref
-?mf &&macro c,l,p
+?mf macro c,l,p
 if c
 	extrn	n&_FARFRAME:near
 	call	n&_FARFRAME
@@ -1176,28 +1179,26 @@ else
 endif
 	db	l shr 1
 	db	p shr 1
-&&endm
-?cs2 <ln>,<n>
-n segment
-&endm
+endm
+endm
 endm
 ?cs2 macro ln,n
 .xcref
 .xcref sEnd
 .cref
-sEnd &macro
+sEnd macro arg
 n ends
 purge ?mf
 purge sEnd
-&endm
+endm
 endm
 ?cs3 macro ln,n
 .xcref
 .xcref ln&_assumes
 .cref
-ln&_assumes &macro s
+ln&_assumes macro s
 assume s:&n
-&endm
+endm
 endm
 .xcref
 .xcref sBegin
@@ -1218,11 +1219,7 @@ endif
 endif
 endif
 errnz macro x
-if2
-if x
-errnz1 <x>,%(x)
-endif
-endif
+.errnz (x),<x>
 endm
 errnz1 macro x1,x2
 = *errnz* x1 = x2
@@ -1234,3 +1231,16 @@ endm
 ifdef ?PROFILE
 externFP <StartNMeas,StopNMeas>
 endif
+callcrt MACRO funcname
+ifdef _QC2
+call funcname
+else
+if sizeC
+push cs
+call near ptr (funcname)
+else
+call funcname
+endif
+endif
+ENDM
+.cref

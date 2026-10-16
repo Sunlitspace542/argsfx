@@ -1,8 +1,5 @@
 cls
-set path=%path%;c:\bin
-set lib=;c:\lib\
-set include=;c:\include\
-set tmp=;c:\tmp\
+setpath.bat
 cd SFX\ARGSFX
 make > ..\..\build.log
 cd ..\..
