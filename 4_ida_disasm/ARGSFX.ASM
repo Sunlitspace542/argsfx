@@ -1189,7 +1189,7 @@ ERROK3:					; CODE XREF: INSFRERR1+29j
 		mov	al, ss:[si]
 		or	al, al
 		jz	short ERRORT2
-		mov	cx, 8A5Ah
+		mov	cx, offset WARNTXT
 		inc	ss:WARNINGS
 		jmp	short DONEEW2
 ; ───────────────────────────────────────────────────────────────────────────
@@ -5273,7 +5273,7 @@ ERROK2:					; CODE XREF: ERROR_ROUT+40j
 		mov	al, ss:[si]
 		or	al, al
 		jz	short ERRORT
-		mov	cx, 8A5Ah
+		mov	cx, offset WARNTXT
 		inc	ss:WARNINGS
 		jmp	short DONEEW
 ; ───────────────────────────────────────────────────────────────────────────
@@ -5398,7 +5398,7 @@ FATALERR_ROUT	proc near		; CODE XREF: WRITEBLOCKS+75p
 		mov	dx, seg	seg003
 		mov	ds, dx
 		assume ds:seg003
-		mov	dx, 8A3Ch
+		mov	dx, offset FATALERRTXT
 		call	_OS2PRTSTRING
 		pop	dx
 		pop	ds
@@ -18493,7 +18493,7 @@ loc_72E8:				; CODE XREF: P_STRING+E5j
 
 		public NSTRNODEF
 NSTRNODEF:				; CODE XREF: P_STRING+EDj
-		mov	ss:byte_8A6E, 0
+		mov	ss:PRINTBUFFER, 0
 		mov	ss:PFSTRLEN, 1
 
 		public STRDEF
@@ -21855,10 +21855,10 @@ M_FIND:					; CODE XREF: seg000:8A58j seg000:8A5Fj ...
 		mov	di, ds:[bp+8]
 ; ───────────────────────────────────────────────────────────────────────────
 		db 36h,	8Eh
-byte_8A6E	db 1Eh			; DATA XREF: P_STRING:NSTRNODEFw
+		db 1Eh			; DATA XREF: P_STRING:NSTRNODEFw
 					; PRTHEXB:OK2w
-byte_8A6F	db 7Ch			; DATA XREF: PRTHEXB:OK1w
-byte_8A70	db 9Ah			; DATA XREF: PRTHEXB+24w
+		db 7Ch			; DATA XREF: PRTHEXB:OK1w
+		db 9Ah			; DATA XREF: PRTHEXB+24w
 ; ───────────────────────────────────────────────────────────────────────────
 		mov	si, ss:word_9A7E
 
@@ -22517,7 +22517,7 @@ OK1:					; CODE XREF: PRTHEXB+7j
 
 		public OK2
 OK2:					; CODE XREF: PRTHEXB+1Cj
-		mov	ss:byte_8A6E, al
+		mov	ss:PRINTBUFFER, al
 		mov	ss:byte_8A70, 24h ; '$'
 		push	ds
 		push	dx
@@ -81847,9 +81847,13 @@ OPERRCLI	db ' File open error in command line.',0Dh,0Ah,'$'
 		align 2
 		public CTRLCTXT
 CTRLCTXT	db 0Dh,0Ah,1Bh,'[0mCtrl-C pressed!  -  Exiting... ',0Dh,0Ah,'$',0Dh,0Ah
-FATALERRTXT	db '  -  Drastic Error : $Error$Warning$Expression:$',0
-		db    0
-		db    0
+FATALERRTXT	db '  -  Drastic Error : $'
+ERRORTXT	db 'Error$'
+WARNTXT		db 'Warning$'
+EXPRTXT		db 'Expression:$'
+PRINTBUFFER	db    0
+byte_8A6F	db    0
+byte_8A70	db    0
 		db    0
 		db    0
 		db    0
