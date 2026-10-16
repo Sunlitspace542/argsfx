@@ -48557,10 +48557,6 @@ db    0
 db    0
 db    0
 db    0
-IF VERSION_SASM NE 0
-DB	"Sending (4 Mbit Ramboy 4, $printer port)   $fabcard)   $"
-DB	"     Writing object code.$"
-ENDIF
 DB	"Run statement"
 DB	0,9
 DB	"onerror", __CR,__LF

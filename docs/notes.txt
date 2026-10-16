@@ -18,6 +18,12 @@ Then: repeating symbols:
   - 1 byte: length of label
   - label (ASCII)
 
+Extender EXE notes
+- Argonaut seems to have used a modified ZPM stub? We do have source for the stub/ZPM library in the Zortech SDK, though the Rational Systems library is not included
+- Segments seem to have been rearranged compared to the standard DOS versions
+- EXE starts with MZ for ZPM stub, then NE executable for main assembler program, then extra data, though this may be assembler code because the segment order might be different (see previous)
+
+Debug info format
 
 NB02 magic number - Microsoft LINK v5.10 (or equivalent linker) signature
 this first data chunk looks to be source filesystem information?

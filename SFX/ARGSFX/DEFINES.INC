@@ -9,9 +9,9 @@
 ; Carriage Return / Line Feed
 __CR	equ	0Dh
 __LF	equ	0Ah
-_CRLF	equ	00A0Dh
+_CRLF	equ	00A0Dh ; (word version)
 
-; Marks calls to unimplemented code
+; Put this around calls to currently unimplemented code
 UNIMPLEMENTED_ROUTINES	equ	0
 
 ; Platform Defines
@@ -22,11 +22,6 @@ TARGET_DOS		equ	1
 ; Target MS-DOS, DOS/16M (ZPM) extended version (Protected Mode)
 TARGET_DOS16M	equ	0
 
-; TODO Find MASM 5.13, we need it to be able to target OS/2
 ; Target IBM OS/2 (Protected Mode)
 TARGET_OS2		equ	0
 
-; Assembler Version defines
-
-; SASM/SASMX
-VERSION_SASM	equ	0

@@ -50,7 +50,8 @@ so it cannot yet be used as a codebase for general changes.
 - Run ``build to log.cmd`` to assemble, writing console output to a log file.  
 
 # Known Info
-- Originally linked with LINK 5.13 (According to the header of ArgSfx OS/2 1.35)
+- OS/2 Originally linked with LINK 5.13
+- DOS extender versions linked with LINK 5.10
 - Built with version 3.0r1 of the Zortech C/C++ toolchain, according to 'stamps' left in the data of the DOS extender builds.  
 
 All known versions of the assembler:  
