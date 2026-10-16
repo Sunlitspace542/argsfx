@@ -4,7 +4,7 @@ The aim is to reconstruct the x86 assembly source code so it can be further modi
 
 The non-DOS extender version of version 1.50 has been used as a base as it is the most recent non-extender version currently known to exist to also include debug data, which after being opened in Zortech ZDB 3.0r1, was used to produce a code listing with all labels intact.  
 
-Currently, work is in progress to reconstruct source code assemblable by MASM by cross-referencing the IDA and ZDB disassemblies.
+Currently, work is in progress to reconstruct source code for ArgSfx v1.50 that can be rebuilt by MASM by locating all symbols, inserting them into IDA, and hoping for the best.
 
 ```diff
 - WARNING! -
@@ -16,12 +16,12 @@ so it cannot yet be used as a codebase for general changes.
 
 # Disassembly Progress:
 
-| Segment | Type | Purpose                   | Status      |
-|---------|------|---------------------------|-------------|
-| 0       | Code | Main assembler logic      | In Progress |
-| 1       | Code | I/O routines (``_OS2*``)  | Implemented |
-| 2       | Data | Data                      | X           |
-| 3       | Data | Data, Stack               | X           |
+| Segment | Type | Purpose                                    | Status      |
+|---------|------|--------------------------------------------|-------------|
+| 0       | Code | Main assembler logic (`ARGSFX` module)     | In Progress |
+| 1       | Code | I/O routines (``_OS2*``) (`CALL` module)   | Implemented |
+| 2       | Data | Data                                       | In Progress |
+| 3       | Data | Data, Stack                                | In Progress |
 
 ## Plan:
 - [ ] 1. Disassemble ArgSfx v1.50
@@ -40,6 +40,7 @@ so it cannot yet be used as a codebase for general changes.
 - [ ] Locate libraries for OS/2? (DOSCALLS)
 - [ ] Locate LINK 5.10 (for DOS)
 - [ ] Find/make a good way to dump reliable debug info from the NB02 symbol data left in the standard DOS EXEs (in progress)
+- [ ] Separate script for disassembling data segments? I don't like how IDA handles them
 
 # Building
 
@@ -75,13 +76,14 @@ All known versions of the companion linker:
 - SL (SLink?) 1.01 (``SL.EXE``) (ArgLink's codebase descended from here)  
 - ArgLink SFX versions 1.06, 1.08, 1.11 (``ARGLINK.EXE``)
 
-## Original source structure from leftover debug data:
+## Original source tree structure reconstructed from leftover debug data:
 ```
 D:
 └── SFX
     ├── ARGSFX
-    │   ├── ARGSFX.ASM: Presumably the main assembler logic and 65816 parser
-    │   └── MARIOP.ASM: Presumably the MARIO Chip (SuperFX) code parser
+    │   ├── ARGSFX.ASM: Presumably the main assembler logic and 65816 parser (module ARGSFX)
+    │   ├── MARIOP.ASM: Presumably the MARIO Chip (SuperFX) code parser (module ARGSFX)
+    │   └── CALL.ASM: _OS2* system call abstraction routines (module CALLS) (this file is an educated guess from module names)
     └── ARGLINK: Source directory for the ARGLINK linker (Currently out of scope for this project)
         ├── EXPRESS.ASM
         ├── SENDER.ASM

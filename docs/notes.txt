@@ -1,27 +1,46 @@
-ArgBug MAP file format
+Standard EXE segment notes
+ Start  Stop   Length Name               Class
+ 00000H 0CDEFH 0CDF0H seg000             CODE - module "ARGSFX"
+ 0CDF0H 0CEBFH 000D0H seg001             CODE - module "CALL"
+ 0CEC0H 10EBFH 04000H seg002             DATA - segs 2 and 3 contain RAM layout and data
+ 10EC0H 1B5C0H 0A701H seg003             DATA - stack lives here
 
-"SIZE" magic (4 bytes): 53 49 5A 45 (ASCII "SIZE")
-Then: zero or more 4-byte entries
-  [0]: 2 bytes: Value High (from [0F94] (PCADDR?))
-  [2]: 1 byte: Value Low  (from [0F92] (PCADDR-2?))
-  [3]: 1 byte: Type ID (from AL)
-Type IDs:
-MAP_SHORTA: 01 - Accumulator 8-bit
-MAP_SHORTI: 02 - Index registers X/Y 8-bit
-MAP_LONGA: 03 - Accumulator 16-bit
-MAP_LONGI: 04 - Index registers X/Y 16-bit
-
-"SM32" magic number (4 bytes: 53 4D 33 32)
- 2 bytes, number of symbols (little-endian)
-Then: repeating symbols:
-  - 4 bytes: address (little-endian)
-  - 1 byte: length of label
-  - label (ASCII)
+Symbols REGNERR1 through to EXIT (0x0908d-0x0cb22) seem to correspond to where MARIOP.ASM is
 
 Extender EXE notes
 - Argonaut seems to have used a modified ZPM stub? We do have source for the stub/ZPM library in the Zortech SDK, though the Rational Systems library is not included
 - Segments seem to have been rearranged compared to the standard DOS versions
 - EXE starts with MZ for ZPM stub, then NE executable for main assembler program, then extra data, though this may be assembler code because the segment order might be different (see previous)
+
+```
+; Stub function used in the OS/2 version
+_OS2INITTERM	proc far
+
+; The OS/2 version does this:
+	IF	TARGET_OS2	NE	0
+	PUSH	DX
+	BX
+	SS
+	PUSH	73e6h
+	PUSH	SS
+	PUSH	73eah
+	PUSH	2h
+	PUSH	1h
+	CALLF	DOSCALLS::Ordinal_14
+
+	PUSH	DX
+	PUSH	BX
+	PUSH	SS
+	PUSH	73e6h
+	PUSH	SS
+	PUSH	73eah
+	PUSH	2h
+	PUSH	4h
+	CALLF	DOSCALLS::Ordinal_14
+	ENDIF
+	retf
+_OS2INITTERM	endp
+```
 
 Debug info format
 
@@ -48,3 +67,25 @@ the main source file path again ("D:\SFX\ARGSFX\ARGSFX.ASM"),
 some more bytes,
 another NB02 signature, (signature, if OMF executable?)
 and 4 bytes (offset of base, if OMF executable?)
+
+ArgSfx Assembler technical info
+
+ArgBug MAP file format
+
+"SIZE" magic (4 bytes): 53 49 5A 45 (ASCII "SIZE")
+Then: zero or more 4-byte entries
+  [0]: 2 bytes: Value High (from [0F94] (PCADDR?))
+  [2]: 1 byte: Value Low  (from [0F92] (PCADDR-2?))
+  [3]: 1 byte: Type ID (from AL)
+Type IDs:
+MAP_SHORTA: 01 - Accumulator 8-bit
+MAP_SHORTI: 02 - Index registers X/Y 8-bit
+MAP_LONGA: 03 - Accumulator 16-bit
+MAP_LONGI: 04 - Index registers X/Y 16-bit
+
+"SM32" magic number (4 bytes: 53 4D 33 32)
+ 2 bytes, number of symbols (little-endian)
+Then: repeating symbols:
+  - 4 bytes: address (little-endian)
+  - 1 byte: length of label
+  - label (ASCII)
