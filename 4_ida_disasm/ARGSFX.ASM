@@ -167,7 +167,7 @@ LBUFOK:					; CODE XREF: LINK+4Fj
 		push	dx
 		mov	dx, seg	seg003
 		mov	ds, dx
-		mov	dx, 891Ch
+		mov	dx, offset NOFILE ;891Ch
 		call	_OS2PRTSTRING
 		pop	dx
 		pop	ds
@@ -796,7 +796,7 @@ DOWSYM:					; CODE XREF: WRITESYMBOLS+6j
 		push	dx
 		mov	dx, seg	seg003
 		mov	ds, dx
-		mov	dx, 891Ch
+		mov	dx, offset NOFILE ;891Ch
 		call	_OS2PRTSTRING
 		pop	dx
 		pop	ds
@@ -1209,7 +1209,7 @@ DONEEW2:				; CODE XREF: INSFRERR1+49j
 		mov	ax, ss
 		mov	ds, ax
 		assume ds:seg003
-		mov	si, 2557h
+		mov	si, DEFAULTERR
 		mov	ss:DOINGERR, 1
 		call	P_PRINTF2
 		mov	ss:DOINGERR, 0
@@ -5293,7 +5293,7 @@ DONEEW:					; CODE XREF: ERROR_ROUT+60j
 		mov	ax, ss
 		mov	ds, ax
 		assume ds:seg003
-		mov	si, 2557h
+		mov	si, DEFAULTERR
 		mov	ss:DOINGERR, 1
 		call	P_PRINTF2
 		mov	ss:DOINGERR, 0
@@ -8030,7 +8030,7 @@ P_DEFERROR:				; CODE XREF: seg000:68E3j
 		mov	ax, ss
 		mov	es, ax
 		assume es:seg000
-		mov	di, 2557h
+		mov	di, DEFAULTERR
 		call	COPYPF
 		pop	di
 		pop	es
@@ -20411,12 +20411,11 @@ EAINDABSX:				; CODE XREF: seg000:7F51j
 		lodsb
 		and	al, 0DFh
 		cmp	al, 58h	; 'X'
-		jz	short BADSIZELWDN
+		jz	short EAINDABSX_sub
 		jmp	EATOOBIGB
 ; ───────────────────────────────────────────────────────────────────────────
 
-		public BADSIZELWDN
-BADSIZELWDN:				; CODE XREF: seg000:8005j
+EAINDABSX_sub:				; CODE XREF: seg000:8005j
 		lodsb
 		cmp	al, 29h	; ')'
 		jz	short loc_8012
@@ -20523,8 +20522,6 @@ EAINDIDXJ:				; CODE XREF: seg000:8041j
 		mov	bp, 1Ch
 		test	byte ptr ss:loc_ACD+1, 0C0h
 
-		public MUSTEVAL
-MUSTEVAL:
 		jz	short locret_814F
 		test	byte ptr ss:loc_ACD+1, 40h
 		jnz	short loc_810C
@@ -20537,9 +20534,6 @@ MUSTEVAL:
 		mov	word ptr es:[bp+2], 14h
 		add	bp, 15h
 		mov	word ptr ss:loc_AC7, bp
-
-		public CANTOPENFILE
-CANTOPENFILE:
 		cmp	bp, 7F00h
 		jb	short loc_8108
 		call	MOREFR
@@ -20557,8 +20551,6 @@ loc_810C:				; CODE XREF: seg000:80DFj
 		push	cx
 		push	ax
 
-		public PREMEOF
-PREMEOF:
 		mov	es, ss:word_13A6
 		assume es:nothing
 		mov	bp, ss:word_13A8
@@ -20797,9 +20789,6 @@ loc_82A6:				; CODE XREF: seg000:82A1j
 
 loc_82AF:				; CODE XREF: seg000:82AAj
 		test	byte ptr ss:loc_ACD+1, 0C0h
-
-		public OUTMACSPACE
-OUTMACSPACE:
 		jz	short loc_832D
 		test	byte ptr ss:loc_ACD+1, 40h
 		jnz	short loc_82EA
@@ -20811,9 +20800,6 @@ OUTMACSPACE:
 		mov	es:[bp+6], di
 		mov	word ptr es:[bp+2], 0
 		add	bp, 15h
-
-		public SPURENDM
-SPURENDM:
 		mov	word ptr ss:loc_AC7, bp
 		cmp	bp, 7F00h
 		jb	short loc_82E6
@@ -20821,9 +20807,6 @@ SPURENDM:
 
 loc_82E6:				; CODE XREF: seg000:82E1j
 		pop	bp
-
-		public INCCOLINFO
-INCCOLINFO:
 		pop	es
 		assume es:nothing
 		jmp	short loc_832D
@@ -20904,9 +20887,6 @@ loc_837B:				; CODE XREF: seg000:834Ej
 		push	es
 		push	bp
 		push	cx
-
-		public ILLFIRST
-ILLFIRST:
 		push	ax
 		mov	es, ss:word_13A6
 		assume es:nothing
@@ -20935,9 +20915,6 @@ loc_83BA:				; CODE XREF: seg000:83B5j
 loc_83BE:				; CODE XREF: seg000:8346j seg000:8379j
 		mov	es:[di+1], cl
 		mov	bp, 28h	; '('
-
-		public UNKOPT
-UNKOPT:
 		retn
 ; ───────────────────────────────────────────────────────────────────────────
 
@@ -21278,9 +21255,6 @@ L_NOTSET:				; CODE XREF: ADDSYMBOL+1AFj
 		adc	ss:word_13C8, 0
 		pop	ds
 		pop	di
-
-		public PUBISEXTERN
-PUBISEXTERN:
 		pop	es
 		pop	bx
 		retn
@@ -21378,8 +21352,6 @@ _SYMLOOP:				; CODE XREF: ADDSYMBOL+2B2j
 		or	al, al
 		js	short _ENDSYMHASH
 
-		public INVARRAY
-INVARRAY:
 		stosb
 		add	dx, ax
 		add	dx, dx
@@ -59824,8 +59796,14 @@ EOFTXT		db  0Dh
 		db  0Ah
 		db  1Ah
 		public CRTXT
-CRTXT		db 0Dh,0Ah
-		db '$ $',0
+CRTXT		db  0Dh
+		db  0Ah
+		db  24h	; $
+		public SPACETXT
+SPACETXT	db  20h
+		db  24h	; $
+		public DEFAULTERR
+DEFAULTERR	db    0
 		db    0
 		db    0
 		db    0
@@ -81673,54 +81651,40 @@ MPTAB		db 0FFh
 		db 0FFh
 		db 0FFh
 		public IFLIST
-IFLIST		db  51h	; Q
-		db  45h	; E
-		db  45h	; E
-		db  4Eh	; N
-		db  54h	; T
-		db  47h	; G
-		db  45h	; E
-		db  47h	; G
-		db  54h	; T
-		db  4Ch	; L
-		db  45h	; E
-		db  4Ch	; L
-		db 0FFh
-		db  44h	; D
-		db 0FFh
-		db  43h	; C
-		db 0FFh
-		db  56h	; V
-		db 0FFh
-		db  53h	; S
-		db  44h	; D
-		db  4Eh	; N
-		db  43h	; C
-		db  4Eh	; N
-		db  56h	; V
-		db  4Eh	; N
-		db  53h	; S
-		db  4Eh	; N
-		db 0FFh
-		db  56h	; V
-		db  56h	; V
-		db  4Eh	; N
-		db  45h	; E
-		db  46h	; F
-		db  4Eh	; N
-		db  46h	; F
+IFLIST
+		dw 'EQ'
+		dw 'NE'
+		dw 'GT'
+		dw 'GE'
+		dw 'LT'
+		dw 'LE'
+		db 0FFh,'D'
+		db 0FFh,'C'
+		db 0FFh,'V'
+		db 0FFh,'S'
+		db 'S'
+		db 'D'
+		db 'N'
+		db 'C'
+		db 'N'
+		db 'V'
+		db 'N'
+		db 'S'
+		db  0ffh,'N'
+		db 'V'
+		db 'V'
+		db 'N'
+		db 'E'
+		db 'F'
+		db 'N'
+		db 'F'
 		db    0
 		db    0
-		db 0DBh	; █
-		db  7Bh	; {
-		db 0E3h	; π
-		db  7Bh	; {
-		db 0E9h	; Θ
-		db  7Bh	; {
-		db 0EFh	; ∩
-		db  7Bh	; {
-		db 0F5h	; ⌡
-		db  7Bh	; {
+		dw offset _86TXT
+		dw offset _186TXT
+		dw offset _286TXT
+		dw offset _386TXT
+		dw offset _486TXT
 		public _86TXT
 _86TXT		db '8088/86',0
 		public _186TXT
@@ -81732,602 +81696,152 @@ _386TXT		db '80386',0
 		public _486TXT
 _486TXT		db '80486',0
 		align 2
-aCanTFindSource	db 'Can',27h,'t find source file "$',0
+INVSRCNAMETXT	db 'Can',27h,'t find source file "$',0
 aWritingObjectF	db 'Writing object file to disk.$',0
 aDiskFull_	db 'Disk full.$',0
-aCanTAllocateAn	db 'Can',27h,'t allocate any more memory.$',0
-aReptsUnbalance	db 'Repts unbalanced at end of file.$',0
-aConditionalsUn	db 'Conditionals unbalanced - Too many IFs.$',0
-aCtrlCOrCtrlBre	db 'CTRL-C or CTRL-BREAK pressed.$',0
-aConditionals_0	db 'Conditionals unbalanced - Too many ENDCs.$',0
-aErrorInDeferro	db 'Error in DEFERROR string.$',0
+CANTALLOC	db 'Can',27h,'t allocate any more memory.$',0
+REPTUNBAL	db 'Repts unbalanced at end of file.$',0
+IFSUNBAL	db 'Conditionals unbalanced - Too many IFs.$',0
+CTRLC_HIT	db 'CTRL-C or CTRL-BREAK pressed.$',0
+ENDCSUNBAL	db 'Conditionals unbalanced - Too many ENDCs.$',0
+NESTEDERR	db 'Error in DEFERROR string.$',0
 aOutOfMacroSpac	db 'Out of macro space while defining macro definition.$',0
-aOutOfSourceLev	db 'Out of source levels. (Max is 32.)$',0
-aOutOfLocalLabe	db 'Out of local label memory(Put a parent label in).$',0
-aUserAssemblyFa	db 'User assembly fail.$',0
+NOSRCLEV	db 'Out of source levels. (Max is 32.)$',0
+MORELOCMEM	db 'Out of local label memory(Put a parent label in).$',0
+FAIL	db 'User assembly fail.$',0
 aInternalErrorS	db 'Internal error: Strange condition at symbol char table.(report)$',0
-aInternalErrorC	db 'Internal error: Couldn',27h,'t evaluate heap expression(maybe -e__he'
-		db 'ap=xxxx CLI option.$',0
+aInternalErrorC	db 'Internal error: Couldn',27h,'t evaluate heap expression(maybe -e__heap=xxxx CLI option.$',0
 aFileReadFailur	db 'File read failure, maybe corrupt end of file.$',0
 aNeedDos3_0OrHi	db 'Need DOS 3.0 or higher.$',0
-aUnknownObjectB	db 'Unknown object block.. (REPORT THIS).$',0
-aTooManyErrors_	db 'Too many errors.$',0
-aCanTOpenMapFil	db 'Can',27h,'t open MAP file!$',0
-aInvalidSourceT	db 'Invalid source type(report this)$',0
-aBadValueSpecif	db 'Bad value specified$',0
-aUnknownInstruc	db 'Unknown instruction$',0
-aBadByteSize	db 'Bad byte size$',0
-aBadWordSize	db 'Bad word size$',0
-aJumpTooBig	db 'Jump too big$',0
-aNegativeAddres	db 'Negative address$',0
-aTooBigForDirec	db 'Too big for direct page$',0
-aNoSuchEffectiv	db 'No such effective address or syntax error$',0
-aSymbolDefinedT	db 'Symbol defined twice$',0
-aMacroDefinedTw	db 'Macro defined twice$',9,'       Macro defined twice is : $',0
-aCanTFindSymbol	db 'Can',27h,'t find symbol$',0
-aBadSizeMustBeL	db 'Bad size Must be L,W,D,N$',0
-aAngledBracketM	db 'Angled bracket missing from paramater$',0
-aMissingEndm	db 'Missing ENDM$',0
-aTooManyParamet	db 'Too many parameters specified$',0
-aBadParameterSp	db 'Bad parameter specified$',0
-aCannotFindMacr	db 'Cannot find macro parameter$',0
-aRepAndSepCanOn	db 'REP and SEP can only use immediate data$',0
-aExpressionMust	db 'Expression must evaluate$',0
+UNKBLK	db 'Unknown object block.. (REPORT THIS).$',0
+MAXERRORSTXT	db 'Too many errors.$',0
+MAPFILE_ERROR	db 'Can',27h,'t open MAP file!$',0
+INVTYPE	db 'Invalid source type(report this)$',0
+BADVALUE	db 'Bad value specified$',0
+UNKNOWNINST	db 'Unknown instruction$',0
+BADSIZEB	db 'Bad byte size$',0
+BADSIZEW	db 'Bad word size$',0
+PCTOOBIG	db 'Jump too big$',0
+NEGADDR	db 'Negative address$',0
+TOOBIGFORD	db 'Too big for direct page$',0
+NOSUCHEA	db 'No such effective address or syntax error$',0
+SYMBOLTWICE	db 'Symbol defined twice$',0
+MACTWICE	db 'Macro defined twice$',9,'       Macro defined twice is : $',0
+MACDEFEDTWICE	db 'Can',27h,'t find symbol$',0
+BADSIZELWDN	db 'Bad size Must be L,W,D,N$',0
+ABMISSING	db 'Angled bracket missing from paramater$',0
+NOENDM	db 'Missing ENDM$',0
+TOOMANYPARS	db 'Too many parameters specified$',0
+BADPARM	db 'Bad parameter specified$',0
+PARNOTHERE	db 'Cannot find macro parameter$',0
+REPIMM	db 'REP and SEP can only use immediate data$',0
+MUSTEVAL	db 'Expression must evaluate$',0
 aBadRomType	db 'Bad ROM type$',0
-aCanTOpenFile	db 'Can',27h,'t open file$',0
-aPrematureEndOf	db 'Premature end of file,  missing ENDC$',0
-aMissingSingleQ	db 'Missing single quote$',0
-aMissingDoubleQ	db 'Missing double quote$',0
-aMissingEndingQ	db 'Missing ending quotes$',0
-aTooManyEndcS	db 'Too many ENDC',27h,'s$',0
-aBadReptCount	db 'Bad REPT count$',0
-aTooManyRepts	db 'Too many repts$',0
-aTooManyEndrs	db 'Too many endrs$',0
-aReptsMustBeLoc	db 'REPTS must be local to file$',0
-aErrorReloading	db 'Error reloading REPT source chunk$',0
-aEquSetMustHave	db 'EQU/SET must have a label$',0
+CANTOPENFILE	db 'Can',27h,'t open file$',0
+PREMEOF	db 'Premature end of file,  missing ENDC$',0
+MISSINGSINGLE	db 'Missing single quote$',0
+MISSINGDOUBLE	db 'Missing double quote$',0
+MISSINGBOTH	db 'Missing ending quotes$',0
+TOOMANYENDCS	db 'Too many ENDC',27h,'s$',0
+BADREPTCOUNT	db 'Bad REPT count$',0
+TMREPTS	db 'Too many repts$',0
+TOOMANYENDRS	db 'Too many endrs$',0
+TOOOLDREPT	db 'REPTS must be local to file$',0
+REPTFILEERR	db 'Error reloading REPT source chunk$',0
+MUSTHAVELAB	db 'EQU/SET must have a label$',0
 aSetAttemptedTo	db 'SET attempted to overwrite permanant label$',0
-aNotInAMacro	db 'Not in a macro$',0
-aBadMarioValue	db 'Bad Mario value$',0
-aBadMarioRegist	db 'Bad Mario register$',0
-aBadSeperator	db 'Bad seperator$',0
-aExpected	db '[ expected$',0
-aExpected_0	db '] expected$',0
-aMissingOpening	db 'Missing opening quotes$',0
-aNeedMemoryForM	db 'Need memory for macro definitions$',0
-aSpuriousEndm	db 'Spurious ENDM$',0
-aExpectedInccol	db 'Expected INCCOL <NAME>,start pal,end pal$',0
+NOTINMAC	db 'Not in a macro$',0
+BADMVAL	db 'Bad Mario value$',0
+BADMREG	db 'Bad Mario register$',0
+BADSEP	db 'Bad seperator$',0
+OSBRACKET	db '[ expected$',0
+CSBRACKET	db '] expected$',0
+MISSINGQUOTES	db 'Missing opening quotes$',0
+OUTMACSPACE	db 'Need memory for macro definitions$',0
+SPURENDM	db 'Spurious ENDM$',0
+INCCOLINFO	db 'Expected INCCOL <NAME>,start pal,end pal$',0
 aNeedMoreEmsFor	db 'Need more EMS for FR references$',0
 aHeapGoneGetSom	db 'Heap gone, Get some more.$',0
 aParameterUsedI	db 'Parameter used in definition is more than given$',0
-aIllegalCharact	db 'Illegal character in symbol$',0
-aExtensionSpeci	db 'Extension specified in immediate EA mode$',0
-aUnknownOption	db 'Unknown option$',0
-aMissingExpress	db 'Missing expression$',0
-aIllegalBaseInE	db 'Illegal base in expression$',0
-aIllegalOperato	db 'Illegal operator in expression$',0
-aUnbalancedBrac	db 'Unbalanced brackets$',0
-aShiftIsTooLarg	db 'Shift is too large$',0
-aNumberHasTooMa	db 'Number has too many digits$',0
-aDivideByZero	db 'Divide by zero$',0
-aFirstModParame	db 'First mod parameter must be 1-65535$',0
-aAttemptedToDef	db 'Attempted to define a null string$',0
-aNotInReptLoop	db 'Not in REPT loop$',0
-aNotEnoughIrpSF	db 'Not enough IRP',27h,'s for the REPT loop$',0
-aNotEnoughIrcSF	db 'Not enough IRC',27h,'s for the REPT loop$',0
+ILLFIRST	db 'Illegal character in symbol$',0
+GILESSPEC	db 'Extension specified in immediate EA mode$',0
+UNKOPT	db 'Unknown option$',0
+MISSINGEXP	db 'Missing expression$',0
+ILLEGALBASE	db 'Illegal base in expression$',0
+ILLEGALOP	db 'Illegal operator in expression$',0
+UNBALBRAC	db 'Unbalanced brackets$',0
+TOOBIGSHIFT	db 'Shift is too large$',0
+NUMTOOBIG	db 'Number has too many digits$',0
+DIVZERO	db 'Divide by zero$',0
+MODLOW	db 'First mod parameter must be 1-65535$',0
+NULLSTR	db 'Attempted to define a null string$',0
+NOTINREPT	db 'Not in REPT loop$',0
+ENDOFIRP	db 'Not enough IRP',27h,'s for the REPT loop$',0
+ENDOFIRC	db 'Not enough IRC',27h,'s for the REPT loop$',0
 aMultiplication	db 'Multiplication overflow$',0
-aCanTAllocateIn	db 'Can',27h,'t allocate incbin buffer$',0
-aNoPublicLocalS	db 'No PUBLIC local symbols allowed$',0
-aNoExternLocalS	db 'No EXTERN local symbols allowed$',0
-aIllegalExternU	db 'Illegal EXTERN use$',0
-aLookingForAQuo	db 'Looking for a quote buddy$',0
-aLmsSmsOnOddBou	db 'LMS/SMS on odd boundary$',0
-aJmpJsrToADiffe	db 'JMP/JSR to a different bank$',0
-aExtraCharacter	db 'Extra characters at end of line$',0
-aInvalidDbrDefi	db 'Invalid DBR defined$',0
-aPublicIsAlread	db 'PUBLIC is already an EXTERN$',0
-aExternIsAlread	db 'EXTERN is already a PUBLIC$',0
+NOINCMEM	db 'Can',27h,'t allocate incbin buffer$',0
+PUBNOLOCALS	db 'No PUBLIC local symbols allowed$',0
+EXTNOLOCALS	db 'No EXTERN local symbols allowed$',0
+ILLEGALEXTUSE	db 'Illegal EXTERN use$',0
+INVALIDIRS	db 'Looking for a quote buddy$',0
+LMSODD	db 'LMS/SMS on odd boundary$',0
+DIFFBANK	db 'JMP/JSR to a different bank$',0
+EXTRACHARS	db 'Extra characters at end of line$',0
+INVALIDDBR	db 'Invalid DBR defined$',0
+PUBISEXTERN	db 'PUBLIC is already an EXTERN$',0
+EXTERNISPUB	db 'EXTERN is already a PUBLIC$',0
 aExpectingParam	db 'Expecting parameters$',0
 aUnexpectedEndO	db 'Unexpected end of line$',0
 aExpectingAStar	db 'Expecting a { start of macro definition$',0
 aUnexpectedEn_0	db 'Unexpected end of file$',0
-aInvalidArray	db 'Invalid array$',0
-aStringTooLongF	db 'String too long for array$',0
-aUndefinedStrin	db 'Undefined string specified$',0
-aUndefinedEnvir	db 'Undefined Environment Variable$',0
-		db  57h	; W
-		db  69h	; i
-		db  6Ch	; l
-		db  64h	; d
-		db  63h	; c
-		db  61h	; a
-		db  72h	; r
-		db  64h	; d
-		db  73h	; s
-		db  20h
-		db  6Eh	; n
-		db  6Fh	; o
-		db  74h	; t
-		db  20h
-		db  61h	; a
-		db  6Ch	; l
-		db  6Ch	; l
-		db  6Fh	; o
-		db  77h	; w
-		db  65h	; e
-		db  64h	; d
-		db  20h
-		db  69h	; i
-		db  6Eh	; n
-		db  20h
-		db  66h	; f
-		db  69h	; i
-		db  6Ch	; l
-		db  65h	; e
-		db  6Eh	; n
-		db  61h	; a
-		db  6Dh	; m
-		db  65h	; e
-		db  73h	; s
-		db  24h	; $
-		db    1
-		db  53h	; S
-		db  61h	; a
-		db  6Dh	; m
-		db  65h	; e
-		db  20h
-		db  6Eh	; n
-		db  61h	; a
-		db  6Dh	; m
-		db  65h	; e
-		db  24h	; $
-		db    1
-		db  4Eh	; N
-		db  75h	; u
-		db  6Ch	; l
-		db  6Ch	; l
-		db  20h
-		db  70h	; p
-		db  61h	; a
-		db  72h	; r
-		db  61h	; a
-		db  6Dh	; m
-		db  65h	; e
-		db  74h	; t
-		db  65h	; e
-		db  72h	; r
-		db  20h
-		db  73h	; s
-		db  70h	; p
-		db  65h	; e
-		db  63h	; c
-		db  69h	; i
-		db  66h	; f
-		db  69h	; i
-		db  65h	; e
-		db  64h	; d
-		db  24h	; $
-		db    1
-		db  42h	; B
-		db  61h	; a
-		db  64h	; d
-		db  20h
-		db  72h	; r
-		db  61h	; a
-		db  64h	; d
-		db  69h	; i
-		db  78h	; x
-		db  20h
-		db  73h	; s
-		db  70h	; p
-		db  65h	; e
-		db  63h	; c
-		db  69h	; i
-		db  66h	; f
-		db  69h	; i
-		db  65h	; e
-		db  64h	; d
-		db  20h
-		db  69h	; i
-		db  6Eh	; n
-		db  20h
-		db  50h	; P
-		db  52h	; R
-		db  49h	; I
-		db  4Eh	; N
-		db  54h	; T
-		db  46h	; F
-		db  20h
-		db  65h	; e
-		db  78h	; x
-		db  70h	; p
-		db  72h	; r
-		db  65h	; e
-		db  73h	; s
-		db  73h	; s
-		db  69h	; i
-		db  6Fh	; o
-		db  6Eh	; n
-		db  24h	; $
-		db    1
-		db  42h	; B
-		db  61h	; a
-		db  64h	; d
-		db  20h
-		db  68h	; h
-		db  65h	; e
-		db  78h	; x
-		db  20h
-		db  6Eh	; n
-		db  75h	; u
-		db  6Dh	; m
-		db  62h	; b
-		db  65h	; e
-		db  72h	; r
-		db  20h
-		db  69h	; i
-		db  6Eh	; n
-		db  20h
-		db  70h	; p
-		db  72h	; r
-		db  69h	; i
-		db  6Eh	; n
-		db  74h	; t
-		db  66h	; f
-		db  20h
-		db  73h	; s
-		db  74h	; t
-		db  72h	; r
-		db  69h	; i
-		db  6Eh	; n
-		db  67h	; g
-		db  24h	; $
-		db    1
-		db  49h	; I
-		db  6Eh	; n
-		db  76h	; v
-		db  61h	; a
-		db  6Ch	; l
-		db  69h	; i
-		db  64h	; d
-		db  20h
-		db  73h	; s
-		db  74h	; t
-		db  72h	; r
-		db  69h	; i
-		db  6Eh	; n
-		db  67h	; g
-		db  24h	; $
-		db    1
-		db  42h	; B
-		db  61h	; a
-		db  64h	; d
-		db  20h
-		db  50h	; P
-		db  52h	; R
-		db  49h	; I
-		db  4Eh	; N
-		db  54h	; T
-		db  46h	; F
-		db  20h
-		db  25h	; %
-		db  63h	; c
-		db  6Fh	; o
-		db  6Dh	; m
-		db  6Dh	; m
-		db  61h	; a
-		db  6Eh	; n
-		db  64h	; d
-		db  2Ch	; ,
-		db  20h
-		db  4Ch	; L
-		db  6Fh	; o
-		db  6Fh	; o
-		db  6Bh	; k
-		db  20h
-		db  61h	; a
-		db  74h	; t
-		db  20h
-		db  73h	; s
-		db  61h	; a
-		db  73h	; s
-		db  6Dh	; m
-		db  2Eh	; .
-		db  64h	; d
-		db  6Fh	; o
-		db  63h	; c
-		db  24h	; $
-		db    1
-		db  42h	; B
-		db  61h	; a
-		db  64h	; d
-		db  20h
-		db  50h	; P
-		db  52h	; R
-		db  49h	; I
-		db  4Eh	; N
-		db  54h	; T
-		db  46h	; F
-		db  20h
-		db  6Ch	; l
-		db  65h	; e
-		db  61h	; a
-		db  64h	; d
-		db  69h	; i
-		db  6Eh	; n
-		db  67h	; g
-		db  20h
-		db  63h	; c
-		db  68h	; h
-		db  61h	; a
-		db  72h	; r
-		db  61h	; a
-		db  63h	; c
-		db  74h	; t
-		db  65h	; e
-		db  72h	; r
-		db  24h	; $
-		db    1
-		db  42h	; B
-		db  61h	; a
-		db  64h	; d
-		db  20h
-		db  66h	; f
-		db  69h	; i
-		db  65h	; e
-		db  6Ch	; l
-		db  64h	; d
-		db  24h	; $
-		db    1
-		db  52h	; R
-		db  65h	; e
-		db  70h	; p
-		db  74h	; t
-		db  20h
-		db  72h	; r
-		db  65h	; e
-		db  2Dh	; -
-		db  6Ch	; l
-		db  6Fh	; o
-		db  61h	; a
-		db  64h	; d
-		db  2Eh	; .
-		db  20h
-		db  4Dh	; M
-		db  6Fh	; o
-		db  76h	; v
-		db  69h	; i
-		db  6Eh	; n
-		db  67h	; g
-		db  20h
-		db  6Ch	; l
-		db  61h	; a
-		db  72h	; r
-		db  67h	; g
-		db  65h	; e
-		db  20h
-		db  52h	; R
-		db  45h	; E
-		db  50h	; P
-		db  54h	; T
-		db  20h
-		db  6Ch	; l
-		db  6Fh	; o
-		db  6Fh	; o
-		db  70h	; p
-		db  73h	; s
-		db  20h
-		db  77h	; w
-		db  69h	; i
-		db  6Ch	; l
-		db  6Ch	; l
-		db  20h
-		db  68h	; h
-		db  65h	; e
-		db  6Ch	; l
-		db  70h	; p
-		db  20h
-		db  61h	; a
-		db  73h	; s
-		db  73h	; s
-		db  65h	; e
-		db  6Dh	; m
-		db  62h	; b
-		db  6Ch	; l
-		db  79h	; y
-		db  20h
-		db  74h	; t
-		db  69h	; i
-		db  6Dh	; m
-		db  65h	; e
-		db  24h	; $
-		db    1
-		db  4Eh	; N
-		db  6Fh	; o
-		db  20h
-		db  4Dh	; M
-		db  56h	; V
-		db  4Eh	; N
-		db  2Fh	; /
-		db  4Dh	; M
-		db  56h	; V
-		db  50h	; P
-		db  20h
-		db  63h	; c
-		db  6Fh	; o
-		db  6Dh	; m
-		db  6Dh	; m
-		db  61h	; a
-		db  6Eh	; n
-		db  64h	; d
-		db  21h	; !
-		db  24h	; $
-		db    0
-		db  43h	; C
-		db  61h	; a
-		db  6Eh	; n
-		db  27h	; '
-		db  74h	; t
-		db  20h
-		db  66h	; f
-		db  69h	; i
-		db  6Eh	; n
-		db  64h	; d
-		db  20h
-		db  73h	; s
-		db  79h	; y
-		db  6Dh	; m
-		db  62h	; b
-		db  6Fh	; o
-		db  6Ch	; l
-		db  24h	; $
-		db  0Dh
-		db  0Ah
-		db  50h	; P
-		db  75h	; u
-		db  62h	; b
-		db  6Ch	; l
-		db  69h	; i
-		db  63h	; c
-		db  20h
-		db  6Eh	; n
-		db  6Fh	; o
-		db  74h	; t
-		db  20h
-		db  64h	; d
-		db  65h	; e
-		db  66h	; f
-		db  69h	; i
-		db  6Eh	; n
-		db  65h	; e
-		db  64h	; d
-		db  20h
-		db  61h	; a
-		db  74h	; t
-		db  20h
-		db  65h	; e
-		db  6Eh	; n
-		db  64h	; d
-		db  20h
-		db  6Fh	; o
-		db  66h	; f
-		db  20h
-		db  61h	; a
-		db  73h	; s
-		db  73h	; s
-		db  65h	; e
-		db  6Dh	; m
-		db  62h	; b
-		db  6Ch	; l
-		db  79h	; y
-		db  20h
-		db  3Ah	; :
-		db  20h
-		db  24h	; $
-		db  0Dh
-		db  0Ah
-		db  53h	; S
-		db  79h	; y
-		db  6Dh	; m
-		db  62h	; b
-		db  6Fh	; o
-		db  6Ch	; l
-		db  20h
-		db  6Eh	; n
-		db  6Fh	; o
-		db  74h	; t
-		db  20h
-		db  64h	; d
-		db  65h	; e
-		db  66h	; f
-		db  69h	; i
-		db  6Eh	; n
-		db  65h	; e
-		db  64h	; d
-		db  20h
-		db  3Ah	; :
-		db  20h
-		db  24h	; $
-		db  45h	; E
-		db  72h	; r
-		db  72h	; r
-		db  6Fh	; o
-		db  72h	; r
-		db  20h
-		db  3Ah	; :
-		db  20h
-		db  43h	; C
-		db  61h	; a
-		db  6Eh	; n
-		db  6Eh	; n
-		db  6Fh	; o
-		db  74h	; t
-		db  20h
-		db  61h	; a
-		db  6Ch	; l
-		db  6Ch	; l
-		db  6Fh	; o
-		db  63h	; c
-		db  61h	; a
-		db  74h	; t
-		db  65h	; e
-		db  20h
-		db  69h	; i
-		db  6Eh	; n
-		db  63h	; c
-		db  62h	; b
-		db  69h	; i
-		db  6Eh	; n
-		db  20h
-		db  62h	; b
-		db  6Ch	; l
-		db  6Fh	; o
-		db  63h	; c
-		db  6Bh	; k
-		db  0Dh
-		db  0Ah
-		db  24h	; $
-		db  52h	; R
-		db  61h	; a
-		db  6Dh	; m
-		db  62h	; b
-		db  6Fh	; o
-		db  79h	; y
-		db  20h
-		db  6Eh	; n
-		db  6Fh	; o
-		db  74h	; t
-		db  20h
-		db  70h	; p
-		db  72h	; r
-		db  65h	; e
-		db  73h	; s
-		db  65h	; e
-		db  6Eh	; n
-		db  74h	; t
-		db  2Eh	; .
-		db  2Eh	; .
-		db  2Eh	; .
-		db  2Eh	; .
-		db  0Dh
-		db  0Ah
-		db  24h	; $
+INVARRAY	db 'Invalid array$',0
+STR2LONG	db 'String too long for array$',0
+NOSTRINGDEF	db 'Undefined string specified$',0
+NOSUCHENV	db 'Undefined Environment Variable$',0
+BADFILENAME	DB	"Wildcards not allowed in filenames$", 1
+	DB	"Same name$", 1
+	DB	"Null parameter specified$", 1
+BADRADIX	DB	"Bad radix specified in PRINTF expression$", 1
+BADHEX	DB	"Bad hex number in printf string$", 1
+BADSTRVAL	DB	"Invalid string$", 1
+BADPFSPEC	DB	"Bad PRINTF %command, Look at sasm.doc$", 1 ; SASM leftover
+PRINTFNOVAL	DB	"Bad PRINTF leading character$", 1
+BADFIELD	DB	"Bad field$", 1
+	DB	"Rept re-load. Moving large REPT loops will help assembly time$", 1
+	DB	"No MVN/MVP command!$", 0
+CANTFINDFR	DB	"Can't find symbol$",0Dh,0Ah
+PUBLICNOTDEF	DB	"Public not defined at end of assembly : $",0Dh,0Ah
+EXTNOTDEF	DB	"Symbol not defined : $"
+	DB	"Error : Cannot allocate incbin block",0Dh,0Ah,"$"
+	DB	"Ramboy not present....",0Dh,0Ah, "$"
 		public NOFILE
-NOFILE		db 'Can',27h,'t open output file....$',0Dh,0Ah
+NOFILE	db 'Can',27h,'t open output file....$',0Dh,0Ah
 		db '$Can',27h,'t open symbols file....$',0Dh,0Ah
-		db '$Rompos:$ Blk length:$Total gap length = $ Gap length:$     $',9,'$'
-		db ' +$ x$($)',0Dh,0Ah
-		db '$  -  $ at line $ has a value of $ File open error in command lin'
-		db 'e.',0Dh,0Ah
-		db '$ EMM failure.',0Dh,0Ah
-		db '$"',0Dh,0Ah
-		db '$Writing SOB file : $ $',0
+		db '$Rompos:$ Blk length:$Total gap length = $ Gap length:$     $'
+		public TAB
+TAB		db 9,'$'
+		public PLUS
+PLUS	db ' +$'
+		public X
+X:		db ' x$'
+		public OPBR
+OPBR	db '($'
+		public CLOSEBRAC
+CLOSEBRAC	db ')',0Dh,0Ah
+		public STARS
+STARS	db '$  -  $'
+		public ATLINE
+ATLINE	db ' at line $'
+		public HASAVALUE
+HASAVALUE	db ' has a value of $'
+		public OPERRCLI
+OPERRCLI	db ' File open error in command line.',0Dh,0Ah,'$'
+		db ' EMM failure.',0Dh,0Ah,'$"'
+		db 0Dh,0Ah,'$Writing SOB file : $ $',0
 		align 2
 		public CTRLCTXT
-CTRLCTXT	db 0Dh,0Ah
-		db 1Bh,'[0mCtrl-C pressed!  -  Exiting... ',0Dh,0Ah
-		db '$',0Dh,0Ah
-		db '  -  Drastic Error : $Error$Warning$Expression:$',0
+CTRLCTXT	db 0Dh,0Ah,1Bh,'[0mCtrl-C pressed!  -  Exiting... ',0Dh,0Ah,'$',0Dh,0Ah
+FATALERRTXT	db '  -  Drastic Error : $Error$Warning$Expression:$',0
 		db    0
 		db    0
 		db    0
@@ -82799,7 +82313,7 @@ DAYSPTRS:
 public WED
 WED	db 'Wednesday',0
 		public THURS
-THURS		db 'Thursday',0
+THURS	db 'Thursday',0
 		public FRI
 FRI		db 'Friday',0
 		public SAT
@@ -82809,7 +82323,7 @@ SUN		db 'Sunday',0
 		public MON
 MON		db 'Monday',0
 		public TUES
-TUES		db 'Tuesday',0
+TUES	db 'Tuesday',0
 		public MONPTRS
 MONPTRS		dw    0000h
 		dw offset JAN
@@ -82847,8 +82361,8 @@ OCT		db 'October',0
 		public NOV
 NOV		db 'November',0
 		public DECE
-DECE		db 'December',0
-aArgsfxV1_50Dbr	db 'ArgSfx v1.50 (DBR=OFF) Copyright (c) Argonaut Software Ltd. 1992',0Dh
+DECE	db 'December',0
+HELPTXT	db 'ArgSfx v1.50 (DBR=OFF) Copyright (c) Argonaut Software Ltd. 1992',0Dh
 		db 0Ah
 		db 'Usage: ARGSFX [options] sourcefile',0Dh,0Ah
 		db ' Options are:',0Dh,0Ah
@@ -87457,11 +86971,10 @@ TEMPMAPFNAME	db 'SFXTEMP.MAP',0
 MAPEXTNAME	db '.MAP',0
 		public MAPFILEMES
 MAPFILEMES	db 0Dh,0Ah
-		db 'Writing MAP file...$ Done.',0Dh,0Ah
-		db '$string not defined',0
+		db 'Writing MAP file...$ Done.',0Dh,0Ah,'$'
+		db 'string not defined',0
 aDebugPointEnco	db 0Dh,0Ah
-		db 'Debug point encountered',0Dh,0Ah
-		db '$'
+		db 'Debug point encountered',0Dh,0Ah,'$'
 	public JONS_EXT_FLAG
 JONS_EXT_FLAG	db 0
 		public JONS_FREF_PTR
