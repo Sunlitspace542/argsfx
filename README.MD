@@ -34,6 +34,13 @@ so it cannot yet be used as a codebase for general changes.
 - [ ] Create buildable disassembly of the linker? (I don't think I'm going to be able to decompile it but there is some HASM in there)
 - [ ] Investigate porting - 32-bit conversion, static recomp, reimplementation? (the OS/2 version may be the key here)
 
+## TODO
+- [x] Locate Zortech C/C++ 3.0r1
+- [x] Locate LINK 5.13 (for OS/2)
+- [ ] Locate libraries for OS/2? (DOSCALLS)
+- [ ] Locate LINK 5.10 (for DOS)
+- [ ] Find/make a good way to dump reliable debug info from the NB02 symbol data left in the standard DOS EXEs (in progress)
+
 # Building
 
 ## Importing symbols into IDA
