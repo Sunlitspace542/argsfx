@@ -3104,47 +3104,47 @@ loc_1395:				; CODE XREF: seg000:1390j
 		dw 4951h		; DATA XREF: seg000:25AEw
 					; ERROR_ROUT+680w ...
 		public _LOOP
-_LOOP		dw 36ACh		; DATA XREF: seg000:2578r
+_LOOP	dw 36ACh		; DATA XREF: seg000:2578r
 					; ERROR_ROUT+64Ar ...
-word_13C2	dw 26D7h		; DATA XREF: seg000:257Cr
-					; ERROR_ROUT+64Er ...
-			dw 53Ah			; DATA XREF: FATALERR_ROUT+BBw
-					; seg000:572Er	...
-			db 75h,	5Ah		; DATA XREF: seg000:5710r
-			dw 4947h		; DATA XREF: seg000:56F1r
-					; ADDSYMBOL+195w ...
-word_13CA	dw 0F475h		; DATA XREF: seg000:56ECr
-					; ADDSYMBOL+18Fw ...
-			db 59h,	5Fh, 7,	8Eh	; DATA XREF: seg000:5703r seg000:56FEr
-			dw 3EDAh		; DATA XREF: seg000:2627w
-					; ERROR_ROUT+6F9w ...
-			dw 468Ah		; DATA XREF: seg000:2622w
-					; ERROR_ROUT+6F4w ...
+		dw 26D7h		; DATA XREF: seg000:257Cr
+				; ERROR_ROUT+64Er ...
+		dw 53Ah			; DATA XREF: FATALERR_ROUT+BBw
+				; seg000:572Er	...
+		db 75h,	5Ah		; DATA XREF: seg000:5710r
+		dw 4947h		; DATA XREF: seg000:56F1r
+				; ADDSYMBOL+195w ...
+		dw 0F475h		; DATA XREF: seg000:56ECr
+				; ADDSYMBOL+18Fw ...
+		db 59h,	5Fh, 7,	8Eh	; DATA XREF: seg000:5703r seg000:56FEr
+		dw 3EDAh		; DATA XREF: seg000:2627w
+				; ERROR_ROUT+6F9w ...
+		dw 468Ah		; DATA XREF: seg000:2622w
+				; ERROR_ROUT+6F4w ...
 		db 4, 0A8h, 10h, 75h, 33h, 0A8h, 40h, 75h, 19h,	24h, 7Fh
 					; DATA XREF: seg000:45CAw seg000:4673w ...
 		db 36h,	8, 6
 		dw 0ACEh		; DATA XREF: ERROR_ROUT+DAr
-word_13E4	dw 8B3Eh		; DATA XREF: ERROR_ROUT+DFr
-			db 56h,	0Ah, 3Eh, 8Bh	; DATA XREF: seg000:6377w
-					; seg000:loc_641Ew ...
-			db 4Eh			; DATA XREF: P_PRINTF2+Dr seg000:6357w ...
-			db 0Ch			; DATA XREF: seg000:4C54w seg000:4C6Bw
-			dw 8E36h		; DATA XREF: sub_36FF-DC7w
-					; INCLUDEFILE+D8w
-word_13EE	dw 8C1Eh		; DATA XREF: sub_36FF-DC2w
-					; INCLUDEFILE+DDw ...
-			dw 329Ah		; DATA XREF: ERROR_ROUT+EDw
-					; GETLINE_MACROS+Cr ...
-			db 0C0h			; DATA XREF: PARSECLI:loc_8FE6w
-			dw 5DE9h		; DATA XREF: PARSECLI+1BCw
-			db 0FCh			; DATA XREF: sub_36FF+274r
+		dw 8B3Eh		; DATA XREF: ERROR_ROUT+DFr
+		db 56h,	0Ah, 3Eh, 8Bh	; DATA XREF: seg000:6377w
+				; seg000:loc_641Ew ...
+		db 4Eh			; DATA XREF: P_PRINTF2+Dr seg000:6357w ...
+		db 0Ch			; DATA XREF: seg000:4C54w seg000:4C6Bw
+		dw 8E36h		; DATA XREF: sub_36FF-DC7w
+				; INCLUDEFILE+D8w
+		dw 8C1Eh		; DATA XREF: sub_36FF-DC2w
+				; INCLUDEFILE+DDw ...
+		dw 329Ah		; DATA XREF: ERROR_ROUT+EDw
+				; GETLINE_MACROS+Cr ...
+		db 0C0h			; DATA XREF: PARSECLI:loc_8FE6w
+		dw 5DE9h		; DATA XREF: PARSECLI+1BCw
+		db 0FCh			; DATA XREF: sub_36FF+274r
 					; PARSECLI+109w
 		public _EXT
-_EXT		dw 0D98Ch		; DATA XREF: sub_36FF+28Cr
+_EXT	dw 0D98Ch		; DATA XREF: sub_36FF+28Cr
 					; sub_36FF+2A0r ...
 		db 8Bh			; DATA XREF: PARSECLI+F7w
 		dw 36D5h		; DATA XREF: PARSECLI+EAw
-word_13FB	dw 1E8Eh		; DATA XREF: PARSECLI+EFw
+		dw 1E8Eh		; DATA XREF: PARSECLI+EFw
 		dw 9A8Ch		; DATA XREF: PARSECLI+C9w
 		dw 8036h		; DATA XREF: seg000:241Cw
 					; sub_36FF-C8Bw ...
@@ -5247,7 +5247,7 @@ ERROR_ROUT	proc near		; CODE XREF: LINK+55p sub_AD7-13p ...
 		push	ss:PFTODISK
 		mov	ss:PFTODISK, 0
 		mov	ss:LLINE, ds
-		mov	ss:word_122A4, si
+		mov	ss:word_13E4, si
 		push	es
 		push	ax
 		push	di
@@ -55274,7 +55274,8 @@ word_13BE	dw 0			; DATA XREF: WRITEBLOCKS+Dw
 		public LENLASTBLK
 LENLASTBLK	db    0
 		db    0
-		db    0
+		public WORD_13C2
+WORD_13C2		db    0
 		db    0
 		public ERRORS
 ERRORS		dw 0			; DATA XREF: _ARGSFX:OVERRETr
@@ -55285,7 +55286,8 @@ WARNINGS	dw 0			; DATA XREF: INSFRERR1+44w
 		public SYMBOLS
 SYMBOLS		db    0
 		db    0
-		db    0
+		public	WORD_13CA
+WORD_13CA	db    0
 		db    0
 		public TOTALBYTES
 TOTALBYTES	db    0
@@ -55316,7 +55318,7 @@ word_122A0	dw 0			; DATA XREF: INSFRERR1+60w
 					; ERROR_ROUT+77w
 		public LLINE
 LLINE		dw 0			; DATA XREF: ERROR_ROUT+1Dw
-word_122A4	dw 0			; DATA XREF: ERROR_ROUT+22w
+word_13E4	dw 0			; DATA XREF: ERROR_ROUT+22w
 		public EXPRSUR
 EXPRSUR		db    0
 		public WARNSUP
@@ -55333,7 +55335,8 @@ LISTMACS	db 0			; DATA XREF: LISTLINE+20r
 		public LASTLINE
 LASTLINE	db    0
 		db    0
-		db    0
+		public WORD_13EE
+word_13EE	db    0
 		db    0
 		public LINE
 LINE		dw 0			; DATA XREF: INSFRERR1+10w
@@ -55351,7 +55354,8 @@ SYMLISTOPT	db 0			; DATA XREF: WRITESYMBOLSr
 		public SYMLISTNAME
 SYMLISTNAME	db    0
 		db    0
-		db    0
+		public	WORD_13FB
+WORD_13FB	db    0
 		db    0
 		public MAXERRORS
 MAXERRORS	dw 32h			; DATA XREF: EVAL_FRS+9Dr
