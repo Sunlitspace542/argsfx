@@ -3201,7 +3201,7 @@ _NOTTHERE:				; CODE XREF: seg000:1392j
 		mov	ss:PARENTPTR, ax
 ; ───────────────────────────────────────────────────────────────────────────
 		db 36h,	0A1h
-word_1470	dw 0F86h		; DATA XREF: seg000:264Cr
+		dw 0F86h		; DATA XREF: seg000:264Cr
 					; seg000:loc_2656w ...
 ; ───────────────────────────────────────────────────────────────────────────
 		mov	ss:word_11E42, ax
@@ -5356,7 +5356,7 @@ ERROR_ROUT	endp
 
 		public NEEDCR
 NEEDCR		proc near		; CODE XREF: LINK+71p WRITESYMBOLS+1Dp ...
-		mov	al, ss:byte_247C
+		mov	al, ss:NEEDLF
 		or	al, al
 		jz	short NONEEDCR
 		push	ds
@@ -5369,7 +5369,7 @@ NEEDCR		proc near		; CODE XREF: LINK+71p WRITESYMBOLS+1Dp ...
 		pop	dx
 		pop	ds
 		assume ds:nothing
-		mov	ss:byte_247C, 0
+		mov	ss:NEEDLF, 0
 
 		public NONEEDCR
 NONEEDCR:				; CODE XREF: NEEDCR+6j
@@ -5432,7 +5432,7 @@ FERRLP:					; CODE XREF: FATALERR_ROUT+2Ej
 		call	GETLINE
 		mov	ss:word_9A7C, ax
 		push	cx
-		mov	ss:byte_2480, 0
+		mov	ss:FIELD, 0
 		mov	cx, ss:word_9A7C
 		call	PRTDECW
 		pop	cx
@@ -5630,7 +5630,7 @@ ASSEMBLE:				; CODE XREF: _ARGSFX+29p
 		mov	word ptr ss:loc_AB8, ax
 		mov	ss:RELOADLINE, ax
 		mov	word ptr ss:loc_EDF, ax
-		mov	ss:word_248A, ax
+		mov	ss:MACRO1LINE, ax
 		push	ds
 		push	si
 		push	es
@@ -5696,33 +5696,33 @@ loc_247A:				; DATA XREF: sub_36FF+2DBr
 ; ───────────────────────────────────────────────────────────────────────────
 		assume ds:nothing
 		db 36h
-byte_247C	db 8Ch			; DATA XREF: NEEDCRr NEEDCR+19w ...
-byte_247D	db 16h			; DATA XREF: sub_36FF:loc_38B8w
+		db 8Ch			; DATA XREF: NEEDCRr NEEDCR+19w ...
+		db 16h			; DATA XREF: sub_36FF:loc_38B8w
 					; sub_36FF+1C2w ...
 		db 0A0h, 24h
-byte_2480	db 36h			; DATA XREF: FATALERR_ROUT+55w
+		db 36h			; DATA XREF: FATALERR_ROUT+55w
 					; sub_2C3C+6Fw	...
-byte_2481	db 89h			; DATA XREF: GETFIELD+6w GETFIELD+3Fw	...
-byte_2482	db 26h			; DATA XREF: P_PRINTF2+68w
+		db 89h			; DATA XREF: GETFIELD+6w GETFIELD+3Fw	...
+		db 26h			; DATA XREF: P_PRINTF2+68w
 					; P_PRINTF2:PFGOTFLDw ...
-byte_2483	db 0A2h			; DATA XREF: P_PRINTF2+6Ew
+		db 0A2h			; DATA XREF: P_PRINTF2+6Ew
 					; P_PRINTF2+ADw ...
-byte_2484	db 24h			; DATA XREF: GETFIELD+Cw GETFIELD+1Dw	...
-byte_2485	db 0EBh			; DATA XREF: P_PRINTF2:PFENDw
+		db 24h			; DATA XREF: GETFIELD+Cw GETFIELD+1Dw	...
+		db 0EBh			; DATA XREF: P_PRINTF2:PFENDw
 					; seg000:5845r	...
-word_2486	dw 0BB1Bh		; DATA XREF: sub_36FF+1C9r
+		dw 0BB1Bh		; DATA XREF: sub_36FF+1C9r
 					; sub_36FF+1DCr ...
-word_2488	dw 7827h		; DATA XREF: PFPRTNUM+13r BIN2DECW+82w ...
-word_248A	dw 0D736h		; DATA XREF: seg000:2424w
+		dw 7827h		; DATA XREF: PFPRTNUM+13r BIN2DECW+82w ...
+		dw 0D736h		; DATA XREF: seg000:2424w
 					; sub_36FF-C83w ...
-byte_248C	db 0BBh, 0A7h, 76h, 0Ah, 0C0h, 74h, 0Bh, 0FEh, 0C0h, 74h
+		db 0BBh, 0A7h, 76h, 0Ah, 0C0h, 74h, 0Bh, 0FEh, 0C0h, 74h
 					; DATA XREF: seg000:loc_96DFw
 					; seg000:loc_98E8w ...
 		db 1Bh,	70h
-byte_2498	db 33h			; DATA XREF: seg000:5356w
+		db 33h			; DATA XREF: seg000:5356w
 					; PARSECLI+1E6w ...
-byte_2499	db 78h,	4Eh, 0E9h	; DATA XREF: seg000:535Cw seg000:5375w
-word_249C	dw 12Bh			; DATA XREF: seg000:534Aw
+		db 78h,	4Eh, 0E9h	; DATA XREF: seg000:535Cw seg000:5375w
+		dw 12Bh			; DATA XREF: seg000:534Aw
 					; PARSECLI+1D9w
 word_249E	dw 0E84Eh		; DATA XREF: seg000:5352w
 					; PARSECLI+1DEw
@@ -5829,13 +5829,13 @@ loc_261E:				; CODE XREF: seg000:260Ej seg000:2617j
 loc_2645:				; CODE XREF: seg000:2640j
 		mov	ss:word_F96, ax
 		mov	ax, [bp+0]
-		cmp	ss:word_1470, ax
+		cmp	ss:NUMREPTS, ax
 		jz	short loc_2656
 		jmp	E_REPTUNBAL
 ; ───────────────────────────────────────────────────────────────────────────
 
 loc_2656:				; CODE XREF: seg000:2651j
-		mov	ss:word_1470, ax
+		mov	ss:NUMREPTS, ax
 		mov	ax, [bp+15h]
 		mov	ss:LINE, ax
 		mov	ax, [bp+0Ah]
@@ -6100,9 +6100,9 @@ loc_2860:				; CODE XREF: ERROR_ROUT+6E0j
 loc_2887:				; CODE XREF: ERROR_ROUT+712j
 		mov	ss:word_F96, ax
 		mov	ax, [bp+0]
-		cmp	ss:word_1470, ax
+		cmp	ss:NUMREPTS, ax
 		jnz	short E_REPTUNBAL
-		mov	ss:word_1470, ax
+		mov	ss:NUMREPTS, ax
 		mov	ax, [bp+15h]
 		mov	ss:LINE, ax
 		mov	ax, [bp+0Ah]
@@ -6222,7 +6222,7 @@ PMOKNOL:				; CODE XREF: sub_36FF-D8Cj
 		dec	si
 		mov	word ptr [bp+0Ch], ds
 		mov	[bp+0Eh], si
-		mov	ax, ss:word_1470
+		mov	ax, ss:NUMREPTS
 		mov	[bp+0],	ax
 		mov	ax, ss:word_F96
 		mov	[bp+4],	ax
@@ -6303,7 +6303,7 @@ _MACNUMOK:				; CODE XREF: sub_36FF-D04j
 		mov	word ptr ss:loc_AB8, ax
 		mov	ss:RELOADLINE, ax
 		mov	word ptr ss:loc_EDF, ax
-		mov	ss:word_248A, ax
+		mov	ss:MACRO1LINE, ax
 		mov	ss:LINE, 0
 		retn
 ; END OF FUNCTION CHUNK	FOR sub_36FF
@@ -6735,7 +6735,7 @@ loc_2C6D:				; CODE XREF: sub_2C3C+2Cj
 		pop	ds
 		assume ds:nothing
 		push	cx
-		mov	ss:byte_2480, 0
+		mov	ss:FIELD, 0
 		mov	cx, ss:LINE
 		call	PRTDECW
 		pop	cx
@@ -6751,7 +6751,7 @@ loc_2C6D:				; CODE XREF: sub_2C3C+2Cj
 		assume ds:nothing
 		push	dx
 		push	cx
-		mov	ss:byte_2480, 0
+		mov	ss:FIELD, 0
 		mov	dx, ss:word_9A7C
 		mov	cx, ss:word_9A7E
 		call	PRTDECL
@@ -8506,11 +8506,11 @@ DSREDEFSTRING:				; CODE XREF: sub_36FF+19Cj
 ; ───────────────────────────────────────────────────────────────────────────
 
 loc_38B8:				; CODE XREF: sub_36FF+1B4j
-		mov	ss:byte_247D, 1
+		mov	ss:PFOUTPUT, 1
 		call	P_PRINTF2
-		mov	ss:byte_247D, 0
+		mov	ss:PFOUTPUT, 0
 		pop	cx
-		cmp	cx, ss:word_2486
+		cmp	cx, ss:PFSTRLEN
 		ja	short loc_38D2
 		jmp	E_STR2LONG
 ; ───────────────────────────────────────────────────────────────────────────
@@ -8522,7 +8522,7 @@ loc_38D2:				; CODE XREF: sub_36FF+1CEj
 		mov	ds, ax
 		assume ds:seg000
 		mov	si, 8A6Eh
-		mov	cx, ss:word_2486
+		mov	cx, ss:PFSTRLEN
 
 		public DSCOPYPFLP2
 DSCOPYPFLP2:				; CODE XREF: sub_36FF+1E4j
@@ -10496,12 +10496,12 @@ loc_43D7:				; CODE XREF: sub_36FF+CDDj
 		mov	ax, es
 		mov	ds, ax
 		mov	si, di
-		mov	ss:byte_247D, 1
+		mov	ss:PFOUTPUT, 1
 		call	P_PRINTF2
-		mov	ss:byte_247D, 0
+		mov	ss:PFOUTPUT, 0
 		mov	di, si
 		push	bx
-		mov	bx, ss:word_2486
+		mov	bx, ss:PFSTRLEN
 		add	bx, 8A6Eh
 		mov	byte ptr ss:[bx], 0Dh
 		mov	byte ptr ss:[bx+1], 0Ah
@@ -10591,7 +10591,7 @@ FEGMSRUN:				; CODE XREF: sub_36FF+D81j
 		mov	es, word ptr [bp+0Ch]
 		mov	di, [bp+0Eh]
 		mov	ax, [bp+0]
-		mov	ss:word_1470, ax
+		mov	ss:NUMREPTS, ax
 		mov	ax, [bp+15h]
 		mov	ss:LINE, ax
 		mov	ss:word_F9C, bp
@@ -10936,7 +10936,7 @@ INCLUDEFILE	proc near		; CODE XREF: seg000:474Cp
 		mov	bp, ss:word_F9C
 		mov	word ptr [bp+0Ch], ds
 		mov	[bp+0Eh], si
-		mov	ax, ss:word_1470
+		mov	ax, ss:NUMREPTS
 		mov	[bp+0],	ax
 		mov	ax, ss:word_F96
 		mov	[bp+4],	ax
@@ -10998,10 +10998,10 @@ SRCLOK1:				; CODE XREF: INCLUDEFILE+95j
 		mov	word ptr ss:loc_AB8, ax
 		mov	ss:RELOADLINE, ax
 		mov	word ptr ss:loc_EDF, ax
-		mov	ss:word_248A, ax
+		mov	ss:MACRO1LINE, ax
 		mov	bx, 1
 		mov	ss:LINE, bx
-		mov	ss:word_248A, bx
+		mov	ss:MACRO1LINE, bx
 		mov	ss:LASTLINE, ds
 		mov	ss:word_13EE, si
 		add	ss:word_13EE, 1
@@ -11930,7 +11930,7 @@ P_MEXIT:				; CODE XREF: seg000:6D1Dj
 		mov	ax, [bp+4]
 		mov	ss:word_F96, ax
 		mov	ax, [bp+0]
-		mov	ss:word_1470, ax
+		mov	ss:NUMREPTS, ax
 		retn
 ; ───────────────────────────────────────────────────────────────────────────
 
@@ -12748,11 +12748,11 @@ P_OUTPUT:				; CODE XREF: seg000:5336j seg000:6DF4j
 NOTOFF:					; CODE XREF: seg000:536Aj seg000:5373j
 		call	COPYNAMENID
 		mov	ax, ss:word_9A7C
-		mov	ss:word_249C, ax
+		mov	ss:OUTPUTADDR, ax
 		mov	ax, ss:word_9A7E
 		mov	ss:word_249E, ax
-		mov	ss:byte_2498, 1
-		mov	ss:byte_2499, 4
+		mov	ss:OUTPUTFLAG, 1
+		mov	ss:OUTPUTNOWFLAG, 4
 		retn
 ; ───────────────────────────────────────────────────────────────────────────
 
@@ -12766,7 +12766,7 @@ OUTPUTOFF:				; CODE XREF: seg000:5341j
 		xlat	byte ptr ss:[bx]
 		or	al, al
 		jns	short NOTOFF
-		mov	ss:byte_2499, 0
+		mov	ss:OUTPUTNOWFLAG, 0
 		retn
 
 ; ███████████████ S U B	R O U T	I N E ███████████████████████████████████████
@@ -12978,8 +12978,8 @@ PFOK:					; CODE XREF: P_PRINTF2+52j
 PFGOT:					; CODE XREF: P_PRINTF2+24j
 					; P_PRINTF2+28j
 		mov	dh, al
-		mov	ss:byte_2482, 0FFh
-		mov	ss:byte_2483, 20h ; ' '
+		mov	ss:TFIELD, 0FFh
+		mov	ss:TFIELDFILL, 20h ; ' '
 		cmp	byte ptr [si], 5Bh ; '['
 		jnz	short PFGOTFLD2
 		inc	si
@@ -13019,7 +13019,7 @@ PFGETCOM:				; CODE XREF: P_PRINTF2+9Bj
 		mov	cl, al
 		inc	si
 		lodsb
-		mov	ss:byte_2483, al
+		mov	ss:TFIELDFILL, al
 		lodsb
 		cmp	al, 5Dh	; ']'
 		jz	short loc_54EA
@@ -13032,7 +13032,7 @@ loc_54EA:				; CODE XREF: P_PRINTF2+B4j
 
 		public PFGOTFLD
 PFGOTFLD:				; CODE XREF: P_PRINTF2+96j
-		mov	ss:byte_2482, al
+		mov	ss:TFIELD, al
 		inc	si
 
 		public PFGOTFLD2
@@ -13060,7 +13060,7 @@ loc_54FC:				; CODE XREF: P_PRINTF2+C6j
 		public PFPERC
 PFPERC:					; CODE XREF: P_PRINTF2+D1j
 		inc	dl
-		cmp	dl, ss:byte_2482
+		cmp	dl, ss:TFIELD
 		ja	short PFLOOP
 		stosb
 		jmp	short PFLOOP
@@ -13069,7 +13069,7 @@ PFPERC:					; CODE XREF: P_PRINTF2+D1j
 		public PFEND
 PFEND:					; CODE XREF: P_PRINTF2+2Ej
 					; P_PRINTF2+CDj
-		mov	ss:byte_2485, dl
+		mov	ss:NUMCHARS, dl
 		call	PFDOTFIELD
 
 		public PFEND2
@@ -13093,14 +13093,14 @@ loc_552F:				; CODE XREF: P_PRINTF2+F9j
 		sub	di, word ptr ss:loc_2471+1
 		mov	cx, di
 		pop	di
-		mov	ss:word_2486, cx
-		mov	al, ss:byte_247D
+		mov	ss:PFSTRLEN, cx
+		mov	al, ss:PFOUTPUT
 		or	al, al
 		jnz	short PFOUT
-		mov	ss:byte_247C, 0
+		mov	ss:NEEDLF, 0
 		cmp	byte ptr es:[di-2], 0Dh
 		jz	short PFOKCR
-		mov	ss:byte_247C, 1
+		mov	ss:NEEDLF, 1
 
 		public PFOKCR
 PFOKCR:					; CODE XREF: P_PRINTF2+11Fj
@@ -13651,7 +13651,7 @@ PFLINE:
 		xor	dx, dx
 		call	PFPRTNUM
 		pop	dx
-		add	dl, ss:byte_2485
+		add	dl, ss:NUMCHARS
 		mov	al, 2Fh	; '/'
 		stosb
 		inc	dl
@@ -13667,7 +13667,7 @@ PFLINE:
 		xor	dx, dx
 		call	PFPRTNUM
 		pop	dx
-		add	dl, ss:byte_2485
+		add	dl, ss:NUMCHARS
 
 		public PFNOMACL
 PFNOMACL:				; CODE XREF: seg000:5857j
@@ -13681,7 +13681,7 @@ PF_FRLINE:				; CODE XREF: seg000:5837j
 		xor	dx, dx
 		call	PFPRTNUM
 		pop	dx
-		add	dl, ss:byte_2485
+		add	dl, ss:NUMCHARS
 		jmp	PFLOOP
 
 ; ███████████████ S U B	R O U T	I N E ███████████████████████████████████████
@@ -13690,14 +13690,14 @@ PF_FRLINE:				; CODE XREF: seg000:5837j
 		public GETFIELD
 GETFIELD	proc near		; CODE XREF: P_PRINTF2+3Ep
 					; P_PRINTF2:PFSPECp ...
-		mov	ss:byte_2480, 0
-		mov	ss:byte_2481, 20h ; ' '
-		mov	ss:byte_2484, 0
+		mov	ss:FIELD, 0
+		mov	ss:FIELDFILL, 20h ; ' '
+		mov	ss:PFPRTHEX, 0
 		cmp	byte ptr [si], 3Ah ; ':'
 		jnz	short GETF
 		cmp	byte ptr [si+1], 24h ; '$'
 		jnz	short PFBADRADIX
-		mov	ss:byte_2484, 1
+		mov	ss:PFPRTHEX, 1
 		inc	si
 		inc	si
 
@@ -13718,14 +13718,14 @@ GETF:					; CODE XREF: GETFIELD+15j
 		cmp	al, 2Ch	; ','
 		jnz	short PFFLD
 		lodsb
-		mov	ss:byte_2481, al
+		mov	ss:FIELDFILL, al
 		lodsb
 		cmp	al, 5Dh	; ']'
 		jnz	short PFFLD
 
 		public PFFOK
 PFFOK:					; CODE XREF: GETFIELD+38j
-		mov	ss:byte_2480, cl
+		mov	ss:FIELD, cl
 
 		public PFNOF
 PFNOF:					; CODE XREF: GETFIELD+29j
@@ -13768,14 +13768,14 @@ GETFIELD	endp
 PFPRTNUM	proc near		; CODE XREF: P_PRINTF2:PFOKp
 					; seg000:PFOK2p ...
 		push	di
-		mov	al, ss:byte_2484
+		mov	al, ss:PFPRTHEX
 		or	al, al
 		jnz	short PFDOPRTHEX
 		call	BIN2DECL
 		pop	di
 		call	PFDOFIELD
 		call	BIN2DECL
-		mov	di, ss:word_2488
+		mov	di, ss:PRINTBUFPTR
 		dec	di
 		retn
 ; ───────────────────────────────────────────────────────────────────────────
@@ -13793,13 +13793,13 @@ PFPRTNUM	endp ; sp =  2
 
 		public PFDOFIELD
 PFDOFIELD	proc near		; CODE XREF: PFPRTNUM+Dp
-		mov	bl, ss:byte_2480
+		mov	bl, ss:FIELD
 		or	bl, bl
 		jz	short ENDFIELD2
-		sub	bl, ss:byte_2485
+		sub	bl, ss:NUMCHARS
 		js	short ENDFIELD2
 		jz	short ENDFIELD2
-		mov	al, ss:byte_2481
+		mov	al, ss:FIELDFILL
 
 		public FIELDLP2
 FIELDLP2:				; CODE XREF: PFDOFIELD+19j
@@ -13818,13 +13818,13 @@ PFDOFIELD	endp
 
 		public PFDOTFIELD
 PFDOTFIELD	proc near		; CODE XREF: P_PRINTF2+E7p
-		mov	bl, ss:byte_2482
+		mov	bl, ss:TFIELD
 		or	bl, bl
 		jz	short ENDTFIELD
 		sub	bl, dl
 		js	short ENDTFIELD
 		jz	short ENDTFIELD
-		mov	al, ss:byte_2483
+		mov	al, ss:TFIELDFILL
 
 		public TFIELDLP
 TFIELDLP:				; CODE XREF: PFDOTFIELD+16j
@@ -14380,12 +14380,12 @@ P_RUN:					; CODE XREF: seg000:5C4Cj seg000:5C56j ...
 		dec	si
 		push	word ptr ss:loc_2471+1
 		mov	word ptr ss:loc_2471+1,	8B36h
-		mov	ss:byte_247D, 1
+		mov	ss:PFOUTPUT, 1
 		call	P_PRINTF2
-		mov	ss:byte_247D, 0
+		mov	ss:PFOUTPUT, 0
 		pop	word ptr ss:loc_2471+1
 		push	bx
-		mov	bx, ss:word_2486
+		mov	bx, ss:PFSTRLEN
 		add	bx, 8B36h
 		mov	word ptr ss:[bx], 0A0Dh
 		mov	byte ptr ss:[bx+2], 1Ah
@@ -14393,7 +14393,7 @@ P_RUN:					; CODE XREF: seg000:5C4Cj seg000:5C56j ...
 		dec	si
 		mov	word ptr [bp+0Ch], ds
 		mov	[bp+0Eh], si
-		mov	ax, ss:word_1470
+		mov	ax, ss:NUMREPTS
 		mov	[bp+0],	ax
 		mov	ax, ss:word_F96
 		mov	[bp+4],	ax
@@ -14543,7 +14543,7 @@ M_IRP:					; CODE XREF: seg000:6BE8j seg000:92CAj
 ; ───────────────────────────────────────────────────────────────────────────
 
 loc_5DC5:				; CODE XREF: seg000:5DC0j
-		cmp	ss:word_1470, 0
+		cmp	ss:NUMREPTS, 0
 		jnz	short loc_5DD0
 		jmp	P_NOTINREPT
 ; ───────────────────────────────────────────────────────────────────────────
@@ -14644,7 +14644,7 @@ M_IRS:					; CODE XREF: seg000:6BEFj seg000:92C2j
 ; ───────────────────────────────────────────────────────────────────────────
 
 loc_5E75:				; CODE XREF: seg000:5E70j
-		cmp	ss:word_1470, 0
+		cmp	ss:NUMREPTS, 0
 		jz	short P_NOTINREPT
 
 loc_5E7D:				; CODE XREF: seg000:5E82j
@@ -14781,9 +14781,9 @@ REPFINDLF:				; CODE XREF: seg000:5F34j
 		public REPFOUNDLF0
 REPFOUNDLF0:				; CODE XREF: seg000:5F2Dj
 		dec	si
-		cmp	ss:word_1470, 6
+		cmp	ss:NUMREPTS, 6
 		jge	short P_REPTERROR
-		inc	ss:word_1470
+		inc	ss:NUMREPTS
 		push	es
 		push	di
 		add	word ptr ss:RPTPTR, 12h
@@ -14829,7 +14829,7 @@ P_REPTERR1:				; CODE XREF: seg000:5F22j seg000:5F28j
 
 		public P_ENDR
 P_ENDR:					; CODE XREF: seg000:6A18j
-		test	ss:word_1470, 0FFFFh
+		test	ss:NUMREPTS, 0FFFFh
 		jnz	short loc_5FAE
 		jmp	P_ENDRERR
 ; ───────────────────────────────────────────────────────────────────────────
@@ -14838,7 +14838,7 @@ loc_5FAE:				; CODE XREF: seg000:5FA9j
 		mov	bp, ss:word_F9C
 		sub	bp, 1Fh
 		mov	dx, [bp+0]
-		cmp	dx, ss:word_1470
+		cmp	dx, ss:NUMREPTS
 		jl	short loc_5FC3
 		jmp	P_ENDRERROR
 ; ───────────────────────────────────────────────────────────────────────────
@@ -14851,7 +14851,7 @@ loc_5FC3:				; CODE XREF: seg000:5FBEj
 		sbb	ax, 0
 		jns	short SETREPT
 		sub	word ptr ss:RPTPTR, 12h
-		dec	ss:word_1470
+		dec	ss:NUMREPTS
 		dec	ss:LINE
 		retn
 ; ───────────────────────────────────────────────────────────────────────────
@@ -18360,11 +18360,11 @@ REDEFSTRING:				; CODE XREF: P_STRING+11j
 ; ───────────────────────────────────────────────────────────────────────────
 
 loc_722C:				; CODE XREF: P_STRING+29j
-		mov	ss:byte_247D, 1
+		mov	ss:PFOUTPUT, 1
 		call	P_PRINTF2
-		mov	ss:byte_247D, 0
+		mov	ss:PFOUTPUT, 0
 		pop	cx
-		cmp	cx, ss:word_2486
+		cmp	cx, ss:PFSTRLEN
 		jbe	short E_STR2LONG
 		push	ds
 		push	si
@@ -18372,7 +18372,7 @@ loc_722C:				; CODE XREF: P_STRING+29j
 		mov	ds, ax
 		assume ds:seg000
 		mov	si, 8A6Eh
-		mov	cx, ss:word_2486
+		mov	cx, ss:PFSTRLEN
 
 		public COPYPFLP2
 COPYPFLP2:				; CODE XREF: P_STRING+56j
@@ -18485,22 +18485,22 @@ loc_72E8:				; CODE XREF: P_STRING+E5j
 		lodsb
 		cmp	al, 3Dh	; '='
 		jnz	short NSTRNODEF
-		mov	ss:byte_247D, 1
+		mov	ss:PFOUTPUT, 1
 		call	P_PRINTF2
-		mov	ss:byte_247D, 0
+		mov	ss:PFOUTPUT, 0
 		jmp	short STRDEF
 ; ───────────────────────────────────────────────────────────────────────────
 
 		public NSTRNODEF
 NSTRNODEF:				; CODE XREF: P_STRING+EDj
 		mov	ss:byte_8A6E, 0
-		mov	ss:word_2486, 1
+		mov	ss:PFSTRLEN, 1
 
 		public STRDEF
 STRDEF:					; CODE XREF: P_STRING+FEj
 		cmp	ss:STRTEMP1, 0
 		jnz	short GOTLEN2
-		mov	ax, ss:word_2486
+		mov	ax, ss:PFSTRLEN
 		mov	ss:STRTEMP1, ax
 
 		public GOTLEN2
@@ -18512,7 +18512,7 @@ GOTLEN2:				; CODE XREF: P_STRING+113j
 		mov	ds, ax
 		assume ds:seg000
 		mov	si, 8A6Eh
-		mov	cx, ss:word_2486
+		mov	cx, ss:PFSTRLEN
 		cmp	cx, ss:STRTEMP1
 		ja	short E_INVARRAY
 		mov	ax, ss:STRTEMP1
@@ -21930,10 +21930,10 @@ loc_8AED:				; CODE XREF: seg000:8AE8j
 
 		public CALCFIELD
 CALCFIELD	proc near		; CODE XREF: PRTDECW+Fp PRTDECL+Fp
-		mov	cl, ss:byte_2480
+		mov	cl, ss:FIELD
 		or	cl, cl
 		jz	short ENDFIELD
-		sub	cl, ss:byte_2485
+		sub	cl, ss:NUMCHARS
 		js	short ENDFIELD
 
 		public FIELDLP
@@ -22001,7 +22001,7 @@ BIN2DECW	proc near		; CODE XREF: FATALERR_ROUT+7Ep
 		push	bx
 		push	cx
 		push	di
-		mov	ss:byte_2485, 0
+		mov	ss:NUMCHARS, 0
 		cmp	cx, 270Fh
 		ja	short BIN10000
 		cmp	cx, 3E7h
@@ -22025,7 +22025,7 @@ BINDIGIT1:				; CODE XREF: BIN2DECW+2Bj
 		jnb	short BINDIGIT1
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		add	cx, bx
 
 		public BIN1000
@@ -22040,7 +22040,7 @@ BINDIGIT2:				; CODE XREF: BIN2DECW+40j
 		jnb	short BINDIGIT2
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		add	cx, bx
 
 		public BIN100
@@ -22055,7 +22055,7 @@ BINDIGIT3:				; CODE XREF: BIN2DECW+55j
 		jnb	short BINDIGIT3
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		add	cx, bx
 
 		public BIN10
@@ -22070,7 +22070,7 @@ BINDIGIT4:				; CODE XREF: BIN2DECW+69j
 		jnb	short BINDIGIT4
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		add	cl, bl
 
 		public BIN1
@@ -22078,10 +22078,10 @@ BIN1:					; CODE XREF: BIN2DECW+20j
 		mov	al, cl
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		mov	al, 24h	; '$'
 		stosb
-		mov	ss:word_2488, di
+		mov	ss:PRINTBUFPTR, di
 		pop	di
 		pop	cx
 		pop	bx
@@ -22201,7 +22201,7 @@ BIN2DECL	proc near		; CODE XREF: ADD_ASSEMVARS+DAp
 		push	dx
 		push	di
 		push	bp
-		mov	ss:byte_2485, 0
+		mov	ss:NUMCHARS, 0
 		cmp	dx, 0
 		js	short B2DLBS
 
@@ -22277,7 +22277,7 @@ B2DLBS:					; CODE XREF: BIN2DECL+Fj
 		adc	dx, 0
 		mov	al, 2Dh	; '-'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		jmp	short B2DLBS1
 ; ───────────────────────────────────────────────────────────────────────────
 
@@ -22334,7 +22334,7 @@ BINLDIGIT1:				; CODE XREF: BIN2DECL+B8j
 		jnb	short BINLDIGIT1
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		add	cx, bx
 		adc	dx, bp
 
@@ -22352,7 +22352,7 @@ BINLDIGIT2:				; CODE XREF: BIN2DECL+D4j
 		jnb	short BINLDIGIT2
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		add	cx, bx
 		adc	dx, bp
 
@@ -22370,7 +22370,7 @@ BINLDIGIT3:				; CODE XREF: BIN2DECL+F0j
 		jnb	short BINLDIGIT3
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		add	cx, bx
 		adc	dx, bp
 
@@ -22388,7 +22388,7 @@ BINLDIGIT4:				; CODE XREF: BIN2DECL+10Cj
 		jnb	short BINLDIGIT4
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		add	cx, bx
 		adc	dx, bp
 
@@ -22406,7 +22406,7 @@ BINLDIGIT5:				; CODE XREF: BIN2DECL+128j
 		jnb	short BINLDIGIT5
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		add	cx, bx
 		adc	dx, bp
 
@@ -22423,7 +22423,7 @@ BINDIGIT1B:				; CODE XREF: BIN2DECL+142j
 		jnb	short BINDIGIT1B
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		add	cx, bx
 
 		public BINL1000
@@ -22438,7 +22438,7 @@ BINDIGIT2B:				; CODE XREF: BIN2DECL+157j
 		jnb	short BINDIGIT2B
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		add	cx, bx
 
 		public BINL100
@@ -22453,7 +22453,7 @@ BINDIGIT3B:				; CODE XREF: BIN2DECL+16Cj
 		jnb	short BINDIGIT3B
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		add	cx, bx
 
 		public BINL10
@@ -22468,7 +22468,7 @@ BINDIGIT4B:				; CODE XREF: BIN2DECL+180j
 		jnb	short BINDIGIT4B
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		add	cl, bl
 
 		public BINL1
@@ -22476,10 +22476,10 @@ BINL1:					; CODE XREF: BIN2DECL:loc_8CA4j
 		mov	al, cl
 		add	al, 30h	; '0'
 		stosb
-		inc	ss:byte_2485
+		inc	ss:NUMCHARS
 		mov	al, 24h	; '$'
 		stosb
-		mov	ss:word_2488, di
+		mov	ss:PRINTBUFPTR, di
 		pop	bp
 		pop	di
 		pop	dx
@@ -22851,10 +22851,10 @@ loc_901E:				; CODE XREF: PARSECLI+1CDj
 		mov	ax, ss
 		mov	es, ax
 		mov	di, 9ADCh
-		mov	ss:word_249C, es
+		mov	ss:OUTPUTADDR, es
 		mov	ss:word_249E, di
 		call	COPYNAME
-		mov	ss:byte_2498, 1
+		mov	ss:OUTPUTFLAG, 1
 		jmp	OP_LP
 ; ───────────────────────────────────────────────────────────────────────────
 
@@ -24119,7 +24119,7 @@ loc_9683:				; CODE XREF: seg000:9674j
 		dec	si
 
 loc_9686:				; CODE XREF: seg000:9650j seg000:9660j ...
-		mov	ss:byte_248C+1,	cl
+		mov	ss:DREG,	cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_9693
@@ -24182,7 +24182,7 @@ loc_96DC:				; CODE XREF: seg000:96CDj
 		dec	si
 
 loc_96DF:				; CODE XREF: seg000:96A9j seg000:96B9j ...
-		mov	ss:byte_248C, cl
+		mov	ss:SREG, cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_96EC
@@ -24192,8 +24192,8 @@ loc_96DF:				; CODE XREF: seg000:96A9j seg000:96B9j ...
 loc_96EC:				; CODE XREF: seg000:96E7j
 		call	CODEDREGSREG_ROU
 		call	M_ADCCONT
-		mov	ds, word ptr ss:byte_248C+8
-		mov	si, word ptr ss:byte_248C+0Ah
+		mov	ds, word ptr ss:SREG+8
+		mov	si, word ptr ss:SREG+0Ah
 		retn
 ; ───────────────────────────────────────────────────────────────────────────
 
@@ -24464,7 +24464,7 @@ loc_988C:				; CODE XREF: seg000:987Dj
 		dec	si
 
 loc_988F:				; CODE XREF: seg000:9859j seg000:9869j ...
-		mov	ss:byte_248C+1,	cl
+		mov	ss:DREG,	cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_989C
@@ -24527,7 +24527,7 @@ loc_98E5:				; CODE XREF: seg000:98D6j
 		dec	si
 
 loc_98E8:				; CODE XREF: seg000:98B2j seg000:98C2j ...
-		mov	ss:byte_248C, cl
+		mov	ss:SREG, cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_98F5
@@ -24537,8 +24537,8 @@ loc_98E8:				; CODE XREF: seg000:98B2j seg000:98C2j ...
 loc_98F5:				; CODE XREF: seg000:98F0j
 		call	CODEDREGSREG_ROU
 		call	M_ADDCONT
-		mov	ds, word ptr ss:byte_248C+8
-		mov	si, word ptr ss:byte_248C+0Ah
+		mov	ds, word ptr ss:SREG+8
+		mov	si, word ptr ss:SREG+0Ah
 		retn
 ; ───────────────────────────────────────────────────────────────────────────
 
@@ -24820,7 +24820,7 @@ word_9A94	dw 2C3Ch		; DATA XREF: sub_36FF+B63w
 ; ───────────────────────────────────────────────────────────────────────────
 
 loc_9AA8:				; CODE XREF: seg000:9A72j
-		mov	ss:byte_248C+1,	cl
+		mov	ss:DREG,	cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_9AB5
@@ -24883,7 +24883,7 @@ loc_9AFE:				; CODE XREF: seg000:9AEFj
 		dec	si
 
 loc_9B01:				; CODE XREF: seg000:9ACBj seg000:9ADBj ...
-		mov	ss:byte_248C, cl
+		mov	ss:SREG, cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_9B0E
@@ -24893,8 +24893,8 @@ loc_9B01:				; CODE XREF: seg000:9ACBj seg000:9ADBj ...
 loc_9B0E:				; CODE XREF: seg000:9B09j
 		call	CODEDREGSREG_ROU
 		call	M_ANDCONT
-		mov	ds, word ptr ss:byte_248C+8
-		mov	si, word ptr ss:byte_248C+0Ah
+		mov	ds, word ptr ss:SREG+8
+		mov	si, word ptr ss:SREG+0Ah
 		retn
 ; ───────────────────────────────────────────────────────────────────────────
 
@@ -30471,7 +30471,7 @@ loc_BC55:				; CODE XREF: seg000:BC46j
 		dec	si
 
 loc_BC58:				; CODE XREF: seg000:BC22j seg000:BC32j ...
-		mov	ss:byte_248C+1,	cl
+		mov	ss:DREG,	cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_BC65
@@ -30534,7 +30534,7 @@ loc_BCAE:				; CODE XREF: seg000:BC9Fj
 		dec	si
 
 loc_BCB1:				; CODE XREF: seg000:BC7Bj seg000:BC8Bj ...
-		mov	ss:byte_248C, cl
+		mov	ss:SREG, cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_BCBE
@@ -30544,8 +30544,8 @@ loc_BCB1:				; CODE XREF: seg000:BC7Bj seg000:BC8Bj ...
 loc_BCBE:				; CODE XREF: seg000:BCB9j
 		call	CODEDREGSREG_ROU
 		call	M_ORCONT
-		mov	ds, word ptr ss:byte_248C+8
-		mov	si, word ptr ss:byte_248C+0Ah
+		mov	ds, word ptr ss:SREG+8
+		mov	si, word ptr ss:SREG+0Ah
 		retn
 ; ───────────────────────────────────────────────────────────────────────────
 
@@ -31267,7 +31267,7 @@ loc_C08C:				; CODE XREF: seg000:C07Dj
 		dec	si
 
 loc_C08F:				; CODE XREF: seg000:C059j seg000:C069j ...
-		mov	ss:byte_248C+1,	cl
+		mov	ss:DREG,	cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_C09C
@@ -31330,7 +31330,7 @@ loc_C0E5:				; CODE XREF: seg000:C0D6j
 		dec	si
 
 loc_C0E8:				; CODE XREF: seg000:C0B2j seg000:C0C2j ...
-		mov	ss:byte_248C, cl
+		mov	ss:SREG, cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_C0F5
@@ -31340,8 +31340,8 @@ loc_C0E8:				; CODE XREF: seg000:C0B2j seg000:C0C2j ...
 loc_C0F5:				; CODE XREF: seg000:C0F0j
 		call	CODEDREGSREG_ROU
 		call	M_SUBCONT
-		mov	ds, word ptr ss:byte_248C+8
-		mov	si, word ptr ss:byte_248C+0Ah
+		mov	ds, word ptr ss:SREG+8
+		mov	si, word ptr ss:SREG+0Ah
 		retn
 ; ───────────────────────────────────────────────────────────────────────────
 
@@ -31524,7 +31524,7 @@ loc_C1E8:				; CODE XREF: seg000:C1D9j
 		dec	si
 
 loc_C1EB:				; CODE XREF: seg000:C1B5j seg000:C1C5j ...
-		mov	ss:byte_248C+1,	cl
+		mov	ss:DREG,	cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_C1F8
@@ -31587,7 +31587,7 @@ loc_C241:				; CODE XREF: seg000:C232j
 		dec	si
 
 loc_C244:				; CODE XREF: seg000:C20Ej seg000:C21Ej ...
-		mov	ss:byte_248C, cl
+		mov	ss:SREG, cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_C251
@@ -31597,8 +31597,8 @@ loc_C244:				; CODE XREF: seg000:C20Ej seg000:C21Ej ...
 loc_C251:				; CODE XREF: seg000:C24Cj
 		call	CODEDREGSREG_ROU
 		call	M_SBCCONT
-		mov	ds, word ptr ss:byte_248C+8
-		mov	si, word ptr ss:byte_248C+0Ah
+		mov	ds, word ptr ss:SREG+8
+		mov	si, word ptr ss:SREG+0Ah
 		retn
 ; ───────────────────────────────────────────────────────────────────────────
 
@@ -32662,7 +32662,7 @@ loc_C8C9:				; CODE XREF: seg000:C8BAj
 		dec	si
 
 loc_C8CC:				; CODE XREF: seg000:C896j seg000:C8A6j ...
-		mov	ss:byte_248C+1,	cl
+		mov	ss:DREG,	cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_C8D9
@@ -32725,7 +32725,7 @@ loc_C922:				; CODE XREF: seg000:C913j
 		dec	si
 
 loc_C925:				; CODE XREF: seg000:C8EFj seg000:C8FFj ...
-		mov	ss:byte_248C, cl
+		mov	ss:SREG, cl
 		lodsb
 		cmp	al, 2Ch	; ','
 		jz	short loc_C932
@@ -32735,8 +32735,8 @@ loc_C925:				; CODE XREF: seg000:C8EFj seg000:C8FFj ...
 loc_C932:				; CODE XREF: seg000:C92Dj
 		call	CODEDREGSREG_ROU
 		call	M_XORCONT
-		mov	ds, word ptr ss:byte_248C+8
-		mov	si, word ptr ss:byte_248C+0Ah
+		mov	ds, word ptr ss:SREG+8
+		mov	si, word ptr ss:SREG+0Ah
 		retn
 
 ; ███████████████ S U B	R O U T	I N E ███████████████████████████████████████
@@ -32757,7 +32757,7 @@ CODEDREGSREG_ROU proc near		; CODE XREF: seg000:loc_96ECp
 
 loc_C94B:				; CODE XREF: CODEDREGSREG_ROU+3j
 		inc	si
-		mov	ss:byte_248C+2,	0
+		mov	ss:SREG+2,	0
 		call	CONVEXPRESS
 		lodsb
 		cmp	al, 3Ah	; ':'
@@ -32793,7 +32793,7 @@ loc_C975:				; CODE XREF: CODEDREGSREG_ROU+2Dj
 
 loc_C97E:				; CODE XREF: CODEDREGSREG_ROU+36j
 		shr	cx, 1
-		mov	al, ss:byte_248C+2
+		mov	al, ss:SREG+2
 		add	al, 0A0h ; 'á'
 		mov	ah, 3Dh	; '='
 		xchg	al, ah
@@ -32862,8 +32862,8 @@ loc_CA19:				; CODE XREF: CODEDREGSREG_ROU+4Fj
 		stosw
 		mov	al, cl
 		stosb
-		mov	al, ss:byte_248C
-		cmp	al, ss:byte_248C+1
+		mov	al, ss:SREG
+		cmp	al, ss:DREG
 		jz	short WITH2
 		or	al, al
 		jz	short CHKDREG2
@@ -32872,7 +32872,7 @@ loc_CA19:				; CODE XREF: CODEDREGSREG_ROU+4Fj
 
 		public CHKDREG2
 CHKDREG2:				; CODE XREF: CODEDREGSREG_ROU+E7j
-		mov	al, ss:byte_248C+1
+		mov	al, ss:DREG
 		or	al, al
 		jz	short EXIT2
 		add	al, 10h
@@ -32891,20 +32891,20 @@ WITH2:					; CODE XREF: CODEDREGSREG_ROU+E3j
 EXIT2:					; CODE XREF: CODEDREGSREG_ROU+F2j
 					; CODEDREGSREG_ROU+F7j	...
 		mov	al, 52h	; 'R'
-		mov	ss:byte_248C+3,	al
-		mov	al, ss:byte_248C+2
+		mov	ss:SREG+3,	al
+		mov	al, ss:SREG+2
 		cmp	al, 0Ah
 		jb	short DIG1
 		mov	al, 31h	; '1'
-		mov	ss:byte_248C+4,	al
-		mov	al, ss:byte_248C+2
+		mov	ss:SREG+4,	al
+		mov	al, ss:SREG+2
 		sub	al, 0Ah
 		add	al, 30h	; '0'
-		mov	ss:byte_248C+5,	al
-		mov	ss:byte_248C+6,	0Dh
-		mov	ss:byte_248C+7,	0Ah
-		mov	word ptr ss:byte_248C+8, ds
-		mov	word ptr ss:byte_248C+0Ah, si
+		mov	ss:SREG+5,	al
+		mov	ss:SREG+6,	0Dh
+		mov	ss:SREG+7,	0Ah
+		mov	word ptr ss:SREG+8, ds
+		mov	word ptr ss:SREG+0Ah, si
 		mov	ax, ss
 		mov	ds, ax
 		assume ds:seg000
@@ -32915,11 +32915,11 @@ EXIT2:					; CODE XREF: CODEDREGSREG_ROU+F2j
 		public DIG1
 DIG1:					; CODE XREF: CODEDREGSREG_ROU+10Cj
 		add	al, 30h	; '0'
-		mov	ss:byte_248C+4,	al
-		mov	ss:byte_248C+5,	0Dh
-		mov	ss:byte_248C+6,	(offset	loc_6+4)
-		mov	word ptr ss:byte_248C+8, ds
-		mov	word ptr ss:byte_248C+0Ah, si
+		mov	ss:SREG+4,	al
+		mov	ss:SREG+5,	0Dh
+		mov	ss:SREG+6,	(offset	loc_6+4)
+		mov	word ptr ss:SREG+8, ds
+		mov	word ptr ss:SREG+0Ah, si
 		mov	ax, ss
 		mov	ds, ax
 		mov	si, 248Fh
@@ -32987,7 +32987,7 @@ loc_CAEF:				; CODE XREF: CODEDREGSREG_ROU+19Dj
 
 loc_CAF2:				; CODE XREF: CODEDREGSREG_ROU+179j
 					; CODEDREGSREG_ROU+189j ...
-		mov	ss:byte_248C+2,	cl
+		mov	ss:SREG+2,	cl
 		pop	cx
 		lodsb
 		jmp	REGSPECONT
@@ -32995,8 +32995,8 @@ loc_CAF2:				; CODE XREF: CODEDREGSREG_ROU+179j
 
 		public REG2REG
 REG2REG:				; CODE XREF: CODEDREGSREG_ROU+5j
-		mov	al, ss:byte_248C
-		cmp	al, ss:byte_248C+1
+		mov	al, ss:SREG
+		cmp	al, ss:DREG
 		jz	short WITH
 		or	al, al
 		jz	short CHKDREG
@@ -33005,7 +33005,7 @@ REG2REG:				; CODE XREF: CODEDREGSREG_ROU+5j
 
 		public CHKDREG
 CHKDREG:				; CODE XREF: CODEDREGSREG_ROU+1C6j
-		mov	al, ss:byte_248C+1
+		mov	al, ss:DREG
 		or	al, al
 		jz	short EXIT
 		add	al, 10h
@@ -33023,8 +33023,8 @@ WITH:					; CODE XREF: CODEDREGSREG_ROU+1C2j
 		public EXIT
 EXIT:					; CODE XREF: CODEDREGSREG_ROU+1D1j
 					; CODEDREGSREG_ROU+1D6j ...
-		mov	word ptr ss:byte_248C+8, ds
-		mov	word ptr ss:byte_248C+0Ah, si
+		mov	word ptr ss:SREG+8, ds
+		mov	word ptr ss:SREG+0Ah, si
 		retn
 CODEDREGSREG_ROU endp ;	sp =  2
 
@@ -33076,7 +33076,7 @@ OPEN_MAP_FILE	endp
 GEN_MAP_SYMBOLS	proc near		; CODE XREF: _ARGSFX+35p
 		test	ss:MAPFILE, 0FFh
 		jz	short OMFEND
-		mov	al, ss:byte_2498
+		mov	al, ss:OUTPUTFLAG
 		or	al, ss:LINKFLAG
 		jnz	short loc_CB87
 		jmp	GMFDELETE
