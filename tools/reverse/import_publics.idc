@@ -6,7 +6,6 @@
 
 static main()
 {
-    // Same-address aliases: ARGSFX, CALL
     if (MakeNameEx(0x0, "_ARGSFX", SN_PUBLIC) == 0)
         Message("Failed to import _ARGSFX at 0x0\n");
     if (MakeNameEx(0x3B, "OVERRET", SN_PUBLIC) == 0)
@@ -2130,6 +2129,8 @@ static main()
         Message("Failed to import FORCEABSW at 0x77F6\n");
     if (MakeNameEx(0x77FE, "EAJMP", SN_PUBLIC) == 0)
         Message("Failed to import EAJMP at 0x77FE\n");
+    if (MakeNameEx(0x7822, ".FR", SN_PUBLIC) == 0)
+        Message("Failed to import .FR at 0x7822\n");
     if (MakeNameEx(0x790B, "EAEXPL", SN_PUBLIC) == 0)
         Message("Failed to import EAEXPL at 0x790B\n");
     if (MakeNameEx(0x799D, "EAEXPLX", SN_PUBLIC) == 0)
@@ -3037,12 +3038,22 @@ static main()
         Message("Failed to import _OS2OPENFILE at 0xCE12\n");
     if (MakeNameEx(0xCE18, "_OS2OPENNEWFILE", SN_PUBLIC) == 0)
         Message("Failed to import _OS2OPENNEWFILE at 0xCE18\n");
+    if (MakeNameEx(0xCE1E, "_OS2OPENAPPENDFILE", SN_PUBLIC) == 0)
+        Message("Failed to import _OS2OPENAPPENDFILE at 0xCE1E\n");
+    if (MakeNameEx(0xCE34, "_OS2CLOSEFILE", SN_PUBLIC) == 0)
+        Message("Failed to import _OS2CLOSEFILE at 0xCE34\n");
     if (MakeNameEx(0xCE39, "_OS2READBYTES", SN_PUBLIC) == 0)
         Message("Failed to import _OS2READBYTES at 0xCE39\n");
     if (MakeNameEx(0xCE3E, "_OS2WRITEBYTES", SN_PUBLIC) == 0)
         Message("Failed to import _OS2WRITEBYTES at 0xCE3E\n");
+    if (MakeNameEx(0xCE5F, "_OS2SEEKFILE", SN_PUBLIC) == 0)
+        Message("Failed to import _OS2SEEKFILE at 0xCE5F\n");
     if (MakeNameEx(0xCE65, "_OS2SEEKEND", SN_PUBLIC) == 0)
         Message("Failed to import _OS2SEEKEND at 0xCE65\n");
+    if (MakeNameEx(0xCE6B, "_OS2ALLOCSEG", SN_PUBLIC) == 0)
+        Message("Failed to import _OS2ALLOCSEG at 0xCE6B\n");
+    if (MakeNameEx(0xCE70, "_OS2FREESEG", SN_PUBLIC) == 0)
+        Message("Failed to import _OS2FREESEG at 0xCE70\n");
     if (MakeNameEx(0xCE75, "_OS2AVAILMEM", SN_PUBLIC) == 0)
         Message("Failed to import _OS2AVAILMEM at 0xCE75\n");
     if (MakeNameEx(0xCE84, "_OS2GETDATE", SN_PUBLIC) == 0)
@@ -3625,4 +3636,7 @@ static main()
         Message("Failed to import FILEFOUND at 0x1B46A\n");
     if (MakeNameEx(0x1B46B, "FILENAMEBUF", SN_PUBLIC) == 0)
         Message("Failed to import FILENAMEBUF at 0x1B46B\n");
+    // Same-address aliases: _END
+    if (MakeNameEx(0x1B5C1, "_EDATA", SN_PUBLIC) == 0)
+        Message("Failed to import _EDATA at 0x1B5C1\n");
 }

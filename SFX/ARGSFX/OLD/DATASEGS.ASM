@@ -48799,8 +48799,8 @@ db    0
 db    0
 db    0
 
-DB	__CR,__LF, "Incbin file     : $"
-DB	__CR,__LF, "Over lapped by  : $"
+DB	0Dh,0Ah, "Incbin file     : $"
+DB	0Dh,0Ah, "Over lapped by  : $"
 
 db    0
 db    0

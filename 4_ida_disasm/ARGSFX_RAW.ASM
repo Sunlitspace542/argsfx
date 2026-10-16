@@ -139,7 +139,7 @@ loc_99:					; CODE XREF: seg000:009Cj
 		pop	ds
 		assume ds:nothing
 		mov	bx, 800h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jnb	short LBUFOK
 		push	dx
 		mov	dx, 8535h
@@ -195,7 +195,7 @@ LDISKOK:				; CODE XREF: seg000:00D7j
 		xor	cx, cx
 		mov	dx, 6
 		mov	bx, ss:FHANDLE
-		call	far ptr	loc_CE5F
+		call	far ptr	_OS2SEEKFILE
 		mov	ax, ss
 		mov	ds, ax
 		assume ds:seg003
@@ -204,7 +204,7 @@ LDISKOK:				; CODE XREF: seg000:00D7j
 		mov	bx, ss:FHANDLE
 		call	far ptr	_OS2WRITEBYTES
 		mov	bx, ss:FHANDLE
-		call	far ptr	loc_CE34
+		call	far ptr	_OS2CLOSEFILE
 		retn
 ; ───────────────────────────────────────────────────────────────────────────
 		db  36h	; 6
@@ -248,19 +248,18 @@ WEDO:					; CODE XREF: seg000:0178j
 		xor	di, di
 
 		public WELP
-WELP:					; CODE XREF: seg000:021Dj
+WELP:
 		xor	cx, cx
 		push	si
 		add	si, 2
 		lodsw
 		jmp	short WELP3
-; ───────────────────────────────────────────────────────────────────────────
 
 		public WELP2
 WELP2:					; CODE XREF: seg000:01C8j
 		lodsw
 		or	ax, ax
-		jz	short WEENDEXP
+		jz	short near ptr WEENDEXP
 
 		public WELP3
 WELP3:					; CODE XREF: seg000:018Cj
@@ -291,7 +290,6 @@ loc_1B4:				; CODE XREF: seg000:01AFj
 WENOTLAB:				; CODE XREF: seg000:0195j seg000:025Ej ...
 		add	si, 4
 		jmp	short WELP2
-; ───────────────────────────────────────────────────────────────────────────
 
 		public WEENDEXP
 WEENDEXP:				; CODE XREF: seg000:0191j
@@ -305,14 +303,14 @@ WEENDEXP:				; CODE XREF: seg000:0191j
 		add	bx, 5
 
 		public WEWEPLP
-WEWEPLP:				; CODE XREF: seg000:01DFj
+WEWEPLP:
 		lodsb
 		stosb
 		dec	bx
 		jnz	short WEWEPLP
 		mov	si, dx
 		cmp	di, 7E00h
-		jb	short WENOTENDBUF
+		jb	short near ptr WENOTENDBUF
 		push	ds
 		push	si
 		push	cx
@@ -330,34 +328,58 @@ WEWEPLP:				; CODE XREF: seg000:01DFj
 		public WENOTENDBUF
 WENOTENDBUF:				; CODE XREF: seg000:01E7j
 		add	si, 5
-
-loc_207:				; DATA XREF: seg000:8951w
-		cmp	si, 3F00h
-
-loc_20B:				; DATA XREF: seg000:8956w
-		jb	short WEOK
-		xor	si, si
-		mov	ax, [si]
-		mov	ds, ax
-		mov	si, 2
-
+		db  81h	; ü
+		db 0FEh	; ■
+		db    0
+word_20A	dw 723Fh		; DATA XREF: seg000:8951w
+word_20C	dw 3309h		; DATA XREF: seg000:8956w
+		db 0F6h	; ÷
+		db  8Bh	; ï
+		db    4
+		db  8Eh	; Ä
+		db 0D8h	; ╪
+		db 0BEh	; ╛
+		db    2
+		db    0
 		public WEOK
-WEOK:					; CODE XREF: seg000:loc_20Bj
-		dec	ss:NUMEXTS
-		jz	short loc_220
-		jmp	WELP
-; ───────────────────────────────────────────────────────────────────────────
-
-loc_220:				; CODE XREF: seg000:021Bj
-		mov	es, ss:TEMP4
-		xor	al, al
-		stosb
-		mov	ds, ss:TEMP4
-		xor	dx, dx
-		mov	cx, di
-		mov	bx, ss:FHANDLE
-		call	far ptr	_OS2WRITEBYTES
-		retn
+WEOK		db  36h	; 6
+		db 0FFh
+		db  0Eh
+		db 0AAh	; ¬
+		db  13h
+		db  74h	; t
+		db    3
+		db 0E9h	; Θ
+		db  65h	; e
+		db 0FFh
+		db  36h	; 6
+		db  8Eh	; Ä
+		db    6
+		db  82h	; é
+		db  9Ah	; Ü
+		db  32h	; 2
+		db 0C0h	; └
+		db 0AAh	; ¬
+		db  36h	; 6
+		db  8Eh	; Ä
+		db  1Eh
+		db  82h	; é
+		db  9Ah	; Ü
+		db  33h	; 3
+		db 0D2h	; ╥
+		db  8Bh	; ï
+		db 0CFh	; ╧
+		db  36h	; 6
+		db  8Bh	; ï
+		db  1Eh
+		db 0DDh	; ▌
+		db  0Eh
+		db  9Ah	; Ü
+		db  4Eh	; N
+		db    0
+		db 0DFh	; ▀ SEG16 SEGDEF [seg001,0]
+		db  0Ch
+		db 0C3h	; ├
 ; ───────────────────────────────────────────────────────────────────────────
 
 		public WRITESTR
@@ -860,7 +882,7 @@ SYMNEXT:				; CODE XREF: seg000:0526j
 
 loc_5A5:				; CODE XREF: seg000:05A0j
 		mov	bx, ss:FHANDLE
-		call	far ptr	loc_CE34
+		call	far ptr	_OS2CLOSEFILE
 		retn
 ; ───────────────────────────────────────────────────────────────────────────
 		db  36h	; 6
@@ -1107,9 +1129,9 @@ GAPLAST:				; CODE XREF: seg000:0684j
 DO_END:					; CODE XREF: seg000:0038p
 					; seg000:STOPASSEMp
 		mov	bx, ss:FILELISTHAN
-		call	far ptr	loc_CE34
+		call	far ptr	_OS2CLOSEFILE
 		mov	bx, ss:PFHANDLE
-		call	far ptr	loc_CE34
+		call	far ptr	_OS2CLOSEFILE
 		mov	ax, ss
 		mov	ds, ax
 		assume ds:seg003
@@ -6113,7 +6135,7 @@ MOREFR:					; CODE XREF: seg000:3717p seg000:7E20p
 		push	si
 		push	di
 		mov	bx, 801h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jnb	short near ptr unk_1E12
 		jmp	_CANTALLOC
 
@@ -6147,7 +6169,7 @@ MOREEXT:				; CODE XREF: seg000:07C4p seg000:78FAp
 		push	si
 		push	di
 		mov	bx, 401h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jnb	short near ptr unk_1E4C
 		jmp	_CANTALLOC
 
@@ -6178,7 +6200,7 @@ MORESYM:				; CODE XREF: seg000:8599p seg000:879Dp ...
 		push	si
 		push	di
 		mov	bx, 6D7h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jnb	short near ptr unk_1E7F
 		jmp	_CANTALLOC
 
@@ -6259,7 +6281,7 @@ MORESTRING:				; CODE XREF: seg000:735Ep
 		push	si
 		push	di
 		mov	bx, 201h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jnb	short near ptr unk_1EDB
 		jmp	_CANTALLOC
 
@@ -6290,7 +6312,7 @@ MORESYMTX:				; CODE XREF: seg000:87ABp seg000:8A33p
 		push	si
 		push	di
 		mov	bx, 401h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jnb	short near ptr unk_1F0E
 		jmp	_CANTALLOC
 
@@ -6311,7 +6333,7 @@ unk_1F0E:				; CODE XREF: seg000:1F09j
 		public GETMEM
 GETMEM:					; CODE XREF: seg000:001Dp
 		mov	bx, 401h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jnb	short loc_1F2F
 		jmp	_CANTALLOC
 ; ───────────────────────────────────────────────────────────────────────────
@@ -6320,7 +6342,7 @@ loc_1F2F:				; CODE XREF: seg000:1F2Aj
 		mov	ss:SYMTXPTR, ax
 		mov	ss:word_11E34, 0
 		mov	bx, 201h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jnb	short loc_1F47
 		jmp	_CANTALLOC
 ; ───────────────────────────────────────────────────────────────────────────
@@ -6329,7 +6351,7 @@ loc_1F47:				; CODE XREF: seg000:1F42j
 		mov	ss:HEAPPTR, ax
 		mov	ss:word_11D9B, 2
 		mov	bx, 201h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jnb	short loc_1F5F
 		jmp	_CANTALLOC
 ; ───────────────────────────────────────────────────────────────────────────
@@ -6342,7 +6364,7 @@ loc_1F5F:				; CODE XREF: seg000:1F5Aj
 		mov	word ptr es:0, 0
 		mov	word ptr es:2, 0FFFFh
 		mov	bx, 6D7h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jnb	short loc_1F8B
 		jmp	_CANTALLOC
 ; ───────────────────────────────────────────────────────────────────────────
@@ -6351,7 +6373,7 @@ loc_1F8B:				; CODE XREF: seg000:1F86j
 		mov	ss:SYMPTR, ax
 		mov	ss:word_11E38, 0
 		mov	bx, 801h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jnb	short loc_1FA3
 		jmp	_CANTALLOC
 ; ───────────────────────────────────────────────────────────────────────────
@@ -6360,7 +6382,7 @@ loc_1FA3:				; CODE XREF: seg000:1F9Ej
 		mov	ss:MACPTR, ax
 		mov	ss:word_11964, 0
 		mov	bx, 801h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jb	short _CANTALLOC
 		mov	ss:OBJPTR, ax
 		mov	ss:OLDBLKADDR, ax
@@ -6380,14 +6402,14 @@ CLROBJ:					; CODE XREF: seg000:1FE4j
 		jnz	short CLROBJ
 		mov	ss:OBJCODEADDR,	di
 		mov	bx, 801h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jb	short _CANTALLOC
 		mov	ss:FIRSTFRSEG, ax
 		mov	ss:FRPTR, ax
 		mov	ss:word_11987, 2
 		mov	ss:NEWFRPTR, 2
 		mov	bx, 401h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jb	short _CANTALLOC
 		mov	ss:FIRSTEXTSEG,	ax
 		mov	ss:EXTPTR, ax
@@ -7736,7 +7758,7 @@ loc_2786:				; CODE XREF: seg000:277Fj
 loc_278C:				; CODE XREF: seg000:2729j seg000:273Fj ...
 		call	CALCLENLASTBLK
 		mov	bx, 801h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jnb	short loc_279C
 		jmp	_CANTALLOC
 ; ───────────────────────────────────────────────────────────────────────────
@@ -7800,10 +7822,10 @@ unk_2838:				; CODE XREF: seg000:2830j
 
 unk_283E:				; CODE XREF: seg000:282Cj
 		mov	bx, [bp+2]
-		call	far ptr	loc_CE34
+		call	far ptr	_OS2CLOSEFILE
 		push	es
 		mov	es, word ptr [bp+10h]
-		call	far ptr	unk_CE70
+		call	far ptr	_OS2FREESEG
 		pop	es
 		jmp	short near ptr unk_2860
 
@@ -7963,9 +7985,9 @@ PMOKNOL:				; CODE XREF: seg000:2973j
 		mov	byte ptr [bp+14h], 2
 		mov	[bp+17h], ax
 		mov	[bp+19h], di
-		mov	ax, word ptr ss:loc_207+3
+		mov	ax, ss:word_20A
 		mov	[bp+1Dh], ax
-		mov	ax, word ptr ss:loc_20B+1
+		mov	ax, ss:word_20C
 		mov	[bp+1Fh], ax
 		mov	ss:word_F9C, bp
 		cmp	ss:byte_F8A, 20h ; ' '
@@ -7982,18 +8004,18 @@ PMOKNOL:				; CODE XREF: seg000:2973j
 SRCLOK2:				; CODE XREF: seg000:29D7j
 		inc	ss:byte_F8A
 		inc	ss:word_AA6
-		inc	byte ptr ss:loc_207+2
-		cmp	byte ptr ss:loc_207+2, 5Ah ; 'Z'
+		inc	ss:byte_209
+		cmp	ss:byte_209, 5Ah ; 'Z'
 		jb	short near ptr _MACNUMOK
-		mov	byte ptr ss:loc_207+2, 41h ; 'A'
-		inc	byte ptr ss:loc_207+1
-		cmp	byte ptr ss:loc_207+1, 5Ah ; 'Z'
+		mov	ss:byte_209, 41h ; 'A'
+		inc	ss:byte_208
+		cmp	ss:byte_208, 5Ah ; 'Z'
 		jb	short near ptr _MACNUMOK
-		mov	byte ptr ss:loc_207+1, 41h ; 'A'
-		inc	byte ptr ss:loc_207
-		cmp	byte ptr ss:loc_207, 5Ah ; 'Z'
+		mov	ss:byte_208, 41h ; 'A'
+		inc	ss:byte_207
+		cmp	ss:byte_207, 5Ah ; 'Z'
 		jb	short near ptr _MACNUMOK
-		mov	byte ptr ss:loc_207, 41h ; 'A'
+		mov	ss:byte_207, 41h ; 'A'
 		inc	byte ptr ss:WENOTENDBUF+2
 
 		public _MACNUMOK
@@ -8270,7 +8292,7 @@ EMATSA:					; CODE XREF: seg000:2BA0j
 		mov	byte ptr es:[di-1], 5Fh	; '_'
 		mov	ax, word ptr ss:WENOTENDBUF+2
 		stosw
-		mov	ax, word ptr ss:loc_207+1
+		mov	ax, ss:word_208
 		stosw
 		jmp	short EXPANDMACRO
 
@@ -15210,7 +15232,7 @@ READMORESOURCE:				; CODE XREF: seg000:2832p seg000:4482p ...
 		mov	bx, [bp+2]
 		mov	cx, [bp+6]
 		mov	dx, [bp+8]
-		call	far ptr	loc_CE5F
+		call	far ptr	_OS2SEEKFILE
 		pop	bp
 		push	bp
 		mov	bx, [bp+2]
@@ -17228,7 +17250,7 @@ ERR_OUTMACSPACE:			; CODE XREF: seg000:5077j
 		mov	ax, 7F5Ch
 		stosw
 		mov	bx, 801h
-		call	far ptr	loc_CE6B
+		call	far ptr	_OS2ALLOCSEG
 		jb	short MOREMAC
 		mov	es:[di], ax
 		mov	ss:word_AA2, ax
@@ -26995,7 +27017,8 @@ EAJMP		db  36h	; 6
 		db    6
 		db    0
 		db 0C3h	; ├
-		db  80h	; Ç
+		public _FR
+_FR		db  80h	; Ç
 		db  3Ch	; <
 		db  2Ch	; ,
 		db  75h	; u
@@ -30754,8 +30777,8 @@ loc_8936:				; CODE XREF: seg000:0720p
 		jz	short MG_NEXT
 		mov	es, word ptr ds:[bp+6]
 		mov	di, ds:[bp+8]
-		mov	word ptr ss:loc_207+3, es
-		mov	word ptr ss:loc_20B+1, di
+		mov	ss:word_20A, es
+		mov	ss:word_20C, di
 		mov	dx, ds
 		pop	ds
 		pop	si
@@ -47241,7 +47264,7 @@ GMF9:					; CODE XREF: seg000:CBCAj seg000:CC3Cj
 		public GMFDONE
 GMFDONE:				; CODE XREF: seg000:CC43j
 		mov	bx, ss:word_9BE9
-		call	far ptr	loc_CE34
+		call	far ptr	_OS2CLOSEFILE
 		mov	si, 9ADCh
 		mov	ax, seg	seg003
 		mov	ds, ax
@@ -47307,7 +47330,7 @@ GMF0:					; CODE XREF: seg000:CCA2j
 		public GMFDELETE
 GMFDELETE:				; CODE XREF: seg000:CB84j
 		mov	bx, ss:word_9BE9
-		call	far ptr	loc_CE34
+		call	far ptr	_OS2CLOSEFILE
 		mov	dx, 0A43Dh
 		mov	ax, seg	seg003
 		mov	ds, ax
@@ -47612,7 +47635,8 @@ _OS2OPENNEWFILE:			; CODE XREF: seg000:00CEP seg000:04FEP ...
 					; DS:DX	-> ASCIZ filename (may include drive and path)
 		retf
 ; ───────────────────────────────────────────────────────────────────────────
-		db  1Eh
+		public _OS2OPENAPPENDFILE
+_OS2OPENAPPENDFILE db  1Eh
 		db  52h	; R
 		db 0B8h	; ╕
 		db    1
@@ -47636,7 +47660,8 @@ _OS2OPENNEWFILE:			; CODE XREF: seg000:00CEP seg000:04FEP ...
 		db 0CBh	; ╦
 ; ───────────────────────────────────────────────────────────────────────────
 
-loc_CE34:				; CODE XREF: seg000:0155P seg000:05AAP ...
+		public _OS2CLOSEFILE
+_OS2CLOSEFILE:				; CODE XREF: seg000:0155P seg000:05AAP ...
 		mov	ah, 3Eh
 		int	21h		; DOS -	2+ - CLOSE A FILE WITH HANDLE
 					; BX = file handle
@@ -47679,7 +47704,8 @@ loc_CE5A:				; CODE XREF: seg001:0053j seg001:0058j
 		retf
 ; ───────────────────────────────────────────────────────────────────────────
 
-loc_CE5F:				; CODE XREF: seg000:0137P seg000:48AEP
+		public _OS2SEEKFILE
+_OS2SEEKFILE:				; CODE XREF: seg000:0137P seg000:48AEP
 		mov	ax, 4200h
 		int	21h		; DOS -	2+ - MOVE FILE READ/WRITE POINTER (LSEEK)
 					; AL = method: offset from beginning of	file
@@ -47694,13 +47720,15 @@ _OS2SEEKEND	db 0B8h	; ╕
 		db 0CBh	; ╦
 ; ───────────────────────────────────────────────────────────────────────────
 
-loc_CE6B:				; CODE XREF: seg000:00B2P seg000:1E08P ...
+		public _OS2ALLOCSEG
+_OS2ALLOCSEG:				; CODE XREF: seg000:00B2P seg000:1E08P ...
 		mov	ah, 48h
 		int	21h		; DOS -	2+ - ALLOCATE MEMORY
 					; BX = number of 16-byte paragraphs desired
 		retf
 
-unk_CE70:				; CODE XREF: seg000:284AP
+		public _OS2FREESEG
+_OS2FREESEG:				; CODE XREF: seg000:284AP
 		mov	ah, 49h	; 'I'
 		int	21h ; '!'       ; DOS - 2+ - FREE MEMORY
 					; ES = segment address of area to be freed
@@ -69272,7 +69300,7 @@ EXTPTR		dw 0			; DATA XREF: seg000:0782r seg000:1141r ...
 word_12268	dw 0			; DATA XREF: seg000:0787r seg000:07A8r ...
 		public NUMEXTS
 NUMEXTS		dw 0			; DATA XREF: seg000:WRITEEXTERNSr
-					; seg000:WEOKw	...
+					; seg000:07B9w	...
 		public OBJPTR
 OBJPTR		dw 0			; DATA XREF: seg000:1112r seg000:1FB8w
 word_1226E	dw 0			; DATA XREF: seg000:1FC4w
