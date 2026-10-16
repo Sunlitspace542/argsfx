@@ -81726,8 +81726,9 @@ NEGADDR	db 'Negative address$',0
 TOOBIGFORD	db 'Too big for direct page$',0
 NOSUCHEA	db 'No such effective address or syntax error$',0
 SYMBOLTWICE	db 'Symbol defined twice$',0
-MACTWICE	db 'Macro defined twice$',9,'       Macro defined twice is : $',0
-MACDEFEDTWICE	db 'Can',27h,'t find symbol$',0
+MACTWICE	db 'Macro defined twice$',9,
+MACDEFEDTWICE	db '       Macro defined twice is : $',0
+	db 'Can',27h,'t find symbol$',0
 BADSIZELWDN	db 'Bad size Must be L,W,D,N$',0
 ABMISSING	db 'Angled bracket missing from paramater$',0
 NOENDM	db 'Missing ENDM$',0
