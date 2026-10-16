@@ -1,5 +1,5 @@
 cls
-setpath.bat
+call setpath.bat
 cd SFX\ARGSFX
 make clean
 cd ..\..
