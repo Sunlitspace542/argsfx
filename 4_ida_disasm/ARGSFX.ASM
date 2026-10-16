@@ -1082,7 +1082,7 @@ INSFRERR:				; CODE XREF: EVAL_FRS+4Aj
 		jnz	short EXTNEXTFR
 		mov	ss:CANTFINDFL, 1
 		push	dx
-		mov	dx, 8886h
+		mov	dx, offset CANTFINDFR
 		call	INSFRERR1
 		pop	dx
 		mov	ss:CANTFINDFL, 0
@@ -1244,7 +1244,7 @@ FR_DOBYTE:
 		public FRBERR
 FRBERR:					; CODE XREF: seg000:0855j seg000:085Aj ...
 		push	dx
-		mov	dx, 7F28h
+		mov	dx, offset BADSIZEB
 		call	INSFRERR1
 		pop	dx
 		retn
@@ -1298,7 +1298,7 @@ DFRW2:					; CODE XREF: seg000:0897j seg000:08AFj
 		public FRWERR
 FRWERR:					; CODE XREF: seg000:089Cj seg000:08A0j ...
 		push	dx
-		mov	dx, 7F37h
+		mov	dx, offset BADSIZEW
 		call	INSFRERR1
 		pop	dx
 		jmp	short DFRW2
@@ -1338,7 +1338,7 @@ FR_DOJMWORD:
 		public FRBANKERR
 FRBANKERR:				; CODE XREF: seg000:08D0j
 		push	dx
-		mov	dx, 85DDh
+		mov	dx, offset DIFFBANK
 		call	INSFRERR1
 		pop	dx
 		retn
@@ -1367,7 +1367,7 @@ FR_DOBRANCH:
 		public FRBCCERR
 FRBCCERR:				; CODE XREF: seg000:08E8j seg000:08F3j ...
 		push	dx
-		mov	dx, 7F46h
+		mov	dx, offset PCTOOBIG
 		call	INSFRERR1
 		pop	dx
 		retn
@@ -1412,7 +1412,7 @@ FR_DONIBBLE:
 		public DFRNERR
 DFRNERR:				; CODE XREF: seg000:0933j seg000:0938j
 		push	dx
-		mov	dx, 8251h
+		mov	dx, offset BADMVAL
 		call	INSFRERR1
 		pop	dx
 		retn
@@ -1698,7 +1698,7 @@ loc_ABF:				; DATA XREF: seg000:4DD4r seg000:62A6r
 		push	dx
 
 loc_AC1:				; DATA XREF: seg000:4DA2r seg000:6274r ...
-		mov	dx, 844Eh
+		mov	dx, offset NUMTOOBIG
 		call	ERROR_ROUT	; DATA XREF: seg000:2E0Br seg000:2EA4r ...
 
 loc_AC7:				; DATA XREF: seg000:2E32w seg000:2ECBw ...
@@ -1995,7 +1995,7 @@ loc_C2D:				; CODE XREF: sub_AD7+151j
 		adc	dx, 0
 		lodsb
 		push	dx
-		mov	dx, 844Eh
+		mov	dx, offset NUMTOOBIG
 		call	ERROR_ROUT
 		pop	dx
 
@@ -2066,7 +2066,7 @@ NUMASC:
 		mov	ch, cl
 		mov	cl, al
 		push	dx
-		mov	dx, 844Eh
+		mov	dx, offset NUMTOOBIG
 		call	ERROR_ROUT
 		pop	dx
 
@@ -2421,7 +2421,7 @@ loc_EE1:				; DATA XREF: P_PRINTF2+5r
 		adc	dx, dx
 		or	cl, al
 		push	dx
-		mov	dx, 844Eh
+		mov	dx, offset NUMTOOBIG
 		call	ERROR_ROUT
 		pop	dx
 
@@ -2689,21 +2689,21 @@ OPERR:					; CODE XREF: sub_AD7+5B0j
 
 loc_10CB:				; CODE XREF: sub_AD7:OPERRj
 		push	dx
-		mov	dx, 8405h
+		mov	dx, offset ILLEGALOP
 		call	ERROR_ROUT
 		pop	dx
 
 		public NUMERR
 NUMERR:
 		push	dx
-		mov	dx, 83E9h
+		mov	dx, offset ILLEGALBASE
 		call	ERROR_ROUT
 		pop	dx
 
 		public E_UNBALBRAC
 E_UNBALBRAC:				; CODE XREF: sub_AD7+50Bj sub_AD7+5B8j
 		push	dx
-		mov	dx, 8425h
+		mov	dx, offset UNBALBRAC
 		call	ERROR_ROUT
 		pop	dx
 
@@ -3228,7 +3228,7 @@ _NOFRBLP:				; CODE XREF: seg000:148Dj
 		jmp	LNUMOUT
 ; ───────────────────────────────────────────────────────────────────────────
 		push	dx
-		mov	dx, 87D2h
+		mov	dx, offset BADSTRVAL
 		call	ERROR_ROUT
 		pop	dx
 
@@ -3526,14 +3526,14 @@ N_TOOBIGSHIFT:				; CODE XREF: seg000:15CFj seg000:15D7j ...
 		test	ss:DOINGFRS, 0FFh
 		jnz	short N_FR
 		push	dx
-		mov	dx, 843Ah
+		mov	dx, offset TOOBIGSHIFT
 		call	ERROR_ROUT
 		pop	dx
 
 		public N_FR
 N_FR:					; CODE XREF: seg000:1600j
 		push	dx
-		mov	dx, 843Ah
+		mov	dx, offset TOOBIGSHIFT
 		call	INSFRERR1
 		pop	dx
 		mov	cx, 1
@@ -3822,7 +3822,7 @@ CALCMOD:
 		public CLMODER
 CLMODER:				; CODE XREF: seg000:17C7j seg000:17CFj
 		push	dx
-		mov	dx, 847Ah
+		mov	dx, offset MODLOW
 		call	ERROR_ROUT
 		pop	dx
 
@@ -3851,7 +3851,7 @@ EDIVZ:					; CODE XREF: seg000:17FDj
 		or	cx, cx
 		jnz	short EDIV1
 		push	dx
-		mov	dx, 846Ah
+		mov	dx, offset DIVZERO
 		call	ERROR_ROUT
 		pop	dx
 
@@ -4098,7 +4098,7 @@ FEASR2:					; CODE XREF: seg000:19C0j
 		public FTOOBIGSHIFT
 FTOOBIGSHIFT:				; CODE XREF: seg000:19ABj seg000:19B3j ...
 		push	dx
-		mov	dx, 843Ah
+		mov	dx, offset TOOBIGSHIFT
 		call	ERROR_ROUT
 		pop	dx
 
@@ -4369,7 +4369,7 @@ FCALCMOD:
 		public FCLMODER
 FCLMODER:				; CODE XREF: seg000:1B8Cj seg000:1B94j
 		push	dx
-		mov	dx, 847Ah
+		mov	dx, offset MODLOW
 		call	INSFRERR1
 		pop	dx
 
@@ -5976,7 +5976,7 @@ loc_2765:				; CODE XREF: ERROR_ROUT+5A4j
 		and	al, 0FEh
 		push	ax
 		push	dx
-		mov	dx, 7FAAh
+		mov	dx, offset SYMBOLTWICE
 		call	ERROR_ROUT
 		pop	dx
 		pop	ax
@@ -14149,7 +14149,7 @@ P_PEIERR:				; CODE XREF: seg000:5AC9j
 		public P_PEIERR1
 P_PEIERR1:				; CODE XREF: seg000:5AD3j seg000:5ADAj
 		push	dx
-		mov	dx, 7F28h
+		mov	dx, offset BADSIZEB
 		call	ERROR_ROUT
 		pop	dx
 
@@ -20281,20 +20281,15 @@ loc_7F07:				; CODE XREF: seg000:7EDAj
 		xor	cx, cx
 		add	ax, ss:word_13BE
 		adc	cx, ss:ROMPOS
-
-		public BADSIZEB
-BADSIZEB:
 		mov	es:[bp+0], ax
 		mov	es:[bp+2], cx
 		mov	byte ptr es:[bp+4], 2
 		add	bp, 5
 		mov	ss:word_13A8, bp
 		cmp	bp, 3F00h
-		jb	short PCTOOBIG
+		jb	short loc_7F07_sub
 		call	MOREEXT
-
-		public PCTOOBIG
-PCTOOBIG:				; CODE XREF: seg000:7F41j
+loc_7F07_sub:				; CODE XREF: seg000:7F41j
 		pop	ax
 		pop	cx
 		pop	bp
@@ -20308,12 +20303,11 @@ locret_7F4A:				; CODE XREF: seg000:7ED2j seg000:7F05j
 		public INDCOMMA
 INDCOMMA:				; CODE XREF: seg000:7EB9j
 		cmp	cx, 0FFh
-		jle	short NEGADDR
+		jle	short INDCOMMA_sub
 		jmp	EAINDABSX
 ; ───────────────────────────────────────────────────────────────────────────
 
-		public NEGADDR
-NEGADDR:				; CODE XREF: seg000:7F4Fj
+INDCOMMA_sub:				; CODE XREF: seg000:7F4Fj
 		mov	al, [si+1]
 		and	al, 0DFh
 		cmp	al, 58h	; 'X'
@@ -20327,13 +20321,11 @@ loc_7F60:				; CODE XREF: seg000:7F5Bj
 		xlat	byte ptr ss:[bx]
 		or	al, al
 
-		public TOOBIGFORD
-TOOBIGFORD:
 		jns	short loc_7F6B
 		jmp	EAERR
 ; ───────────────────────────────────────────────────────────────────────────
 
-loc_7F6B:				; CODE XREF: seg000:TOOBIGFORDj
+loc_7F6B:
 		cmp	al, 53h	; 'S'
 		jnz	short loc_7F72
 		jmp	EAINDSY
@@ -20932,7 +20924,7 @@ EAJMPERR:				; CODE XREF: seg000:7805j
 EATOOBIGB:				; CODE XREF: seg000:7BF9j seg000:8007j ...
 		xor	bp, bp
 		push	dx
-		mov	dx, 7F28h
+		mov	dx, offset BADSIZEB
 		call	ERROR_ROUT
 		pop	dx
 ; START	OF FUNCTION CHUNK FOR P_STRING
@@ -20942,7 +20934,7 @@ EAERR:					; CODE XREF: seg000:14EFj
 					; sub_36FF+1B6j ...
 		xor	bp, bp
 		push	dx
-		mov	dx, 7F7Fh
+		mov	dx, offset NOSUCHEA
 		call	ERROR_ROUT
 		pop	dx
 
@@ -20950,7 +20942,7 @@ EAERR:					; CODE XREF: seg000:14EFj
 EAMISSEXP:
 		xor	bp, bp
 		push	dx
-		mov	dx, 83D5h
+		mov	dx, offset MISSINGEXP
 		call	ERROR_ROUT
 		pop	dx
 
@@ -20958,7 +20950,7 @@ EAMISSEXP:
 EADPINDERR:				; CODE XREF: seg000:820Dj
 		xor	bp, bp
 		push	dx
-		mov	dx, 7F37h
+		mov	dx, offset BADSIZEW
 		call	ERROR_ROUT
 		pop	dx
 
@@ -20966,18 +20958,15 @@ EADPINDERR:				; CODE XREF: seg000:820Dj
 EAZPTOOBIG:				; CODE XREF: seg000:7A44j
 		xor	bp, bp
 		push	dx
-		mov	dx, 7F66h
+		mov	dx, offset TOOBIGFORD
 		call	ERROR_ROUT
 		pop	dx
 
 		public EAIMMERR1
 EAIMMERR1:				; CODE XREF: seg000:7722j
 		xor	bp, bp
-
-		public ILLEGALOP
-ILLEGALOP:
 		push	dx
-		mov	dx, 7F37h
+		mov	dx, offset BADSIZEW
 		call	ERROR_ROUT
 		pop	dx
 
@@ -20985,7 +20974,7 @@ ILLEGALOP:
 EAIMMERR:				; CODE XREF: seg000:7690j
 		xor	bp, bp
 		push	dx
-		mov	dx, 7F28h
+		mov	dx, offset BADSIZEB
 		call	ERROR_ROUT
 		pop	dx
 
@@ -20993,7 +20982,7 @@ EAIMMERR:				; CODE XREF: seg000:7690j
 EAEXPERR:				; CODE XREF: seg000:77B3j
 		xor	bp, bp
 		push	dx
-		mov	dx, 7F54h
+		mov	dx, offset NEGADDR
 		call	ERROR_ROUT
 		pop	dx
 
@@ -21001,7 +20990,7 @@ EAEXPERR:				; CODE XREF: seg000:77B3j
 A_LA_GILES:				; CODE XREF: seg000:7672j
 		xor	bp, bp
 		push	dx
-		mov	dx, 839Bh
+		mov	dx, offset GILESSPEC
 		call	ERROR_ROUT
 		pop	dx
 ; END OF FUNCTION CHUNK	FOR P_STRING
@@ -21059,9 +21048,6 @@ L_SYMLOOP:				; CODE XREF: ADDSYMBOL+8Fj
 		or	al, al
 		js	short L_ENDSYMHASH
 		stosb
-
-		public MODLOW
-MODLOW:
 		add	dx, ax
 		add	dx, dx
 		lodsb
