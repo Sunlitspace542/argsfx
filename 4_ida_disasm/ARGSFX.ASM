@@ -181,9 +181,9 @@ LDISKOK:				; CODE XREF: LINK+6Fj
 		mov	ss:OUTPUTBLKFLAG, 4
 		mov	es, ss:TEMP4
 		xor	di, di
-		mov	ax, 4F53h
+		mov	ax, 4F53h ; 'SO'
 		stosw
-		mov	ax, 4A42h
+		mov	ax, 4A42h ; 'BJ'
 		stosw
 		mov	ax, 101h
 		stosw
