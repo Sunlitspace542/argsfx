@@ -2149,91 +2149,30 @@ static main()
         Message("Failed to import EAZPINDEXY at 0x7B6D\n");
     if (MakeNameEx(0x7BF3, "EAZPINDEXS", SN_PUBLIC) == 0)
         Message("Failed to import EAZPINDEXS at 0x7BF3\n");
-    if (MakeNameEx(0x7BFB, "INVSRCNAMETXT", SN_PUBLIC) == 0)
-        Message("Failed to import INVSRCNAMETXT at 0x7BFB\n");
-    if (MakeNameEx(0x7C3F, "CANTALLOC", SN_PUBLIC) == 0)
-        Message("Failed to import CANTALLOC at 0x7C3F\n");
-    if (MakeNameEx(0x7C60, "REPTUNBAL", SN_PUBLIC) == 0)
-        Message("Failed to import REPTUNBAL at 0x7C60\n");
-    // Same-address aliases: IFSUNBAL
     if (MakeNameEx(0x7C82, "EAINDEX", SN_PUBLIC) == 0)
         Message("Failed to import EAINDEX at 0x7C82\n");
     if (MakeNameEx(0x7C99, "EAINDEXX", SN_PUBLIC) == 0)
         Message("Failed to import EAINDEXX at 0x7C99\n");
-    if (MakeNameEx(0x7CAB, "CTRLC_HIT", SN_PUBLIC) == 0)
-        Message("Failed to import CTRLC_HIT at 0x7CAB\n");
     if (MakeNameEx(0x7CAE, "FORCEABSX", SN_PUBLIC) == 0)
         Message("Failed to import FORCEABSX at 0x7CAE\n");
     if (MakeNameEx(0x7CB6, "EAINDEXY", SN_PUBLIC) == 0)
         Message("Failed to import EAINDEXY at 0x7CB6\n");
-    if (MakeNameEx(0x7CCA, "ENDCSUNBAL", SN_PUBLIC) == 0)
-        Message("Failed to import ENDCSUNBAL at 0x7CCA\n");
     if (MakeNameEx(0x7CCB, "FORCEABSY", SN_PUBLIC) == 0)
         Message("Failed to import FORCEABSY at 0x7CCB\n");
     if (MakeNameEx(0x7CD3, "EAINDEXFR", SN_PUBLIC) == 0)
         Message("Failed to import EAINDEXFR at 0x7CD3\n");
     if (MakeNameEx(0x7CED, "EAINDEXXFR", SN_PUBLIC) == 0)
         Message("Failed to import EAINDEXXFR at 0x7CED\n");
-    if (MakeNameEx(0x7CF5, "NESTEDERR", SN_PUBLIC) == 0)
-        Message("Failed to import NESTEDERR at 0x7CF5\n");
-    if (MakeNameEx(0x7D45, "NOSRCLEV", SN_PUBLIC) == 0)
-        Message("Failed to import NOSRCLEV at 0x7D45\n");
-    if (MakeNameEx(0x7D69, "MORELOCMEM", SN_PUBLIC) == 0)
-        Message("Failed to import MORELOCMEM at 0x7D69\n");
-    if (MakeNameEx(0x7D9C, "FAIL", SN_PUBLIC) == 0)
-        Message("Failed to import FAIL at 0x7D9C\n");
     if (MakeNameEx(0x7DCE, "EAINDEXYFR", SN_PUBLIC) == 0)
         Message("Failed to import EAINDEXYFR at 0x7DCE\n");
-    if (MakeNameEx(0x7E8D, "UNKBLK", SN_PUBLIC) == 0)
-        Message("Failed to import UNKBLK at 0x7E8D\n");
     if (MakeNameEx(0x7EAF, "EAIND", SN_PUBLIC) == 0)
         Message("Failed to import EAIND at 0x7EAF\n");
-    if (MakeNameEx(0x7EB4, "MAXERRORSTXT", SN_PUBLIC) == 0)
-        Message("Failed to import MAXERRORSTXT at 0x7EB4\n");
-    if (MakeNameEx(0x7EC6, "MAPFILE_ERROR", SN_PUBLIC) == 0)
-        Message("Failed to import MAPFILE_ERROR at 0x7EC6\n");
-    if (MakeNameEx(0x7EDC, "INVTYPE", SN_PUBLIC) == 0)
-        Message("Failed to import INVTYPE at 0x7EDC\n");
-    if (MakeNameEx(0x7EFE, "BADVALUE", SN_PUBLIC) == 0)
-        Message("Failed to import BADVALUE at 0x7EFE\n");
-    if (MakeNameEx(0x7F13, "UNKNOWNINST", SN_PUBLIC) == 0)
-        Message("Failed to import UNKNOWNINST at 0x7F13\n");
-    if (MakeNameEx(0x7F28, "BADSIZEB", SN_PUBLIC) == 0)
-        Message("Failed to import BADSIZEB at 0x7F28\n");
-    if (MakeNameEx(0x7F37, "BADSIZEW", SN_PUBLIC) == 0)
-        Message("Failed to import BADSIZEW at 0x7F37\n");
-    if (MakeNameEx(0x7F46, "PCTOOBIG", SN_PUBLIC) == 0)
-        Message("Failed to import PCTOOBIG at 0x7F46\n");
     if (MakeNameEx(0x7F4B, "INDCOMMA", SN_PUBLIC) == 0)
         Message("Failed to import INDCOMMA at 0x7F4B\n");
-    if (MakeNameEx(0x7F54, "NEGADDR", SN_PUBLIC) == 0)
-        Message("Failed to import NEGADDR at 0x7F54\n");
-    if (MakeNameEx(0x7F66, "TOOBIGFORD", SN_PUBLIC) == 0)
-        Message("Failed to import TOOBIGFORD at 0x7F66\n");
-    if (MakeNameEx(0x7F7F, "NOSUCHEA", SN_PUBLIC) == 0)
-        Message("Failed to import NOSUCHEA at 0x7F7F\n");
-    if (MakeNameEx(0x7FAA, "SYMBOLTWICE", SN_PUBLIC) == 0)
-        Message("Failed to import SYMBOLTWICE at 0x7FAA\n");
-    if (MakeNameEx(0x7FC0, "MACTWICE", SN_PUBLIC) == 0)
-        Message("Failed to import MACTWICE at 0x7FC0\n");
-    if (MakeNameEx(0x7FD5, "MACDEFEDTWICE", SN_PUBLIC) == 0)
-        Message("Failed to import MACDEFEDTWICE at 0x7FD5\n");
     if (MakeNameEx(0x7FFF, "EAINDABSX", SN_PUBLIC) == 0)
         Message("Failed to import EAINDABSX at 0x7FFF\n");
-    if (MakeNameEx(0x800A, "BADSIZELWDN", SN_PUBLIC) == 0)
-        Message("Failed to import BADSIZELWDN at 0x800A\n");
-    if (MakeNameEx(0x8024, "ABMISSING", SN_PUBLIC) == 0)
-        Message("Failed to import ABMISSING at 0x8024\n");
     if (MakeNameEx(0x8029, "EAINDINDEX", SN_PUBLIC) == 0)
         Message("Failed to import EAINDINDEX at 0x8029\n");
-    if (MakeNameEx(0x804B, "NOENDM", SN_PUBLIC) == 0)
-        Message("Failed to import NOENDM at 0x804B\n");
-    if (MakeNameEx(0x8059, "TOOMANYPARS", SN_PUBLIC) == 0)
-        Message("Failed to import TOOMANYPARS at 0x8059\n");
-    if (MakeNameEx(0x8078, "BADPARM", SN_PUBLIC) == 0)
-        Message("Failed to import BADPARM at 0x8078\n");
-    if (MakeNameEx(0x8091, "PARNOTHERE", SN_PUBLIC) == 0)
-        Message("Failed to import PARNOTHERE at 0x8091\n");
     if (MakeNameEx(0x80AE, "REPIMM", SN_PUBLIC) == 0)
         Message("Failed to import REPIMM at 0x80AE\n");
     if (MakeNameEx(0x80CA, "EAINDIDXJ", SN_PUBLIC) == 0)
@@ -2242,114 +2181,46 @@ static main()
         Message("Failed to import MUSTEVAL at 0x80D7\n");
     if (MakeNameEx(0x80FF, "CANTOPENFILE", SN_PUBLIC) == 0)
         Message("Failed to import CANTOPENFILE at 0x80FF\n");
-    if (MakeNameEx(0x8110, "PREMEOF", SN_PUBLIC) == 0)
-        Message("Failed to import PREMEOF at 0x8110\n");
-    if (MakeNameEx(0x8136, "MISSINGSINGLE", SN_PUBLIC) == 0)
-        Message("Failed to import MISSINGSINGLE at 0x8136\n");
-    if (MakeNameEx(0x814C, "MISSINGDOUBLE", SN_PUBLIC) == 0)
-        Message("Failed to import MISSINGDOUBLE at 0x814C\n");
     if (MakeNameEx(0x8150, "EAINDSY", SN_PUBLIC) == 0)
         Message("Failed to import EAINDSY at 0x8150\n");
-    if (MakeNameEx(0x8162, "MISSINGBOTH", SN_PUBLIC) == 0)
-        Message("Failed to import MISSINGBOTH at 0x8162\n");
-    if (MakeNameEx(0x8179, "TOOMANYENDCS", SN_PUBLIC) == 0)
-        Message("Failed to import TOOMANYENDCS at 0x8179\n");
-    if (MakeNameEx(0x818A, "BADREPTCOUNT", SN_PUBLIC) == 0)
-        Message("Failed to import BADREPTCOUNT at 0x818A\n");
-    if (MakeNameEx(0x819A, "TMREPTS", SN_PUBLIC) == 0)
-        Message("Failed to import TMREPTS at 0x819A\n");
-    if (MakeNameEx(0x81AA, "TOOMANYENDRS", SN_PUBLIC) == 0)
-        Message("Failed to import TOOMANYENDRS at 0x81AA\n");
-    if (MakeNameEx(0x81BA, "TOOOLDREPT", SN_PUBLIC) == 0)
-        Message("Failed to import TOOOLDREPT at 0x81BA\n");
-    if (MakeNameEx(0x81D7, "REPTFILEERR", SN_PUBLIC) == 0)
-        Message("Failed to import REPTFILEERR at 0x81D7\n");
     if (MakeNameEx(0x81E9, "EADPIND", SN_PUBLIC) == 0)
         Message("Failed to import EADPIND at 0x81E9\n");
-    if (MakeNameEx(0x81FA, "MUSTHAVELAB", SN_PUBLIC) == 0)
-        Message("Failed to import MUSTHAVELAB at 0x81FA\n");
     if (MakeNameEx(0x8200, "EADPIND1", SN_PUBLIC) == 0)
         Message("Failed to import EADPIND1 at 0x8200\n");
     if (MakeNameEx(0x8210, "EADPINDW", SN_PUBLIC) == 0)
         Message("Failed to import EADPINDW at 0x8210\n");
-    if (MakeNameEx(0x8241, "NOTINMAC", SN_PUBLIC) == 0)
-        Message("Failed to import NOTINMAC at 0x8241\n");
-    if (MakeNameEx(0x8251, "BADMVAL", SN_PUBLIC) == 0)
-        Message("Failed to import BADMVAL at 0x8251\n");
-    if (MakeNameEx(0x8262, "BADMREG", SN_PUBLIC) == 0)
-        Message("Failed to import BADMREG at 0x8262\n");
-    if (MakeNameEx(0x8276, "BADSEP", SN_PUBLIC) == 0)
-        Message("Failed to import BADSEP at 0x8276\n");
-    if (MakeNameEx(0x8285, "OSBRACKET", SN_PUBLIC) == 0)
-        Message("Failed to import OSBRACKET at 0x8285\n");
-    if (MakeNameEx(0x8291, "CSBRACKET", SN_PUBLIC) == 0)
-        Message("Failed to import CSBRACKET at 0x8291\n");
-    if (MakeNameEx(0x829D, "MISSINGQUOTES", SN_PUBLIC) == 0)
-        Message("Failed to import MISSINGQUOTES at 0x829D\n");
     if (MakeNameEx(0x829E, "EADPINDDP", SN_PUBLIC) == 0)
         Message("Failed to import EADPINDDP at 0x829E\n");
-    if (MakeNameEx(0x82B5, "OUTMACSPACE", SN_PUBLIC) == 0)
-        Message("Failed to import OUTMACSPACE at 0x82B5\n");
-    if (MakeNameEx(0x82D8, "SPURENDM", SN_PUBLIC) == 0)
-        Message("Failed to import SPURENDM at 0x82D8\n");
-    if (MakeNameEx(0x82E7, "INCCOLINFO", SN_PUBLIC) == 0)
-        Message("Failed to import INCCOLINFO at 0x82E7\n");
     if (MakeNameEx(0x8335, "EADPINDY", SN_PUBLIC) == 0)
         Message("Failed to import EADPINDY at 0x8335\n");
-    if (MakeNameEx(0x837E, "ILLFIRST", SN_PUBLIC) == 0)
-        Message("Failed to import ILLFIRST at 0x837E\n");
-    if (MakeNameEx(0x839B, "GILESSPEC", SN_PUBLIC) == 0)
-        Message("Failed to import GILESSPEC at 0x839B\n");
-    if (MakeNameEx(0x83C5, "UNKOPT", SN_PUBLIC) == 0)
-        Message("Failed to import UNKOPT at 0x83C5\n");
     if (MakeNameEx(0x83C6, "EAJMPERR", SN_PUBLIC) == 0)
         Message("Failed to import EAJMPERR at 0x83C6\n");
     if (MakeNameEx(0x83D1, "EATOOBIGB", SN_PUBLIC) == 0)
         Message("Failed to import EATOOBIGB at 0x83D1\n");
-    if (MakeNameEx(0x83D5, "MISSINGEXP", SN_PUBLIC) == 0)
-        Message("Failed to import MISSINGEXP at 0x83D5\n");
     if (MakeNameEx(0x83DB, "EAERR", SN_PUBLIC) == 0)
         Message("Failed to import EAERR at 0x83DB\n");
     if (MakeNameEx(0x83E5, "EAMISSEXP", SN_PUBLIC) == 0)
         Message("Failed to import EAMISSEXP at 0x83E5\n");
-    if (MakeNameEx(0x83E9, "ILLEGALBASE", SN_PUBLIC) == 0)
-        Message("Failed to import ILLEGALBASE at 0x83E9\n");
     if (MakeNameEx(0x83EF, "EADPINDERR", SN_PUBLIC) == 0)
         Message("Failed to import EADPINDERR at 0x83EF\n");
     if (MakeNameEx(0x83F9, "EAZPTOOBIG", SN_PUBLIC) == 0)
         Message("Failed to import EAZPTOOBIG at 0x83F9\n");
     if (MakeNameEx(0x8403, "EAIMMERR1", SN_PUBLIC) == 0)
         Message("Failed to import EAIMMERR1 at 0x8403\n");
-    if (MakeNameEx(0x8405, "ILLEGALOP", SN_PUBLIC) == 0)
-        Message("Failed to import ILLEGALOP at 0x8405\n");
     if (MakeNameEx(0x840D, "EAIMMERR", SN_PUBLIC) == 0)
         Message("Failed to import EAIMMERR at 0x840D\n");
     if (MakeNameEx(0x8417, "EAEXPERR", SN_PUBLIC) == 0)
         Message("Failed to import EAEXPERR at 0x8417\n");
     if (MakeNameEx(0x8421, "A_LA_GILES", SN_PUBLIC) == 0)
         Message("Failed to import A_LA_GILES at 0x8421\n");
-    if (MakeNameEx(0x8425, "UNBALBRAC", SN_PUBLIC) == 0)
-        Message("Failed to import UNBALBRAC at 0x8425\n");
     if (MakeNameEx(0x842B, "ADDSYMBOL", SN_PUBLIC) == 0)
         Message("Failed to import ADDSYMBOL at 0x842B\n");
-    if (MakeNameEx(0x843A, "TOOBIGSHIFT", SN_PUBLIC) == 0)
-        Message("Failed to import TOOBIGSHIFT at 0x843A\n");
     if (MakeNameEx(0x844E, "NUMTOOBIG", SN_PUBLIC) == 0)
         Message("Failed to import NUMTOOBIG at 0x844E\n");
     if (MakeNameEx(0x845A, "L_SYMLOOP", SN_PUBLIC) == 0)
         Message("Failed to import L_SYMLOOP at 0x845A\n");
-    if (MakeNameEx(0x846A, "DIVZERO", SN_PUBLIC) == 0)
-        Message("Failed to import DIVZERO at 0x846A\n");
-    if (MakeNameEx(0x847A, "MODLOW", SN_PUBLIC) == 0)
-        Message("Failed to import MODLOW at 0x847A\n");
-    if (MakeNameEx(0x849F, "NULLSTR", SN_PUBLIC) == 0)
-        Message("Failed to import NULLSTR at 0x849F\n");
     if (MakeNameEx(0x84BC, "L_ENDSYMHASH", SN_PUBLIC) == 0)
         Message("Failed to import L_ENDSYMHASH at 0x84BC\n");
-    if (MakeNameEx(0x84C2, "NOTINREPT", SN_PUBLIC) == 0)
-        Message("Failed to import NOTINREPT at 0x84C2\n");
-    if (MakeNameEx(0x84D4, "ENDOFIRP", SN_PUBLIC) == 0)
-        Message("Failed to import ENDOFIRP at 0x84D4\n");
     if (MakeNameEx(0x84D8, "L_FIND", SN_PUBLIC) == 0)
         Message("Failed to import L_FIND at 0x84D8\n");
     if (MakeNameEx(0x8518, "L_TEST", SN_PUBLIC) == 0)
@@ -2358,87 +2229,38 @@ static main()
         Message("Failed to import L_SYMBOLSNOTSAME at 0x8528\n");
     if (MakeNameEx(0x852C, "L_HASHOK", SN_PUBLIC) == 0)
         Message("Failed to import L_HASHOK at 0x852C\n");
-    if (MakeNameEx(0x8535, "NOINCMEM", SN_PUBLIC) == 0)
-        Message("Failed to import NOINCMEM at 0x8535\n");
-    if (MakeNameEx(0x8553, "PUBNOLOCALS", SN_PUBLIC) == 0)
-        Message("Failed to import PUBNOLOCALS at 0x8553\n");
-    if (MakeNameEx(0x8574, "EXTNOLOCALS", SN_PUBLIC) == 0)
-        Message("Failed to import EXTNOLOCALS at 0x8574\n");
-    if (MakeNameEx(0x8595, "ILLEGALEXTUSE", SN_PUBLIC) == 0)
-        Message("Failed to import ILLEGALEXTUSE at 0x8595\n");
-    if (MakeNameEx(0x85A9, "INVALIDIRS", SN_PUBLIC) == 0)
-        Message("Failed to import INVALIDIRS at 0x85A9\n");
-    if (MakeNameEx(0x85C4, "LMSODD", SN_PUBLIC) == 0)
-        Message("Failed to import LMSODD at 0x85C4\n");
     if (MakeNameEx(0x85CA, "L_SYM2", SN_PUBLIC) == 0)
         Message("Failed to import L_SYM2 at 0x85CA\n");
-    if (MakeNameEx(0x85DD, "DIFFBANK", SN_PUBLIC) == 0)
-        Message("Failed to import DIFFBANK at 0x85DD\n");
     if (MakeNameEx(0x85F5, "L_NOTSET", SN_PUBLIC) == 0)
         Message("Failed to import L_NOTSET at 0x85F5\n");
-    if (MakeNameEx(0x85FA, "EXTRACHARS", SN_PUBLIC) == 0)
-        Message("Failed to import EXTRACHARS at 0x85FA\n");
-    if (MakeNameEx(0x861B, "INVALIDDBR", SN_PUBLIC) == 0)
-        Message("Failed to import INVALIDDBR at 0x861B\n");
-    if (MakeNameEx(0x8630, "PUBISEXTERN", SN_PUBLIC) == 0)
-        Message("Failed to import PUBISEXTERN at 0x8630\n");
     if (MakeNameEx(0x8633, "L_NOTFR", SN_PUBLIC) == 0)
         Message("Failed to import L_NOTFR at 0x8633\n");
     if (MakeNameEx(0x863E, "ADDPARENT", SN_PUBLIC) == 0)
         Message("Failed to import ADDPARENT at 0x863E\n");
-    if (MakeNameEx(0x864D, "EXTERNISPUB", SN_PUBLIC) == 0)
-        Message("Failed to import EXTERNISPUB at 0x864D\n");
     if (MakeNameEx(0x867D, "_SYMLOOP", SN_PUBLIC) == 0)
         Message("Failed to import _SYMLOOP at 0x867D\n");
-    if (MakeNameEx(0x86D8, "INVARRAY", SN_PUBLIC) == 0)
-        Message("Failed to import INVARRAY at 0x86D8\n");
     if (MakeNameEx(0x86DF, "_ENDSYMHASH", SN_PUBLIC) == 0)
         Message("Failed to import _ENDSYMHASH at 0x86DF\n");
-    if (MakeNameEx(0x86E7, "STR2LONG", SN_PUBLIC) == 0)
-        Message("Failed to import STR2LONG at 0x86E7\n");
     if (MakeNameEx(0x86FB, "_FIND", SN_PUBLIC) == 0)
         Message("Failed to import _FIND at 0x86FB\n");
-    if (MakeNameEx(0x8702, "NOSTRINGDEF", SN_PUBLIC) == 0)
-        Message("Failed to import NOSTRINGDEF at 0x8702\n");
-    if (MakeNameEx(0x871E, "NOSUCHENV", SN_PUBLIC) == 0)
-        Message("Failed to import NOSUCHENV at 0x871E\n");
     if (MakeNameEx(0x872C, "_TEST", SN_PUBLIC) == 0)
         Message("Failed to import _TEST at 0x872C\n");
     if (MakeNameEx(0x873C, "_SYMBOLSNOTSAME", SN_PUBLIC) == 0)
         Message("Failed to import _SYMBOLSNOTSAME at 0x873C\n");
-    if (MakeNameEx(0x873E, "BADFILENAME", SN_PUBLIC) == 0)
-        Message("Failed to import BADFILENAME at 0x873E\n");
     if (MakeNameEx(0x8740, "_HASHOK", SN_PUBLIC) == 0)
         Message("Failed to import _HASHOK at 0x8740\n");
-    if (MakeNameEx(0x8787, "BADRADIX", SN_PUBLIC) == 0)
-        Message("Failed to import BADRADIX at 0x8787\n");
-    if (MakeNameEx(0x87B1, "BADHEX", SN_PUBLIC) == 0)
-        Message("Failed to import BADHEX at 0x87B1\n");
-    if (MakeNameEx(0x87D2, "BADSTRVAL", SN_PUBLIC) == 0)
-        Message("Failed to import BADSTRVAL at 0x87D2\n");
     if (MakeNameEx(0x87D7, "_SYM2", SN_PUBLIC) == 0)
         Message("Failed to import _SYM2 at 0x87D7\n");
-    if (MakeNameEx(0x87E2, "BADPFSPEC", SN_PUBLIC) == 0)
-        Message("Failed to import BADPFSPEC at 0x87E2\n");
-    if (MakeNameEx(0x8809, "PRINTFNOVAL", SN_PUBLIC) == 0)
-        Message("Failed to import PRINTFNOVAL at 0x8809\n");
     if (MakeNameEx(0x881A, "_NOTSET", SN_PUBLIC) == 0)
         Message("Failed to import _NOTSET at 0x881A\n");
-    if (MakeNameEx(0x8827, "BADFIELD", SN_PUBLIC) == 0)
-        Message("Failed to import BADFIELD at 0x8827\n");
     if (MakeNameEx(0x8835, "_NOT_FREF2EXT", SN_PUBLIC) == 0)
         Message("Failed to import _NOT_FREF2EXT at 0x8835\n");
-    // Same-address aliases: _NOTFR
-    if (MakeNameEx(0x8886, "CANTFINDFR", SN_PUBLIC) == 0)
-        Message("Failed to import CANTFINDFR at 0x8886\n");
-    if (MakeNameEx(0x8899, "PUBLICNOTDEF", SN_PUBLIC) == 0)
-        Message("Failed to import PUBLICNOTDEF at 0x8899\n");
+    if (MakeNameEx(0x8886, "_NOTFR", SN_PUBLIC) == 0)
+        Message("Failed to import _NOTFR at 0x8886\n");
     if (MakeNameEx(0x88A9, "GETMACRO", SN_PUBLIC) == 0)
         Message("Failed to import GETMACRO at 0x88A9\n");
     if (MakeNameEx(0x88BE, "MG_SYMLOOP", SN_PUBLIC) == 0)
         Message("Failed to import MG_SYMLOOP at 0x88BE\n");
-    if (MakeNameEx(0x88C4, "EXTNOTDEF", SN_PUBLIC) == 0)
-        Message("Failed to import EXTNOTDEF at 0x88C4\n");
     if (MakeNameEx(0x8920, "MG_ENDSYMHASH", SN_PUBLIC) == 0)
         Message("Failed to import MG_ENDSYMHASH at 0x8920\n");
     if (MakeNameEx(0x892E, "MG_NEXT", SN_PUBLIC) == 0)
@@ -2453,10 +2275,6 @@ static main()
         Message("Failed to import ADDMACRO at 0x8998\n");
     if (MakeNameEx(0x89BF, "M_SYMLOOP", SN_PUBLIC) == 0)
         Message("Failed to import M_SYMLOOP at 0x89BF\n");
-    if (MakeNameEx(0x89F8, "QUOTETXT", SN_PUBLIC) == 0)
-        Message("Failed to import QUOTETXT at 0x89F8\n");
-    if (MakeNameEx(0x89FC, "LINKSTRTMES", SN_PUBLIC) == 0)
-        Message("Failed to import LINKSTRTMES at 0x89FC\n");
     if (MakeNameEx(0x8A21, "M_ENDSYMHASH", SN_PUBLIC) == 0)
         Message("Failed to import M_ENDSYMHASH at 0x8A21\n");
     if (MakeNameEx(0x8A46, "M_FIND", SN_PUBLIC) == 0)
@@ -2525,7 +2343,6 @@ static main()
         Message("Failed to import BINL1000000000 at 0x8CE6\n");
     if (MakeNameEx(0x8CEE, "BINLDIGIT1", SN_PUBLIC) == 0)
         Message("Failed to import BINLDIGIT1 at 0x8CEE\n");
-    // Same-address aliases: HELPTXT
     if (MakeNameEx(0x8D02, "BINL100000000", SN_PUBLIC) == 0)
         Message("Failed to import BINL100000000 at 0x8D02\n");
     if (MakeNameEx(0x8D0A, "BINLDIGIT2", SN_PUBLIC) == 0)
@@ -2604,8 +2421,6 @@ static main()
         Message("Failed to import OP_MAPFILE at 0x905D\n");
     if (MakeNameEx(0x9066, "OP_OPER", SN_PUBLIC) == 0)
         Message("Failed to import OP_OPER at 0x9066\n");
-    if (MakeNameEx(0x9068, "DEFAULTSRC", SN_PUBLIC) == 0)
-        Message("Failed to import DEFAULTSRC at 0x9068\n");
     if (MakeNameEx(0x907A, "COPYNAME", SN_PUBLIC) == 0)
         Message("Failed to import COPYNAME at 0x907A\n");
     if (MakeNameEx(0x907E, "CNLOOP", SN_PUBLIC) == 0)
@@ -3454,6 +3269,186 @@ static main()
         Message("Failed to import _386TXT at 0x18AAF\n");
     if (MakeNameEx(0x18AB5, "_486TXT", SN_PUBLIC) == 0)
         Message("Failed to import _486TXT at 0x18AB5\n");
+    if (MakeNameEx(0x18ABB, "INVSRCNAMETXT", SN_PUBLIC) == 0)
+        Message("Failed to import INVSRCNAMETXT at 0x18ABB\n");
+    if (MakeNameEx(0x18AFF, "CANTALLOC", SN_PUBLIC) == 0)
+        Message("Failed to import CANTALLOC at 0x18AFF\n");
+    if (MakeNameEx(0x18B20, "REPTUNBAL", SN_PUBLIC) == 0)
+        Message("Failed to import REPTUNBAL at 0x18B20\n");
+    if (MakeNameEx(0x18B42, "IFSUNBAL", SN_PUBLIC) == 0)
+        Message("Failed to import IFSUNBAL at 0x18B42\n");
+    if (MakeNameEx(0x18B6B, "CTRLC_HIT", SN_PUBLIC) == 0)
+        Message("Failed to import CTRLC_HIT at 0x18B6B\n");
+    if (MakeNameEx(0x18B8A, "ENDCSUNBAL", SN_PUBLIC) == 0)
+        Message("Failed to import ENDCSUNBAL at 0x18B8A\n");
+    if (MakeNameEx(0x18BB5, "NESTEDERR", SN_PUBLIC) == 0)
+        Message("Failed to import NESTEDERR at 0x18BB5\n");
+    if (MakeNameEx(0x18C05, "NOSRCLEV", SN_PUBLIC) == 0)
+        Message("Failed to import NOSRCLEV at 0x18C05\n");
+    if (MakeNameEx(0x18C29, "MORELOCMEM", SN_PUBLIC) == 0)
+        Message("Failed to import MORELOCMEM at 0x18C29\n");
+    if (MakeNameEx(0x18C5C, "FAIL", SN_PUBLIC) == 0)
+        Message("Failed to import FAIL at 0x18C5C\n");
+    if (MakeNameEx(0x18D4D, "UNKBLK", SN_PUBLIC) == 0)
+        Message("Failed to import UNKBLK at 0x18D4D\n");
+    if (MakeNameEx(0x18D74, "MAXERRORSTXT", SN_PUBLIC) == 0)
+        Message("Failed to import MAXERRORSTXT at 0x18D74\n");
+    if (MakeNameEx(0x18D86, "MAPFILE_ERROR", SN_PUBLIC) == 0)
+        Message("Failed to import MAPFILE_ERROR at 0x18D86\n");
+    if (MakeNameEx(0x18D9C, "INVTYPE", SN_PUBLIC) == 0)
+        Message("Failed to import INVTYPE at 0x18D9C\n");
+    if (MakeNameEx(0x18DBE, "BADVALUE", SN_PUBLIC) == 0)
+        Message("Failed to import BADVALUE at 0x18DBE\n");
+    if (MakeNameEx(0x18DD3, "UNKNOWNINST", SN_PUBLIC) == 0)
+        Message("Failed to import UNKNOWNINST at 0x18DD3\n");
+    if (MakeNameEx(0x18DE8, "BADSIZEB", SN_PUBLIC) == 0)
+        Message("Failed to import BADSIZEB at 0x18DE8\n");
+    if (MakeNameEx(0x18DF7, "BADSIZEW", SN_PUBLIC) == 0)
+        Message("Failed to import BADSIZEW at 0x18DF7\n");
+    if (MakeNameEx(0x18E06, "PCTOOBIG", SN_PUBLIC) == 0)
+        Message("Failed to import PCTOOBIG at 0x18E06\n");
+    if (MakeNameEx(0x18E14, "NEGADDR", SN_PUBLIC) == 0)
+        Message("Failed to import NEGADDR at 0x18E14\n");
+    if (MakeNameEx(0x18E26, "TOOBIGFORD", SN_PUBLIC) == 0)
+        Message("Failed to import TOOBIGFORD at 0x18E26\n");
+    if (MakeNameEx(0x18E3F, "NOSUCHEA", SN_PUBLIC) == 0)
+        Message("Failed to import NOSUCHEA at 0x18E3F\n");
+    if (MakeNameEx(0x18E6A, "SYMBOLTWICE", SN_PUBLIC) == 0)
+        Message("Failed to import SYMBOLTWICE at 0x18E6A\n");
+    if (MakeNameEx(0x18E80, "MACTWICE", SN_PUBLIC) == 0)
+        Message("Failed to import MACTWICE at 0x18E80\n");
+    if (MakeNameEx(0x18E95, "MACDEFEDTWICE", SN_PUBLIC) == 0)
+        Message("Failed to import MACDEFEDTWICE at 0x18E95\n");
+    if (MakeNameEx(0x18ECA, "BADSIZELWDN", SN_PUBLIC) == 0)
+        Message("Failed to import BADSIZELWDN at 0x18ECA\n");
+    if (MakeNameEx(0x18EE4, "ABMISSING", SN_PUBLIC) == 0)
+        Message("Failed to import ABMISSING at 0x18EE4\n");
+    if (MakeNameEx(0x18F0B, "NOENDM", SN_PUBLIC) == 0)
+        Message("Failed to import NOENDM at 0x18F0B\n");
+    if (MakeNameEx(0x18F19, "TOOMANYPARS", SN_PUBLIC) == 0)
+        Message("Failed to import TOOMANYPARS at 0x18F19\n");
+    if (MakeNameEx(0x18F38, "BADPARM", SN_PUBLIC) == 0)
+        Message("Failed to import BADPARM at 0x18F38\n");
+    if (MakeNameEx(0x18F51, "PARNOTHERE", SN_PUBLIC) == 0)
+        Message("Failed to import PARNOTHERE at 0x18F51\n");
+    if (MakeNameEx(0x18FD0, "PREMEOF", SN_PUBLIC) == 0)
+        Message("Failed to import PREMEOF at 0x18FD0\n");
+    if (MakeNameEx(0x18FF6, "MISSINGSINGLE", SN_PUBLIC) == 0)
+        Message("Failed to import MISSINGSINGLE at 0x18FF6\n");
+    if (MakeNameEx(0x1900C, "MISSINGDOUBLE", SN_PUBLIC) == 0)
+        Message("Failed to import MISSINGDOUBLE at 0x1900C\n");
+    if (MakeNameEx(0x19022, "MISSINGBOTH", SN_PUBLIC) == 0)
+        Message("Failed to import MISSINGBOTH at 0x19022\n");
+    if (MakeNameEx(0x19039, "TOOMANYENDCS", SN_PUBLIC) == 0)
+        Message("Failed to import TOOMANYENDCS at 0x19039\n");
+    if (MakeNameEx(0x1904A, "BADREPTCOUNT", SN_PUBLIC) == 0)
+        Message("Failed to import BADREPTCOUNT at 0x1904A\n");
+    if (MakeNameEx(0x1905A, "TMREPTS", SN_PUBLIC) == 0)
+        Message("Failed to import TMREPTS at 0x1905A\n");
+    if (MakeNameEx(0x1906A, "TOOMANYENDRS", SN_PUBLIC) == 0)
+        Message("Failed to import TOOMANYENDRS at 0x1906A\n");
+    if (MakeNameEx(0x1907A, "TOOOLDREPT", SN_PUBLIC) == 0)
+        Message("Failed to import TOOOLDREPT at 0x1907A\n");
+    if (MakeNameEx(0x19097, "REPTFILEERR", SN_PUBLIC) == 0)
+        Message("Failed to import REPTFILEERR at 0x19097\n");
+    if (MakeNameEx(0x190BA, "MUSTHAVELAB", SN_PUBLIC) == 0)
+        Message("Failed to import MUSTHAVELAB at 0x190BA\n");
+    if (MakeNameEx(0x19101, "NOTINMAC", SN_PUBLIC) == 0)
+        Message("Failed to import NOTINMAC at 0x19101\n");
+    if (MakeNameEx(0x19111, "BADMVAL", SN_PUBLIC) == 0)
+        Message("Failed to import BADMVAL at 0x19111\n");
+    if (MakeNameEx(0x19122, "BADMREG", SN_PUBLIC) == 0)
+        Message("Failed to import BADMREG at 0x19122\n");
+    if (MakeNameEx(0x19136, "BADSEP", SN_PUBLIC) == 0)
+        Message("Failed to import BADSEP at 0x19136\n");
+    if (MakeNameEx(0x19145, "OSBRACKET", SN_PUBLIC) == 0)
+        Message("Failed to import OSBRACKET at 0x19145\n");
+    if (MakeNameEx(0x19151, "CSBRACKET", SN_PUBLIC) == 0)
+        Message("Failed to import CSBRACKET at 0x19151\n");
+    if (MakeNameEx(0x1915D, "MISSINGQUOTES", SN_PUBLIC) == 0)
+        Message("Failed to import MISSINGQUOTES at 0x1915D\n");
+    if (MakeNameEx(0x19175, "OUTMACSPACE", SN_PUBLIC) == 0)
+        Message("Failed to import OUTMACSPACE at 0x19175\n");
+    if (MakeNameEx(0x19198, "SPURENDM", SN_PUBLIC) == 0)
+        Message("Failed to import SPURENDM at 0x19198\n");
+    if (MakeNameEx(0x191A7, "INCCOLINFO", SN_PUBLIC) == 0)
+        Message("Failed to import INCCOLINFO at 0x191A7\n");
+    if (MakeNameEx(0x1923E, "ILLFIRST", SN_PUBLIC) == 0)
+        Message("Failed to import ILLFIRST at 0x1923E\n");
+    if (MakeNameEx(0x1925B, "GILESSPEC", SN_PUBLIC) == 0)
+        Message("Failed to import GILESSPEC at 0x1925B\n");
+    if (MakeNameEx(0x19285, "UNKOPT", SN_PUBLIC) == 0)
+        Message("Failed to import UNKOPT at 0x19285\n");
+    if (MakeNameEx(0x19295, "MISSINGEXP", SN_PUBLIC) == 0)
+        Message("Failed to import MISSINGEXP at 0x19295\n");
+    if (MakeNameEx(0x192A9, "ILLEGALBASE", SN_PUBLIC) == 0)
+        Message("Failed to import ILLEGALBASE at 0x192A9\n");
+    if (MakeNameEx(0x192C5, "ILLEGALOP", SN_PUBLIC) == 0)
+        Message("Failed to import ILLEGALOP at 0x192C5\n");
+    if (MakeNameEx(0x192E5, "UNBALBRAC", SN_PUBLIC) == 0)
+        Message("Failed to import UNBALBRAC at 0x192E5\n");
+    if (MakeNameEx(0x192FA, "TOOBIGSHIFT", SN_PUBLIC) == 0)
+        Message("Failed to import TOOBIGSHIFT at 0x192FA\n");
+    if (MakeNameEx(0x1932A, "DIVZERO", SN_PUBLIC) == 0)
+        Message("Failed to import DIVZERO at 0x1932A\n");
+    if (MakeNameEx(0x1933A, "MODLOW", SN_PUBLIC) == 0)
+        Message("Failed to import MODLOW at 0x1933A\n");
+    if (MakeNameEx(0x1935F, "NULLSTR", SN_PUBLIC) == 0)
+        Message("Failed to import NULLSTR at 0x1935F\n");
+    if (MakeNameEx(0x19382, "NOTINREPT", SN_PUBLIC) == 0)
+        Message("Failed to import NOTINREPT at 0x19382\n");
+    if (MakeNameEx(0x19394, "ENDOFIRP", SN_PUBLIC) == 0)
+        Message("Failed to import ENDOFIRP at 0x19394\n");
+    if (MakeNameEx(0x193F5, "NOINCMEM", SN_PUBLIC) == 0)
+        Message("Failed to import NOINCMEM at 0x193F5\n");
+    if (MakeNameEx(0x19413, "PUBNOLOCALS", SN_PUBLIC) == 0)
+        Message("Failed to import PUBNOLOCALS at 0x19413\n");
+    if (MakeNameEx(0x19434, "EXTNOLOCALS", SN_PUBLIC) == 0)
+        Message("Failed to import EXTNOLOCALS at 0x19434\n");
+    if (MakeNameEx(0x19455, "ILLEGALEXTUSE", SN_PUBLIC) == 0)
+        Message("Failed to import ILLEGALEXTUSE at 0x19455\n");
+    if (MakeNameEx(0x19469, "INVALIDIRS", SN_PUBLIC) == 0)
+        Message("Failed to import INVALIDIRS at 0x19469\n");
+    if (MakeNameEx(0x19484, "LMSODD", SN_PUBLIC) == 0)
+        Message("Failed to import LMSODD at 0x19484\n");
+    if (MakeNameEx(0x1949D, "DIFFBANK", SN_PUBLIC) == 0)
+        Message("Failed to import DIFFBANK at 0x1949D\n");
+    if (MakeNameEx(0x194BA, "EXTRACHARS", SN_PUBLIC) == 0)
+        Message("Failed to import EXTRACHARS at 0x194BA\n");
+    if (MakeNameEx(0x194DB, "INVALIDDBR", SN_PUBLIC) == 0)
+        Message("Failed to import INVALIDDBR at 0x194DB\n");
+    if (MakeNameEx(0x194F0, "PUBISEXTERN", SN_PUBLIC) == 0)
+        Message("Failed to import PUBISEXTERN at 0x194F0\n");
+    if (MakeNameEx(0x1950D, "EXTERNISPUB", SN_PUBLIC) == 0)
+        Message("Failed to import EXTERNISPUB at 0x1950D\n");
+    if (MakeNameEx(0x19598, "INVARRAY", SN_PUBLIC) == 0)
+        Message("Failed to import INVARRAY at 0x19598\n");
+    if (MakeNameEx(0x195A7, "STR2LONG", SN_PUBLIC) == 0)
+        Message("Failed to import STR2LONG at 0x195A7\n");
+    if (MakeNameEx(0x195C2, "NOSTRINGDEF", SN_PUBLIC) == 0)
+        Message("Failed to import NOSTRINGDEF at 0x195C2\n");
+    if (MakeNameEx(0x195DE, "NOSUCHENV", SN_PUBLIC) == 0)
+        Message("Failed to import NOSUCHENV at 0x195DE\n");
+    if (MakeNameEx(0x195FE, "BADFILENAME", SN_PUBLIC) == 0)
+        Message("Failed to import BADFILENAME at 0x195FE\n");
+    if (MakeNameEx(0x19647, "BADRADIX", SN_PUBLIC) == 0)
+        Message("Failed to import BADRADIX at 0x19647\n");
+    if (MakeNameEx(0x19671, "BADHEX", SN_PUBLIC) == 0)
+        Message("Failed to import BADHEX at 0x19671\n");
+    if (MakeNameEx(0x19692, "BADSTRVAL", SN_PUBLIC) == 0)
+        Message("Failed to import BADSTRVAL at 0x19692\n");
+    if (MakeNameEx(0x196A2, "BADPFSPEC", SN_PUBLIC) == 0)
+        Message("Failed to import BADPFSPEC at 0x196A2\n");
+    if (MakeNameEx(0x196C9, "PRINTFNOVAL", SN_PUBLIC) == 0)
+        Message("Failed to import PRINTFNOVAL at 0x196C9\n");
+    if (MakeNameEx(0x196E7, "BADFIELD", SN_PUBLIC) == 0)
+        Message("Failed to import BADFIELD at 0x196E7\n");
+    if (MakeNameEx(0x19746, "CANTFINDFR", SN_PUBLIC) == 0)
+        Message("Failed to import CANTFINDFR at 0x19746\n");
+    if (MakeNameEx(0x19759, "PUBLICNOTDEF", SN_PUBLIC) == 0)
+        Message("Failed to import PUBLICNOTDEF at 0x19759\n");
+    if (MakeNameEx(0x19784, "EXTNOTDEF", SN_PUBLIC) == 0)
+        Message("Failed to import EXTNOTDEF at 0x19784\n");
     if (MakeNameEx(0x197DC, "NOFILE", SN_PUBLIC) == 0)
         Message("Failed to import NOFILE at 0x197DC\n");
     if (MakeNameEx(0x19855, "TAB", SN_PUBLIC) == 0)
@@ -3474,6 +3469,10 @@ static main()
         Message("Failed to import HASAVALUE at 0x19873\n");
     if (MakeNameEx(0x19884, "OPERRCLI", SN_PUBLIC) == 0)
         Message("Failed to import OPERRCLI at 0x19884\n");
+    if (MakeNameEx(0x198B8, "QUOTETXT", SN_PUBLIC) == 0)
+        Message("Failed to import QUOTETXT at 0x198B8\n");
+    if (MakeNameEx(0x198BC, "LINKSTRTMES", SN_PUBLIC) == 0)
+        Message("Failed to import LINKSTRTMES at 0x198BC\n");
     if (MakeNameEx(0x198D4, "CTRLCTXT", SN_PUBLIC) == 0)
         Message("Failed to import CTRLCTXT at 0x198D4\n");
     if (MakeNameEx(0x198FC, "FATALERRTXT", SN_PUBLIC) == 0)
@@ -3536,6 +3535,10 @@ static main()
         Message("Failed to import NOV at 0x19BB0\n");
     if (MakeNameEx(0x19BB9, "DECE", SN_PUBLIC) == 0)
         Message("Failed to import DECE at 0x19BB9\n");
+    if (MakeNameEx(0x19BC2, "HELPTXT", SN_PUBLIC) == 0)
+        Message("Failed to import HELPTXT at 0x19BC2\n");
+    if (MakeNameEx(0x19F28, "DEFAULTSRC", SN_PUBLIC) == 0)
+        Message("Failed to import DEFAULTSRC at 0x19F28\n");
     if (MakeNameEx(0x1A638, "STRCMP1", SN_PUBLIC) == 0)
         Message("Failed to import STRCMP1 at 0x1A638\n");
     if (MakeNameEx(0x1A738, "STRCMP2", SN_PUBLIC) == 0)
